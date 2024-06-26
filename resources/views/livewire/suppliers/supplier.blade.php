@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
 
 @include("partials.v1.title",[
               "second_title"=>"Proveedores",
@@ -194,4 +194,4 @@
 
            ])
 
-</x-app-layout>
+</div>
