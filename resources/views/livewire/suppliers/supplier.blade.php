@@ -1,197 +1,55 @@
+
+<!-- resources/views/livewire/suppliers/supplier.blade.php -->
 <div>
-
-@include("partials.v1.title",[
-              "second_title"=>"Proveedores",
-              "first_title"=>"Listado"
-          ])
-            @include("partials.v1.table_nav",
-                   [
-                       "nav_options"=>[
-                              [
-                              "button_align"=>"right",
-                              "click_action"=>"",
-                              "button_content"=>"Crear nuevo",
-                              "button_icon"=>"fa-solid fa-plus",
-                              "target_route"=>"supplier.list",
-                              ],
-
-                          ]
-                  ])
-
-        @include("partials.v2.table.primary-table",[
-               "table_pageable"=>$table_pageable??true,
-               "table_headers"=>[
-              [
-                   "col_name" =>"ID",
-                   "col_data" =>"id",
-                   "col_filter"=>false
-               ],
-               [
-                   "col_name" =>"Nombre",
-                   "col_data" =>"name",
-                   "col_filter"=>false
-               ],
-               [
-                   "col_name" =>"Apellido",
-                   "col_data" =>"last_name",
-                   "col_filter"=>false
-               ],
-               [
-                   "col_name" =>"Correo electronico",
-                   "col_data" =>"email",
-                   "col_filter"=>false
-               ],
-               [
-                   "col_name" =>"Telefono",
-                   "col_data" =>"phonePlusIndicative",
-                   "col_filter"=>false
-               ],
-                ],
-//                 "table_actions"=>[
-//
-//                                    "customs"=>[
-//                                                [
-//                                                   "redirect"=>[
-//                                                               "route"=>"v1.admin.client.detail.client",
-//                                                               "binding"=>"client"
-//                                                         ],
-//                                                       "icon"=>"fas fa-search",
-//                                                       "tooltip_title"=>"Detalles",
-//                                                       "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_SHOW],
-//                                                 ],
-//                                                [
-//                                                   "redirect"=>[
-//                                                               "route"=>"v1.admin.client.edit.client",
-//                                                               "binding"=>"client"
-//                                                         ],
-//                                                       "icon"=>"fas fa-pencil",
-//                                                       "tooltip_title"=>"Editar",
-//                                                       "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_EDIT],
-//                                                 ],
-//                                                [
-//                                                   "redirect"=>[
-//                                                               "route"=>"v1.admin.client.settings",
-//                                                               "binding"=>"client"
-//                                                         ],
-//                                                       "icon"=>"fas fa-gear",
-//                                                       "tooltip_title"=>"Configuración",
-//                                                       "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_SETTINGS],
-//                                                 ],
-//
-//                                                    [
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_SHOW_MONITORING],
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.monitoring",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                            "icon"=>"fa fa-connectdevelop",
-//                                                            "tooltip_title"=>"Monitoreo",
-//                                                            "conditional" => "conditionalMonitoring",
-//                                                    ],
-//                                                    [
-//                                                        "function"=>"deleteClient",
-//                                                        "conditional"=>"conditionalDeleteClient",
-//                                                        "icon"=>"fas fa-trash",
-//                                                        "tooltip_title"=>"Eliminar",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_DELETE],
-//                                                ],
-//                                                [
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.add.equipment",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                        "icon"=>"fas fa-computer",
-//                                                        "tooltip_title"=>"Agregar equipos",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_ADD_EQUIPMENT],
-//                                                ],
-//                                                [
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.work_orders",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                        "icon"=>"fas fa-hammer",
-//                                                        "tooltip_title"=>"Ordenes de trabajo",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_WORK_ORDER],
-//                                                ],
-//                                                [
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.change_equipment.historical",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                        "icon"=>"fas fa-server",
-//                                                        "tooltip_title"=>"Historial de cambios de equipo",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_SHOW],
-//                                                ],
-//                                                [
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.add.alerts",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                        "icon"=>"fas fa-bell",
-//                                                        "tooltip_title"=>"Alertas",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_SHOW_ALERTS],
-//                                                ],
-//                                                [
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.monitoring.control",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                        "icon"=>"fas fa-toggle-on",
-//                                                        "tooltip_title"=>"On/Off",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_MONITORING_CONTROL],
-//                                                ],
-//                                                 [
-//                                                        "function"=>"disableClient",
-//                                                        "icon"=>"fas fa-user-xmark",
-//                                                        "tooltip_title"=>"Desactivar cliente",
-//                                                        "modal"=>[
-//                                                                "header"=>"Desactivar cliente",
-//                                                                "body"=>"Esta seguro de desactivar cliente ?",
-//                                                        ],
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_ACTION_DISABLE],
-//                                                ],
-//                                                [
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.invoicing",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                        "icon"=>"fas fa-money-bill",
-//                                                        "tooltip_title"=>"Facturas",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_SHOW_INVOICING],
-//                                                ],
-//                                                [
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.hand_reading",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                        "icon"=>"fas fa-file-signature",
-//                                                        "tooltip_title"=>"Lecturas manuales",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_HAND_READING],
-//                                                ],
-//                                                [
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.invoice_generate",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                        "icon"=>"fas fa-receipt",
-//                                                        "tooltip_title"=>"Generar factura de prueba",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_INVOICE_GENERATE],
-//                                                ],
-//                                                 [
-//                                                        "redirect"=>[
-//                                                                    "route"=>"v1.admin.client.manual_payment",
-//                                                                    "binding"=>"client"
-//                                                              ],
-//                                                        "icon"=>"fas fa-dollar-sign",
-//                                                        "tooltip_title"=>"Registrar pagos",
-//                                                        "permission"=>[\App\Http\Resources\V1\Permissions::CLIENT_INVOICE_MANUAL_PAYMENT],
-//                                                ],
-//                                    ]
-//                                    ],
+<x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Listado de proveedores') }}
+    </h2>
+</x-slot>
 
 
-               "table_rows"=>$data
-
-           ])
-
+<div class="py-8">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="flex justify-end mb-4">
+            <a href="">
+                <x-button class="bg-green-500 hover:bg-green-400 focus:bg-green-400 active:bg-green-600">
+                    {{ __('Crear nuevo') }}
+                </x-button>
+            </a>
+        </div>
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="container mx-auto">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                        <tr>
+                            <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">ID</th>
+                            <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">Nombre</th>
+                            <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">Email</th>
+                            <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($data as $user)
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">{{ $user->id }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200">{{ $user->name }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200">{{ $user->email }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200">
+                                    <a href="" class="text-blue-600 hover:text-blue-900">Editar</a>
+                                    <form action="" method="POST" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900 ml-2">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

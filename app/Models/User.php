@@ -65,6 +65,6 @@ class User extends Authenticatable
     }
     public function suppliers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Client::class);
+        return $this->hasMany(Supplier::class);
     }
 }
