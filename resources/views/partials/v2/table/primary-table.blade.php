@@ -1,26 +1,21 @@
-<table class="table-auto">
-    <thead>
-    <tr>
-        <th>Song</th>
-        <th>Artist</th>
-        <th>Year</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-        <td>Malcolm Lockyer</td>
-        <td>1961</td>
-    </tr>
-    <tr>
-        <td>Witchy Woman</td>
-        <td>The Eagles</td>
-        <td>1972</td>
-    </tr>
-    <tr>
-        <td>Shining Star</td>
-        <td>Earth, Wind, and Fire</td>
-        <td>1975</td>
-    </tr>
-    </tbody>
-</table>
+<div class="mt-{{ $mt ?? 0 }} mb-{{ $mb ?? 0 }}">
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                @foreach($table_headers as $header)
+                    <th>{{ $header['col_name'] }}</th>
+                @endforeach
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($table_rows as $row)
+                <tr>
+                    @foreach($table_headers as $header)
+                        <td>{{ $row[$header['col_data']] }}</td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+    
