@@ -16,6 +16,22 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')">
+                        {{ __('Tablas') }}
+                    </x-nav-link>
+                </div>
+
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link wire:click="cargarDashboard" :active="$paginaActual === 'dashboard'">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div> --}}
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link wire:click.prevent="cargarTablaIndex" :active="$paginaActual === 'tablas.tablaIndex'">
+                        {{ __('Tablas') }}
+                    </x-nav-link>
+                </div> --}}
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
