@@ -28,11 +28,31 @@
     <!-- Styles -->
     @livewireStyles
 </head>
+<style>
+    body {
+    position: relative;
+    min-height: 100vh;
+    z-index: 0;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('img/Logos_Centrales/CENTRO_ICONO.png') center center no-repeat;
+    background-size: 46vw 67vh;
+    opacity: 0.2; /* Ajusta la opacidad aquí */
+    z-index: -1;
+}
+</style>
 
 <body class="font-sans antialiased">
     <x-banner />
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-0">
         @livewire('navigation-menu')
 
         <!-- Page Heading -->

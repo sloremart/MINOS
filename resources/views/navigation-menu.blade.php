@@ -29,6 +29,46 @@
                         </div>
                     </x-nav-link>
                 </div>
+                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                    <x-nav-link href="#" >
+                        <div class="flex flex-col items-center">
+                            <img src="{{ asset('img/Iconos_Menu/INVENTARIO/INVENTARIO.png') }}" alt="aca va el icono" class="w-10 h-auto pb-2.5">
+                            {{ __('Inventario') }}
+                        </div>
+                    </x-nav-link>
+                </div>
+                {{-- <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                    <x-nav-link href="#" >
+                        <div class="flex flex-col items-center">
+                            <img src="{{ asset('img/Iconos_Menu/COMPRAS/COMPRAS.png') }}" alt="aca va el icono" class="w-10 h-auto pb-2.5">
+                            {{ __('Compras') }}
+                        </div>
+                    </x-nav-link>
+                </div> --}}
+                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                    <x-nav-link href="#" >
+                        <div class="flex flex-col items-center">
+                            <img src="{{ asset('img/Iconos_Menu/VENTAS/VENTAS.png') }}" alt="aca va el icono" class="w-10 h-auto pb-2.5">
+                            {{ __('Ventas') }}
+                        </div>
+                    </x-nav-link>
+                </div>
+                {{-- <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                    <x-nav-link href="#" >
+                        <div class="flex flex-col items-center">
+                            <img src="{{ asset('img/Iconos_Menu/COMPROBANTES/COMPROBANTES.png') }}" alt="aca va el icono" class="w-10 h-auto pb-2.5">
+                            {{ __('Comprobante') }}
+                        </div>
+                    </x-nav-link>
+                </div> --}}
+                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                    <x-nav-link href="#" >
+                        <div class="flex flex-col items-center">
+                            <img src="{{ asset('img/Iconos_Menu/REPORTES/REPORTES.png') }}" alt="aca va el icono" class="w-10 h-auto pb-2.5">
+                            {{ __('Analitica de Datos') }}
+                        </div>
+                    </x-nav-link>
+                </div>
                 
                 
                
@@ -45,7 +85,7 @@
                 </div> --}}
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 border-l-2 border-blue-700">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ms-3 relative">
@@ -152,7 +192,7 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
+            <div class="-me-2 flex items-center sm:hidden ">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
