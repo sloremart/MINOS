@@ -23,6 +23,7 @@
     
                             @livewire('boton-cancelar')
                         </div>
+                        
                         <div class="flex flex-col">
                             <span class="p-4" style="font-size: 20px;">BOTON PARA EDITAR DATOS  </span>
                             @livewire('boton-editar')

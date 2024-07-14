@@ -16,9 +16,17 @@
                             class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900 rounded-3xl">
                             <div class="rounded-3xl">
                                 <button
+                                    class="relative inline-flex  items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                                    <span
+                                        class="relative px-4  py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0 text-purple-700 hover:text-white "
+                                        style="font-size: 20px">
+                                        <i class="fa-regular fa-circle-plus"></i>
+                                    </span>
+                                </button>
+                                <button
                                     class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-red-600 to-red-500 group-hover:from-red-600 group-hover:to-red-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                                     <span
-                                        class="relative px-5  py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0 text-red-700 hover:text-white"
+                                        class="relative px-4  py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0 text-red-700 hover:text-white"
                                         style="font-size: 20px">
                                         <i class="fa-solid fa-file-pdf"></i>
                                     </span>
@@ -26,15 +34,15 @@
                                 <button
                                     class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-green-600 to-green-500 group-hover:from-green-600 group-hover:to-green-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                                     <span
-                                        class="relative px-5  py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0 text-green-700 hover:text-white"
+                                        class="relative px-4  py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0 text-green-700 hover:text-white"
                                         style="font-size: 20px">
                                         <i class="fa-solid fa-file-excel"></i>
                                     </span>
                                 </button>
                                 <button
-                                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-gray-600 to-gray-500 group-hover:from-gray-600 group-hover:to-gray-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                                    class="relative inline-flex   items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-gray-600 to-gray-500 group-hover:from-gray-600 group-hover:to-gray-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                                     <span
-                                        class="relative px-5  py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0 text-green-700 hover:text-white"
+                                        class="relative px-4  py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0 text-green-700 hover:text-white"
                                         style="font-size: 20px">
                                         <i class="fa-solid fa-print"></i>
                                     </span>
@@ -57,9 +65,12 @@
                                     placeholder="Search for users">
                             </div>
                         </div>
-                        <div class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden border-2 border-purple-700">
-                            <table class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400">
-                                <thead class="text-xs text-gray-200 uppercase bg-purple-700 dark:bg-gray-700 dark:text-gray-400">
+                        <div
+                            class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden border-2 border-purple-700">
+                            <table
+                                class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400">
+                                <thead
+                                    class="text-xs text-gray-200 uppercase bg-purple-700 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="p-4">
                                             <div class="flex items-center">
@@ -83,7 +94,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <td class="w-4 p-4">
                                             <div class="flex items-center">
                                                 <input id="checkbox-table-search-1" type="checkbox"
@@ -91,8 +103,10 @@
                                                 <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                                             </div>
                                         </td>
-                                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                            <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
+                                        <th scope="row"
+                                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                            <img class="w-10 h-10 rounded-full"
+                                                src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
                                             <div class="ps-3">
                                                 <div class="text-base font-semibold">Neil Sims</div>
                                                 <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
@@ -110,10 +124,12 @@
                                             <!-- Modal toggle -->
                                             <a href="#" type="button" data-modal-target="editUserModal"
                                                 data-modal-show="editUserModal"
-                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
+                                                user</a>
                                         </td>
                                     </tr>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <td class="w-4 p-4">
                                             <div class="flex items-center">
                                                 <input id="checkbox-table-search-1" type="checkbox"
@@ -121,8 +137,10 @@
                                                 <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                                             </div>
                                         </td>
-                                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                            <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
+                                        <th scope="row"
+                                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                            <img class="w-10 h-10 rounded-full"
+                                                src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
                                             <div class="ps-3">
                                                 <div class="text-base font-semibold">Neil Sims</div>
                                                 <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
@@ -140,16 +158,17 @@
                                             <!-- Modal toggle -->
                                             <a href="#" type="button" data-modal-target="editUserModal"
                                                 data-modal-show="editUserModal"
-                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
+                                                user</a>
                                         </td>
                                     </tr>
                                     <!-- Repetir las filas necesarias -->
                                 </tbody>
                             </table>
                         </div>
-                        
-                        
-                        
+
+
+
                         <!-- Edit user modal -->
                         <div id="editUserModal" tabindex="-1" aria-hidden="true"
                             class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
