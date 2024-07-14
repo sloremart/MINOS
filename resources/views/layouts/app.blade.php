@@ -43,9 +43,22 @@ body::before {
     right: 0;
     bottom: 0;
     background: url('img/Logos_Centrales/CENTRO_ICONO.png') center center no-repeat;
-    background-size: 46vw 67vh;
+    background-size: contain;
     opacity: 0.2; /* Ajusta la opacidad aquí */
     z-index: -1;
+    
+}
+
+@media (max-width: 768px) {
+    body::before {
+        background-size: 80vw 50vh; /* Ajuste para pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    body::before {
+        background-size: 70vw 40vh; /* Ajuste para pantallas muy pequeñas */
+    }
 }
 </style>
 
