@@ -1,7 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'flowbite';
 
 [x-cloak] {
     display: none;
+}
+
+
+button {
+    margin: 0;
+    padding: 0;
 }

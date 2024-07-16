@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\tablas;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,12 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Suppliers\Supplier::class)
             ->name("supplier.list");
     });
+
     Route::prefix("clientes")->group(function () {
         Route::get('listado', \App\Livewire\Clients\Client::class)
             ->name("client.list");
     });
+
+    Route::get('/tablas', [tablas::class, 'tablas'])->name('tablas.tablas');
+
 });

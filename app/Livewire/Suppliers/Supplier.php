@@ -20,5 +20,9 @@ class Supplier extends Component
         return view('livewire.suppliers.supplier', [
         "data" => $this->getData()
         ])->layout('layouts.app');
+        // return view('livewire.suppliers.supplier', [
+        //     'data' => $this->getData()
+        // ]);
     }
+    
 }
