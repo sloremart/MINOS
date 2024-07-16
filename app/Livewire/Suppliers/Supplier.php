@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Suppliers;
 
+use App\Livewire\Forms\SupplierForm;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Supplier extends Component
@@ -18,5 +20,9 @@ class Supplier extends Component
         return view('livewire.suppliers.supplier', [
         "data" => $this->getData()
         ])->layout('layouts.app');
+        // return view('livewire.suppliers.supplier', [
+        //     'data' => $this->getData()
+        // ]);
     }
+    
 }

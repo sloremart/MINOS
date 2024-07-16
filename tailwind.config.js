@@ -11,6 +11,7 @@ export default {
         './resources/views/**/*.blade.php',
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
+        "./node_modules/flowbite/**/*.js",
     ],
 
     theme: {
