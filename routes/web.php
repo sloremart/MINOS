@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tablas;
-
+use App\Http\Controllers\tipologiasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,5 +38,7 @@ Route::middleware([
     });
 
     Route::get('/tablas', [tablas::class, 'tablas'])->name('tablas.tablas');
+    Route::get('/tipologias', [tipologiasController::class, 'tipologia'])->name('tipologias.tipologias');
+
 
 });

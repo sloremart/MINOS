@@ -122,5 +122,5 @@
         </div>
     </div>
 </x-app-layout>
-@livewire('modales-component')
+
 {{-- @livewire('moda-registro-cliente-component') --}}

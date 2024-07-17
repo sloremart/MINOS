@@ -43,8 +43,8 @@
                                
                             </li>
                             <li class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                    usuarios
+                                <a href="{{ route('tipologias.tipologias') }}" :active="request()->routeIs('tipologias.tipologias')" class="flex-grow">
+                                    Tipologias
                                 </a>
                                 <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                             </li>
