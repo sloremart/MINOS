@@ -14,7 +14,7 @@ class TipologiasComponent extends Component
     public $nombre_uni;
     public $abreviatura;
 
-  
+    protected $listeners = ['eventoGuardarTipologia' => 'storetipologia'];
 
     public function render()
     {
@@ -29,12 +29,24 @@ class TipologiasComponent extends Component
         return view('livewire.tipologia.tipologias-component', ['tipologias' => $tipologias]);
     }
 
-    public function storetipologia()
+    public function storetipologia($data)
     {
+        $this->nombre_uni = $data['nombre_uni'];
+        $this->abreviatura = $data['abreviatura'];
+
+        // if (is_null($this->nombre_uni) || is_null($this->abreviatura)) {
+        //     session()->flash('error', 'Todos los campos son obligatorios.');
+        //     return;
+        // }
+
         $tipologia = new Tipologias();
         $tipologia->nombre_uni = $this->nombre_uni;
         $tipologia->abreviatura = $this->abreviatura;
         $tipologia->estatus = "ACTIVO";
         $tipologia->save();
+
+        $this->reset(['nombre_uni', 'abreviatura']);
     }
 }
+
+
