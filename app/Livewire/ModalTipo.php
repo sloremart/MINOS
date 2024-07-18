@@ -10,6 +10,7 @@ class ModalTipo extends Component
     public $abreviatura;
     public $id;
     public $estatus;
+    protected $listeners = ['editarTipologia'];
 
     public function guardarTipologia()
     {
@@ -19,6 +20,14 @@ class ModalTipo extends Component
             'estatus' => $this->estatus,
             'id' => $this->id
         ])->to('tipologias-component');
+    }
+    
+    public function editarTipologia($data)
+    {
+        $this->nombre_uni = $data['nombre_uni'];
+        $this->abreviatura = $data['abreviatura'];
+        $this->estatus = $data['estatus'];
+        $this->id = $data['id'];
     }
     
 

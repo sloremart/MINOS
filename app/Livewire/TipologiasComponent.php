@@ -47,19 +47,21 @@ class TipologiasComponent extends Component
     public function edittipologia($id)
     {
         $tipologia = Tipologias::find($id);
+        $this->id = $tipologia->id;
+        $this->nombre_uni = $tipologia->nombre_uni;
+        $this->abreviatura = $tipologia->abreviatura;
+        $this->estatus = $tipologia->estatus;
 
-        if ($tipologia) {
-            $this->id = $tipologia->id;
-            $this->nombre_uni = $tipologia->nombre_uni;
-            $this->abreviatura = $tipologia->abreviatura;
-            $this->estatus = $tipologia->estatus; // Log para depuración
-            // Log para depuración
-            logger()->debug('Datos de tipología:', [
-                'selectedTipologia' => $this->id,
-                'nombre_uni' => $this->nombre_uni,
-                'abreviatura' => $this->abreviatura,
-                'estatus' => $this->estatus,
-            ]);
-        }
+        // Emitir el evento para enviar los datos al componente ModalTipo
+        $this->dispatch('editarTipologia', [
+            'nombre_uni' => $this->nombre_uni,
+            'abreviatura' => $this->abreviatura,
+            'estatus' => $this->estatus,
+            'id' => $this->id
+        ]);
     }
+    public function updatetipologia($id){
+
+    } 
+
 }
