@@ -64,7 +64,8 @@
                                     placeholder="Search for users">
                             </div>
                         </div>
-                        <div class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden border-2 border-blue-700">
+                        <div
+                            class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden border-2 border-blue-700">
                             <table
                                 class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400">
                                 <thead
@@ -106,20 +107,34 @@
                                             </td>
                                             <td class="text-end">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button"
-                                                        class="btn btn-outline-secondary m-2 rounded"><i
-                                                            class="fa-solid fa-pencil"></i></button>
-                                                    <button type="button" class="btn btn-outline-danger m-2 rounded"><i
-                                                            class="fa-solid fa-circle-xmark"></i></button>
+                                                    <button type="button" data-modal-target="editipologia"
+                                                        data-modal-toggle="editipologia"
+                                                       wire:click="edittipologia({{ $tipologia->id }})" 
+                                                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded group bg-gradient-to-br  from-blue-400 to-blue-500 group-hover:from-blue-00 group-hover:ring-red-300 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                                                        <span
+                                                            class="relative px-2  py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded group-hover:bg-opacity-0 text-blue-700 hover:text-white"
+                                                            style="font-size: 15px">
+                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                        </span>
+                                                    </button>
+                                                    <button
+                                                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded group bg-gradient-to-br  from-red-400 to-red-500 group-hover:from-blue-00 group-hover:ring-red-300 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:red-blue-300 dark:focus:ring-blue-800">
+                                                        <span
+                                                            class="relative px-2  py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded group-hover:bg-opacity-0 text-red-700 hover:text-white"
+                                                            style="font-size: 15px">
+                                                            <i class="fa-solid fa-circle-xmark"></i>
+                                                        </span>
+                                                    </button>
+
                                                 </div>
                                             </td>
                                         </tr>
                                         <!-- Repetir las filas necesarias -->
                                     @endforeach
-                                   
+
                                 </tbody>
                             </table>
-                          
+
                         </div>
                         {{ $tipologias->links('livewire-pagination-links') }}
                     </div>
@@ -131,6 +146,7 @@
 
     </x-app-layout>
 
-  
-@livewire('modal-tipo')
+
+    @livewire('modal-tipo')
+    
 </div>

@@ -13,8 +13,11 @@ class TipologiasComponent extends Component
     public $buscar;
     public $nombre_uni;
     public $abreviatura;
+    public $id;
+    public $estatus;
 
     protected $listeners = ['eventoGuardarTipologia' => 'storetipologia'];
+
 
     public function render()
     {
@@ -33,12 +36,6 @@ class TipologiasComponent extends Component
     {
         $this->nombre_uni = $data['nombre_uni'];
         $this->abreviatura = $data['abreviatura'];
-
-        // if (is_null($this->nombre_uni) || is_null($this->abreviatura)) {
-        //     session()->flash('error', 'Todos los campos son obligatorios.');
-        //     return;
-        // }
-
         $tipologia = new Tipologias();
         $tipologia->nombre_uni = $this->nombre_uni;
         $tipologia->abreviatura = $this->abreviatura;
@@ -47,6 +44,22 @@ class TipologiasComponent extends Component
 
         $this->reset(['nombre_uni', 'abreviatura']);
     }
+    public function edittipologia($id)
+    {
+        $tipologia = Tipologias::find($id);
+
+        if ($tipologia) {
+            $this->id = $tipologia->id;
+            $this->nombre_uni = $tipologia->nombre_uni;
+            $this->abreviatura = $tipologia->abreviatura;
+            $this->estatus = $tipologia->estatus; // Log para depuración
+            // Log para depuración
+            logger()->debug('Datos de tipología:', [
+                'selectedTipologia' => $this->id,
+                'nombre_uni' => $this->nombre_uni,
+                'abreviatura' => $this->abreviatura,
+                'estatus' => $this->estatus,
+            ]);
+        }
+    }
 }
-
-
