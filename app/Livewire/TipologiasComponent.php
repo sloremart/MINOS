@@ -16,7 +16,13 @@ class TipologiasComponent extends Component
     public $id;
     public $estatus;
 
-    protected $listeners = ['eventoGuardarTipologia' => 'storetipologia'];
+    protected $listeners = [
+        'eventoGuardarTipologia' => 'storetipologia',
+        'eventoupdateTipologia' => 'updatetipologia',
+
+    ];
+    // Reglas de validación
+    
 
 
     public function render()
@@ -36,6 +42,9 @@ class TipologiasComponent extends Component
     {
         $this->nombre_uni = $data['nombre_uni'];
         $this->abreviatura = $data['abreviatura'];
+
+        // Realizar la validación
+        // $this->validate();
         $tipologia = new Tipologias();
         $tipologia->nombre_uni = $this->nombre_uni;
         $tipologia->abreviatura = $this->abreviatura;
@@ -60,8 +69,24 @@ class TipologiasComponent extends Component
             'id' => $this->id
         ]);
     }
-    public function updatetipologia($id){
+    public function updatetipologia($data)
+    {
+        // $this->validate();
+        $tipologia = Tipologias::find($data['id']);
+        $tipologia->nombre_uni = $data['nombre_uni'];
+        $tipologia->abreviatura = $data['abreviatura'];
+        $tipologia->estatus = $data['estatus'];
+        $tipologia->save();
 
-    } 
+        $this->reset(['nombre_uni', 'abreviatura', 'estatus', 'id']);
+    }
+    public function deletetipo($id)
+    {
+        $tipologia = Tipologias::find($id);
+        if ($tipologia) {
+            $tipologia->delete();
+        }
+    }
 
+   
 }

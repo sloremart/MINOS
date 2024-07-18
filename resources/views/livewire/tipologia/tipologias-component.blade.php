@@ -117,7 +117,7 @@
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </span>
                                                     </button>
-                                                    <button
+                                                    <button wire:click="deletetipo({{ $tipologia->id }})"
                                                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded group bg-gradient-to-br  from-red-400 to-red-500 group-hover:from-blue-00 group-hover:ring-red-300 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:red-blue-300 dark:focus:ring-blue-800">
                                                         <span
                                                             class="relative px-2  py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded group-hover:bg-opacity-0 text-red-700 hover:text-white"
