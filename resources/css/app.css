@@ -12,3 +12,29 @@ button {
     margin: 0;
     padding: 0;
 }
+
+
+.custom-scrollbar::-webkit-scrollbar {
+    height: 8px; /* Altura de la barra de desplazamiento horizontal */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #ffffff; /* Color del fondo de la barra de desplazamiento */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #0011ff8e; /* Color de la barra de desplazamiento */
+    border-radius: 50px; /* Bordes redondeados de la barra de desplazamiento */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #0026ff91; /* Color de la barra de desplazamiento al pasar el ratón por encima */
+}
+@media (max-width: 1000px) {
+    .sm\\:hidden {
+        display: block !important;
+    }
+    .sm\\:flex {
+        display: none !important;
+    }
+}

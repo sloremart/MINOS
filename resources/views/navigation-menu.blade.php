@@ -2,7 +2,7 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 pt-2  sm:px-6 bg-white lg:px-8 bg-gray-0 rounded-full shadow-lg">
         <div class="flex justify-between h-20">
-            <div class="flex">
+            <div class="flex ">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -10,9 +10,11 @@
                         <img src="{{ asset('img/Logo_Minos/LOGO.png') }}" alt="aca va el icono" class="w-40 h-auto pb-2.5">
                     </a>
                 </div>
+            </div>
+            <div class="flex w-full justify-end">
 
                 <!-- Navigation Links -->
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('img/Iconos_Menu/INICIO/INICIO.png') }}" alt="aca va el icono"
@@ -21,7 +23,7 @@
                         </div>
                     </x-nav-link>
                 </div>
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" :active>
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/ADMINISTRACION.png') }}"
@@ -65,7 +67,7 @@
 
                 </div>
 
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar1">
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('img/Iconos_Menu/INVENTARIO/INVENTARIO.png') }}"
@@ -116,7 +118,7 @@
                         </div>
                     </x-nav-link>
                 </div> --}}
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar2">
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('img/Iconos_Menu/VENTAS/Ventas.png') }}"
@@ -164,7 +166,7 @@
                         </div>
                     </x-nav-link>
                 </div> --}}
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
+                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar3">
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('img/Iconos_Menu/REPORTES/Reportes.png') }}"
@@ -204,10 +206,6 @@
                     </div>
                     
                 </div>
-
-
-
-
                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link wire:click="cargarDashboard" :active="$paginaActual === 'dashboard'">
                         {{ __('Dashboard') }}
@@ -334,9 +332,8 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden ">
-                <button @click="open = ! open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+            <div class="-me-2 flex items-center lg:hidden ">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -350,7 +347,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+    <div :class="{ 'block': open, 'hidden': !open }" class=" hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Inicio') }}

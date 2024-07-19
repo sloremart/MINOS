@@ -43,8 +43,7 @@ class TipologiasComponent extends Component
         $this->nombre_uni = $data['nombre_uni'];
         $this->abreviatura = $data['abreviatura'];
 
-        // Realizar la validación
-        // $this->validate();
+        
         $tipologia = new Tipologias();
         $tipologia->nombre_uni = $this->nombre_uni;
         $tipologia->abreviatura = $this->abreviatura;
@@ -71,7 +70,7 @@ class TipologiasComponent extends Component
     }
     public function updatetipologia($data)
     {
-        // $this->validate();
+       
         $tipologia = Tipologias::find($data['id']);
         $tipologia->nombre_uni = $data['nombre_uni'];
         $tipologia->abreviatura = $data['abreviatura'];
