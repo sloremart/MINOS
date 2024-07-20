@@ -27,7 +27,6 @@ class ClientIndex extends Component
     public function insert($supplierId)
     {
         $this->modelForm->insert($supplierId);
-
     }
     public function save()
     {

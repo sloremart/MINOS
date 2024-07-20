@@ -30,11 +30,3 @@ button {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #0026ff91; /* Color de la barra de desplazamiento al pasar el ratón por encima */
 }
-@media (max-width: 1000px) {
-    .sm\\:hidden {
-        display: block !important;
-    }
-    .sm\\:flex {
-        display: none !important;
-    }
-}

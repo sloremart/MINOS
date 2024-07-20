@@ -14,7 +14,7 @@
             <div class="flex w-full justify-end">
 
                 <!-- Navigation Links -->
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
+                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('img/Iconos_Menu/INICIO/INICIO.png') }}" alt="aca va el icono"
@@ -23,92 +23,116 @@
                         </div>
                     </x-nav-link>
                 </div>
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
+                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" :active>
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/ADMINISTRACION.png') }}"
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
                             <span>{{ __('Administracion') }}</span>
                         </div>
-                    </x-nav-link> 
+                    </x-nav-link>
                     <!-- Dropdown menu -->
                     <div id="dropdownNavbar"
                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
-                           
-                            <li class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                               
-                                    <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                        Roles
-                                    </a>
-                                    <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Roles.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
-                               
+{{-- 
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+
+                                <a href="{{ route('tablas.tablas') }}" :active="request() - > routeIs('tablas.tablas')"
+                                    class="flex-grow">
+                                    Roles
+                                </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Roles.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+
                             </li>
-                            <li class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tipologias.tipologias') }}" :active="request()->routeIs('tipologias.tipologias')" class="flex-grow">
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tipologias.tipologias') }}"
+                                    :active="request() - > routeIs('tipologias.tipologias')" class="flex-grow">
                                     Tipologias
                                 </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                             </li>
-                            <li class="flex justify-between  border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
+                            <li
+                                class="flex justify-between  border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}" :active="request() - > routeIs('tablas.tablas')"
+                                    class="flex-grow">
                                     Informacion Empresa
                                 </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Informacion_Empresa.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Informacion_Empresa.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                             </li>
-                            <li class="flex justify-between   items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
+                            <li
+                                class="flex justify-between   items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}" :active="request() - > routeIs('tablas.tablas')"
+                                    class="flex-grow">
                                     Caja
                                 </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Caja.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
-                            </li>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Caja.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                            </li> --}}
                         </ul>
                     </div>
 
                 </div>
 
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
+                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar1">
                         <div class="flex flex-col items-center">
-                            <img src="{{ asset('img/Iconos_Menu/INVENTARIO/INVENTARIO.png') }}"
-                                alt="aca va el icono" class="w-10 h-auto pb-2.5">
+                            <img src="{{ asset('img/Iconos_Menu/INVENTARIO/INVENTARIO.png') }}" alt="aca va el icono"
+                                class="w-10 h-auto pb-2.5">
                             <span>{{ __('Inventario') }}</span>
                         </div>
-                    </x-nav-link> 
+                    </x-nav-link>
                     <!-- Dropdown menu -->
                     <div id="dropdownNavbar1"
                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
-                           
-                            <li class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                               
-                                    <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                        iventario1
-                                    </a>
-                                    <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Roles.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
-                               
-                            </li>
-                            <li class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
+
+                            {{-- <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+
+                                <a href="{{ route('tablas.tablas') }}" :active="request() - > routeIs('tablas.tablas')"
+                                    class="flex-grow">
                                     iventario1
                                 </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Roles.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+
                             </li>
-                            <li class="flex justify-between  border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}" :active="request() - > routeIs('tablas.tablas')"
+                                    class="flex-grow">
                                     iventario1
                                 </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Informacion_Empresa.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                             </li>
-                            <li class="flex justify-between   items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
+                            <li
+                                class="flex justify-between  border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}" :active="request() - > routeIs('tablas.tablas')"
+                                    class="flex-grow">
                                     iventario1
                                 </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Caja.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Informacion_Empresa.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                             </li>
+                            <li
+                                class="flex justify-between   items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}" :active="request() - > routeIs('tablas.tablas')"
+                                    class="flex-grow">
+                                    iventario1
+                                </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Caja.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                            </li> --}}
                         </ul>
                     </div>
-                    
+
                 </div>
                 {{-- <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
                     <x-nav-link href="#" >
@@ -118,45 +142,58 @@
                         </div>
                     </x-nav-link>
                 </div> --}}
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
+                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar2">
                         <div class="flex flex-col items-center">
-                            <img src="{{ asset('img/Iconos_Menu/VENTAS/Ventas.png') }}"
-                                alt="aca va el icono" class="w-10 h-auto pb-2.5">
+                            <img src="{{ asset('img/Iconos_Menu/VENTAS/Ventas.png') }}" alt="aca va el icono"
+                                class="w-10 h-auto pb-2.5">
                             <span>{{ __('Ventas') }}</span>
                         </div>
-                    </x-nav-link> 
+                    </x-nav-link>
                     <!-- Dropdown menu -->
                     <div id="dropdownNavbar2"
                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
-                           
-                            <li class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                               
-                                    <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                        ventas
-                                    </a>
-                                    <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Roles.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
-                               
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                            aria-labelledby="dropdownLargeButton">
+{{-- 
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+
+                                <a href="{{ route('tablas.tablas') }}"
+                                    :active="request() - > routeIs('tablas.tablas')" class="flex-grow">
+                                    ventas
+                                </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Roles.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+
                             </li>
-                            <li class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                    ventas                                </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}"
+                                    :active="request() - > routeIs('tablas.tablas')" class="flex-grow">
+                                    ventas </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                             </li>
-                            <li class="flex justify-between  border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                    ventas                                </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Informacion_Empresa.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                            <li
+                                class="flex justify-between  border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}"
+                                    :active="request() - > routeIs('tablas.tablas')" class="flex-grow">
+                                    ventas </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Informacion_Empresa.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                             </li>
-                            <li class="flex justify-between   items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                    ventas                                </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Caja.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
-                            </li>
+                            <li
+                                class="flex justify-between   items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}"
+                                    :active="request() - > routeIs('tablas.tablas')" class="flex-grow">
+                                    ventas </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Caja.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                            </li> --}}
                         </ul>
                     </div>
-                    
+
                 </div>
                 {{-- <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 sm:ms-10">
                     <x-nav-link href="#" >
@@ -166,45 +203,58 @@
                         </div>
                     </x-nav-link>
                 </div> --}}
-                <div class="hidden sm:flex sm:items-center sm:flex-col sm:space-y-2 ">
+                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar3">
                         <div class="flex flex-col items-center">
-                            <img src="{{ asset('img/Iconos_Menu/REPORTES/Reportes.png') }}"
-                                alt="aca va el icono" class="w-10 h-auto pb-2.5">
+                            <img src="{{ asset('img/Iconos_Menu/REPORTES/Reportes.png') }}" alt="aca va el icono"
+                                class="w-10 h-auto pb-2.5">
                             <span>{{ __('Analitica de Datos') }}</span>
                         </div>
-                    </x-nav-link> 
+                    </x-nav-link>
                     <!-- Dropdown menu -->
                     <div id="dropdownNavbar3"
                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
-                           
-                            <li class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                               
-                                    <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                        reportes
-                                    </a>
-                                    <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Roles.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
-                               
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                            aria-labelledby="dropdownLargeButton">
+
+                            {{-- <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+
+                                <a href="{{ route('tablas.tablas') }}"
+                                    :active="request() - > routeIs('tablas.tablas')" class="flex-grow">
+                                    reportes
+                                </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Roles.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+
                             </li>
-                            <li class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                    reportes                                </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}"
+                                    :active="request() - > routeIs('tablas.tablas')" class="flex-grow">
+                                    reportes </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                             </li>
-                            <li class="flex justify-between  border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                    reportes                                </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Informacion_Empresa.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                            <li
+                                class="flex justify-between  border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}"
+                                    :active="request() - > routeIs('tablas.tablas')" class="flex-grow">
+                                    reportes </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Informacion_Empresa.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                             </li>
-                            <li class="flex justify-between   items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('tablas.tablas') }}" :active="request()->routeIs('tablas.tablas')" class="flex-grow">
-                                    reportes                                </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Caja.png') }}" style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
-                            </li>
+                            <li
+                                class="flex justify-between   items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('tablas.tablas') }}"
+                                    :active="request() - > routeIs('tablas.tablas')" class="flex-grow">
+                                    reportes </a>
+                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Caja.png') }}"
+                                    style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                            </li> --}}
                         </ul>
                     </div>
-                    
+
                 </div>
                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link wire:click="cargarDashboard" :active="$paginaActual === 'dashboard'">
@@ -218,7 +268,7 @@
                 </div> --}}
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ms-6 border-l-2 border-blue-700">
+            <div class="hidden md:flex sm:items-center sm:ms-6 border-l-2 border-blue-700">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ms-3 relative">
@@ -230,7 +280,8 @@
                                         {{ Auth::user()->currentTeam->name }}
 
                                         <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                         </svg>
@@ -282,7 +333,8 @@
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     <img class="h-8 w-8 rounded-full object-cover"
-                                        src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                        src="{{ Auth::user()->profile_photo_url }}"
+                                        alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
@@ -291,7 +343,8 @@
                                         {{ Auth::user()->name }}
 
                                         <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                         </svg>
@@ -333,7 +386,8 @@
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center lg:hidden ">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                <button @click="open = ! open"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -349,9 +403,36 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class=" hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <!-- Componente de enlace de navegación -->
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Inicio') }}
             </x-responsive-nav-link>
+            <!-- Lista desplegable -->
+            <div class="relative" x-data="{ open: false }">
+                <x-responsive-nav-link href="#" @click="open = !open" class="cursor-pointer">
+                    {{ __('Opciones') }}
+                    <svg class="inline w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                        </path>
+                    </svg>
+                </x-responsive-nav-link>
+
+                <div x-show="open" @click.away="open = false"
+                    class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
+                    <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        {{ __('Ruta 1') }}
+                    </a>
+                    <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        {{ __('Ruta 2') }}
+                    </a>
+                    <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        {{ __('Ruta 3') }}
+                    </a>
+                </div>
+            </div>
+
+
         </div>
 
         <!-- Responsive Settings Options -->
