@@ -122,7 +122,7 @@
     
 
 
-    @livewire('modal-tipo')
+    @livewire('Tipologias.modal-tipo')
 
 </div>
 

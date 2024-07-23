@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Tipologias;
 
 use Livewire\Component;
 
@@ -26,7 +26,7 @@ class ModalTipo extends Component
             'abreviatura' => $this->abreviatura,
             'estatus' => $this->estatus,
             'id' => $this->id
-        ])->to('tipologias-component');
+        ])->to('Tipologias.tipologias-component');
     }
     public function updateTipologia()
     {
@@ -36,7 +36,7 @@ class ModalTipo extends Component
             'abreviatura' => $this->abreviatura,
             'estatus' => $this->estatus,
             'id' => $this->id
-        ])->to('tipologias-component');
+        ])->to('Tipologias.tipologias-component');
     }
 
     public function editarTipologia($data)
