@@ -1,5 +1,5 @@
 <div>
-    <x-app-layout>
+    
         {{-- <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Tipologia') }}
@@ -84,7 +84,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($tipologias as $tipologia)
+                                        @foreach ($data as $tipologia)
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td class="px-6 py-4">{{ $tipologia->id }}</td>
                                             <td class="px-6 py-4 text-center">{{ $tipologia->nombre_uni }}</td>
@@ -111,7 +111,7 @@
                             </div>
                         </div>
                         
-                        {{ $tipologias->links('livewire-pagination-links') }}
+                        {{ $data->links('livewire-pagination-links') }}
                     </div>
 
                 </div>
@@ -119,9 +119,10 @@
             </div>
         </div>
 
-    </x-app-layout>
+    
 
 
     @livewire('modal-tipo')
 
 </div>
+

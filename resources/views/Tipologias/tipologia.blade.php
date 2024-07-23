@@ -1,5 +1,9 @@
 <div>
-    @livewire('tipologias-component')
+    {{-- @livewire('tipologias-component') --}}
 
-   
+    @extends('layouts.app')
+
+    @section('content')
+    @livewire('tipologias-component')
+    @endsection
 </div>

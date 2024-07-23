@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\tablas;
-use App\Http\Controllers\tipologiasController;
+// use App\Http\Controllers\tablas;
+// use App\Http\Controllers\tipologiasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,9 +36,13 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Clients\Client::class)
             ->name("client.list");
     });
+    Route::prefix("tipologias")->group(function () {
+        Route::get('listado', \App\Livewire\Tipologias\TipologiasComponent::class)
+            ->name("tipologia.list");
+    });
 
-    Route::get('/tablas', [tablas::class, 'tablas'])->name('tablas.tablas');
-    Route::get('/tipologias', [tipologiasController::class, 'tipologia'])->name('tipologias.tipologias');
+    // Route::get('/tablas', [tablas::class, 'tablas'])->name('tablas.tablas');
+    // Route::get('/tipologias', [tipologiasController::class, 'tipologia'])->name('tipologias.tipologias');
 
 
 });
