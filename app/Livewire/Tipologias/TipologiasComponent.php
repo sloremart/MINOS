@@ -52,7 +52,7 @@ class TipologiasComponent extends Component
         $tipologia->estatus = "ACTIVO";
         $tipologia->save();
 
-        $tipologia->clear();
+        $this->clear();
         
     }
 
@@ -76,6 +76,7 @@ class TipologiasComponent extends Component
             'estatus' => $this->estatus,
             'id' => $this->id
         ]);
+        $this->clear();
     }
     public function updatetipologia($data)
     {

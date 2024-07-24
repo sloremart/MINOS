@@ -51,8 +51,8 @@
                 </form>
             </x-authentication-card>
         </div>
-        <div class="grid relative col-span-2 place-items-center p-4 bg-gray-200 justify-center before:absolute before:inset-0 before:bg-[url('../../public/img/LOGO_SENA/Papel_Tapiz.png')] before:bg-contain before:bg-center before:opacity-100 before:z-0">
-            <img class="w-1/2 absolute h-auto rounded-lg z-10" src="{{ asset('img/Logos_Centrales/CENTRO_ICONO.png') }}" alt="">
+        <div class="grid relative col-span-2 place-items-center p-4 bg-gray-200 justify-center before:absolute before:inset-0 before:bg-[url('../../public/images/LOGO_SENA/Papel_Tapiz.png')] before:bg-contain before:bg-center before:opacity-100 before:z-0">
+            <img class="w-1/2 absolute h-auto rounded-lg z-10" src="{{ asset('images/Logos_Centrales/CENTRO_ICONO.png') }}" alt="">
         </div>
     </div>
 
