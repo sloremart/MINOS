@@ -1,7 +1,6 @@
 <?php
 // C:\laragon\www\MINOS\app\Livewire\TipologiasComponent.php
 namespace App\Livewire\Tipologias;
-
 use App\Models\Tipologias;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -19,7 +18,6 @@ class TipologiasComponent extends Component
     protected $listeners = [
         'eventoGuardarTipologia' => 'storetipologia',
         'eventoupdateTipologia' => 'updatetipologia',
-
     ];
     // Reglas de validación
     public function render()
@@ -42,40 +40,11 @@ class TipologiasComponent extends Component
         }
     }
 
-//     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
-// {
-//     if ($this->buscar == "") {
-//         $tipologias = Tipologias::paginate(5);
-//     } else {
-//         $tipologias = Tipologias::where('nombre_uni', 'like', "%$this->buscar%")
-//             ->orWhere('abreviatura', 'like', "%$this->buscar%")
-//             ->orWhere('estatus', 'like', "%$this->buscar%")
-//             ->paginate(5);
-//     }
-//     return view('livewire.tipologia.tipologias-component', [
-//         "data" => $tipologias
-//     ])->layout('layouts.app');
-// }
-
-
-    // public function render()
-    // {
-    //     if ($this->buscar == "") {
-    //         $tipologias = Tipologias::paginate(5);
-    //     } else {
-    //         $tipologias = Tipologias::where('nombre_uni', 'like', "%$this->buscar%")
-    //             ->orWhere('abreviatura', 'like', "%$this->buscar%")
-    //             ->orWhere('estatus', 'like', "%$this->buscar%")
-    //             ->paginate(5);
-    //     }
-    //     return view('livewire.tipologia.tipologias-component', ['tipologias' => $tipologias]);
-    // }
 
     public function storetipologia($data)
     {
         $this->nombre_uni = $data['nombre_uni'];
         $this->abreviatura = $data['abreviatura'];
-
         
         $tipologia = new Tipologias();
         $tipologia->nombre_uni = $this->nombre_uni;
@@ -83,8 +52,15 @@ class TipologiasComponent extends Component
         $tipologia->estatus = "ACTIVO";
         $tipologia->save();
 
-        $this->reset(['nombre_uni', 'abreviatura']);
+        $tipologia->clear();
+        
     }
+
+    public function clear(){
+        $this->nombre_uni = '';
+        $this->abreviatura = '';
+    }
+
     public function edittipologia($id)
     {
         $tipologia = Tipologias::find($id);
@@ -103,7 +79,6 @@ class TipologiasComponent extends Component
     }
     public function updatetipologia($data)
     {
-       
         $tipologia = Tipologias::find($data['id']);
         $tipologia->nombre_uni = $data['nombre_uni'];
         $tipologia->abreviatura = $data['abreviatura'];
@@ -119,6 +94,5 @@ class TipologiasComponent extends Component
             $tipologia->delete();
         }
     }
-
    
 }

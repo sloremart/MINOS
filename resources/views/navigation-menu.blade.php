@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         {{-- <x-application-mark class="block h-9 w-auto" /> --}}
-                        <img src="{{ asset('img/Logo_Minos/LOGO.png') }}" alt="aca va el icono" class="w-40 h-auto pb-2.5">
+                        <img src="{{ asset('images/Logo_Minos/LOGO.png') }}" alt="aca va el icono" class="w-40 h-auto pb-2.5">
                     </a>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         <div class="flex flex-col items-center">
-                            <img src="{{ asset('img/Iconos_Menu/INICIO/INICIO.png') }}" alt="aca va el icono"
+                            <img src="{{ asset('images/Iconos_Menu/INICIO/INICIO.png') }}" alt="aca va el icono"
                                 class="w-10 h-auto pb-2.5">
                             <span>{{ __('Inicio') }}</span>
                         </div>
@@ -26,7 +26,7 @@
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" :active>
                         <div class="flex flex-col items-center">
-                            <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/ADMINISTRACION.png') }}"
+                            <img src="{{ asset('images/Iconos_Menu/ADMINISTRACION/ADMINISTRACION.png') }}"
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
                             <span>{{ __('Administracion') }}</span>
                         </div>
@@ -43,7 +43,7 @@
                                     class="flex-grow">
                                     Roles
                                 </a>
-                                <img src="{{ asset('img/Iconos_Menu/ADMINISTRACION/Roles.png') }}"
+                                <img src="{{ asset('images/Iconos_Menu/ADMINISTRACION/Roles.png') }}"
                                     style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
 
                             </li>
@@ -82,7 +82,7 @@
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar1">
                         <div class="flex flex-col items-center">
-                            <img src="{{ asset('img/Iconos_Menu/INVENTARIO/INVENTARIO.png') }}" alt="aca va el icono"
+                            <img src="{{ asset('images/Iconos_Menu/INVENTARIO/INVENTARIO.png') }}" alt="aca va el icono"
                                 class="w-10 h-auto pb-2.5">
                             <span>{{ __('Inventario') }}</span>
                         </div>
@@ -145,7 +145,7 @@
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar2">
                         <div class="flex flex-col items-center">
-                            <img src="{{ asset('img/Iconos_Menu/VENTAS/Ventas.png') }}" alt="aca va el icono"
+                            <img src="{{ asset('images/Iconos_Menu/VENTAS/Ventas.png') }}" alt="aca va el icono"
                                 class="w-10 h-auto pb-2.5">
                             <span>{{ __('Ventas') }}</span>
                         </div>
@@ -206,7 +206,7 @@
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar3">
                         <div class="flex flex-col items-center">
-                            <img src="{{ asset('img/Iconos_Menu/REPORTES/Reportes.png') }}" alt="aca va el icono"
+                            <img src="{{ asset('images/Iconos_Menu/REPORTES/Reportes.png') }}" alt="aca va el icono"
                                 class="w-10 h-auto pb-2.5">
                             <span>{{ __('Analitica de Datos') }}</span>
                         </div>

@@ -34,7 +34,6 @@
                                     <label for="floating_outlined"
                                         class="absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-purple-700  peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1 rounded-xl">Nombre
                                         Unidad</label>
-                                        <p class=" text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh, snapp!</span> Some error message.</p>
                                 </div>
                             </div>
                             <div class="col-span-2 sm:col-span-1">
@@ -52,10 +51,10 @@
                 <!-- Modal footer -->
                 <div class="flex items-center justify-end p-4 md:p-5  border-gray-200 rounded-b dark:border-gray-600">
                     <button type="button"
-                        class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded text-lg px-5 py-2.5 text-center me-2 mb-2"
+                        class="text-white bg-gradient-to-r from-blue-800 via-blue-800 to-blue-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-600 font-medium rounded text-lg px-5 py-2.5 text-center me-2 mb-2"
                         data-modal-hide="tipologias">CERRAR</button>
                     <button type="button" wire:click='guardarTipologia'  data-modal-hide="tipologias"
-                        class="text-white bg-gradient-to-r from-purple-500 via-purple-700 to-purple-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium hover:text-white rounded text-lg px-5 py-2.5 text-center me-2 mb-2">
+                        class="text-white bg-gradient-to-r from-purple-800 via-purple-800 to-purple-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium hover:text-white rounded text-lg px-5 py-2.5 text-center me-2 mb-2">
                         GUARDAR
                     </button>
 
@@ -128,10 +127,10 @@
                 <!-- Modal footer -->
                 <div class="flex items-center justify-end p-4 md:p-5 border-gray-200 rounded-b dark:border-gray-600">
                     <button type="button"
-                        class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded text-lg px-5 py-2.5 text-center me-2 mb-2"
+                        class="text-white bg-gradient-to-r from-blue-800 via-blue-800 to-blue-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-600 font-medium rounded text-lg px-5 py-2.5 text-center me-2 mb-2"
                         data-modal-hide="editipologia">CERRAR</button>
                     <button type="button" wire:click="updateTipologia" data-modal-hide="editipologia"
-                        class="text-white bg-gradient-to-r from-purple-500 via-purple-700 to-purple-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium hover:text-white rounded text-lg px-5 py-2.5 text-center me-2 mb-2">
+                        class="text-white bg-gradient-to-r from-purple-800 via-purple-800 to-purple-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium hover:text-white rounded text-lg px-5 py-2.5 text-center me-2 mb-2">
                         GUARDAR
                     </button>
                 </div>
