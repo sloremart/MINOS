@@ -61,7 +61,7 @@ class TipologiasComponent extends Component
         $tipologia = new Tipologias();
         $tipologia->nombre_uni = $data['nombre_uni'];
         $tipologia->abreviatura = $data['abreviatura'];
-        $tipologia->estatus = "ACTIVO";
+        $tipologia->estatus = $data['estatus'];
         $tipologia->save();
 
         $this->resetFields();
@@ -78,6 +78,7 @@ class TipologiasComponent extends Component
             'estatus' => $tipologia->estatus,
             'id' => $this->tipologiaId
         ]);
+        $this->resetFields();
     }
 
     public function updatetipologia($data)
