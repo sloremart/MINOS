@@ -1,6 +1,7 @@
 <?php
-// C:\laragon\www\MINOS\app\Livewire\TipologiasComponent.php
+
 namespace App\Livewire\Tipologias;
+
 use App\Models\Tipologias;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -10,16 +11,14 @@ class TipologiasComponent extends Component
     use WithPagination;
 
     public $buscar;
-    public $nombre_uni;
-    public $abreviatura;
-    public $id;
-    public $estatus;
+    public $isEditMode = false;
+    public $tipologiaId;
 
     protected $listeners = [
         'eventoGuardarTipologia' => 'storetipologia',
         'eventoupdateTipologia' => 'updatetipologia',
     ];
-    // Reglas de validación
+
     public function render()
     {
         $data = $this->getData();
@@ -40,44 +39,47 @@ class TipologiasComponent extends Component
         }
     }
 
+    public function openModal($mode, $id = null)
+    {
+        if ($mode === 'edit') {
+            $this->isEditMode = true;
+            $this->edittipologia($id);
+        } else {
+            $this->isEditMode = false;
+            $this->resetFields();
+            $this->dispatch('resetModalFields');  // Emitir evento para resetear el modal
+        }
+    }
+
+    public function resetFields()
+    {
+        $this->dispatch('resetModalFields');
+    }
 
     public function storetipologia($data)
     {
-        $this->nombre_uni = $data['nombre_uni'];
-        $this->abreviatura = $data['abreviatura'];
-        
         $tipologia = new Tipologias();
-        $tipologia->nombre_uni = $this->nombre_uni;
-        $tipologia->abreviatura = $this->abreviatura;
+        $tipologia->nombre_uni = $data['nombre_uni'];
+        $tipologia->abreviatura = $data['abreviatura'];
         $tipologia->estatus = "ACTIVO";
         $tipologia->save();
 
-        $this->clear();
-        
-    }
-
-    public function clear(){
-        $this->nombre_uni = '';
-        $this->abreviatura = '';
+        $this->resetFields();
     }
 
     public function edittipologia($id)
     {
         $tipologia = Tipologias::find($id);
-        $this->id = $tipologia->id;
-        $this->nombre_uni = $tipologia->nombre_uni;
-        $this->abreviatura = $tipologia->abreviatura;
-        $this->estatus = $tipologia->estatus;
+        $this->tipologiaId = $tipologia->id;
 
-        // Emitir el evento para enviar los datos al componente ModalTipo
         $this->dispatch('editarTipologia', [
-            'nombre_uni' => $this->nombre_uni,
-            'abreviatura' => $this->abreviatura,
-            'estatus' => $this->estatus,
-            'id' => $this->id
+            'nombre_uni' => $tipologia->nombre_uni,
+            'abreviatura' => $tipologia->abreviatura,
+            'estatus' => $tipologia->estatus,
+            'id' => $this->tipologiaId
         ]);
-        $this->clear();
     }
+
     public function updatetipologia($data)
     {
         $tipologia = Tipologias::find($data['id']);
@@ -86,8 +88,9 @@ class TipologiasComponent extends Component
         $tipologia->estatus = $data['estatus'];
         $tipologia->save();
 
-        $this->reset(['nombre_uni', 'abreviatura', 'estatus', 'id']);
+        $this->resetFields();
     }
+
     public function deletetipo($id)
     {
         $tipologia = Tipologias::find($id);
@@ -95,5 +98,4 @@ class TipologiasComponent extends Component
             $tipologia->delete();
         }
     }
-   
 }

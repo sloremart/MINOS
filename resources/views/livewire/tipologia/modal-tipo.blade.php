@@ -7,7 +7,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 rounded-3xl  dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        AGREGAR TIPOLOGIA
+                        {{ $isEditMode ? 'EDITAR TIPOLOGIA' : 'AGREGAR TIPOLOGIA' }}
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-lg w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -53,9 +53,9 @@
                     <button type="button"
                         class="text-white bg-gradient-to-r from-blue-800 via-blue-800 to-blue-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-600 font-medium rounded text-lg px-5 py-2.5 text-center me-2 mb-2"
                         data-modal-hide="tipologias">CERRAR</button>
-                    <button type="button" wire:click='guardarTipologia'  data-modal-hide="tipologias"
+                    <button type="button"  wire:click="{{ $isEditMode ? 'updateTipologia' : 'guardarTipologia' }}"  data-modal-hide="tipologias"
                         class="text-white bg-gradient-to-r from-purple-800 via-purple-800 to-purple-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium hover:text-white rounded text-lg px-5 py-2.5 text-center me-2 mb-2">
-                        GUARDAR
+                        {{ $isEditMode ? 'Actualizar' : 'Guardar' }}
                     </button>
 
                 </div>
@@ -65,7 +65,7 @@
 
 
 
-    <div id="editipologia" wire:ignore.self tabindex="-1" aria-hidden="true"
+    {{-- <div id="editipologia" wire:ignore.self tabindex="-1" aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed rounded-3xl top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <!-- Modal content -->
@@ -136,7 +136,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 
