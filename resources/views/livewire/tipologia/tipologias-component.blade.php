@@ -16,7 +16,7 @@
                                 <div class="inline-flex items-center rounded-3xl ">
                                     <button type="button" data-modal-target="tipologias" data-modal-toggle="tipologias"
                                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-purple-800 to-purple-800 group-hover:from-purple-800 group-hover:to-purple-800 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-800 dark:focus:ring-purple-800"
-                                        wire:click="openModal('create')">
+                                        >
                                         <span
                                             class="relative px-4 py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0 text-purple-700 hover:text-white"
                                             style="font-size: 20px">
@@ -96,7 +96,7 @@
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <button type="button" data-modal-target="tipologias"
                                                         data-modal-toggle="tipologias"
-                                                        wire:click="openModal('edit', {{ $tipologia->id }})"
+                                                       wire:click="Edit({{$tipologia->id}})"
                                                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded group bg-gradient-to-br from-blue-800 to-blue-800 group-hover:from-blue-200 group-hover:ring-blue-200 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                                                         <span
                                                             class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded group-hover:bg-opacity-0 text-blue-800 hover:text-white"
@@ -104,7 +104,7 @@
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </span>
                                                     </button>
-                                                    <button wire:click="deletetipo({{ $tipologia->id }})"
+                                                    <button onclick="Comfirm('{{ $tipologia->id }}"
                                                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded group bg-gradient-to-br from-blue-400 to-blue-500 group-hover:from-blue-00 group-hover:ring-blue-300 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:red-blue-300 dark:focus:ring-blue-800">
                                                         <span
                                                             class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded group-hover:bg-opacity-0 text-blue-800 hover:text-white"
@@ -122,6 +122,7 @@
                     </div>
 
                     {{ $data->links('livewire-pagination-links') }}
+                    {{-- {{ $data->links()}}  --}}
                 </div>
 
             </div>
@@ -132,6 +133,59 @@
 
 
 
-    @livewire('Tipologias.modal-tipo')
+    @include('livewire.tipologia.form')
 
 </div>
+<script>
+     document.addEventListener('livewire:init', () => {
+        Livewire.on('show-modal', (event) => {
+            $('#tipologias').modal('show');
+        });
+        Livewire.on('category-added', (event) => {
+            let modal = document.querySelector('#tipologias')
+            modal.classList.add('hidden')
+
+            let body = document.querySelector('body')
+            body.removeChild(body.lastChild)
+            
+        });
+        Livewire.on('category-updated', (event) => {
+            // $('#tipologias').modal('hide');
+            let modal = document.querySelector('#tipologias')
+            modal.classList.add('hidden')
+
+            let body = document.querySelector('body')
+            body.removeChild(body.lastChild)
+        });
+
+    });
+
+    function Comfirm(id) {
+        // var datos = id.split("||");
+        // if(products > 0){
+        //     Swal.fire('NO SE PUEDE ELIMINAR LA CATEGORIA POR QUE TIENE PRODUCTOS RELACIONADOS')
+        //     return;
+        // }
+        alert('entro');
+
+        Swal.fire({
+            title: 'Esta seguro de eliminar la tipologia?',
+            text: "Una vez hecho esto la tipologia no estara en el  sistema",
+            type: "info",
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText: `<i class="fa fa-thumbs-up"></i> Aceptar`,
+            confirmButtonAriaLabel: "Aceptar",
+            cancelButtonText: `<i class="fa fa-thumbs-down"></i> Cancelar`,
+            cancelButtonAriaLabel: "Cancelar"
+        }).then(function(result) {
+            // console.log(result);
+            if (result.value) {
+                // Encuentra el componente Livewire y llama al método destroy
+                Livewire.find(document.querySelector('[wire\\:id]').getAttribute('wire:id')).call('Destroy', id);
+                // Swal.close();
+            }
+        });
+    }
+</script>

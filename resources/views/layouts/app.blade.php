@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
   
         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
+        <link href="{{ asset('sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css" />
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -52,5 +53,6 @@
         @stack('modals')
       
         @livewireScripts
+        <script src="{{ asset('sweetalerts/sweetalert2.min.js') }}"></script>
     </body>
 </html>

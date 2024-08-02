@@ -11,13 +11,16 @@ class TipologiasComponent extends Component
     use WithPagination;
 
     public $buscar;
-    public $isEditMode = false;
-    public $tipologiaId;
+    public $name;
+    public $abreviatura;
+    public $estatus;
+    public $selected_id;
+    public $componetName;
+    public $pageTitle;
+    public $modalTitle;
+    private $paginacion=5;
 
-    protected $listeners = [
-        'eventoGuardarTipologia' => 'storetipologia',
-        'eventoupdateTipologia' => 'updatetipologia',
-    ];
+   
 
     public function render()
     {
@@ -26,77 +29,123 @@ class TipologiasComponent extends Component
             'data' => $data,
         ])->layout('layouts.app');
     }
-
+    public function mount()
+    {
+        $this->pageTitle = 'Listado';
+        $this->componetName = 'Tipologias';
+        $this->modalTitle = 'Crear';
+    }
+    public function paginationView()
+    {
+        return 'vendor.livewire.bootstrap';
+    }
     public function getData()
     {
         if ($this->buscar == "") {
-            return Tipologias::paginate(5);
+            return Tipologias::paginate($this->paginacion);
         } else {
             return Tipologias::where('nombre_uni', 'like', "%$this->buscar%")
                 ->orWhere('abreviatura', 'like', "%$this->buscar%")
                 ->orWhere('estatus', 'like', "%$this->buscar%")
-                ->paginate(5);
+                ->paginate($this->paginacion);
         }
     }
 
-    public function openModal($mode, $id = null)
+    public function Store()
     {
-        if ($mode === 'edit') {
-            $this->isEditMode = true;
-            $this->edittipologia($id);
-        } else {
-            $this->isEditMode = false;
-            $this->resetFields();
-            $this->dispatch('resetModalFields');  // Emitir evento para resetear el modal
-        }
-    }
+        $rules = [
+            'name' => 'required|unique:data|min:3',
+            'abreviatura' => 'required',
+            'estatus' => 'required',
+            'name' => 'required',
+        ];
 
-    public function resetFields()
-    {
-        $this->dispatch('resetModalFields');
-    }
+        $messages = [
+            'name.required' => 'Nombre de la tipologia es requerido',
+            'name.unique' => 'Ya existe el nombre de la tipologia',
+            'name.min' => 'El nombre de la tipologia debe tener mínimo 3 caracteres',
+            'abreviatura.required' => 'abreviatura requerida!',
+        ];
 
-    public function storetipologia($data)
-    {
-        $tipologia = new Tipologias();
-        $tipologia->nombre_uni = $data['nombre_uni'];
-        $tipologia->abreviatura = $data['abreviatura'];
-        $tipologia->estatus = $data['estatus'];
-        $tipologia->save();
+        $this->validate($rules, $messages);
 
-        $this->resetFields();
-    }
-
-    public function edittipologia($id)
-    {
-        $tipologia = Tipologias::find($id);
-        $this->tipologiaId = $tipologia->id;
-
-        $this->dispatch('editarTipologia', [
-            'nombre_uni' => $tipologia->nombre_uni,
-            'abreviatura' => $tipologia->abreviatura,
-            'estatus' => $tipologia->estatus,
-            'id' => $this->tipologiaId
+        $tipologia = Tipologias::create([
+            'nombre_uni' => $this->name,
+            'abreviatura' => $this->abreviatura,
+            'estatus' => $this->estatus
         ]);
-        $this->resetFields();
+      
+         $tipologia->save();
+      
+        $this->resetUI();
+        $this->dispatch('category-added', 'tipologia registrada');
     }
-
-    public function updatetipologia($data)
+    public function Edit($id)
     {
-        $tipologia = Tipologias::find($data['id']);
-        $tipologia->nombre_uni = $data['nombre_uni'];
-        $tipologia->abreviatura = $data['abreviatura'];
-        $tipologia->estatus = $data['estatus'];
-        $tipologia->save();
+        $record = Tipologias::find($id, ['id', 'nombre_uni', 'estatus','abreviatura']);
+        if ($record) {
+            $this->name = $record->nombre_uni;
+            $this->selected_id = $record->id;
+            $this->estatus =$record-> estatus;
+            $this->abreviatura =$record-> abreviatura;
 
-        $this->resetFields();
-    }
-
-    public function deletetipo($id)
-    {
-        $tipologia = Tipologias::find($id);
-        if ($tipologia) {
-            $tipologia->delete();
+            $this->dispatch('show-modal', 'show modal !');
+        } else {
+            // Manejar el caso en que no se encuentre el registro
+            session()->flash('message', 'Categoría no encontrada.');
         }
     }
+
+    public function Update()
+    {
+       
+        $rules = [
+            'name' => 'required|unique:data|min:3',
+            'abreviatura' => 'required',
+            'estatus' => 'required',
+            'name' => 'required',
+        ];
+        $messages = [
+            'name.required' => 'Nombre de la tipologia es requerido',
+            'name.unique' => 'Ya existe el nombre de la tipologia',
+            'name.min' => 'El nombre de la tipologia debe tener mínimo 3 caracteres',
+            'abreviatura.required' => 'abreviatura requerida!',
+        ];
+        $this->validate($rules, $messages);
+        $tipologia = Tipologias::find($this->selected_id);
+        $tipologia->Update([
+            'nombre_uni' => $this->name,
+            'abreviatura' => $this->abreviatura,
+            'estatus' => $this->estatus
+        ]);
+        $tipologia->save();
+        // $this->resetUI();
+        $this->dispatch('category-updated', 'categoria actualizada');
+    }
+
+    public function resetUI()
+    {
+        $this->name = '';
+        $this->abreviatura = '';
+        $this->estatus = '';
+        $this->selected_id = '';
+    }
+
+    public function Destroy(Tipologias $tipologia)
+    {
+        // $category = Categories::find($id);
+        // dd($category);
+       
+            // Eliminar la categoría
+            $tipologia->delete();
+            // Eliminar la imagen si existe
+           
+            $this->resetUI();
+            // $this->dispatch('deleteRow', 'categoria eliminada');
+       
+    }
+
+   
+
+    
 }

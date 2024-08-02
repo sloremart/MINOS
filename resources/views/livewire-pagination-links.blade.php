@@ -1,7 +1,6 @@
 <div>
     @if ($paginator->hasPages())
         <ul class="flex items-center justify-center space-x-2 mt-4">
-            {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="page-item disabled">
                     <a href="javascript:;" class="px-3 py-1 bg-gray-200 text-gray-500 cursor-not-allowed rounded"><i
@@ -16,9 +15,7 @@
                 </li>
             @endif
 
-            {{-- Pagination Element Here --}}
             @foreach ($elements as $element)
-                {{-- Make dots here --}}
                 @if (is_string($element))
                     <li class="page-item disabled">
                         <a
@@ -26,7 +23,6 @@
                     </li>
                 @endif
 
-                {{-- Links array Here --}}
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
@@ -44,7 +40,6 @@
                 @endif
             @endforeach
 
-            {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
                 <li class="page-item">
                     <a href="javascript:;" wire:click="nextPage"
