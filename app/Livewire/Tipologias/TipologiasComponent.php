@@ -131,18 +131,22 @@ class TipologiasComponent extends Component
         $this->selected_id = '';
     }
 
-    public function Destroy(Tipologias $tipologia)
-    {
-        // $category = Categories::find($id);
-        // dd($category);
-       
-            // Eliminar la categoría
+    // protected $listeners = ['delete', 'Destroy'];
+
+    protected $listeners = ['Destroy'];
+
+    public function Destroy($id)
+    {   
+        // dd($id);
+        $tipologia = Tipologias::find($id);
+        // dd($tipologia);
+        if ($tipologia) {
             $tipologia->delete();
-            // Eliminar la imagen si existe
-           
             $this->resetUI();
-            // $this->dispatch('deleteRow', 'categoria eliminada');
-       
+            // $this->dispatch('delete',  'Tipología eliminada');
+        } else {
+            $this->dispatch('error', 'No se encontró la tipología');
+        }
     }
 
    
