@@ -39,6 +39,7 @@ button {
     background-color: #f8f9fa; /* Fondo de la caja de alerta */
     /* border: 1px solid #ced4da; Borde de la caja de alerta */
     border-radius:50px;
+    width: 20%;
 }
 
 /* Estilo para el título */
@@ -49,15 +50,16 @@ button {
 
 /* Estilo para el botón de confirmación */
 .my-custom-confirm-button {
+    
     background-color: #7e22ce; /* Fondo del botón de confirmación */
     color: white; /* Color del texto del botón de confirmación */
-    border: none; /* Sin borde */
+    border-radius: 20px; /* Sin borde */
 }
 
 /* Estilo para el botón de negación */
 .my-custom-deny-button {
     background-color: #1e40af; /* Fondo del botón de negación */
     color: white; /* Color del texto del botón de negación */
-    border: none; /* Sin borde */
+    border-radius: 20px; /* Sin borde */
 }
 
