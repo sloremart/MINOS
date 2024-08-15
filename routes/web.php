@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tablas;
+use App\Livewire\Forms\ProductForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,13 @@ Route::middleware([
     })->name('dashboard');
 
     Route::prefix("proveedores")->group(function () {
-        Route::get('listado', \App\Livewire\Suppliers\Supplier::class)
+        Route::get('listado', \App\Livewire\Forms\SupplierForm::class)
             ->name("supplier.list");
+
+        Route::post('crear', [SupplierController::class, 'store'])
+            ->name('suppliers.store'); // Definimos la ruta suppliers.store
     });
+
 
     Route::prefix("clientes")->group(function () {
         Route::get('listado', \App\Livewire\Clients\Client::class)
@@ -38,5 +43,9 @@ Route::middleware([
     });
 
     Route::get('/tablas', [tablas::class, 'tablas'])->name('tablas.tablas');
+
+
+    Route::get('/productos/listado', \App\Livewire\Forms\ProductForm::class)->name('product.list');
+
 
 });
