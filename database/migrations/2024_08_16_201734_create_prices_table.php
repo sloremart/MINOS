@@ -10,6 +10,7 @@ class CreatePricesTable extends Migration
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('user_id')->constrained('users');
             $table->decimal('price', 10, 2);
             $table->boolean('active')->default(false);
             $table->date('valid_from_date');

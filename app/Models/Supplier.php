@@ -9,7 +9,7 @@ class Supplier extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'contact', 'phone', 'address'];
+    protected $fillable = ['name', 'contact', 'phone', 'address', 'document', 'email','user_id' ];
 
     public function products()
     {
@@ -19,5 +19,9 @@ class Supplier extends Model
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

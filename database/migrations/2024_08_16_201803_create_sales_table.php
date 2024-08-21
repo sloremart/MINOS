@@ -10,6 +10,7 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('user_id')->constrained('users');
             $table->date('sale_date');
             $table->decimal('total_amount', 10, 2);
             $table->text('details')->nullable();

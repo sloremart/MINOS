@@ -9,6 +9,7 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('supplier_id')->constrained('suppliers');
             $table->date('purchase_date');
             $table->decimal('total_amount', 10, 2);
