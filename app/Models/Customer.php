@@ -9,10 +9,16 @@ class Customer extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'email', 'phone', 'address'];
+    protected $fillable = ['name', 'email', 'phone', 'address', 'contact','user_id'];
 
     public function sales()
     {
         return $this->hasMany(Sale::class);
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

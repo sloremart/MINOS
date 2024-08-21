@@ -17,6 +17,7 @@
     @include("partials.v1.table.primary-table",[
                "table_headers"=>["ID"=>"id",
                                  "Nombre"=>"name",
+                                 "Documento"=>"document",
                                  "Telefono"=>"phone",
 
 
@@ -32,7 +33,7 @@
 
     @if($isOpen)
         <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full z-10" style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+            <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-xl sm:w-full z-10" style="background-image: url('/images/icono_central.png'); background-size: 45%; background-repeat: no-repeat; background-position: center;">
 
                 <!-- Aquí está la parte superior azul con el título centrado -->
                 <div class="bg-blue-900 text-gray-200 bg-opacity-75 px-4 py-3 sm:px-6 rounded-t-lg">
@@ -66,19 +67,20 @@
                                         "col_with"=>2,
                                         "required"=>true
                             ],
-                             [
+
+                                 [
                                         "input_type"=>"text",
-                                        "input_model"=>"modelForm.contact",
-                                        "icon_class"=>"fa-solid fa-file-signature",
-                                        "placeholder"=>"Contacto",
-                                        "input_field"=>"Contacto",
+                                        "input_model"=>"modelForm.document",
+                                        "icon_class"=>"fa-sharp fa-solid fa-address-card",
+                                        "placeholder"=>"Documento",
+                                        "input_field"=>"Documento",
                                         "col_with"=>1,
                                         "required"=>true
                             ],
                              [
                                         "input_type"=>"text",
                                         "input_model"=>"modelForm.phone",
-                                        "icon_class"=>"fa-solid fa-file-signature",
+                                        "icon_class"=>"fa-sharp fa-solid fa-phone-volume",
                                         "placeholder"=>"Telefono",
                                         "input_field"=>"Telefono",
                                         "col_with"=>1,
@@ -86,7 +88,7 @@
                             ], [
                                         "input_type"=>"text",
                                         "input_model"=>"modelForm.address",
-                                        "icon_class"=>"fas fa-user",
+                                        "icon_class"=>"fa-solid fa-location-dot",
                                         "placeholder"=>"Direcciòn",
                                         "input_field"=>"Direcciòn",
                                         "col_with"=>2,
@@ -99,14 +101,7 @@
                  ])
 
                 <!-- Pie del Modal -->
-                <div class="text-gray-200 bg-opacity-75 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
-                    <button wire:click="submitForm()" type="submit" class="bg-blue-900 text-gray-200 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
-                        Guardar
-                    </button>
-                    <button wire:click="closeModal" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
-                        Cancelar
-                    </button>
-                </div>
+
             </div>
         </div>
     @endif

@@ -9,7 +9,7 @@ class Purchase extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['supplier_id', 'purchase_date', 'total_amount', 'details'];
+    protected $fillable = ['supplier_id', 'user_id', 'purchase_date', 'total_amount', 'details'];
 
     public function supplier()
     {
@@ -19,5 +19,9 @@ class Purchase extends Model
     public function productPurchases()
     {
         return $this->hasMany(ProductPurchase::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
