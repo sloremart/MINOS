@@ -9,7 +9,7 @@ class Subgroup extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'description', 'group_id'];
+    protected $fillable = ['name', 'description', 'group_id', 'code'];
 
     public function group()
     {
