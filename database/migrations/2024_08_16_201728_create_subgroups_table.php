@@ -10,6 +10,7 @@ class CreateSubgroupsTable extends Migration
         Schema::create('subgroups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('code')->unique()->nullable();
             $table->text('description')->nullable();
             $table->foreignId('group_id')->constrained('groups')->onDelete('cascade');
             $table->timestamps();

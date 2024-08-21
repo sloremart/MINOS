@@ -10,7 +10,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code')->unique();
+            $table->string('code')->unique()->nullable();
             $table->text('description')->nullable();
             $table->boolean('applies_iva');
             $table->foreignId('vat_percentage_id')->constrained('vat_percentages');

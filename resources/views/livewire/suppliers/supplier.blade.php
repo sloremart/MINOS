@@ -60,9 +60,9 @@
             "form_inputs"=>[
 
                              [
-                                        "input_type"=>"text",
+                                        "input_type"=>"checkbox",
                                         "input_model"=>"modelForm.name",
-                                        "icon_class"=>"fas fa-user",
+                                        "icon_class"=>"",
                                         "placeholder"=>"Nombre",
                                         "input_field"=>"Nombre",
                                         "col_with"=>2,
