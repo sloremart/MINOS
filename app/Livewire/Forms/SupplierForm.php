@@ -4,48 +4,77 @@ namespace App\Livewire\Forms;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
-use Livewire\Component;
+use Livewire\Form;
 
-class SupplierForm extends Component
+class SupplierForm extends Form
 {
     public $id = null;
+
     #[Validate('required|min:5')]
     public $name = '';
-    #[Validate('required|min:5')]
-    public $contact = '';
+
+    #[Validate('required|min:5|unique:suppliers,document')]
+    public $document = '';
+
+    #[Validate('required|email|unique:suppliers,email')]
+    public $email = '';
+
     #[Validate('required|min:5')]
     public $phone = '';
+
     #[Validate('required|min:5')]
     public $address = '';
 
-    public function setSupplier($id)
+    // `user_id` is usually assigned automatically based on the logged-in user.
+    public $user_id;
+
+    public function mount($id = null)
     {
-        $model = Supplier::find($this->id);
+        if ($id) {
+            $this->set($id);
+        } else {
+            $this->user_id = Auth::id(); // Set the current user's ID by default
+        }
+    }
+
+    public function set($id)
+    {
+        $model = Supplier::find($id);
         if ($model) {
+            $this->id = $model->id;
             $this->name = $model->name;
-            $this->contact = $model->contact;
+            $this->document = $model->document;
+            $this->email = $model->email;
             $this->phone = $model->phone;
             $this->address = $model->address;
+            $this->user_id = $model->user_id;
         }
     }
 
     public function store()
     {
         $this->validate();
-        //$user = Auth::user();
-        //$data = $this->all();
-        //$data['user_id'] = $user->id;
-        Supplier::create($this->all());
+
+        $data = $this->all();
+        $data['user_id'] = Auth::id();
+
+        Supplier::create($data);
+
         session()->flash('message', 'Proveedor creado correctamente.');
         return redirect('/proveedores/listado');
     }
 
-    public function update()
+    public function edit()
     {
         $this->validate();
-        $this->supplier->update($this->all());
-        session()->flash('message', 'Proveedor actualizado correctamente.');
-        return redirect('/proveedores/listado');
+
+        $model = Supplier::find($this->id);
+        if ($model) {
+            $model->update($this->all());
+
+            session()->flash('message', 'Proveedor actualizado correctamente.');
+            return redirect('/proveedores/listado');
+        }
     }
 
     public function delete($id)
@@ -57,9 +86,10 @@ class SupplierForm extends Component
         }
         return redirect('/proveedores/listado');
     }
+
     public function resetForm()
     {
-        $this->reset(['name', 'contact', 'phone', 'address']);
+        $this->reset(['name', 'document', 'email', 'phone', 'address']);
     }
 
     protected function messages()
@@ -69,6 +99,7 @@ class SupplierForm extends Component
             'name.min' => 'El nombre debe tener al menos 5 caracteres.',
             'document.required' => 'El documento es obligatorio.',
             'document.min' => 'El documento debe tener al menos 5 caracteres.',
+            'document.unique' => 'El documento ya está registrado.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser una dirección válida.',
             'email.unique' => 'El correo electrónico ya está registrado.',
@@ -76,8 +107,6 @@ class SupplierForm extends Component
             'phone.min' => 'El teléfono debe tener al menos 5 caracteres.',
             'address.required' => 'La dirección es obligatoria.',
             'address.min' => 'La dirección debe tener al menos 5 caracteres.',
-            'city.required' => 'La ciudad es obligatoria.',
-            'city.min' => 'La ciudad debe tener al menos 5 caracteres.',
         ];
     }
 }

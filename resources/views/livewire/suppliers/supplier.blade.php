@@ -1,13 +1,12 @@
-
 <!-- resources/views/livewire/suppliers/supplier.blade.php -->
 <div>
 
-<x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Listado de proveedores') }}
-    </h2>
-</x-slot>
-    <div class="text-right z-20 mt-16 relative max-w-6xl mx-auto">
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Listado de proveedores') }}
+        </h2>
+    </x-slot>
+    <div class="text-right z-20 relative max-w-6xl mx-auto">
         <button wire:click="openModal" class="bg-blue-900 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Proveedor
@@ -17,7 +16,11 @@
     @include("partials.v1.table.primary-table",[
                "table_headers"=>["ID"=>"id",
                                  "Nombre"=>"name",
-                                 "Telefono"=>"phone",
+                                 "Documento"=>"document",
+                                 "Correo Electrónico"=>"email",
+                                 "Teléfono"=>"phone",
+                                 "Dirección"=>"address",
+                                 "Usuario Asociado"=>"user_id",
 
 
                 ],
@@ -43,7 +46,7 @@
                         </div>
 
                         <h3 class="text-lg leading-6 font-medium text-gray-200 text-center w-full" id="modal-title">
-                            {{ 'CREAR PROVEEDOR' }}
+                            {{ ($action == 'create')?'CREAR PROVEEDOR': (($action == 'edit') ? 'EDITAR PROVEEDOR' : 'DETALLES DEL PROVEEDOR') }}
                         </h3>
                     </div>
                 </div>
@@ -54,7 +57,7 @@
             "form_grid_col"=>3,
             "session_message"=>"message",
             "form_submit_action"=>"submitForm",
-            "show_form_submit_action"=>true,
+            "show_form_submit_action"=>false,
             "form_inputs"=>[
 
                              [
@@ -64,45 +67,65 @@
                                         "placeholder"=>"Nombre",
                                         "input_field"=>"Nombre",
                                         "col_with"=>2,
-                                        "required"=>true
+                                        "required"=>true,
+                                        "disabled"=>$action == 'details',
+
                             ],
                              [
                                         "input_type"=>"text",
-                                        "input_model"=>"modelForm.contact",
-                                        "icon_class"=>"fa-solid fa-file-signature",
-                                        "placeholder"=>"Contacto",
-                                        "input_field"=>"Contacto",
+                                        "input_model"=>"modelForm.document",
+                                        "icon_class"=>"fa-solid fa-id-card",
+                                        "placeholder"=>"Documento",
+                                        "input_field"=>"Documento",
                                         "col_with"=>1,
-                                        "required"=>true
+                                        "required"=>true,
+                                        "disabled"=>$action == 'details',
+
+                            ],
+                             [
+                                        "input_type"=>"text",
+                                        "input_model"=>"modelForm.email",
+                                        "icon_class"=>"fa-solid fa-envelope",
+                                        "placeholder"=>"Correo Electrónico",
+                                        "input_field"=>"Correo Electrónico",
+                                        "col_with"=>2,
+                                        "required"=>true,
+                                        "disabled"=>$action == 'details',
+
                             ],
                              [
                                         "input_type"=>"text",
                                         "input_model"=>"modelForm.phone",
-                                        "icon_class"=>"fa-solid fa-file-signature",
-                                        "placeholder"=>"Telefono",
-                                        "input_field"=>"Telefono",
+                                        "icon_class"=>"fa-solid fa-phone",
+                                        "placeholder"=>"Teléfono",
+                                        "input_field"=>"Teléfono",
                                         "col_with"=>1,
-                                        "required"=>true
-                            ], [
+                                        "required"=>true,
+                                        "disabled"=>$action == 'details',
+
+                            ],
+                             [
                                         "input_type"=>"text",
                                         "input_model"=>"modelForm.address",
-                                        "icon_class"=>"fas fa-user",
-                                        "placeholder"=>"Direcciòn",
-                                        "input_field"=>"Direcciòn",
-                                        "col_with"=>2,
-                                        "required"=>true
+                                        "icon_class"=>"fas fa-map-marker-alt",
+                                        "placeholder"=>"Dirección",
+                                        "input_field"=>"Dirección",
+                                        "col_with"=>3,
+                                        "required"=>true,
+                                        "disabled"=>$action == 'details',
+
                             ]
-
-
 
                          ]
                  ])
 
                 <!-- Pie del Modal -->
                 <div class="text-gray-200 bg-opacity-75 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
-                    <button wire:click="submitForm()" type="submit" class="bg-blue-900 text-gray-200 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
-                        Guardar
-                    </button>
+                    @if($action != 'details')
+                        <button wire:click="submitForm()" type="submit" class="bg-blue-900 text-gray-200 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
+                            Guardar
+                        </button>
+                    @endif
                     <button wire:click="closeModal" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
                         Cancelar
                     </button>

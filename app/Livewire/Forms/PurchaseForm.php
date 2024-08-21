@@ -2,24 +2,24 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\Sale;
-use App\Models\Customer;
+use App\Models\Purchase;
+use App\Models\Supplier;
 use App\Models\User;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class SaleForm extends Form
+class PurchaseForm extends Form
 {
     public $id = null;
-
-    #[Validate('required|exists:customers,id')]
-    public $customer_id = null;
 
     #[Validate('required|exists:users,id')]
     public $user_id = null;
 
+    #[Validate('required|exists:suppliers,id')]
+    public $supplier_id = null;
+
     #[Validate('required|date')]
-    public $sale_date = '';
+    public $purchase_date = '';
 
     #[Validate('required|numeric|min:0')]
     public $total_amount = 0.00;
@@ -29,12 +29,12 @@ class SaleForm extends Form
 
     public function set($id)
     {
-        $model = Sale::find($id);
+        $model = Purchase::find($id);
         if ($model) {
             $this->id = $model->id;
-            $this->customer_id = $model->customer_id;
             $this->user_id = $model->user_id;
-            $this->sale_date = $model->sale_date;
+            $this->supplier_id = $model->supplier_id;
+            $this->purchase_date = $model->purchase_date;
             $this->total_amount = $model->total_amount;
             $this->details = $model->details;
         }
@@ -43,46 +43,46 @@ class SaleForm extends Form
     public function store()
     {
         $this->validate();
-        Sale::create($this->all());
-        session()->flash('message', 'Venta creada correctamente.');
-        return redirect('/ventas/listado');
+        Purchase::create($this->all());
+        session()->flash('message', 'Compra creada correctamente.');
+        return redirect('/compras/listado');
     }
 
     public function edit()
     {
         $this->validate();
-        $model = Sale::find($this->id);
+        $model = Purchase::find($this->id);
         if ($model) {
             $model->update($this->all());
-            session()->flash('message', 'Venta actualizada correctamente.');
-            return redirect('/ventas/listado');
+            session()->flash('message', 'Compra actualizada correctamente.');
+            return redirect('/compras/listado');
         }
     }
 
     public function delete($id)
     {
-        $model = Sale::find($id);
+        $model = Purchase::find($id);
         if ($model) {
             $model->delete();
-            session()->flash('message', 'Venta eliminada correctamente.');
+            session()->flash('message', 'Compra eliminada correctamente.');
         }
-        return redirect('/ventas/listado');
+        return redirect('/compras/listado');
     }
 
     public function resetForm()
     {
-        $this->reset(['customer_id', 'user_id', 'sale_date', 'total_amount', 'details']);
+        $this->reset(['user_id', 'supplier_id', 'purchase_date', 'total_amount', 'details']);
     }
 
     protected function messages()
     {
         return [
-            'customer_id.required' => 'El cliente es obligatorio.',
-            'customer_id.exists' => 'El cliente seleccionado no existe.',
             'user_id.required' => 'El usuario es obligatorio.',
             'user_id.exists' => 'El usuario seleccionado no existe.',
-            'sale_date.required' => 'La fecha de venta es obligatoria.',
-            'sale_date.date' => 'La fecha de venta debe ser una fecha válida.',
+            'supplier_id.required' => 'El proveedor es obligatorio.',
+            'supplier_id.exists' => 'El proveedor seleccionado no existe.',
+            'purchase_date.required' => 'La fecha de compra es obligatoria.',
+            'purchase_date.date' => 'La fecha de compra debe ser una fecha válida.',
             'total_amount.required' => 'El monto total es obligatorio.',
             'total_amount.numeric' => 'El monto total debe ser un número.',
             'total_amount.min' => 'El monto total no puede ser negativo.',

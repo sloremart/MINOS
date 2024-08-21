@@ -25,8 +25,9 @@
                                   "number_max"=>$form_input["number_max"]??"",
                                   "number_step"=>$form_input["number_step"]??"",
                                   "select_options"=>$form_input["select_options"]??[],
-                                      "select_option_value"=>$form_input["select_option_value"]??"",
-                                      "select_option_view"=>$form_input["select_option_view"]??"",
+                                  "select_option_value"=>$form_input["select_option_value"]??"",
+                                  "select_option_view"=>$form_input["select_option_view"]??"",
+                                  "disabled" =>$form_input["disabled"]??"",
                              ])
 
                     @elseif($form_input["input_type"]=="dropdown-search")

@@ -3,86 +3,100 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Product;
+use App\Models\VatPercentage;
+use App\Models\Unit;
+use App\Models\Subgroup;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class ProductForm extends Form
 {
-    #[Validate('required|string|max:255')]
+    public $id = null;
+
+    #[Validate('required|min:3')]
     public $name = '';
 
-    #[Validate('required|string|max:255|unique:products,code')]
+    #[Validate('required|unique:products,code')]
     public $code = '';
 
-    #[Validate('nullable|string')]
+    #[Validate('nullable')]
     public $description = '';
 
     #[Validate('required|boolean')]
-    public $applies_iva = true;
+    public $applies_iva = false;
 
     #[Validate('required|exists:vat_percentages,id')]
-    public $vat_percentage_id;
+    public $vat_percentage_id = null;
 
     #[Validate('required|exists:units,id')]
-    public $unit_id;
-
-    #[Validate('required|exists:trade_categories,id')]
-    public $category_id;
+    public $unit_id = null;
 
     #[Validate('required|exists:subgroups,id')]
-    public $subgroup_id;
+    public $subgroup_id = null;
 
-    public $productId;
-
-    public function mount($productId = null)
+    public function set($id)
     {
-        $this->productId = $productId;
-
-        if ($this->productId) {
-            $this->loadProduct();
+        $model = Product::find($id);
+        if ($model) {
+            $this->id = $model->id;
+            $this->name = $model->name;
+            $this->code = $model->code;
+            $this->description = $model->description;
+            $this->applies_iva = $model->applies_iva;
+            $this->vat_percentage_id = $model->vat_percentage_id;
+            $this->unit_id = $model->unit_id;
+            $this->subgroup_id = $model->subgroup_id;
         }
-    }
-
-    public function loadProduct()
-    {
-        $product = Product::findOrFail($this->productId);
-        $this->name = $product->name;
-        $this->code = $product->code;
-        $this->description = $product->description;
-        $this->applies_iva = $product->applies_iva;
-        $this->vat_percentage_id = $product->vat_percentage_id;
-        $this->unit_id = $product->unit_id;
-        $this->category_id = $product->category_id;
-        $this->subgroup_id = $product->subgroup_id;
     }
 
     public function store()
     {
         $this->validate();
-
         Product::create($this->all());
-
-        session()->flash('message', 'Product successfully created.');
-
-        $this->reset();
+        session()->flash('message', 'Producto creado correctamente.');
+        return redirect('/productos/listado');
     }
 
-    public function update()
+    public function edit()
     {
         $this->validate();
-
-        $product = Product::findOrFail($this->productId);
-        $product->update($this->all());
-
-        session()->flash('message', 'Product successfully updated.');
+        $model = Product::find($this->id);
+        if ($model) {
+            $model->update($this->all());
+            session()->flash('message', 'Producto actualizado correctamente.');
+            return redirect('/productos/listado');
+        }
     }
 
-    public function delete()
+    public function delete($id)
     {
-        Product::findOrFail($this->productId)->delete();
+        $model = Product::find($id);
+        if ($model) {
+            $model->delete();
+            session()->flash('message', 'Producto eliminado correctamente.');
+        }
+        return redirect('/productos/listado');
+    }
 
-        session()->flash('message', 'Product successfully deleted.');
+    public function resetForm()
+    {
+        $this->reset(['name', 'code', 'description', 'applies_iva', 'vat_percentage_id', 'unit_id', 'subgroup_id']);
+    }
 
-        $this->reset();
+    protected function messages()
+    {
+        return [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.min' => 'El nombre debe tener al menos 3 caracteres.',
+            'code.required' => 'El código es obligatorio.',
+            'code.unique' => 'El código ya está registrado.',
+            'applies_iva.required' => 'Debes indicar si aplica IVA.',
+            'vat_percentage_id.required' => 'El porcentaje de IVA es obligatorio.',
+            'vat_percentage_id.exists' => 'El porcentaje de IVA seleccionado no existe.',
+            'unit_id.required' => 'La unidad es obligatoria.',
+            'unit_id.exists' => 'La unidad seleccionada no existe.',
+            'subgroup_id.required' => 'El subgrupo es obligatorio.',
+            'subgroup_id.exists' => 'El subgrupo seleccionado no existe.',
+        ];
     }
 }
