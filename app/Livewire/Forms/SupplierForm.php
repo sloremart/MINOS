@@ -8,67 +8,44 @@ use Livewire\Component;
 
 class SupplierForm extends Component
 {
-    public $isOpen = false;  // Controla si el modal está abierto o cerrado
-    public $id;
+    public $id = null;
     #[Validate('required|min:5')]
     public $name = '';
     #[Validate('required|min:5')]
-    public $document = '';
-    #[Validate('required|min:5|email|unique:suppliers,email')]
-    public $email = '';
+    public $contact = '';
     #[Validate('required|min:5')]
     public $phone = '';
     #[Validate('required|min:5')]
     public $address = '';
-    #[Validate('required|min:5')]
-    public $city = '';
 
-    public function openModal()
+    public function setSupplier($id)
     {
-        $this->isOpen = true;
-    }
-
-    public function closeModal()
-    {
-        $this->isOpen = false;
+        $model = Supplier::find($this->id);
+        if ($model) {
+            $this->name = $model->name;
+            $this->contact = $model->contact;
+            $this->phone = $model->phone;
+            $this->address = $model->address;
+        }
     }
 
     public function store()
     {
         $this->validate();
-        $user = Auth::user();
-        $data = $this->all();
-        $data['user_id'] = $user->id;
-        Supplier::create($data);
-        $this->closeModal();
+        //$user = Auth::user();
+        //$data = $this->all();
+        //$data['user_id'] = $user->id;
+        Supplier::create($this->all());
         session()->flash('message', 'Proveedor creado correctamente.');
         return redirect('/proveedores/listado');
     }
 
-    public function insert($id)
+    public function update()
     {
-        $model = Supplier::find($id);
-        if ($model){
-            $this->id = $model->id;
-            $this->email = $model->email;
-            $this->name = $model->name;
-            $this->document = $model->document;
-            $this->phone = $model->phone;
-            $this->city = $model->city;
-            $this->address = $model->address;
-            $this->openModal();  // Abrir modal cuando se edita
-        }
-    }
-
-    public function edit()
-    {
-        $model = Supplier::find($this->id);
-        if ($model) {
-            $model->update($this->all());
-            $this->closeModal();
-            session()->flash('message', 'Proveedor actualizado correctamente.');
-            return redirect('/proveedores/listado');
-        }
+        $this->validate();
+        $this->supplier->update($this->all());
+        session()->flash('message', 'Proveedor actualizado correctamente.');
+        return redirect('/proveedores/listado');
     }
 
     public function delete($id)
@@ -80,12 +57,9 @@ class SupplierForm extends Component
         }
         return redirect('/proveedores/listado');
     }
-
-    public function render()
+    public function resetForm()
     {
-        return view('livewire.forms.supplier-form', [
-            'suppliers' => Supplier::all(),
-        ])->layout('layouts.app');
+        $this->reset(['name', 'contact', 'phone', 'address']);
     }
 
     protected function messages()

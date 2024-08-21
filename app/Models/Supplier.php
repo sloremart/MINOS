@@ -2,23 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Supplier extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'name',
-        'document',
-        'email',
-        'phone',
-        'address',
-        'city',
-        'user_id'
-    ];
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    use SoftDeletes;
+
+    protected $fillable = ['name', 'contact', 'phone', 'address'];
+
+    public function products()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(Product::class, 'product_suppliers');
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 }

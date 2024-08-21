@@ -5,14 +5,6 @@
     <div class="relative flex items-center justify-center min-h-screen">
         <div class="absolute inset-0 bg-cover bg-center bg-repeat opacity-20" style="background-image: url('/images/icono_central.png'); background-size: 100px;"></div>
 
-        <div class="absolute top-0 left-0 m-4 opacity-100">
-            <img src="/images/curvas_arriba.png" alt="Top Left Image" class="w-192 h-60 md:w-192 md:h-60">
-        </div>
-
-        <div class="absolute bottom-0 right-0 m-4 opacity-100">
-            <img src="/images/curvas_abajo.png" alt="Bottom Right Image" class="w-192 h-16 md:w-192 md:h-60">
-        </div>
-
         <div class="relative flex flex-col items-center bg-white p-12 rounded-lg shadow-lg w-full max-w-xl">
             <form method="POST" action="{{ route('register') }}" class="w-full">
                 @csrf

@@ -1,23 +1,19 @@
-<div class="form-group mb-{{$mb??2}} mt-{{$mt??0}} col-md-{{$col_with??12}} col-sm-12">
-    <label>{{$input_label??""}} @if($tooltip_title??false)
+<div class="mb-{{$mb??2}} mt-{{$mt??0}} col-span-{{$col_with??1}}">
+    <label for="{{$input_name??""}}" class="block text-gray-700 text-sm font-bold mb-2">{{$input_label??""}} @if($tooltip_title??false)
             <span class="fas fa-circle-question"
                   data-toggle="tooltip" data-placement="{{$tooltip_position??"top"}}"
                   title="{{$tooltip_title??""}}"
             ></span>
         @endif</label>
-    <div class="input-group">
+    <div class="relative">
         @isset($icon_class)
-            <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                     <i class="{{$icon_class}}"></i>
-                                    </span>
-            </div>
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+             <i class="text-gray-700 {{$icon_class}}"></i>
+            </span>
         @endisset
         @if($input_rows??1>1)
-            <textarea @if($updated_input??""=="lazy")
-                          wire:model.lazy="{{ $input_model }}"
-                      @elseif($updated_input??""=="defer")
-                          wire:model.defer="{{ $input_model }}"
+            <textarea @if($updated_input??""=="live")
+                          wire:model.live="{{ $input_model }}"
                       @else
 
                           wire:model="{{ $input_model }}"
@@ -48,10 +44,8 @@
                 @endforeach
             </select>
         @else
-            <input @if(($updated_input??null)=="lazy")
-                       wire:model.lazy="{{ $input_model }}"
-                   @elseif(($updated_input??null)=="defer")
-                       wire:model.defer="{{ $input_model }}"
+            <input @if(($updated_input??null)=="live")
+                       wire:model.live="{{ $input_model }}"
                    @else
                        wire:model="{{ $input_model }}"
                    @endif
@@ -59,7 +53,7 @@
                        min="{{ $number_min??''}}" max="{{ $number_max??''}}" step="{{ $number_step??''}}"
                    @endif
                    id="{{$input_id??""}}" type="{{$input_type??"text"}}"
-                   class="form-control" autocomplete="{{$autocomplete??"on"}}"
+                   class="pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full" autocomplete="{{$autocomplete??"on"}}"
                    name="{{$input_name??""}}" onchange="{{$input_on_change??""}}()" placeholder="{{$placeholder??""}}"
 
                    @if($disabled??false)disabled @endif

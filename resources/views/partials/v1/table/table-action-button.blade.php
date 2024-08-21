@@ -42,15 +42,16 @@
 
     @else
         @if(is_array($button_action))
-            <a class="btn btn-redirect btn-sm"
+            <button class="{{$button_action["button_color"]}} hover:{{$button_action["button_hover"]}} text-white font-bold py-1 px-3 rounded"
                data-toggle="tooltip" data-placement="{{$tooltip_position??"top"}}" title="{{$tooltip_title??""}}"
                wire:click="{{$button_action["button_action"]}}('{{$button_action["value"]}}')">
-                {{$button_action["button_content"]}}</a>
+                {{$button_action["button_content"]}}</button>
         @else
-            <a class="btn btn-redirect btn-sm"
+            <button class="{{$button_color}} hover:{{$button_hover}} text-white font-bold py-1 px-3 rounded"
+
                data-toggle="tooltip" data-placement="{{$tooltip_position??"top"}}" title="{{$tooltip_title??""}}"
                wire:click="{{$button_action}}('{{$model_id}}')">
-                <i class="text-{{$icon_color}} {{$icon}}"></i></a>
+                <i class="text-{{$icon_color}} {{$icon}}"></i></button>
         @endif
 
     @endisset
