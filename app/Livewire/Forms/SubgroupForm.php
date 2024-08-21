@@ -13,7 +13,8 @@ class SubgroupForm extends Form
 
     #[Validate('required|min:3')]
     public $name = '';
-
+    #[Validate('min:3')]
+    public $code = '';
     #[Validate('nullable')]
     public $description = '';
 
@@ -26,6 +27,7 @@ class SubgroupForm extends Form
         if ($model) {
             $this->id = $model->id;
             $this->name = $model->name;
+            $this->code = $model->code;
             $this->description = $model->description;
             $this->group_id = $model->group_id;
         }
@@ -34,7 +36,9 @@ class SubgroupForm extends Form
     public function store()
     {
         $this->validate();
-        Subgroup::create($this->all());
+        $subgroup = Subgroup::create($this->all());
+        $subgroup->code = $subgroup->group_id.$subgroup->id;
+        $subgroup->save();
         session()->flash('message', 'Subgrupo creado correctamente.');
         return redirect('/subgrupos/listado');
     }

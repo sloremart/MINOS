@@ -15,7 +15,6 @@ class CreateProductsTable extends Migration
             $table->boolean('applies_iva');
             $table->foreignId('vat_percentage_id')->constrained('vat_percentages');
             $table->foreignId('unit_id')->constrained('units');
-            $table->foreignId('category_id')->constrained('trade_categories');
             $table->foreignId('subgroup_id')->constrained('subgroups');
             $table->timestamps();
             $table->softDeletes(); // Para Soft Deletes

@@ -17,12 +17,10 @@
                "table_headers"=>["ID"=>"id",
                                  "Nombre"=>"name",
                                  "Código"=>"code",
-                                 "Descripción"=>"description",
                                  "Aplica IVA"=>"applies_iva",
-                                 "Porcentaje de IVA"=>"vat_percentage_id",
-                                 "Unidad"=>"unit_id",
-                                 "Subgrupo"=>"subgroup_id",
-                                 "Fecha de Creación"=>"created_at",
+                                 "Porcentaje de IVA"=>"vatPercentage.percentage",
+                                 "Unidad"=>"unit.name",
+                                 "Subgrupo"=>"subgroup.name",
 
 
                 ],
@@ -77,22 +75,13 @@
                             "input_field"=>"Código",
                             "col_with"=>1,
                             "required"=>true,
-                            "disabled"=>$action == 'details',
+                            "disabled"=>true,
                         ],
                         [
-                            "input_type"=>"textarea",
-                            "input_model"=>"modelForm.description",
-                            "icon_class"=>"fas fa-align-left",
-                            "placeholder"=>"Descripción",
-                            "input_field"=>"Descripción",
-                            "col_with"=>3,
-                            "required"=>true,
-                            "disabled"=>$action == 'details',
-                        ],
-                        [
+                            "input_label"=>"Aplica IVA",
                             "input_type"=>"checkbox",
                             "input_model"=>"modelForm.applies_iva",
-                            "icon_class"=>"fas fa-check",
+                            "icon_class"=>null,
                             "placeholder"=>"Aplica IVA",
                             "input_field"=>"Aplica IVA",
                             "col_with"=>1,
@@ -105,9 +94,9 @@
                             "icon_class"=>"fas fa-percentage",
                             "placeholder"=>"Porcentaje de IVA",
                             "input_field"=>"Porcentaje de IVA",
-                            "options"=>$vatPercentages, // Asume que $vatPercentages es un array pasado a la vista con los porcentajes de IVA disponibles
-                            "option_value_field"=>"id",
-                            "option_display_field"=>"percentage",
+                            "select_options"=>$vatPercentages, // Asume que $vatPercentages es un array pasado a la vista con los porcentajes de IVA disponibles
+                            "select_option_value"=>"id",
+                            "select_option_view"=>"percentage",
                             "col_with"=>1,
                             "required"=>true,
                             "disabled"=>$action == 'details',
@@ -118,9 +107,9 @@
                             "icon_class"=>"fas fa-ruler",
                             "placeholder"=>"Unidad",
                             "input_field"=>"Unidad",
-                            "options"=>$units, // Asume que $units es un array pasado a la vista con las unidades disponibles
-                            "option_value_field"=>"id",
-                            "option_display_field"=>"name",
+                            "select_options"=>$units, // Asume que $units es un array pasado a la vista con las unidades disponibles
+                            "select_option_value"=>"id",
+                            "select_option_view"=>"name",
                             "col_with"=>1,
                             "required"=>true,
                             "disabled"=>$action == 'details',
@@ -131,13 +120,24 @@
                             "icon_class"=>"fas fa-object-ungroup",
                             "placeholder"=>"Subgrupo",
                             "input_field"=>"Subgrupo",
-                            "options"=>$subgroups, // Asume que $subgroups es un array pasado a la vista con los subgrupos disponibles
-                            "option_value_field"=>"id",
-                            "option_display_field"=>"name",
-                            "col_with"=>2,
+                            "select_options"=>$subgroups, // Asume que $subgroups es un array pasado a la vista con los subgrupos disponibles
+                            "select_option_value"=>"id",
+                            "select_option_view"=>"name",
+                            "col_with"=>3,
                             "required"=>true,
                             "disabled"=>$action == 'details',
-                        ]
+                        ],
+                         [
+                            "input_type"=>"text",
+                            "input_model"=>"modelForm.description",
+                            "icon_class"=>"fas fa-align-left",
+                            "placeholder"=>"Descripción",
+                            "input_field"=>"Descripción",
+                            "col_with"=>3,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                            "input_rows"=>3
+                        ],
 
                     ]
                 ])

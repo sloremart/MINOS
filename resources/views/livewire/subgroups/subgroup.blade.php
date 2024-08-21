@@ -17,7 +17,7 @@
                "table_headers"=>["ID"=>"id",
                                  "Nombre"=>"name",
                                  "Descripción"=>"description",
-                                 "Grupo Asociado"=>"group_id",
+                                 "Grupo Asociado"=>"group.name",
                                  "Fecha de Creación"=>"created_at",
 
 
@@ -66,7 +66,20 @@
                             "disabled"=>$action == 'details',
                         ],
                         [
-                            "input_type"=>"textarea",
+                            "input_type"=>"select",
+                            "input_model"=>"modelForm.group_id",
+                            "icon_class"=>"fas fa-layer-group",
+                            "placeholder"=>"Grupo Asociado",
+                            "input_field"=>"Grupo Asociado",
+                            "select_options"=>$groups, // Asume que $groups es un array pasado a la vista con los grupos disponibles
+                            "select_option_value"=>"id",
+                            "select_option_view"=>"name",
+                            "col_with"=>1,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ],
+                        [
+                            "input_type"=>"text",
                             "input_model"=>"modelForm.description",
                             "icon_class"=>"fas fa-align-left",
                             "placeholder"=>"Descripción",
@@ -74,20 +87,8 @@
                             "col_with"=>3,
                             "required"=>true,
                             "disabled"=>$action == 'details',
+                            "input_rows"=>3
                         ],
-                        [
-                            "input_type"=>"select",
-                            "input_model"=>"modelForm.group_id",
-                            "icon_class"=>"fas fa-layer-group",
-                            "placeholder"=>"Grupo Asociado",
-                            "input_field"=>"Grupo Asociado",
-                            "options"=>$groups, // Asume que $groups es un array pasado a la vista con los grupos disponibles
-                            "option_value_field"=>"id",
-                            "option_display_field"=>"name",
-                            "col_with"=>2,
-                            "required"=>true,
-                            "disabled"=>$action == 'details',
-                        ]
 
                     ]
                 ])

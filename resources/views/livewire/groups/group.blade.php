@@ -60,12 +60,12 @@
                             "icon_class"=>"fas fa-object-group",
                             "placeholder"=>"Nombre",
                             "input_field"=>"Nombre",
-                            "col_with"=>2,
+                            "col_with"=>3,
                             "required"=>true,
                             "disabled"=>$action == 'details',
                         ],
                         [
-                            "input_type"=>"textarea",
+                            "input_type"=>"text",
                             "input_model"=>"modelForm.description",
                             "icon_class"=>"fas fa-align-left",
                             "placeholder"=>"Descripción",
@@ -73,6 +73,7 @@
                             "col_with"=>3,
                             "required"=>true,
                             "disabled"=>$action == 'details',
+                            "input_rows" => 3
                         ]
 
                     ]

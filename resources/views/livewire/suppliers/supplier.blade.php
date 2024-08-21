@@ -20,7 +20,6 @@
                                  "Correo Electrónico"=>"email",
                                  "Teléfono"=>"phone",
                                  "Dirección"=>"address",
-                                 "Usuario Asociado"=>"user_id",
 
 
                 ],

@@ -12,7 +12,8 @@ class GroupForm extends Form
 
     #[Validate('required|min:3')]
     public $name = '';
-
+    #[Validate('min:3')]
+    public $code = '';
     #[Validate('nullable')]
     public $description = '';
 
@@ -22,6 +23,7 @@ class GroupForm extends Form
         if ($model) {
             $this->id = $model->id;
             $this->name = $model->name;
+            $this->code = $model->code;
             $this->description = $model->description;
         }
     }
@@ -29,7 +31,9 @@ class GroupForm extends Form
     public function store()
     {
         $this->validate();
-        Group::create($this->all());
+        $group = Group::create($this->all());
+        $group->code = $group->id;
+        $group->save();
         session()->flash('message', 'Grupo creado correctamente.');
         return redirect('/grupos/listado');
     }

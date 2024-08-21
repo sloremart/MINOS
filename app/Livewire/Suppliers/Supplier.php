@@ -15,7 +15,7 @@ class Supplier extends Component
 
     public function getData()
     {
-        $data= Auth::user()->suppliers();
+        $data= Auth::user()->suppliers;
         return $data;
     }
 

@@ -46,14 +46,14 @@
 
         @elseif($input_type == "select")
             <select
-                wire:model.lazy="{{$input_model}}"
+                wire:model.live="{{$input_model}}"
                 class="{{$aux_class??'custom-select'}} {{$background??''}} pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
                 @if($required??false)
                     required
                 @endif
                 @if($disabled??false)disabled @endif
             >
-                <option disabled value="0">{{$select_default??""}}</option>
+                <option value="0">{{$select_default??$placeholder??""}}</option>
                 @foreach($select_options??[] as $option)
                     <option
                         @if($select_option_title??"" != "")

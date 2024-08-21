@@ -16,7 +16,7 @@ class ProductForm extends Form
     #[Validate('required|min:3')]
     public $name = '';
 
-    #[Validate('required|unique:products,code')]
+    #[Validate('unique:products,code')]
     public $code = '';
 
     #[Validate('nullable')]
@@ -52,7 +52,9 @@ class ProductForm extends Form
     public function store()
     {
         $this->validate();
-        Product::create($this->all());
+        $product = Product::create($this->all());
+        $product->code = $product->subgroup_id.$product->id;
+        $product->save();
         session()->flash('message', 'Producto creado correctamente.');
         return redirect('/productos/listado');
     }

@@ -66,8 +66,13 @@ class SupplierForm extends Form
 
     public function edit()
     {
-        $this->validate();
-
+        $this->validate([
+            'name' => 'required|min:5',
+            'document' => 'required|min:5|unique:suppliers,document,' . $this->id, // Ignora el registro actual en la validación de unicidad
+            'email' => 'required|email|unique:suppliers,email,' . $this->id, // Ignora el registro actual en la validación de unicidad
+            'phone' => 'required|min:5',
+            'address' => 'required|min:5',
+        ]);
         $model = Supplier::find($this->id);
         if ($model) {
             $model->update($this->all());
