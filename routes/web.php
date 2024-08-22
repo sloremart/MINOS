@@ -99,13 +99,18 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Sales\Sale::class)
             ->name("sale.list");
     });
-
-// Rutas para SaleDetail
+ // Rutas para FormSale
     Route::prefix("ventas/detalles")->group(function () {
         Route::get('listado', \App\Livewire\SaleDetails\SaleDetail::class)
             ->name("sale_detail.list");
     });
 
+
+// Rutas para crear Venta
+    Route::prefix("ventas")->group(function () {
+        Route::get('crear', \App\Livewire\Sales\CreateSale::class)
+            ->name("sale.create");
+    });
 // Rutas para File
     Route::prefix("archivos")->group(function () {
         Route::get('listado', \App\Livewire\Files\File::class)

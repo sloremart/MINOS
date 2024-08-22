@@ -24,7 +24,6 @@ class CreateFilesTable extends Migration
             $table->morphs('imageable');
             $table->softDeletes();
             $table->timestamps();
-            $table->softDeletes(); // Para Soft Deletes
         });
     }
 

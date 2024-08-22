@@ -29,7 +29,7 @@ class Subgroup extends Component
     }
     public function getData()
     {
-        $query = auth()->user()->purchases();
+        $query = \App\Models\Subgroup::query();
         if ($this->search) {
             $query->where($this->search_field, 'like', '%' . $this->search . '%');
         }
