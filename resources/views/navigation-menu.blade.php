@@ -12,15 +12,72 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('supplier.list') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('supplier.list') }}" :active="request()->routeIs('supplier.list')">
                         {{ __('Proveedores') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('product.list') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('product.list') }}" :active="request()->routeIs('product.list')">
                         {{ __('Productos') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('customer.list') }}" :active="request()->routeIs('customer.list')">
+                        {{ __('Clientes') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('sale.list') }}" :active="request()->routeIs('sale.list')">
+                        {{ __('Ventas') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('purchase.list') }}" :active="request()->routeIs('purchase.list')">
+                        {{ __('Compras') }}
+                    </x-nav-link>
+                </div>
+
+                <!-- Dropdown -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex relative" x-data="{ open: false }">
+                    <button @click="open = !open"
+                            class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
+                            :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
+                        <span>{{ __('Configuraciones') }}</span>
+                        <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div x-show="open" @click.away="open = false" class="absolute mt-2 w-48 bg-white rounded-md shadow-lg z-20">
+                        <a href="{{ route('commerce_type.list') }}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                            {{ __('Tipos de comercio') }}
+                        </a>
+                        <a href="{{ route('group.list') }}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }">
+                            {{ __('Grupos') }}
+                        </a>
+                        <a href="{{ route('subgroup_all.list') }}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('subgroup_all.list') ? 'true' : 'false' }} }">
+                            {{ __('Subgrupos') }}
+                        </a>
+                        <a href="{{ route('unit.list') }}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
+                            {{ __('Unidades') }}
+                        </a>
+                        <a href="{{ route('vat_percentage.list') }}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
+                            {{ __('Porcentajes de impuesto') }}
+                        </a>
+                        <!-- Agrega más opciones de navegación aquí -->
+                    </div>
+                </div>
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">

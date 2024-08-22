@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Subgroups;
 
-use App\Models\Group;
-use Livewire\Component;
-use App\Traits\CrudModelsTrait;
 use App\Livewire\Forms\SubgroupForm;
+use App\Models\Group;
+use App\Traits\CrudModelsTrait;
+use Livewire\Component;
 use Livewire\WithPagination;
 
-class Subgroup extends Component
+class SubGroupAll extends Component
 {
     use CrudModelsTrait;
 
@@ -30,11 +30,7 @@ class Subgroup extends Component
     }
     public function getData()
     {
-        if ($this->group){
-            $query = $this->group->subgroups();
-        } else{
-            $query = \App\Models\Subgroup::query();
-        }
+        $query = \App\Models\Subgroup::query();
         if ($this->search) {
             $query->where($this->search_field, 'like', '%' . $this->search . '%');
         }
@@ -46,9 +42,8 @@ class Subgroup extends Component
         $data = $query->pagination();
         return $data;
     }
-    public function mount(Group $group = null)
+    public function mount()
     {
-        $this->group = $group;
         $this->groups = Group::all();
     }
 

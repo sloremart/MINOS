@@ -32,6 +32,19 @@
                                    "edit"=>"edit",
                                    "delete"=>"delete",
                                    "details"=>"details",
+                                   "customs"=>[
+                                                [
+                                                   "redirect"=>[
+                                                               "route"=>"price.list",
+                                                               "binding"=>"product"
+                                                         ],
+                                                       "button_color"=>"bg-blue-500",
+                                                     "button_hover"=>"bg-blue-700",
+                                                     "icon_color"=>"bg-blue-500",
+                                                       "icon"=>"fas fa-chart-line",
+                                                       "tooltip_title"=>"Precios",
+                                                 ],
+                                             ]
                                     ],
 
                "table_rows"=>$data

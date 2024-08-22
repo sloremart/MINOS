@@ -54,8 +54,13 @@ Route::middleware([
 
 // Rutas para Subgroup
     Route::prefix("subgrupos")->group(function () {
-        Route::get('listado', \App\Livewire\Subgroups\Subgroup::class)
+        Route::get('listado/{group?}', \App\Livewire\Subgroups\Subgroup::class)
             ->name("subgroup.list");
+    });
+    // Rutas para Subgroup
+    Route::prefix("subgrupos")->group(function () {
+        Route::get('listado-todos', \App\Livewire\Subgroups\SubgroupAll::class)
+            ->name("subgroup_all.list");
     });
 
 // Rutas para Product
@@ -66,7 +71,7 @@ Route::middleware([
 
 // Rutas para Price
     Route::prefix("precios")->group(function () {
-        Route::get('listado', \App\Livewire\Prices\Price::class)
+        Route::get('listado/{product?}', \App\Livewire\Prices\Price::class)
             ->name("price.list");
     });
 
