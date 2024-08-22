@@ -54,12 +54,9 @@ class SupplierForm extends Form
     public function store()
     {
         $this->validate();
-
         $data = $this->all();
         $data['user_id'] = Auth::id();
-
         Supplier::create($data);
-
         session()->flash('message', 'Proveedor creado correctamente.');
         return redirect('/proveedores/listado');
     }

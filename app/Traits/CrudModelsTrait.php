@@ -15,6 +15,7 @@ trait CrudModelsTrait
     public function closeModal()
     {
         $this->isOpen = false;
+        $this->action = "create";
         $this->modelForm->resetForm();
 
     }

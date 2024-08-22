@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\VatPercentage;
 use App\Models\Unit;
 use App\Models\Subgroup;
+use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -18,10 +19,15 @@ class ProductForm extends Form
 
     #[Validate('unique:products,code')]
     public $code = '';
+    #[Validate('unique:products,code')]
 
     #[Validate('nullable')]
     public $description = '';
 
+    #[Validate('required')]
+    public $price = '';
+    #[Validate('required')]
+    public $quantity = '';
     #[Validate('required|boolean')]
     public $applies_iva = false;
 
@@ -45,6 +51,8 @@ class ProductForm extends Form
             $this->applies_iva = $model->applies_iva;
             $this->vat_percentage_id = $model->vat_percentage_id;
             $this->unit_id = $model->unit_id;
+            $this->price = $model->activePrice ? $model->activePrice->price : '';
+            $this->quantity = $model->inventory->quantity;
             $this->subgroup_id = $model->subgroup_id;
         }
     }
@@ -52,19 +60,48 @@ class ProductForm extends Form
     public function store()
     {
         $this->validate();
-        $product = Product::create($this->all());
-        $product->code = $product->subgroup_id.$product->id;
+        $product = new Product();
+        $product->name = $this->name;
+        $product->description = $this->description;
+        $product->applies_iva = $this->applies_iva;
+        $product->vat_percentage_id = $this->vat_percentage_id;
+        $product->unit_id = $this->unit_id;
+        $product->price = $this->price;
+        $product->quantity = $this->quantity;
+        $product->subgroup_id = $this->subgroup_id;
+        $product->price = $this->price;
+        $product->quantity = $this->quantity;
         $product->save();
+
         session()->flash('message', 'Producto creado correctamente.');
         return redirect('/productos/listado');
     }
 
     public function edit()
     {
-        $this->validate();
+        $this->validate([
+            'name' => 'required|min:3',
+            'code' => 'required|min:3|unique:products,code,' . $this->id, // Ignora el registro actual en la validación de unicidad
+            'description' => 'nullable|min:5',
+            'price' => 'required|numeric|min:0', // Asegúrate de que el precio sea un número válido
+            'quantity' => 'required|integer|min:0', // Asegúrate de que la cantidad sea un entero no negativo
+            'unit_id' => 'required|exists:units,id', // Verifica que el unit_id exista en la tabla de unidades
+            'subgroup_id' => 'required|exists:subgroups,id', // Verifica que el subgroup_id exista en la tabla de subgrupos
+        ]);
         $model = Product::find($this->id);
         if ($model) {
-            $model->update($this->all());
+            $model->name = $this->name;
+            $model->description = $this->description;
+            $model->applies_iva = $this->applies_iva;
+            $model->vat_percentage_id = $this->vat_percentage_id;
+            $model->unit_id = $this->unit_id;
+            $model->price = $this->price;
+            $model->quantity = $this->quantity;
+            $model->subgroup_id = $this->subgroup_id;
+            $model->updated_at = Carbon::now();
+            $model->price = $this->price;
+            $model->quantity = $this->quantity;
+            $model->update();
             session()->flash('message', 'Producto actualizado correctamente.');
             return redirect('/productos/listado');
         }

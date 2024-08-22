@@ -92,7 +92,7 @@
     </div>
     @error($input_model)
     <div class="error-container">
-        <small class="form-text text-danger">{{$message}}</small>
+        <small class="text-red-500">{{ $message }}</small>
     </div>
     @enderror
 </div>

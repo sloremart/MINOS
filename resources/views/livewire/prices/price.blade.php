@@ -6,7 +6,7 @@
             {{ __('Listado de precios') }}
         </h2>
     </x-slot>
-    <div class="text-right z-20 relative max-w-6xl mx-auto">
+    <div class="text-right mt-4 z-20 relative max-w-6xl mx-auto">
         <button wire:click="openModal" class="bg-blue-900 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Precio
@@ -14,9 +14,14 @@
     </div>
 
     @include("partials.v1.table.primary-table",[
+    "filter_active" => true,
+               "search" => "search",
+               "search_1" => "search_1",
+               "search_placeholder"=>$search_placeholder,
+               "search_1_placeholder"=>$search_1_placeholder,
                "table_headers"=>["ID"=>"id",
-                                 "Producto"=>"product_id",
-                                 "Usuario"=>"user_id",
+                                 "Codigo de producto"=>"product.code",
+                                 "Producto"=>"product.name",
                                  "Precio"=>"price",
                                  "Activo"=>"active",
                                  "Fecha de Inicio"=>"valid_from_date",
@@ -63,22 +68,9 @@
                             "icon_class"=>"fas fa-box",
                             "placeholder"=>"Producto",
                             "input_field"=>"Producto",
-                            "options"=>$products, // Asume que $products es un array pasado a la vista con los productos disponibles
-                            "option_value_field"=>"id",
-                            "option_display_field"=>"name",
-                            "col_with"=>2,
-                            "required"=>true,
-                            "disabled"=>$action == 'details',
-                        ],
-                        [
-                            "input_type"=>"select",
-                            "input_model"=>"modelForm.user_id",
-                            "icon_class"=>"fas fa-user",
-                            "placeholder"=>"Usuario",
-                            "input_field"=>"Usuario",
-                            "options"=>$users, // Asume que $users es un array pasado a la vista con los usuarios disponibles
-                            "option_value_field"=>"id",
-                            "option_display_field"=>"name",
+                            "select_options"=>$products, // Asume que $products es un array pasado a la vista con los productos disponibles
+                            "select_option_value"=>"id",
+                            "select_option_view"=>"name",
                             "col_with"=>2,
                             "required"=>true,
                             "disabled"=>$action == 'details',
@@ -89,26 +81,6 @@
                             "icon_class"=>"fas fa-dollar-sign",
                             "placeholder"=>"Precio",
                             "input_field"=>"Precio",
-                            "col_with"=>1,
-                            "required"=>true,
-                            "disabled"=>$action == 'details',
-                        ],
-                        [
-                            "input_type"=>"checkbox",
-                            "input_model"=>"modelForm.active",
-                            "icon_class"=>"fas fa-check",
-                            "placeholder"=>"Activo",
-                            "input_field"=>"Activo",
-                            "col_with"=>1,
-                            "required"=>true,
-                            "disabled"=>$action == 'details',
-                        ],
-                        [
-                            "input_type"=>"date",
-                            "input_model"=>"modelForm.valid_from_date",
-                            "icon_class"=>"fas fa-calendar-alt",
-                            "placeholder"=>"Fecha de Inicio",
-                            "input_field"=>"Fecha de Inicio",
                             "col_with"=>1,
                             "required"=>true,
                             "disabled"=>$action == 'details',

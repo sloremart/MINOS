@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -24,7 +25,16 @@ class CustomerForm extends Form
 
     #[Validate('required|min:5')]
     public $address = '';
+    public $user_id;
 
+    public function mount($id = null)
+    {
+        if ($id) {
+            $this->set($id);
+        } else {
+            $this->user_id = Auth::id(); // Set the current user's ID by default
+        }
+    }
     public function set($id)
     {
         $model = Customer::find($id);
@@ -35,13 +45,17 @@ class CustomerForm extends Form
             $this->document = $model->document;
             $this->phone = $model->phone;
             $this->address = $model->address;
+            $this->user_id = $model->user_id;
+
         }
     }
 
     public function store()
     {
         $this->validate();
-        Customer::create($this->all());
+        $data = $this->all();
+        $data['user_id'] = Auth::id();
+        Customer::create($data);
         session()->flash('message', 'Cliente creado correctamente.');
         return redirect('/clientes/listado');
     }

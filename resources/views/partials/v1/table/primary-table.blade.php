@@ -1,3 +1,15 @@
+<div>
+@if($filter_active)
+    <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
+        @if(($search_placeholder ?? null) != null)
+            <input type="text" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="px-4 py-2 border rounded">
+        @endif
+        @if(($search_1_placeholder ?? null) != null)
+            <input type="text" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" class="px-4 py-2 border rounded">
+        @endif
+
+    </div>
+@endif
 <div class="mb-1">
     <div class="overflow-x-auto mt-5 relative z-10 max-w-6xl mx-auto">
         <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
@@ -18,7 +30,7 @@
                     <tr class="border-b hover:bg-blue-100">
                         @foreach($table_headers as $header_name=>$table_header)
                             <td class="px-4 py-2 border-b">
-                                @if(str_contains($table_header,".") and !str_contains($table_header,"*") and $table_row->{explode(".",$table_header)[0]})
+                                @if(str_contains($table_header,".") and !str_contains($table_header,"*") and ($table_row->{explode(".",$table_header)[0]} != null))
 
                                     {{ $table_row->{explode(".",$table_header)[0]}->{explode(".",$table_header)[1]} }}  {{--Se usa para traer datos de una relacion user.client.name--}}
                                 @else
@@ -115,8 +127,11 @@
             </tbody>
         </table>
     </div>
-{{--    @if($table_pageable??true)--}}
-{{--        {{$table_rows->links("partials.v1.table.pagination-links")}}--}}
-{{--    @endif--}}
+    @if($table_pageable??true)
+        <div class="mt-4 flex justify-center">
+            {{$table_rows->links("partials.v1.table.pagination-links")}}
+        </div>
+    @endif
     <br><br>
+</div>
 </div>

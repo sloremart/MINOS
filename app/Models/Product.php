@@ -2,17 +2,23 @@
 
 namespace App\Models;
 
+use App\Traits\ImageableTrait;
+use App\Traits\PaginatorTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
     use SoftDeletes;
-
+    use PaginatorTrait;
+    use ImageableTrait;
     protected $fillable = [
         'name', 'code', 'description', 'applies_iva',
         'vat_percentage_id', 'unit_id', 'category_id', 'subgroup_id'
     ];
+    public $price;
+    public $quantity;
 
     public function vatPercentage()
     {
@@ -36,16 +42,20 @@ class Product extends Model
 
     public function prices()
     {
-        return $this->hasMany(Price::class);
+        return $this->hasMany(Price::class)->where('user_id', Auth::user()->id);
+    }
+    public function activePrice()
+    {
+        return $this->hasOne(Price::class)->where('active', true)->where('user_id', Auth::user()->id);
     }
 
-    public function inventories()
+    public function inventory()
     {
-        return $this->hasMany(Inventory::class);
+        return $this->hasOne(Inventory::class)->where('user_id', Auth::user()->id);
     }
 
     public function suppliers()
     {
-        return $this->belongsToMany(Supplier::class, 'product_suppliers');
+        return $this->belongsToMany(Supplier::class, 'product_suppliers')->where('user_id', Auth::user()->id);
     }
 }

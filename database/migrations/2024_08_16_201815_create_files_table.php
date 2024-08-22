@@ -10,11 +10,19 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('file_name');
-            $table->string('file_type');
-            $table->integer('file_size');
-            $table->unsignedBigInteger('morphable_id');
-            $table->string('morphable_type');
+            $table->string('path');
+            $table->string('url');
+            $table->string('link')->nullable();
+            $table->string('size');
+            $table->string('alt');
+            $table->string('title');
+            $table->string('mime_type');
+            $table->string('type')->default('image');
+            $table->integer('order')->default(0);
+            $table->morphs('imageable');
+            $table->softDeletes();
             $table->timestamps();
             $table->softDeletes(); // Para Soft Deletes
         });

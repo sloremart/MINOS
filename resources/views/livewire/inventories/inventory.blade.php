@@ -6,7 +6,7 @@
             {{ __('Listado de inventarios') }}
         </h2>
     </x-slot>
-    <div class="text-right z-20 relative max-w-6xl mx-auto">
+    <div class="text-right mt-4 z-20 relative max-w-6xl mx-auto">
         <button wire:click="openModal" class="bg-blue-900 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Inventario
@@ -14,11 +14,16 @@
     </div>
 
     @include("partials.v1.table.primary-table",[
+    "filter_active" => true,
+               "search" => "search",
+               "search_1" => "search_1",
+               "search_placeholder"=>$search_placeholder,
+               "search_1_placeholder"=>$search_1_placeholder,
                "table_headers"=>["ID"=>"id",
-                                 "Producto"=>"product_id",
+                                 "Codigo producto"=>"product.code",
+                                 "Producto"=>"product.name",
                                  "Cantidad"=>"quantity",
-                                 "Usuario"=>"user_id",
-                                 "Fecha de Creación"=>"created_at",
+                                 "Fecha de actualizacion"=>"updated_at",
 
 
                 ],
@@ -61,12 +66,12 @@
                             "icon_class"=>"fas fa-box",
                             "placeholder"=>"Producto",
                             "input_field"=>"Producto",
-                            "options"=>$products, // Asume que $products es un array pasado a la vista con los productos disponibles
-                            "option_value_field"=>"id",
-                            "option_display_field"=>"name",
+                            "select_options"=>$action != 'create'?\App\Models\Product::all():$products, // Asume que $products es un array pasado a la vista con los productos disponibles
+                            "select_option_value"=>"id",
+                            "select_option_view"=>"name",
                             "col_with"=>2,
                             "required"=>true,
-                            "disabled"=>$action == 'details',
+                            "disabled"=>$action != 'create',
                         ],
                         [
                             "input_type"=>"number",
@@ -77,20 +82,8 @@
                             "col_with"=>1,
                             "required"=>true,
                             "disabled"=>$action == 'details',
-                        ],
-                        [
-                            "input_type"=>"select",
-                            "input_model"=>"modelForm.user_id",
-                            "icon_class"=>"fas fa-user",
-                            "placeholder"=>"Usuario",
-                            "input_field"=>"Usuario",
-                            "options"=>$users, // Asume que $users es un array pasado a la vista con los usuarios disponibles
-                            "option_value_field"=>"id",
-                            "option_display_field"=>"name",
-                            "col_with"=>2,
-                            "required"=>true,
-                            "disabled"=>$action == 'details',
                         ]
+
 
                     ]
                 ])

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\ImageableTrait;
+use App\Traits\PaginatorTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PurchaseDetail extends Model
 {
     use HasFactory, SoftDeletes;
-
+    use PaginatorTrait;
+    use ImageableTrait;
     protected $fillable = [
         'purchase_id',
         'product_id',
