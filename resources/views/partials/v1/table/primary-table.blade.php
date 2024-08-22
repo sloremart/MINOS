@@ -92,7 +92,9 @@
                                                             @include("partials.v1.table.table-redirect-button",[
                                                                     "button_route"=>$custom["redirect"]["route"],
                                                                     "button_binding"=>$custom["redirect"]["binding"],
-                                                                    "icon_color"=>"secondary",
+                                                                    "button_color"=>$custom["button_color"],
+                                                                     "button_hover"=>$custom["button_hover"],
+                                                                     "icon_color"=>$custom["icon_color"],
                                                                     "model_id"=>
                                                                     (isset($custom["model_id"])?($table_row->{$custom["model_id"]}):(
                                                                         (str_contains($table_headers[array_keys($table_headers)[0]],".") and !str_contains($table_headers[array_keys($table_headers)[0]],"*") and $table_row->{explode(".",$table_headers[array_keys($table_headers)[0]])[0]})?

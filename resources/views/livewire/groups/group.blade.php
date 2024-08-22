@@ -31,6 +31,19 @@
                                    "edit"=>"edit",
                                    "delete"=>"delete",
                                    "details"=>"details",
+                                   "customs"=>[
+                                                [
+                                                   "redirect"=>[
+                                                               "route"=>"subgroup.list",
+                                                               "binding"=>"group"
+                                                         ],
+                                                       "button_color"=>"bg-blue-500",
+                                                     "button_hover"=>"bg-blue-700",
+                                                     "icon_color"=>"bg-blue-500",
+                                                       "icon"=>"fas fa-sitemap",
+                                                       "tooltip_title"=>"Subgrupos",
+                                                 ],
+                                                 ]
                                     ],
 
                "table_rows"=>$data
