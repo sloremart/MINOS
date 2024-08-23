@@ -16,6 +16,7 @@ class Subgroup extends Component
     use WithPagination;
 
     public $groups;
+    public $group;
     public $search = '';
     public $search_1 = '';
     public $search_field = 'name';
@@ -45,8 +46,9 @@ class Subgroup extends Component
         $data = $query->pagination();
         return $data;
     }
-    public function mount()
+    public function mount(Group $group = null)
     {
+        $this->group = $group;
         $this->groups = Group::all();
     }
 

@@ -74,6 +74,16 @@
                                                          "icon"=>"fas fa-search",
                                                          "tooltip_title"=>"Detalles"
                                                      ])
+                                    @elseif($action_type == "add")
+                                        @include("partials.v1.table.table-action-button", [
+                                            "button_action" => $action_value,
+                                            "button_color" => "bg-blue-500",
+                                            "button_hover" => "bg-blue-700",
+                                            "icon_color" => "bg-blue-500",
+                                            "model_id" => $table_row->{$table_headers[array_keys($table_headers)[0]]},
+                                            "icon" => "fas fa-plus",
+                                            "tooltip_title" => "Agregar"
+                                        ])
                                             @elseif($action_type=="customs")
                                                 @foreach($action_value  as $custom)
                                                     @if(array_key_exists("conditional",$custom) and $this->{$custom["conditional"]}(isset($custom["model_id"])?$table_row->{$custom["model_id"]}:
