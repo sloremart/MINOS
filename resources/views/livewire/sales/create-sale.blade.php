@@ -11,9 +11,9 @@
             CREAR VENTA
         </h3>
 
-        <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="grid grid-cols-3 gap-4 mb-6">
             <!-- Select para Cliente -->
-            <div class="col-span-1">
+            <div class="col-span-2">
                 <label for="clientsid" class="block text-sm font-medium text-gray-700">Cliente</label>
                 <select id="clientsid" wire:model.live="customer.id" class="block w-full mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <option value="">Seleccionar Cliente</option>
@@ -47,7 +47,7 @@
             </div>
 
             <!-- Input para Correo Electrónico -->
-            <div class="col-span-1">
+            <div class="col-span-2">
                 <label class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
                 <div class="relative mt-1">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -58,13 +58,43 @@
             </div>
 
             <!-- Input para Dirección -->
-            <div class="col-span-2">
+            <div class="col-span-3">
                 <label class="block text-sm font-medium text-gray-700">Dirección</label>
                 <div class="relative mt-1">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fas fa-map-marker-alt text-gray-400"></i>
                     </div>
                     <input wire:model="customer.address" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"  readonly>
+                </div>
+            </div>
+
+            <div class="col-span-1">
+                <label class="block text-sm font-medium text-gray-700">Subtotal</label>
+                <div class="relative mt-1">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-dollar-sign text-gray-400"></i>
+                    </div>
+                    <input wire:model="subtotal" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                </div>
+            </div>
+
+            <div class="col-span-1">
+                <label class="block text-sm font-medium text-gray-700">IVA</label>
+                <div class="relative mt-1">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-percentage text-gray-400"></i>
+                    </div>
+                    <input wire:model="vat" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                </div>
+            </div>
+
+            <div class="col-span-1">
+                <label class="block text-sm font-medium text-gray-700">Total</label>
+                <div class="relative mt-1">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-calculator text-gray-400"></i>
+                    </div>
+                    <input wire:model="total" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
                 </div>
             </div>
         </div>
@@ -170,7 +200,7 @@
                     </h3>
                 </div>
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    
+
                     <div>
                         <label for="quantity" class="block text-sm font-medium text-gray-700">Stock Disponible</label>
                         <input type="number" id="quantity" wire:model="selectedProduct.quantity" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>

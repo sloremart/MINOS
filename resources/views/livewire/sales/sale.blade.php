@@ -7,9 +7,10 @@
         </h2>
     </x-slot>
     <div class="text-right mt-4 z-20 relative max-w-6xl mx-auto">
-        <button wire:click="openModal" class="bg-blue-900 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+        <button  class="bg-blue-900 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+            <a href="{{ route('sale.create') }}">
             <i class="fa-solid fa-circle-plus mr-2"></i>
-            Crear Venta
+            Crear Venta</a>
         </button>
     </div>
 
@@ -30,9 +31,20 @@
 
                 ],
                  "table_actions"=>[
-                                   "edit"=>"edit",
-                                   "delete"=>"delete",
-                                   "details"=>"details",
+
+                                   "customs"=>[
+                                                [
+                                                   "redirect"=>[
+                                                               "route"=>"sale_detail.list",
+                                                               "binding"=>"sale"
+                                                         ],
+                                                       "button_color"=>"bg-blue-500",
+                                                     "button_hover"=>"bg-blue-700",
+                                                     "icon_color"=>"bg-blue-500",
+                                                       "icon"=>"fas fa-sitemap",
+                                                       "tooltip_title"=>"Detalle",
+                                                 ],
+                                                 ]
                                     ],
 
                "table_rows"=>$data

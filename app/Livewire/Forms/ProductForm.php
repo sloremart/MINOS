@@ -26,13 +26,13 @@ class ProductForm extends Form
 
     #[Validate('required')]
     public $price = '';
-    #[Validate('required')
-    ]public $total = '';
-    #[Validate('required')
-    ]public $subtotal = '';
+    //#[Validate('required')]
+    public $total = '';
+   // #[Validate('required')]
+    public $subtotal = '';
     #[Validate('required')]
     public $quantity = '';
-    #[Validate('required|numeric|lt:quantity')]
+    //#[Validate('required|numeric|lt:quantity')]
     public $number = '';
     #[Validate('required|boolean')]
     public $applies_iva = false;

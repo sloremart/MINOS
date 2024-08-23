@@ -21,7 +21,7 @@
                "search_1_placeholder"=>$search_1_placeholder,
                "table_headers"=>["ID"=>"id",
                                  "Venta"=>"sale_id",
-                                 "Producto"=>"product_id",
+                                 "Producto"=>"product.name",
                                  "Cantidad"=>"quantity",
                                  "Precio Unitario"=>"unit_price",
                                  "Subtotal"=>"sub_total",

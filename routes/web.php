@@ -105,7 +105,7 @@ Route::middleware([
             ->name("sale.list");
     });
  // Rutas para FormSale
-    Route::prefix("ventas/detalles")->group(function () {
+    Route::prefix("ventas/detalles/{sale?}")->group(function () {
         Route::get('listado', \App\Livewire\SaleDetails\SaleDetail::class)
             ->name("sale_detail.list");
     });

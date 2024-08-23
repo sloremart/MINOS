@@ -3,6 +3,9 @@ namespace App\Livewire\Sales;
 
 use App\Livewire\Forms\CustomerForm;
 use App\Livewire\Forms\ProductForm;
+use App\Livewire\SaleDetails\SaleDetail;
+use App\Models\Inventory;
+use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Product;
@@ -22,8 +25,9 @@ class CreateSale extends Component
     public $vatPercentage;
 
     public $isModalOpen = false;
-    public $quantity = 1;
-    public $price;
+    public $total;
+    public $subtotal;
+    public $vat;
     public ProductForm $selectedProduct;
     public $selectedProducts;
 
@@ -39,7 +43,30 @@ class CreateSale extends Component
     }
     public function submitForm()
     {
-        dd($this->selectedProducts);
+        if ($this->customer->id != ""){
+
+            $sale = \App\Models\Sale::create([
+                'customer_id' => $this->customer->id,
+                'user_id' => auth()->user()->id,
+                'sale_date' => Carbon::now()->format('Y-m-d H:i:s'),
+                'total_amount' => $this->total
+            ]);
+            foreach ($this->selectedProducts as $item){
+                \App\Models\SaleDetail::create([
+                    'sale_id' => $sale->id,
+                    'product_id'=>$item['id'],
+                    'quantity' => $item['number'],
+                    'unit_price' => $item['price'],
+                    'sub_total' => $item['subtotal']
+                ]);
+                $inventory = Inventory::whereUserId(auth()->user()->id)->whereProductId($item['id'])->first();
+                $inventory->quantity = $inventory->quantity - $item['number'];
+                $inventory->last_updated_date = Carbon::now()->format('Y-m-d');
+                $inventory->save();
+            }
+            return redirect('/ventas/listado');
+
+        }
     }
 
     public function updatedCustomer()
@@ -80,7 +107,18 @@ class CreateSale extends Component
     {
         $this->selectedProducts[]=$this->selectedProduct->toArray();
         $this->selectedProduct->resetForm();
+        $this->calculateAmount();
         $this->closeModal();
+    }
+    public function calculateAmount()
+    {
+        $this->total = 0;
+        $this->subtotal = 0;
+        foreach ($this->selectedProducts as $item){
+            $this->subtotal = $this->subtotal + $item['subtotal'];
+            $this->total = $this->total + $item['total'];
+        }
+        $this->vat = $this->total-$this->subtotal;
     }
 
 
