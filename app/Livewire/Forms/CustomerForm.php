@@ -46,7 +46,8 @@ class CustomerForm extends Form
             $this->phone = $model->phone;
             $this->address = $model->address;
             $this->user_id = $model->user_id;
-
+        } else {
+            $this->resetForm();
         }
     }
 

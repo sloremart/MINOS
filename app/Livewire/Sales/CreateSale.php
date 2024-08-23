@@ -1,6 +1,8 @@
 <?php
 namespace App\Livewire\Sales;
 
+use App\Livewire\Forms\CustomerForm;
+use App\Livewire\Forms\ProductForm;
 use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Product;
@@ -15,19 +17,15 @@ class CreateSale extends Component
     ];
 
     public $customers;
-    public $clientsid;
-    public $selectedCustomerData = [
-        'name' => '',
-        'phone' => '',
-        'email' => '',
-        'address' => '',
-    ];
+    public CustomerForm $customer;
+    public $unitName;
+    public $vatPercentage;
 
     public $isModalOpen = false;
     public $quantity = 1;
     public $price;
-    public $selectedProduct;
-    public $selectedProducts = [];
+    public ProductForm $selectedProduct;
+    public $selectedProducts;
 
     public $search = '';
     public $search_1 = '';
@@ -37,80 +35,51 @@ class CreateSale extends Component
     public function mount()
     {
         $this->customers = Customer::all();
+        $this->selectedProducts = [];
+    }
+    public function submitForm()
+    {
+        dd($this->selectedProducts);
     }
 
-    public function updatedClientsid($clientId)
+    public function updatedCustomer()
     {
-        $this->updateClient($clientId);
-    }
-
-    public function updateClient($clientId)
-    {
-        $customer = Customer::find($clientId);
-        if ($customer) {
-            $this->selectedCustomerData = [
-                'name' => $customer->name,
-                'phone' => $customer->phone,
-                'email' => $customer->email,
-                'address' => $customer->address,
-            ];
-        } else {
-            $this->resetSelectedCustomerData();
+        if($this->customer->id == ""){
+            $this->customer->resetForm();
+            return;
         }
+        $this->customer->set($this->customer->id);
     }
-
-    private function resetSelectedCustomerData()
+    public function updatedSelectedProductNumber()
     {
-        $this->selectedCustomerData = [
-            'name' => '',
-            'phone' => '',
-            'email' => '',
-            'address' => '',
-        ];
+        $this->selectedProduct->subtotal = (int)$this->selectedProduct->price*(int)$this->selectedProduct->number;
+        $this->selectedProduct->total = ((int)$this->selectedProduct->subtotal * (int)$this->vatPercentage/100) + (int)$this->selectedProduct->subtotal;
     }
-
-
 
     public function closeModal()
     {
         $this->isModalOpen = false;
-        $this->quantity = 1;
-        $this->price = null;
-        $this->selectedProduct = null;
+        $this->selectedProduct->resetForm();
     }
 
     public function render()
     {
         return view('livewire.sales.create-sale', [
             'data' => $this->getData(),
-            'search_placeholder' => $this->search_placeholder,
-            'search_1_placeholder' => $this->search_1_placeholder,
         ])->layout('layouts.app');
     }
     public function addProductToSale($productId)
     {
-        $this->selectedProduct = Product::find($productId);
-
-        if ($this->selectedProduct) {
-            $this->price = $this->selectedProduct->activePrice->price ?? 0;
-        } else {
-            $this->price = 0;
-        }
-
+        $this->selectedProduct->set($productId);
+        $product = Product::find($productId);
+        $this->unitName = $product->unit->name;
+        $this->vatPercentage = $product->vatPercentage->percentage;
         $this->isModalOpen = true;
     }
     public function confirmAddProductToSale()
     {
-        if ($this->selectedProduct && $this->quantity > 0) {
-            $this->selectedProducts[] = [
-                'id' => $this->selectedProduct->id,
-                'name' => $this->selectedProduct->name,
-                'price' => $this->price,
-                'quantity' => $this->quantity,
-                'subtotal' => $this->quantity * $this->price
-            ];
-        }
-
+        $this->selectedProducts[]=$this->selectedProduct->toArray();
+        $this->selectedProduct->resetForm();
         $this->closeModal();
     }
 

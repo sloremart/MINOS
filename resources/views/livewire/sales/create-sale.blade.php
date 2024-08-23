@@ -15,13 +15,13 @@
             <!-- Select para Cliente -->
             <div class="col-span-1">
                 <label for="clientsid" class="block text-sm font-medium text-gray-700">Cliente</label>
-                <select id="clientsid" wire:model="clientsid" class="block w-full mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                <select id="clientsid" wire:model.live="customer.id" class="block w-full mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <option value="">Seleccionar Cliente</option>
-                    @foreach($customers as $customer)
-                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                    @foreach($customers as $client)
+                        <option value="{{ $client->id }}">{{ $client->name }}</option>
                     @endforeach
                 </select>
-                @error('clientsid') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                @error('customer.id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
 
             <!-- Input para Nombre -->
@@ -31,7 +31,7 @@
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fas fa-user text-gray-400"></i>
                     </div>
-                    <input type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" value="{{ $selectedCustomerData['name'] }}" readonly>
+                    <input wire:model="customer.name" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly >
                 </div>
             </div>
 
@@ -42,7 +42,7 @@
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fas fa-phone text-gray-400"></i>
                     </div>
-                    <input type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" value="{{ $selectedCustomerData['phone'] }}" readonly>
+                    <input wire:model="customer.phone" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fas fa-envelope text-gray-400"></i>
                     </div>
-                    <input type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" value="{{ $selectedCustomerData['email'] }}" readonly>
+                    <input wire:model="customer.email" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fas fa-map-marker-alt text-gray-400"></i>
                     </div>
-                    <input type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" value="{{ $selectedCustomerData['address'] }}" readonly>
+                    <input wire:model="customer.address" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"  readonly>
                 </div>
             </div>
         </div>
@@ -86,10 +86,13 @@
                             Cantidad
                         </th>
                         <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 20%;">
-                            Precio
+                            Precio unitario
                         </th>
                         <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 25%;">
                             Subtotal
+                        </th>
+                        <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 25%;">
+                            Total
                         </th>
                     </tr>
                     </thead>
@@ -100,13 +103,16 @@
                                 {{ $product['name'] }}
                             </td>
                             <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200">
-                                {{ $product['quantity'] }}
+                                {{ $product['number'] }}
                             </td>
                             <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200">
                                 ${{ $product['price'] }}
                             </td>
                             <td class="px-2 py-2 whitespace-nowrap">
                                 ${{ $product['subtotal'] }}
+                            </td>
+                            <td class="px-2 py-2 whitespace-nowrap">
+                                ${{ $product['total'] }}
                             </td>
                         </tr>
                     @endforeach
@@ -160,18 +166,41 @@
             <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full" style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
                 <div class="bg-gray-100 px-4 py-3 sm:px-6">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Agregar Producto
+                        Agregar Producto {{$selectedProduct->name}}
                     </h3>
                 </div>
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    
+                    <div>
+                        <label for="quantity" class="block text-sm font-medium text-gray-700">Stock Disponible</label>
+                        <input type="number" id="quantity" wire:model="selectedProduct.quantity" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                        @error('quantity') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
                     <div>
                         <label for="quantity" class="block text-sm font-medium text-gray-700">Cantidad</label>
-                        <input type="number" id="quantity" wire:model="quantity" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        @error('quantity') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        <input type="number" id="quantity" wire:model.live="selectedProduct.number" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" >
+                        @error('selectedProduct.number') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+                    <div>
+                        <label for="quantity" class="block text-sm font-medium text-gray-700">Unidad</label>
+                        <input type="text" id="quantity" wire:model="unitName" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
                     </div>
                     <div class="mt-4">
                         <label for="price" class="block text-sm font-medium text-gray-700">Precio</label>
-                        <input type="text" id="price" wire:model="price" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                        <input type="text" id="price" wire:model="selectedProduct.price" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                    </div>
+
+                    <div>
+                        <label for="quantity" class="block text-sm font-medium text-gray-700">Iva</label>
+                        <input type="text" id="quantity" wire:model="vatPercentage" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                    </div>
+                    <div class="mt-4">
+                        <label for="price" class="block text-sm font-medium text-gray-700">Subtotal</label>
+                        <input type="text" id="price" wire:model="selectedProduct.subtotal" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                    </div>
+                    <div class="mt-4">
+                        <label for="price" class="block text-sm font-medium text-gray-700">Total</label>
+                        <input type="text" id="price" wire:model="selectedProduct.total" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">

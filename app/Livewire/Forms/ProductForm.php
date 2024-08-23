@@ -26,8 +26,14 @@ class ProductForm extends Form
 
     #[Validate('required')]
     public $price = '';
+    #[Validate('required')
+    ]public $total = '';
+    #[Validate('required')
+    ]public $subtotal = '';
     #[Validate('required')]
     public $quantity = '';
+    #[Validate('required|numeric|lt:quantity')]
+    public $number = '';
     #[Validate('required|boolean')]
     public $applies_iva = false;
 
@@ -54,6 +60,9 @@ class ProductForm extends Form
             $this->price = $model->activePrice ? $model->activePrice->price : '';
             $this->quantity = $model->inventory->quantity;
             $this->subgroup_id = $model->subgroup_id;
+            $this->number = 1;
+            $this->subtotal = $this->number * $this->price;
+            $this->total = $this->subtotal + (($this->subtotal*$model->vatPercentage->percentage/100));
         }
     }
 
@@ -128,6 +137,8 @@ class ProductForm extends Form
             'name.required' => 'El nombre es obligatorio.',
             'name.min' => 'El nombre debe tener al menos 3 caracteres.',
             'code.required' => 'El código es obligatorio.',
+            'number.required' => 'El código es obligatorio.',
+            'number.lt' => 'La cantidad debe ser menor al stock disponible.',
             'code.unique' => 'El código ya está registrado.',
             'applies_iva.required' => 'Debes indicar si aplica IVA.',
             'vat_percentage_id.required' => 'El porcentaje de IVA es obligatorio.',
