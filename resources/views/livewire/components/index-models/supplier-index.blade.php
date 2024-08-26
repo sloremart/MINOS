@@ -1,108 +1,114 @@
-<!-- resources/views/livewire/components/table/primary-table.blade.php -->
-<div>
+<div class="p-4 relative">
+    <!-- Botón para abrir el modal -->
+    <div class="text-right z-20 mt-16 relative">
+        <button wire:click="openModal" class="bg-blue-900 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+            <i class="fa-solid fa-circle-plus mr-2"></i>
+            Crear Proveedor
+        </button>
+    </div>
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if($button_add)
-                <div class="flex justify-end mb-4">
-                    <x-button class="{{ $button_color }}" x-on:click="$dispatch('open-modal', { id: 'createSupplierModal' })">
-                        {{ __($button_label) }}
-                    </x-button>
-                </div>
-            @endif
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="container mx-auto">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white">
-                            <thead>
-                            <tr>
-                                @foreach($table_headers as $header)
-                                    <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">{{ $header['col_name'] }}</th>
-                                @endforeach
-                                <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">Acciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($data as $row)
-                                <tr>
-                                    @foreach($table_headers as $header)
-                                        <td class="py-2 px-4 border-b border-gray-200">{{ $row->{$header['col_data']} }}</td>
-                                    @endforeach
-                                    <td class="py-2 px-4 border-b border-gray-200 ">
-                                        @foreach($actions as $action)
-                                            <button wire:click="{{ $action['method'] }}({{ $row->id }})" class="text-gray-600 hover:text-gray-900 " @if($action['method'] == 'insert') x-on:click="$dispatch('open-modal', { id: 'createSupplierModal' })" @endif>
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $action['icon'] }}"></path>
-                                                </svg>
-                                            </button>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+    <!-- Imagen curva superior -->
+    <div class="absolute top-0 left-0 w-full h-40 opacity-70 z-10">
+        <img src="/images/curvas_arriba.png" alt="Top Curve" class="w-full h-40 object-cover">
+    </div>
+
+    <!-- Modal -->
+    @if($isOpen)
+        <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-80" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-xl sm:w-full z-10" style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+
+                <!-- Encabezado del Modal -->
+                <div class="bg-blue-900 text-gray-200 bg-opacity-75 px-4 py-3 sm:px-6 rounded-t-lg">
+                    <div class="flex flex-col items-center w-full">
+                        <!-- Fecha actual -->
+                        <div class="text-sm text-gray-200 mb-2 self-end">
+                            {{ \Carbon\Carbon::now()->format('d/m/Y') }}
+                        </div>
+
+                        <h3 class="text-lg leading-6 font-medium text-gray-200 text-center w-full" id="modal-title">
+                            {{ $id ? 'EDITAR PROVEEDOR' : 'CREAR PROVEEDOR' }}
+                        </h3>
                     </div>
+                </div>
+
+                <!-- Cuerpo del Modal con Fondo -->
+                <div class="bg-white bg-opacity-75 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <input type="text" wire:model="document" placeholder="Documento" class="w-full p-2 border rounded-lg shadow-inner bg-blue-50">
+                        @error('document') <span class="text-red-500">{{ $message }}</span> @enderror
+
+                        <input type="text" wire:model="name" placeholder="Nombre Proveedor" class="w-full p-2 border rounded-lg shadow-inner bg-blue-50">
+                        @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+
+                        <input type="email" wire:model="email" placeholder="Correo Electrónico" class="w-full p-2 border rounded-lg shadow-inner bg-blue-50">
+                        @error('email') <span class="text-red-500">{{ $message }}</span> @enderror
+
+                        <input type="text" wire:model="phone" placeholder="Teléfono" class="w-full p-2 border rounded-lg shadow-inner bg-blue-50">
+                        @error('phone') <span class="text-red-500">{{ $message }}</span> @enderror
+
+                        <input type="text" wire:model="address" placeholder="Dirección" class="w-full p-2 border rounded-lg shadow-inner bg-blue-50">
+                        @error('address') <span class="text-red-500">{{ $message }}</span> @enderror
+
+                        <input type="text" wire:model="city" placeholder="Ciudad" class="w-full p-2 border rounded-lg shadow-inner bg-blue-50">
+                        @error('city') <span class="text-red-500">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+
+                <!-- Pie del Modal -->
+                <div class="bg-blue-900 text-gray-200 bg-opacity-75 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
+                    <button wire:click="store" type="button" class="bg-blue-900 text-gray-200 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
+                        Guardar
+                    </button>
+                    <button wire:click="closeModal" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
+                        Cancelar
+                    </button>
                 </div>
             </div>
         </div>
-        <x-modal id="createSupplierModal" maxWidth="lg">
-            <x-slot name="header">
-                <h2 class="text-xl font-bold">Agregar Proveedor</h2>
-            </x-slot>
+    @endif
 
-            <x-slot name="body">
-                <form wire:submit.prevent="{{(($modelForm->id ?? null) != null)? 'edit':'save'}}">
-            <div class="m-4">
-                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
-                <input type="text" id="name" wire:model="modelForm.name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="m-4">
-                <label for="document" class="block text-gray-700 text-sm font-bold mb-2">Documento:</label>
-                <input type="text" id="document" wire:model="modelForm.document" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="m-4">
-                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-                <input type="email" id="email" wire:model="modelForm.email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="m-4">
-                <label for="direccion" class="block text-gray-700 text-sm font-bold mb-2">Dirección:</label>
-                <input type="text" id="direccion" wire:model="modelForm.address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="m-4">
-                <label for="ciudad" class="block text-gray-700 text-sm font-bold mb-2">Ciudad:</label>
-                <input type="text" id="ciudad" wire:model="modelForm.city" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="m-4">
-                <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2">Teléfono:</label>
-                <input type="text" id="telefono" wire:model="modelForm.phone" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-        </form>
+    <!-- Tabla de proveedores -->
+    <div class="overflow-x-auto mt-5 relative z-10">
+        <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+            <thead class="bg-blue-900 text-gray-200 uppercase text-sm leading-normal">
+            <tr>
+                <th class="px-4 py-2 border-b">Documento</th>
+                <th class="px-4 py-2 border-b">Nombre Proveedor</th>
+                <th class="px-4 py-2 border-b">Correo Electrónico</th>
+                <th class="px-4 py-2 border-b">Teléfono</th>
+                <th class="px-4 py-2 border-b">Dirección</th>
+                <th class="px-4 py-2 border-b">Ciudad</th>
+                <th class="px-4 py-2 border-b">Acciones</th>
+            </tr>
+            </thead>
+            <tbody class="text-gray-700 text-sm font-light">
+            @foreach($suppliers as $supplier)
+                <tr class="border-b hover:bg-blue-100">
+                    <td class="px-4 py-2 border-b">{{ $supplier->document }}</td>
+                    <td class="px-4 py-2 border-b">{{ $supplier->name }}</td>
+                    <td class="px-4 py-2 border-b">{{ $supplier->email }}</td>
+                    <td class="px-4 py-2 border-b">{{ $supplier->phone }}</td>
+                    <td class="px-4 py-2 border-b">{{ $supplier->address }}</td>
+                    <td class="px-4 py-2 border-b">{{ $supplier->city }}</td>
+                    <td class="px-4 py-2 border-b flex space-x-2">
+                        <!-- Botón de editar con ícono de lápiz -->
+                        <button wire:click="insert({{ $supplier->id }})" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
 
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-button type="button" class="bg-gray-500 hover:bg-gray-400 focus:bg-gray-400 active:bg-gray-600" x-on:click="$dispatch('close')">
-                    {{ __('Cancelar') }}
-                </x-button>
-                <x-button type="submit" class="bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 active:bg-blue-600" wire:click="{{(($modelForm->id ?? null) != null)? 'edit':'save'}}">
-                    {{(($modelForm->id ?? null) != null)? 'Actualizar':'Crear'}}
-                </x-button>
-            </x-slot>
-        </x-modal>
-
+                        <!-- Botón de eliminar con ícono de basurero -->
+                        <button wire:click="delete({{ $supplier->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 
+    <!-- Imagen curva inferior derecha -->
+    <div class="fixed bottom-0 right-0 opacity-70 z-0">
+        <img src="/images/curvas_abajo.png" alt="Bottom Curve" class="w-full h-40 md:h-60 object-right-bottom">
+    </div>
 </div>
-@push('scripts')
-    <script>
-        document.addEventListener('livewire:load', function () {
-            Livewire.on('open-modal', event => {
-                document.getElementById(event.id).__x.$data.show = true;
-                console.log(event);
-            });
-            Livewire.on('close-modal', event => {
-                document.getElementById(event.id).__x.$data.show = false;
-            });
-        });
-    </script>
-@endpush
