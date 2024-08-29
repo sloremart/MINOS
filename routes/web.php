@@ -131,6 +131,10 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Reportes\Reportes::class)
             ->name("reporte.list");
     });
+    Route::prefix("reportes/inventario")->group(function () {
+        Route::get('listado', \App\Livewire\Reportes\ReporteInv::class)
+            ->name("reporInv.list");
+    });
 
 
 

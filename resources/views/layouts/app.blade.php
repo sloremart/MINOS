@@ -21,7 +21,10 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+            <div class="relative z-1">
+                @livewire('navigation-menu')
+            </div>
+           
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -39,7 +42,7 @@
                     <img src="/images/curvas_arriba.png" alt="Top Left Image" class="w-192 h-60 md:w-192 md:h-60">
                 </div>
                 <!-- Contenido -->
-                <div class="relative z-10">
+                <div class="relative z-0">
                     {{ $slot }}
                 </div>
                 <!-- Imagen en la esquina inferior derecha -->

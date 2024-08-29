@@ -21,7 +21,7 @@
             }
         </style>
         <div class="container mx-auto px-4 pt-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
                 <!-- Tabla -->
                 <div class="bg-white col-span-1 md:col-span-2 p-4 rounded-lg shadow-md overflow-x-auto">
                     @include('partials.v1.table.primary-table-reporte', [
@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Gráfica -->
-                <div class="bg-white p-4 col-span-1 rounded-lg shadow-md chart-container flex justify-center items-center"
+                <div class="bg-white col-span-1 md:col-span-1 p-4 rounded-lg shadow-md  chart-container"
                     style="height: 100%;">
                     <canvas id="myDoughnutChart"></canvas>
                 </div>
