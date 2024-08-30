@@ -21,7 +21,7 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            <div class="relative z-1">
+            <div class="relative z-50">
                 @livewire('navigation-menu')
             </div>
            
@@ -42,7 +42,7 @@
                     <img src="/images/curvas_arriba.png" alt="Top Left Image" class="w-192 h-60 md:w-192 md:h-60">
                 </div>
                 <!-- Contenido -->
-                <div class="relative z-0">
+                <div class="relative z-1">
                     {{ $slot }}
                 </div>
                 <!-- Imagen en la esquina inferior derecha -->
