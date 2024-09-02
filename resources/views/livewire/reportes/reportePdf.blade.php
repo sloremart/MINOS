@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
-        <!-- Tabla -->
+        <!-- Tabla jjjj-->
         <div class="relative z-40 bg-white col-span-2 md:col-span-2 p-4 rounded-lg shadow-md overflow-x-auto">
             @include('partials.v1.table.primary-table-reporte', [
                 'filter_active' => true,
