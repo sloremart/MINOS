@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white py-10">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 pt-2  sm:px-6 bg-white lg:px-8 bg-gray-0 rounded-full shadow-lg"
+    <div class="max-w-7xl mx-auto px-4 pt-2 sm:px-6 bg-white lg:px-8 bg-gray-0 rounded-full shadow-lg"
         style=" position: relative; z-index: 1; ">
         <div class="flex justify-between h-20">
             <div class="flex ">
@@ -73,7 +73,7 @@
                 </div>
 
                 <!-- Dropdown -->
-                <div class="z-10 flex font-normal bg-white divide-y divide-gray-100 space-x-8 rounded-lg dark:bg-gray-700 dark:divide-gray-600"
+                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3"
                     x-data="{ open: false }">
                     <button @click="open = !open"
                         class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -152,7 +152,7 @@
                 </div>
             </div>
 
-            <div class="hidden md:flex sm:items-center sm:ms-6 border-l-2 border-blue-700">
+            <div class="hidden md:flex sm:items-center sm:ms-6 lg:border-l border-blue-600 my-3">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ms-3 relative">
