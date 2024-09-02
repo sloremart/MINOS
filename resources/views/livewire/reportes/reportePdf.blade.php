@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
         <!-- Tabla jjjj-->
