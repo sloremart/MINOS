@@ -12,8 +12,11 @@ use App\Models\Product;
 use App\Models\SaleDetail;
 use App\Models\Price;
 use Illuminate\Support\Facades\DB;
+<<<<<<< HEAD
 use Barryvdh\DomPDF\Facade\Pdf; // Usa el facade en lugar de la clase
 
+=======
+>>>>>>> 0a2133f74b2fa9f339e781755bc5f7f8ba18015d
 
 
 
@@ -72,16 +75,6 @@ class Reportes extends Component
             'productNames' => $this->products,
         ])->layout('layouts.app');
     }
-
-    public function pdf(){
-        $query = SaleDetail::all(); // Ejemplo de datos, usa los que necesites
-
-        $pdf = Pdf::loadView('livewire.reportes.reportePdf', compact('query'));
-    
-        // Puedes devolver la vista PDF para verificar si funciona
-        return $pdf->stream('reporte.pdf'); //
-    }
-
 
     public function graficaDetalle(): void
     {

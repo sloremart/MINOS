@@ -6,7 +6,7 @@
         </h2>
     </x-slot>
 
-    <div class=" relative z-40 max-w-6xl mx-auto mt-4 p-6 bg-white shadow-md rounded-lg">
+    <div class="max-w-6xl mx-auto mt-4 p-6 bg-white shadow-md rounded-lg">
         <h3 class="text-lg leading-6 font-medium text-gray-900 mb-6">
             CREAR VENTA
         </h3>

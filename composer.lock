@@ -2568,6 +2568,7 @@
                 }
             ],
             "time": "2024-08-19T11:52:18+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "masterminds/html5",
@@ -2635,6 +2636,8 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.9.0"
             },
             "time": "2024-03-31T07:05:07+00:00"
+=======
+>>>>>>> 0a2133f74b2fa9f339e781755bc5f7f8ba18015d
         },
         {
             "name": "mobiledetect/mobiledetectlib",
