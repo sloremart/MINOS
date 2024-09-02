@@ -7,11 +7,12 @@ use App\Models\Supplier;
 use App\Models\User;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseForm extends Form
 {
     public $id = null;
-
+   
     #[Validate('required|exists:users,id')]
     public $user_id = null;
 
@@ -26,6 +27,15 @@ class PurchaseForm extends Form
 
     #[Validate('nullable')]
     public $details = '';
+
+    public function mount($id = null)
+    {
+        if ($id) {
+            $this->set($id);
+        } else {
+            $this->user_id = Auth::id(); // Set the current user's ID by default
+        }
+    }
 
     public function set($id)
     {

@@ -1,6 +1,9 @@
 <div>
 @if($filter_active)
     <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
+    @if(($buscar_placeholder ?? null) != null)
+            <input type="text" wire:model.live="{{$buscar}}" placeholder="{{$buscar_placeholder ?? ""}}" class="px-4 py-2 border rounded">
+        @endif
         @if(($search_placeholder ?? null) != null)
             <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="px-4 py-2 border rounded">
         @endif

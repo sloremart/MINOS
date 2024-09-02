@@ -9,22 +9,23 @@ use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use App\Models\PurchaseDetail;
 use App\Models\Product;
+use App\Models\Inventory;
 use App\Models\SaleDetail;
 use App\Models\Price;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\Pdf; // Usa el facade en lugar de la clase
 
 
 
-
-class Reportes extends Component
+class ReporteInv extends Component
 {
     use WithFileUploads;
     use CrudModelsTrait;
     use WithPagination;
 
+    public $buscar = ''; // Fecha de inicio
     public $search = ''; // Fecha de inicio
     public $search_1 = ''; // Fecha de fin
+    public $buscar_placeholder = 'Bucar...';
     public $search_placeholder = 'Fecha inicio';
     public $search_1_placeholder = 'Fecha fin';
     private $paginacion = 4;
@@ -39,22 +40,24 @@ class Reportes extends Component
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $query = SaleDetail::join('products', 'sale_details.product_id', '=', 'products.id')
+        $query = Inventory::join('products', 'inventories.product_id', '=', 'products.id')
             ->select(
                 'products.name',
-                DB::raw('SUM(sale_details.quantity) as total_quantity'),
-                DB::raw('MAX(sale_details.unit_price) as unit_price'),
-                DB::raw('MAX(sale_details.sub_total) as sub_total'),
-                DB::raw('MAX(sale_details.created_at) as last_created_at') // O MIN(sale_details.created_at)
+                DB::raw('SUM(inventories.quantity) as total_quantity'),
+                DB::raw('MAX(inventories.created_at) as last_created_at')  
             )
-            ->groupBy('products.name', 'sale_details.created_at');
+            ->groupBy('products.name');
 
+        if ($this->buscar) {
+            $query->where('products.name', '>=', $this->buscar);
+            // dd($query);
+        }
         if ($this->search) {
-            $query->where('sale_details.created_at', '>=', $this->search);
+            $query->where('inventories.created_at', '>=', $this->search);
         }
 
         if ($this->search_1) {
-            $query->where('sale_details.created_at', '<=', $this->search_1);
+            $query->where('inventories.created_at', '<=', $this->search_1);
         }
 
         $data = $query->paginate($this->paginacion);
@@ -66,39 +69,32 @@ class Reportes extends Component
 
         // dd('Evento updateChart despachado', $this->products, $this->quantities);
         $this->graficaDetalle();
-        return view('livewire.reportes.reportes', [
+        return view('livewire.reportes.reporteinv', [
             'data' => $data,
             'quantities' => $this->quantities,
             'productNames' => $this->products,
         ])->layout('layouts.app');
     }
 
-    public function pdf(){
-        $query = SaleDetail::all(); // Ejemplo de datos, usa los que necesites
-
-        $pdf = Pdf::loadView('livewire.reportes.reportePdf', compact('query'));
-    
-        // Puedes devolver la vista PDF para verificar si funciona
-        return $pdf->stream('reporte.pdf'); //
-    }
-
-
     public function graficaDetalle(): void
     {
-        $query = SaleDetail::join('products', 'sale_details.product_id', '=', 'products.id')
+        $query = Inventory::join('products', 'inventories.product_id', '=', 'products.id')
             ->select(
                 'products.name',
-                DB::raw('SUM(sale_details.quantity) as total_quantity')
+                DB::raw('SUM(inventories.quantity) as total_quantity')
             )
             ->groupBy('products.name');
 
         // Filtrar por fechas si se proporcionan
+        if ($this->buscar) {
+            $query->where('products.name', '>=', $this->buscar);
+        }
         if ($this->search) {
-            $query->where('sale_details.created_at', '>=', $this->search);
+            $query->where('inventories.created_at', '>=', $this->search);
         }
 
         if ($this->search_1) {
-            $query->where('sale_details.created_at', '<=', $this->search_1);
+            $query->where('inventories.created_at', '<=', $this->search_1);
         }
 
         // Ejecutar la consulta

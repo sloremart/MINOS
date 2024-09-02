@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Purchases;
 
+use App\Models\Supplier;
 use Livewire\Component;
 use App\Traits\CrudModelsTrait;
 use App\Livewire\Forms\PurchaseForm;
+use App\Models\User;
 use Livewire\WithPagination;
 
 class Purchase extends Component
@@ -14,6 +16,8 @@ class Purchase extends Component
     public PurchaseForm $modelForm;
 
     use WithPagination;
+    public $suppliers = [];
+    public $users = [];
     public $search = '';
     public $search_1 = '';
     public $search_field = 'name';
@@ -25,6 +29,17 @@ class Purchase extends Component
     {
         $this->resetPage();
     }
+    public function mount()
+    {
+        $this->suppliers = Supplier::all();
+        // dd($this->suppliers);
+        $this->users = User::all();
+        // dd($this->users);
+
+       
+    } 
+        
+    
     public function getData()
     {
         $query = auth()->user()->purchases();
