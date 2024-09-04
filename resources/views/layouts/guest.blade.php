@@ -18,7 +18,7 @@
         @livewireStyles
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased ">
+        <div class="font-sans text-gray-900 antialiased">
             <div class="absolute top-0 left-0 opacity-100 ">
                 <img src="/images/curvas_arriba.png" alt="Top Left Image" class=" w-192 h-60 md:w-192 md:h-60">
             </div>

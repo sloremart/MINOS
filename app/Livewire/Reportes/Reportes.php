@@ -12,11 +12,8 @@ use App\Models\Product;
 use App\Models\SaleDetail;
 use App\Models\Price;
 use Illuminate\Support\Facades\DB;
-<<<<<<< HEAD
 use Barryvdh\DomPDF\Facade\Pdf; // Usa el facade en lugar de la clase
 
-=======
->>>>>>> 0a2133f74b2fa9f339e781755bc5f7f8ba18015d
 
 
 
@@ -69,12 +66,55 @@ class Reportes extends Component
 
         // dd('Evento updateChart despachado', $this->products, $this->quantities);
         $this->graficaDetalle();
+        $this->pdf();
         return view('livewire.reportes.reportes', [
             'data' => $data,
             'quantities' => $this->quantities,
             'productNames' => $this->products,
         ])->layout('layouts.app');
     }
+
+
+   
+    public function pdf($search ='', $search_1 = '')
+    {
+        // Copia la misma consulta del método render(), incluyendo los filtros
+        $query = SaleDetail::join('products', 'sale_details.product_id', '=', 'products.id')
+            ->select(
+                'products.name',
+                DB::raw('SUM(sale_details.quantity) as total_quantity'),
+                DB::raw('MAX(sale_details.unit_price) as unit_price'),
+                DB::raw('MAX(sale_details.sub_total) as sub_total'),
+                DB::raw('MAX(sale_details.created_at) as last_created_at')
+            )
+            ->groupBy('products.name','sale_details.created_at');
+    
+        // Aplica los filtros de fechas
+        if (!empty($this->search)) {
+            $query->where('sale_details.created_at', '>=', $this->search);
+        }
+        if (!empty($this->search_1)) {
+            $query->where('sale_details.created_at', '<=', $this->search_1);
+        }
+    
+        // Obtén los datos filtrados
+        $data = $query->get();
+    
+        // Debug para verificar los datos filtrados
+        // dd($data);
+    
+        // Genera el PDF con los datos filtrados
+        $pdf = Pdf::loadView('livewire.reportes.reportePdf', compact('data'));
+        
+        // Devuelve el PDF para visualizarlo
+        return $pdf->stream('reporte.pdf');
+    }
+    
+
+
+    
+
+
 
     public function graficaDetalle(): void
     {
