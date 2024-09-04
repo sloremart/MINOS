@@ -8,6 +8,7 @@
     </x-slot>
     <div class="text-right mt-4 z-20 relative max-w-6xl mx-auto">
         <button wire:click="openModal" class="bg-blue-900 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+            <a href="{{ route('purchase.create') }}">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Compra
         </button>
@@ -72,7 +73,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-user text-gray-400"></i>
                             </div>
-                            <input wire:model="supplier.name" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                            <input wire:model="supplier_id.name" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
                         </div>
                     </div>
 

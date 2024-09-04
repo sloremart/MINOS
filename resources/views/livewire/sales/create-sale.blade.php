@@ -1,75 +1,73 @@
-<div>
+<!-- resources/views/livewire/sales/create-sale.blade.php -->
 
-    <x-slot name="header">
-
-    </x-slot>
-
-    <div class="max-w-7xl mx-auto p-6 bg-white shadow-md rounded-xl grid grid-cols-2 gap-4 mt-50">
+<div class="py-12 flex justify-center">
+    <div class="max-w-7xl mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-2 gap-4 mt-16">
         <!-- Primera columna: Formulario -->
         <div>
+            <div class="grid grid-cols-1 gap-4 mb-6">
+                <!-- Fila de Select y detalles del cliente -->
+                <div class="grid grid-cols-3 gap-5 items-end">
+                    <!-- Select para Cliente -->
+                    <div class="col-span-1">
+                        <label for="clientsid" class="block text-sm font-medium text-gray-700">Cliente</label>
+                        <select id="clientsid" wire:model.live="customer.id" class="block w-full mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            <option value="">Seleccionar Cliente</option>
+                            @foreach($customers as $client)
+                                <option value="{{ $client->id }}">{{ $client->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('customer.id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
 
-            <div class="grid grid-cols-3 gap-4 mb-6">
-                <!-- Select para Cliente -->
-                <div class="col-span-1">
-                    <label for="clientsid" class="block text-sm font-medium text-gray-700">Cliente</label>
-                    <select id="clientsid" wire:model.live="customer.id" class="block w-full mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        <option value="">Seleccionar Cliente</option>
-                        @foreach($customers as $client)
-                            <option value="{{ $client->id }}">{{ $client->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('customer.id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                </div>
-
-                <!-- Input para Nombre -->
-                <div class="col-span-1">
-                    <label class="block text-sm font-medium text-gray-700">Nombre</label>
-                    <div class="relative mt-1">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-user text-gray-400"></i>
+                    <!-- Input para Nombre -->
+                    <div class="col-span-1">
+                        <label class="block text-sm font-medium text-gray-700">Nombre</label>
+                        <div class="relative mt-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
+                            <input wire:model="customer.name" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly >
                         </div>
-                        <input wire:model="customer.name" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly >
+                    </div>
+
+                    <!-- Input para Teléfono -->
+                    <div class="col-span-1">
+                        <label class="block text-sm font-medium text-gray-700">Teléfono</label>
+                        <div class="relative mt-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-phone text-gray-400"></i>
+                            </div>
+                            <input wire:model="customer.phone" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Input para Correo Electrónico -->
+                    <div class="col-span-1">
+                        <label class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <div class="relative mt-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input wire:model="customer.email" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Input para Dirección -->
+                    <div class="col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">Dirección</label>
+                        <div class="relative mt-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-map-marker-alt text-gray-400"></i>
+                            </div>
+                            <input wire:model="customer.address" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"  readonly>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Input para Teléfono -->
-                <div class="col-span-1">
-                    <label class="block text-sm font-medium text-gray-700">Teléfono</label>
-                    <div class="relative mt-1">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-phone text-gray-400"></i>
-                        </div>
-                        <input wire:model="customer.phone" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                    </div>
-                </div>
-
-                <!-- Input para Correo Electrónico -->
-                <div class="col-span-1">
-                    <label class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                    <div class="relative mt-1">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-envelope text-gray-400"></i>
-                        </div>
-                        <input wire:model="customer.email" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                    </div>
-                </div>
-
-                <!-- Input para Dirección -->
-                <div class="col-span-2">
-                    <label class="block text-sm font-medium text-gray-700">Dirección</label>
-                    <div class="relative mt-1">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-map-marker-alt text-gray-400"></i>
-                        </div>
-                        <input wire:model="customer.address" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"  readonly>
-                    </div>
-                </div>
-
-
             </div>
-            @if($isCashModalOpen)
-                <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
 
+            @if($isCashModalOpen)
+                <!-- Modal para pago en efectivo -->
+                <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
                     <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
                         <div class="bg-gray-100 px-4 py-3 sm:px-6">
                             <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -83,13 +81,10 @@
                                 @foreach ($billQuantities as $bill => $quantity)
                                     <div>
                                         <label for="bill-{{ $bill }}" class="block text-sm font-medium text-gray-700">Billetes de ${{ number_format($bill, 0, ',', '.') }}</label>
-                                        <!-- Contenedor relativo para el input y el icono -->
                                         <div class="relative mt-1">
-                                            <!-- Icono de billete -->
                                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <i class="fas fa-money-bill-wave text-gray-400"></i> <!-- Ícono de billete (puedes cambiarlo) -->
+                                                <i class="fas fa-money-bill-wave text-gray-400"></i>
                                             </div>
-                                            <!-- Input con padding para el icono -->
                                             <input type="number" id="bill-{{ $bill }}" wire:model.live="billQuantities.{{ $bill }}" min="0" class="block w-full pl-10 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
                                     </div>
@@ -102,13 +97,10 @@
                                 @foreach ($coinQuantities as $coin => $quantity)
                                     <div>
                                         <label for="coin-{{ $coin }}" class="block text-sm font-medium text-gray-700">Monedas de ${{ number_format($coin, 0, ',', '.') }}</label>
-                                        <!-- Contenedor relativo para el input y el icono -->
                                         <div class="relative mt-1">
-                                            <!-- Icono de moneda -->
                                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <i class="fas fa-coins text-gray-400"></i> <!-- Ícono de moneda (puedes cambiarlo) -->
+                                                <i class="fas fa-coins text-gray-400"></i>
                                             </div>
-                                            <!-- Input con padding para el icono -->
                                             <input type="number" id="coin-{{ $coin }}" wire:model.live="coinQuantities.{{ $coin }}" min="0" class="block w-full pl-10 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
                                     </div>
@@ -116,17 +108,12 @@
                             </div>
 
                             <!-- Total y Cambio -->
-
-
                             <div class="mt-4">
                                 <label for="totalCash" class="block text-sm font-medium text-gray-700">Total Recibido</label>
-                                <!-- Contenedor relativo para el input y el símbolo de $ -->
                                 <div class="relative mt-1">
-                                    <!-- Símbolo de $ -->
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <span class="text-gray-400">$</span>
                                     </div>
-                                    <!-- Input con padding para el símbolo de $ -->
                                     <input type="text" id="totalCash" wire:model.live="cashGiven" readonly
                                            class="block w-full pl-7 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                 </div>
@@ -134,13 +121,10 @@
 
                             <div class="mt-4">
                                 <label for="change" class="block text-sm font-medium text-gray-700">Cambio</label>
-                                <!-- Contenedor relativo para el input y el símbolo de $ -->
                                 <div class="relative mt-1">
-                                    <!-- Símbolo de $ -->
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <span class="text-gray-400">$</span>
                                     </div>
-                                    <!-- Input con padding para el símbolo de $ -->
                                     <input type="text" id="change" wire:model.live="change" readonly
                                            class="block w-full pl-7 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                 </div>
@@ -157,6 +141,7 @@
                     </div>
                 </div>
             @endif
+
             <!-- Modal para agregar producto -->
             @if($isModalOpen)
                 <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -167,14 +152,12 @@
                             </h3>
                         </div>
                         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-
                             <div>
                                 <label for="quantity" class="block text-sm font-medium text-gray-700">Stock Disponible</label>
                                 <input  type="number" id="quantity" wire:model="selectedProduct.quantity" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
                                 @error('quantity') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
                             <div>
-
                                 <label for="quantity" class="block text-sm font-medium text-gray-700">Cantidad</label>
                                 <input type="number" id="quantity" wire:model.live="selectedProduct.number" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" >
                                 @error('selectedProduct.number') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -280,17 +263,6 @@
                             <input wire:model="subtotal" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
                         </div>
                     </div>
-{{--
-                    <div class="flex-grow">
-                        <label class="block text-sm font-medium text-gray-700">IVA</label>
-                        <div class="relative mt-1">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-percentage text-gray-400"></i>
-                            </div>
-                            <input wire:model="vat" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-                    </div>
---}}
 
                     <div class="flex-grow">
                         <label class="block text-sm font-medium text-gray-700">Total</label>
@@ -311,7 +283,6 @@
                             @endforeach
                         </select>
                     </div>
-
                 </div>
 
             </div>
@@ -324,42 +295,35 @@
                 Productos
             </h3>
             <div class="bg-blue-100 rounded-lg shadow-lg">
-            @include("partials.v1.table.primary-table",[
-                "filter_active" => true,
-                "search" => "search",
-                "search_1" => "search_1",
-                "search_placeholder" => $search_placeholder,
-                "search_1_placeholder" => $search_1_placeholder,
-                "table_headers" => [
-                    "ID" => "id",
-                    "Nombre" => "name",
-                    "Código" => "code",
-                 //   "Aplica IVA" => "applies_iva",
-                    "Porcentaje de IVA" => "vatPercentage.percentage",
-                    "Unidad" => "unit.name",
-                    "Precio" => "activePrice.price",
-                    "Stock" => "inventory.quantity",
-                ],
-                "table_actions" => [
-                    "add" => "addProductToSale",
-                ],
-                "table_rows" => $data
-            ])
+                @include("partials.v1.table.primary-table",[
+                    "filter_active" => true,
+                    "search" => "search",
+                    "search_1" => "search_1",
+                    "search_placeholder" => $search_placeholder,
+                    "search_1_placeholder" => $search_1_placeholder,
+                    "table_headers" => [
+                        "ID" => "id",
+                        "Nombre" => "name",
+                        "Código" => "code",
+                        "Porcentaje de IVA" => "vatPercentage.percentage",
+                        "Unidad" => "unit.name",
+                        "Precio" => "activePrice.price",
+                        "Stock" => "inventory.quantity",
+                    ],
+                    "table_actions" => [
+                        "add" => "addProductToSale",
+                    ],
+                    "table_rows" => $data
+                ])
             </div>
-        </div> <div class="mt-6 flex justify-end space-x-4">
+        </div>
+        <div class="mt-6 flex justify-end space-x-4">
             <button wire:click="submitForm" class="bg-blue-900 text-white font-bold py-2 px-4 rounded shadow hover:bg-blue-700">
-              CREAR VENTA
+                CREAR VENTA
             </button>
             <button wire:click="cancel" class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow hover:bg-gray-400">
                 CANCELAR
             </button>
         </div>
-
-
-
     </div>
-
-
-
-
 </div>

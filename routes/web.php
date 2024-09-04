@@ -116,6 +116,12 @@ Route::middleware([
         Route::get('crear', \App\Livewire\Sales\CreateSale::class)
             ->name("sale.create");
     });
+
+    // Rutas para crear Compra
+    Route::prefix("compras")->group(function () {
+        Route::get('crear', \App\Livewire\Purchases\CreatePurchase::class)
+            ->name("purchase.create");
+    });
 // Rutas para File
     Route::prefix("archivos")->group(function () {
         Route::get('listado', \App\Livewire\Files\File::class)
