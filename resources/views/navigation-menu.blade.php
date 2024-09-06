@@ -76,7 +76,7 @@
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3"
                     x-data="{ open: false }">
                     <button @click="open = !open"
-                        class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
+                        class="flex items-center  text-gray-500 hover:text-gray-700 focus:outline-none"
                         :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/ADMINISTRACION.png') }}"
@@ -286,11 +286,43 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-
+        <div class="p-3">
+            <div class="pt-2 pb-2 space-y-1 ">
+                <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{ __('Inicio') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('supplier.list') }}" :active="request()->routeIs('supplier.list')">
+                    {{ __('Proveedores') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('product.list') }}" :active="request()->routeIs('product.list')">
+                    {{ __('Productos') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('customer.list') }}" :active="request()->routeIs('customer.list')">
+                    {{ __('Clientes') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('sale.list') }}" :active="request()->routeIs('sale.list')">
+                    {{ __('Ventas') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('purchase.list') }}" :active="request()->routeIs('purchase.list')">
+                    {{ __('Compras') }}
+                </x-responsive-nav-link>
+            </div>
+            
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('commerce_type.list') }}" :active="request()->routeIs('commerce_type.list')">
+                    {{ __('Configuraciones') }}
+                </x-responsive-nav-link>
+            </div>
         </div>
 
         <!-- Responsive Settings Options -->
