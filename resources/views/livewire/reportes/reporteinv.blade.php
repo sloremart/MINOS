@@ -59,89 +59,66 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var myDoughnutChart; // Declarar la variable fuera del listener
+    
+            function createChart(ctx, products, quantities, fixedColors) {
+                // Verifica si la gráfica ya está creada, si es así la destruye para evitar duplicados
+                if (myDoughnutChart) {
+                    myDoughnutChart.destroy(); // Destruye la gráfica anterior si ya existe
+                }
+    
+                // Crear una nueva gráfica
+                myDoughnutChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: products || [], // Asegurar que es un array
+                        datasets: [{
+                            data: (quantities || []).map(q => parseFloat(q)), // Convertir a números
+                            backgroundColor: fixedColors, // Usar colores fijos
+                            borderColor: fixedColors.map(color => color.replace('0.6', '1')), // Usar colores fijos con borde
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
+                            title: {
+                                display: true,
+                                text: 'Productos y Cantidades'
+                            }
+                        },
+                        cutout: '50%',
+                    }
+                });
+            }
+    
             var ctx = document.getElementById('myDoughnutChart').getContext('2d');
-
+    
             // Colores fijos para el gráfico
             const fixedColors = [
-                '#e1bee7',
-                '#ce93d8',
-                '#ba68c8',
-                '#ab47bc',
-                '#9c27b0',
-                '#8e24aa',
-                '#c5cae9',
-                '#9fa8da',
-                '#7986cb',
-                '#5c6bc0',
-                '#3f51b5',
-                '#3949ab'
+                '#e1bee7', '#ce93d8', '#ba68c8', '#ab47bc', '#9c27b0', '#8e24aa',
+                '#c5cae9', '#9fa8da', '#7986cb', '#5c6bc0', '#3f51b5', '#3949ab'
             ];
-
-            // Crear la gráfica inicial con datos vacíos o definidos
-            var myDoughnutChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: @json($products) || [], // Asegurar que es un array
-                    datasets: [{
-                        data: (@json($quantities) || []).map(q => parseFloat(
-                        q)), // Convertir a números
-                        backgroundColor: fixedColors, // Usar colores fijos
-                        borderColor: fixedColors.map(color => color.replace('0.6',
-                        '1')), // Usar colores fijos con borde
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false,
-                        },
-                        title: {
-                            display: true,
-                            text: 'Productos y Cantidades'
-                        }
-                    },
-                    cutout: '50%',
-                }
-            });
-
+    
+            // Crear la gráfica inicial
+            createChart(ctx, @json($products), @json($quantities), fixedColors);
+    
             // Escuchar el evento 'updateChart'
             Livewire.on('updateChart', (data) => {
                 console.log('Evento updateChart recibido', data);
-
+    
                 const {
-                    products,
-                    quantities
+                     products,
+                      quantities 
                 } = data;
-
-                // Verificar que los arrays no están vacíos
-                // if (!Array.isArray(products) || !Array.isArray(quantities) || products.length === 0 ||
-                //     quantities.length === 0) {
-                //     console.error('Datos inválidos para actualizar la gráfica:', data);
-                //     return;
-                // }
-
-                // Convertir quantities a números
-                const numericQuantities = quantities.map(q => parseFloat(q));
-
-                // Verificar que los datos sean válidos
-                // if (numericQuantities.length === 0 || products.length === 0) {
-                //     console.error('No hay datos válidos para actualizar la gráfica.');
-                //     return;
-                // }
-
-                // Actualizar la gráfica
-                myDoughnutChart.data.labels = products;
-                myDoughnutChart.data.datasets[0].data = numericQuantities;
-
-                
-
-                // Actualizar la gráfica para reflejar los cambios
-                myDoughnutChart.update();
+    
+                // Actualizar la gráfica con los nuevos datos
+                createChart(ctx, products, quantities, fixedColors);
             });
-
         });
     </script>
 

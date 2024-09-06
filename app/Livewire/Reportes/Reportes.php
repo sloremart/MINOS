@@ -76,7 +76,7 @@ class Reportes extends Component
 
 
    
-    public function pdf($search ='', $search_1 = '')
+    public function pdf()
     {
         // Copia la misma consulta del método render(), incluyendo los filtros
         $query = SaleDetail::join('products', 'sale_details.product_id', '=', 'products.id')
@@ -89,13 +89,13 @@ class Reportes extends Component
             )
             ->groupBy('products.name','sale_details.created_at');
     
-        // Aplica los filtros de fechas
-        if (!empty($this->search)) {
-            $query->where('sale_details.created_at', '>=', $this->search);
-        }
-        if (!empty($this->search_1)) {
-            $query->where('sale_details.created_at', '<=', $this->search_1);
-        }
+       // Aplica los filtros de fechas
+    if (!empty($this->search)) {
+        $query->where('sale_details.created_at', '>=', $this->search);
+    }
+    if (!empty($this->search_1)) {
+        $query->where('sale_details.created_at', '<=', $this->search_1);
+    }
     
         // Obtén los datos filtrados
         $data = $query->get();
@@ -109,6 +109,7 @@ class Reportes extends Component
         // Devuelve el PDF para visualizarlo
         return $pdf->stream('reporte.pdf');
     }
+    
     
 
 
