@@ -21,7 +21,9 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+            <div class="relative z-50">
+                @livewire('navigation-menu')
+            </div>
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -40,7 +42,7 @@
                 </div>
 
                 <!-- Contenido -->
-                <div class="relative z-10">
+                <div class="relative z-1">
                     {{ $slot }}
                 </div>
 

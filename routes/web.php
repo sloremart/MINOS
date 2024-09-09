@@ -98,11 +98,51 @@ Route::middleware([
             ->name("price.list");
     });
 
+// Rutas para Tipo Comercio
     Route::prefix("tipos-de-comercio")->group(function () {
         Route::get('listado', \App\Livewire\CommerceTypes\CommerceType::class)
             ->name("commerce_type.list");
     });
 
+// -------------------------------------------------------------
+// Agrego Rutas por que no se encontraban en la actualizacion
+// Rutas para el desplegable del Menu - Administraciones 
+// -------------------------------------------------------------
 
+// Ruta Unidades
+    Route::prefix("unidades")->group(function () {
+        Route::get('listado', \App\Livewire\Units\Unit::class)
+            ->name("unit.list");
+    });
+
+// Ruta Iva
+    Route::prefix("iva")->group(function () {
+        Route::get('listado', \App\Livewire\VatPercentages\VatPercentage::class)
+            ->name("vat_percentage.list");
+    });
+
+// Rutas para Group
+    Route::prefix("grupos")->group(function () {
+        Route::get('listado', \App\Livewire\Groups\Group::class)
+            ->name("group.list");
+    });
+
+// Rutas para Subgroup
+    Route::prefix("subgrupos")->group(function () {
+        Route::get('listado-todos', \App\Livewire\Subgroups\SubgroupAll::class)
+            ->name("subgroup_all.list");
+    }); 
+
+// Rutas para Product
+    Route::prefix("productos")->group(function () {
+        Route::get('listado', \App\Livewire\Products\Product::class)
+            ->name("product.list");
+    });
+
+// Rutas para Price
+    Route::prefix("precios")->group(function () {
+        Route::get('listado/{product?}', \App\Livewire\Prices\Price::class)
+            ->name("price.list");
+    });
 
 });

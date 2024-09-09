@@ -73,7 +73,7 @@
                 </div>
 
                 <!-- Dropdown -->
-                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3"
+                <div class="hidden lg:flex sm:items-center md:flex-col px-3"
                     x-data="{ open: false }">
                     <button @click="open = !open"
                         class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -105,9 +105,9 @@
 
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('commerce_type.list') }}"
+                                <a href="{{ route('group.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }">
                                     {{ __('Grupos') }}
                                 </a>
                                 <img src="{{ asset('') }}"
@@ -116,9 +116,9 @@
 
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('commerce_type.list') }}"
+                                <a href="{{ route('subgroup_all.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('subgroup_all.list') ? 'true' : 'false' }} }">
                                     {{ __('Subgrupos') }}
                                 </a>
                                 <img src="{{ asset('') }}"
@@ -127,9 +127,9 @@
 
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('commerce_type.list') }}"
+                                <a href="{{ route('unit.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
                                     {{ __('Unidades') }}
                                 </a>
                                 <img src="{{ asset('') }}"
@@ -138,9 +138,9 @@
                             
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('commerce_type.list') }}"
+                                <a href="{{ route('vat_percentage.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
                                     {{ __('Porcentajes de impuesto') }}
                                 </a>
                                 <img src="{{ asset('') }}"
@@ -285,11 +285,44 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden ">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden">
+        <div class="p-3">
+            <div class="pt-2 pb-2 space-y-1 ">
+                <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{ __('Inicio') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('supplier.list') }}" :active="request()->routeIs('supplier.list')">
+                    {{ __('Proveedores') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('product.list') }}" :active="request()->routeIs('product.list')">
+                    {{ __('Productos') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('customer.list') }}" :active="request()->routeIs('customer.list')">
+                    {{ __('Clientes') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('sale.list') }}" :active="request()->routeIs('sale.list')">
+                    {{ __('Ventas') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('purchase.list') }}" :active="request()->routeIs('purchase.list')">
+                    {{ __('Compras') }}
+                </x-responsive-nav-link>
+            </div>
+
+            <div class="pt-2 pb-2 space-y-1">
+                <x-responsive-nav-link href="{{ route('commerce_type.list') }}" :active="request()->routeIs('commerce_type.list')">
+                    {{ __('Admitraciones') }}
+                </x-responsive-nav-link>
+            </div>
         </div>
 
         <!-- Responsive Settings Options -->
