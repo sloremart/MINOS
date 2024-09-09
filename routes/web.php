@@ -86,6 +86,23 @@ Route::middleware([
             ->name("entity.list");
     });
 
+// Rutas para Product
+    Route::prefix("productos")->group(function () {
+        Route::get('listado', \App\Livewire\Products\Product::class)
+            ->name("product.list");
+    });
+
+// Rutas para Price
+    Route::prefix("precios")->group(function () {
+        Route::get('listado/{product?}', \App\Livewire\Prices\Price::class)
+            ->name("price.list");
+    });
+
+    Route::prefix("tipos-de-comercio")->group(function () {
+        Route::get('listado', \App\Livewire\CommerceTypes\CommerceType::class)
+            ->name("commerce_type.list");
+    });
+
 
 
 });
