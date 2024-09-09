@@ -12,7 +12,10 @@ class Sale extends Model
     use SoftDeletes;
     use PaginatorTrait;
     use ImageableTrait;
-    protected $fillable = ['customer_id','user_id',  'sale_date', 'total_amount', 'details'];
+    protected $fillable = ['customer_id','user_id',  'sale_date', 'total_amount', 'details','payment_method'];
+
+    public const PAYMENT_METHOD_CASH = "cash";
+    public const PAYMENT_METHOD_TRANSFER = "transfer";
 
     public function customer()
     {

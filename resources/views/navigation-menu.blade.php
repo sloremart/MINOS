@@ -27,7 +27,7 @@
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('images/Iconos Menu/INVENTARIO/Terceros Proveedores.png') }}"
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Proveedores') }}</span>
+                            <span>{{ __('Provedores') }}</span>
                         </div>
                     </x-nav-link>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Usuarios.png') }}"
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Clientes') }}</span>
+                            <span>{{ __('Clietes') }}</span>
                         </div>
                     </x-nav-link>
                 </div>
@@ -76,12 +76,12 @@
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3"
                     x-data="{ open: false }">
                     <button @click="open = !open"
-                        class="flex items-center  text-gray-500 hover:text-gray-700 focus:outline-none"
+                        class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
                         :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/ADMINISTRACION.png') }}"
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Configuraciones') }}</span>
+                            <span>{{ __('Admitraciones') }}</span>
                         </div>
                         {{-- <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -285,44 +285,11 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden">
-        <div class="p-3">
-            <div class="pt-2 pb-2 space-y-1 ">
-                <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Inicio') }}
-                </x-responsive-nav-link>
-            </div>
-            <div class="pt-2 pb-2 space-y-1">
-                <x-responsive-nav-link href="{{ route('supplier.list') }}" :active="request()->routeIs('supplier.list')">
-                    {{ __('Proveedores') }}
-                </x-responsive-nav-link>
-            </div>
-            <div class="pt-2 pb-2 space-y-1">
-                <x-responsive-nav-link href="{{ route('product.list') }}" :active="request()->routeIs('product.list')">
-                    {{ __('Productos') }}
-                </x-responsive-nav-link>
-            </div>
-            <div class="pt-2 pb-2 space-y-1">
-                <x-responsive-nav-link href="{{ route('customer.list') }}" :active="request()->routeIs('customer.list')">
-                    {{ __('Clientes') }}
-                </x-responsive-nav-link>
-            </div>
-            <div class="pt-2 pb-2 space-y-1">
-                <x-responsive-nav-link href="{{ route('sale.list') }}" :active="request()->routeIs('sale.list')">
-                    {{ __('Ventas') }}
-                </x-responsive-nav-link>
-            </div>
-            <div class="pt-2 pb-2 space-y-1">
-                <x-responsive-nav-link href="{{ route('purchase.list') }}" :active="request()->routeIs('purchase.list')">
-                    {{ __('Compras') }}
-                </x-responsive-nav-link>
-            </div>
-            
-            <div class="pt-2 pb-2 space-y-1">
-                <x-responsive-nav-link href="{{ route('commerce_type.list') }}" :active="request()->routeIs('commerce_type.list')">
-                    {{ __('Configuraciones') }}
-                </x-responsive-nav-link>
-            </div>
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden ">
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                {{ __('Dashboard') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

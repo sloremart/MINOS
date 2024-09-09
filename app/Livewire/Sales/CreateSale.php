@@ -26,6 +26,7 @@ class CreateSale extends Component
 
     public $isModalOpen = false;
     public $total;
+    public $paymentMethod;
     public $subtotal;
     public $vat;
     public ProductForm $selectedProduct;
@@ -35,21 +36,78 @@ class CreateSale extends Component
     public $search_1 = '';
     public $search_placeholder = 'Buscar por nombre';
     public $search_1_placeholder = 'Buscar por código';
+    public $isCashModalOpen = false;
+    public $cashGiven = 0;
+    public $change = 0;
+    public $billQuantities = [
+        100000 => 0,
+        50000 => 0,
+        20000 => 0,
+        10000 => 0,
+        5000 => 0,
+        2000 => 0,
+    ];
+
+    public $coinQuantities = [
+        1000 => 0,
+        500 => 0,
+        200 => 0,
+        100 => 0,
+        50 => 0,
+    ];
+
+    public function updatedBillQuantities()
+    {
+        $this->calculateTotalCash();
+    }
+
+    public function updatedCoinQuantities()
+    {
+        $this->calculateTotalCash();
+    }
+    public function calculateTotalCash()
+    {
+        // Calcula la cantidad total de dinero en efectivo recibida
+        $this->cashGiven = 0;
+
+        // Suma de los billetes
+        foreach ($this->billQuantities as $bill => $quantity) {
+            $this->cashGiven += $bill * $quantity;
+        }
+
+        // Suma de las monedas
+        foreach ($this->coinQuantities as $coin => $quantity) {
+            $this->cashGiven += $coin * $quantity;
+        }
+
+        // Calcula el cambio
+        $this->calculateChange();
+    }
+
+    public function calculateChange()
+    {
+        // Calcula el cambio a devolver
+        $this->change = $this->cashGiven - $this->total;
+    }
 
     public function mount()
     {
         $this->customers = Customer::all();
         $this->selectedProducts = [];
+        $this->paymentMethod = '';
     }
+
     public function submitForm()
     {
+
         if ($this->customer->id != ""){
 
             $sale = \App\Models\Sale::create([
                 'customer_id' => $this->customer->id,
                 'user_id' => auth()->user()->id,
                 'sale_date' => Carbon::now()->format('Y-m-d H:i:s'),
-                'total_amount' => $this->total
+                'total_amount' => $this->total,
+                'payment_method' => $this->paymentMethod,
             ]);
             foreach ($this->selectedProducts as $item){
                 \App\Models\SaleDetail::create([
@@ -68,6 +126,26 @@ class CreateSale extends Component
 
         }
     }
+
+    public function updatedPaymentMethod($value)
+    {
+        // Abre el modal de efectivo cuando se selecciona "Efectivo"
+        if ($value === 'cash') {
+            $this->isCashModalOpen = true;
+        } else {
+            $this->isCashModalOpen = false;
+        }
+    }
+    public function closeCashModal()
+    {
+        $this->isCashModalOpen = false;
+        $this->cashGiven = 0;
+        $this->change = 0;
+        $this->billQuantities = array_fill_keys(array_keys($this->billQuantities), 0); // Reiniciar cantidades de billetes
+        $this->coinQuantities = array_fill_keys(array_keys($this->coinQuantities), 0); // Reiniciar cantidades de monedas
+    }
+
+
 
     public function updatedCustomer()
     {
@@ -89,12 +167,24 @@ class CreateSale extends Component
         $this->selectedProduct->resetForm();
     }
 
+
+
+
+
+
+
+
     public function render()
     {
+        $paymentMethods = config('payment_methods.methods');
+
+
         return view('livewire.sales.create-sale', [
             'data' => $this->getData(),
+            'paymentMethods' => $paymentMethods,
         ])->layout('layouts.app');
     }
+
     public function addProductToSale($productId)
     {
         $this->selectedProduct->set($productId);
@@ -136,4 +226,7 @@ class CreateSale extends Component
 
         return $query->paginate(10);
     }
+
+
+
 }
