@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class File extends Model
 {
     use SoftDeletes;
-    use PaginatorTrait;
-    use PaginatorTrait;
+   use PaginatorTrait;
     use ImageableTrait;
     public const URL_BASE = 'images/';
 
