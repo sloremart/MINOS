@@ -49,7 +49,6 @@
                             {{ \Carbon\Carbon::now()->format('d/m/Y') }}
                         </div>
                         <h3 class="text-lg leading-6 font-medium text-gray-200 text-center w-full" id="modal-title">
-                            {{ ($action == 'create')?'CREAR COMPRA': (($action == 'edit') ? 'EDITAR COMPRA' : 'DETALLES DE LA COMPRA') }}
                         </h3>
                     </div>
                 </div>

@@ -226,7 +226,4 @@ class CreateSale extends Component
 
         return $query->paginate(10);
     }
-
-
-
 }

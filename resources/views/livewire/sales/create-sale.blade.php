@@ -319,10 +319,8 @@
         </div>
         <div class="mt-6 flex justify-end space-x-4">
             <button wire:click="submitForm" class="bg-blue-900 text-white font-bold py-2 px-4 rounded shadow hover:bg-blue-700">
-                CREAR VENTA
             </button>
             <button wire:click="cancel" class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow hover:bg-gray-400">
-                CANCELAR
             </button>
         </div>
     </div>

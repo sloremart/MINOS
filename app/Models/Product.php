@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\ImageableTrait;
-use App\Traits\PaginatorTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -57,5 +56,9 @@ class Product extends Model
     public function suppliers()
     {
         return $this->belongsToMany(Supplier::class, 'product_suppliers')->where('user_id', Auth::user()->id);
+    }
+    public function saleDetails()
+    {
+        return $this->hasMany(SaleDetail::class, 'product_id');
     }
 }

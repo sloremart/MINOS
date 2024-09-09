@@ -135,7 +135,7 @@
                                 <img src="{{ asset('') }}"
                                     style="width:40px; height: 40px;" alt="Icono 4" class="w-4 h-4">
                             </li>
-                            
+
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <a href="{{ route('commerce_type.list') }}"
