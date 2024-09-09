@@ -49,12 +49,76 @@
                             {{ \Carbon\Carbon::now()->format('d/m/Y') }}
                         </div>
                         <h3 class="text-lg leading-6 font-medium text-gray-200 text-center w-full" id="modal-title">
+                            {{ ($action == 'create')?'CREAR COMPRA': (($action == 'edit') ? 'EDITAR COMPRA' : 'DETALLES DE LA COMPRA') }}
                         </h3>
                     </div>
                 </div>
 
 
+                @include("partials.v1.form.primary_form",[
+                    "form_toast"=>false,
+                    "form_grid_col"=>3,
+                    "session_message"=>"message",
+                    "form_submit_action"=>"submitForm",
+                    "show_form_submit_action"=>false,
+                    "form_inputs"=>[
 
+                        [
+                            "input_type"=>"select",
+                            "input_model"=>"modelForm.supplier_id",
+                            "icon_class"=>"fas fa-truck-loading",
+                            "placeholder"=>"Proveedor",
+                            "input_field"=>"Proveedor",
+                            "options"=>$suppliers, // Asume que $suppliers es un array pasado a la vista con los proveedores disponibles
+                            "option_value_field"=>"id",
+                            "option_display_field"=>"name",
+                            "col_with"=>2,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ],
+                        [
+                            "input_type"=>"select",
+                            "input_model"=>"modelForm.user_id",
+                            "icon_class"=>"fas fa-user",
+                            "placeholder"=>"Usuario",
+                            "input_field"=>"Usuario",
+                            "options"=>$users, // Asume que $users es un array pasado a la vista con los usuarios disponibles
+                            "option_value_field"=>"id",
+                            "option_display_field"=>"name",
+                            "col_with"=>2,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ],
+                        [
+                            "input_type"=>"date",
+                            "input_model"=>"modelForm.purchase_date",
+                            "icon_class"=>"fas fa-calendar-alt",
+                            "placeholder"=>"Fecha de Compra",
+                            "input_field"=>"Fecha de Compra",
+                            "col_with"=>1,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ],
+                        [
+                            "input_type"=>"text",
+                            "input_model"=>"modelForm.total_amount",
+                            "icon_class"=>"fas fa-dollar-sign",
+                            "placeholder"=>"Monto Total",
+                            "input_field"=>"Monto Total",
+                            "col_with"=>1,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ],
+                        [
+                            "input_type"=>"textarea",
+                            "input_model"=>"modelForm.details",
+                            "icon_class"=>"fas fa-info-circle",
+                            "placeholder"=>"Detalles",
+                            "input_field"=>"Detalles",
+                            "col_with"=>3,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ]
 
 
 
