@@ -23,10 +23,11 @@
     <x-banner />
 
     <div class="min-h-screen bg-gray-100">
+
         <div class="relative z-50">
             @livewire('navigation-menu')
-        </div>
 
+        </div>
 
         <!-- Page Heading -->
         @if (isset($header))
@@ -55,12 +56,8 @@
     </div>
 
     @stack('modals')
-
-    {{-- <script src="{{ asset('js/apexcharts.js') }}"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
-    {{-- <script src="{{ asset('js/chart.min.js') }}"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
     <script src="{{ asset('js/chart.js') }}"></script>
+
     @livewireScripts
 </body>
 

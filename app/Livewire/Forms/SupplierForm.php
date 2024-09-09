@@ -73,6 +73,7 @@ class SupplierForm extends Form
         $model = Supplier::find($this->id);
         if ($model) {
             $model->update($this->all());
+
             session()->flash('message', 'Proveedor actualizado correctamente.');
             return redirect('/proveedores/listado');
         }

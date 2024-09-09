@@ -17,6 +17,7 @@ trait CrudModelsTrait
         $this->isOpen = false;
         $this->action = "create";
         $this->modelForm->resetForm();
+
     }
 
     public function edit($id)

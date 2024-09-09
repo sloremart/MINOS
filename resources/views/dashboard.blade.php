@@ -8,7 +8,8 @@
 
     <div>
                            
-       
     </div>
 
 </x-app-layout>
+
+{{-- @livewire('moda-registro-cliente-component') --}}

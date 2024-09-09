@@ -84,10 +84,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Purchase::class);
     }
-    public function saleDetail(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(SaleDetail::class);
-    }
 
 
 

@@ -6,7 +6,7 @@
             {{ __('Listado de ventas') }}
         </h2>
     </x-slot>
-    <div class="text-right mt-4 z-40 relative max-w-6xl mx-auto">
+    <div class="text-right mt-4 z-20 relative max-w-6xl mx-auto">
         <button  class="bg-blue-900 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
             <a href="{{ route('sale.create') }}">
             <i class="fa-solid fa-circle-plus mr-2"></i>
@@ -64,6 +64,8 @@
                         </h3>
                     </div>
                 </div>
+
+
 
                 <!-- Cuerpo del Modal -->
                 @include("partials.v1.form.primary_form",[

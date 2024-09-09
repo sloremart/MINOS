@@ -2,22 +2,21 @@
 
 namespace App\Livewire\Purchases;
 
-use App\Models\Supplier;
 use Livewire\Component;
 use App\Traits\CrudModelsTrait;
 use App\Livewire\Forms\PurchaseForm;
-use App\Models\User;
 use Livewire\WithPagination;
+use App\Models\User;
+use App\Models\Supplier;
 
 class Purchase extends Component
 {
     use CrudModelsTrait;
+    use WithPagination;
 
     public PurchaseForm $modelForm;
-
-    use WithPagination;
-    public $suppliers = [];
-    public $users = [];
+    public $suppliers;
+    public $users;
     public $search = '';
     public $search_1 = '';
     public $search_field = 'name';
@@ -29,20 +28,12 @@ class Purchase extends Component
     {
         $this->resetPage();
     }
-    public function mount()
-    {
-        $this->suppliers = Supplier::all();
-        // dd($this->suppliers);
-        $this->users = User::all();
-        // dd($this->users);
 
-       
-    } 
-        
-    
     public function getData()
     {
+        // Cambia la consulta para obtener las compras relacionadas con el usuario autenticado
         $query = auth()->user()->purchases();
+
         if ($this->search) {
             $query->where($this->search_field, 'like', '%' . $this->search . '%');
         }
@@ -51,14 +42,22 @@ class Purchase extends Component
             $query->where($this->search_1_field, 'like', '%' . $this->search_1 . '%');
         }
 
-        $data = $query->pagination();
+        $data = $query->paginate(10); // Asegúrate de usar el método correcto para la paginación
         return $data;
     }
-
+    public function mount()
+    {
+        $this->suppliers = Supplier::all(); // Cargar los proveedores
+        $this->users = User::all(); // Cargar los usuarios
+    }
     public function render()
     {
+
+
+
         return view('livewire.purchases.purchase', [
-            "data" => $this->getData()
+            'data' => $this->getData(),
+
         ])->layout('layouts.app');
     }
 }
