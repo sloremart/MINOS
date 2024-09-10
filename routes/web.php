@@ -102,29 +102,30 @@ Route::middleware([
         Route::get('listado', \App\Livewire\CommerceTypes\CommerceType::class)
             ->name("commerce_type.list");
     });
+/////Rutas para los reportes 
     Route::prefix("reporte/venta")->group(function () {
-        Route::get('listado', \App\Livewire\Reportes\Reportes::class)
-            ->name("reporeteVenta.list");
+        Route::get('listado', \App\Livewire\Reports\Reports::class)
+            ->name("reportSale.list");
     });
     Route::prefix('reportes/venta')->group(function () {
         Route::get('pdf', function () {
-            $component = app()->make(\App\Livewire\Reportes\Reportes::class);
+            $component = app()->make(\App\Livewire\Reports\Reports::class);
             // Renderizar el contenido de la vista
             return $component->pdf();
-        })->name('reportespdf.list');
+        })->name('reportpdf.list');
     });
 
     Route::prefix("reportes/inventario")->group(function () {
-        Route::get('listado', \App\Livewire\Reportes\ReporteInv::class)
-            ->name("reporInv.list");
+        Route::get('listado', \App\Livewire\Reports\ReportInv::class)
+            ->name("reportInv.list");
     });
 
     Route::prefix("reportes/ventaCliente")->group(function () {
-        Route::get('listado', \App\Livewire\Reportes\ReporteCliente::class)
-            ->name("reporInv.list");
+        Route::get('listado', \App\Livewire\Reports\ReportCustomer::class)
+            ->name("reportCust.list");
     });
 
-
+//////////////////////////////////termina rutas reportes
 
 
 });

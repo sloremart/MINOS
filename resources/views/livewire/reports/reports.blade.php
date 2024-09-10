@@ -4,7 +4,7 @@
 
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Reportes Iventario') }}
+                {{ __('Reportes') }}
             </h2>
         </x-slot>
         <style>
@@ -24,18 +24,18 @@
             <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
                 <!-- Tabla -->
                 <div class="relative z-40 bg-white col-span-1 md:col-span-2 p-4 rounded-lg shadow-md overflow-x-auto">
-                    @include('partials.v1.table.primary-table-reporte', [
+                    @include('partials.v1.table.primary-table-report', [
                         'filter_active' => true,
-                        'buscar' => 'buscar',
                         'search' => 'search',
                         'search_1' => 'search_1',
-                        'buscar_placeholder' => $buscar_placeholder,
                         'search_placeholder' => $search_placeholder,
                         'search_1_placeholder' => $search_1_placeholder,
                         'table_headers' => [
                             'ID' => 'id',
                             'Nombre' => 'name',
+                            'Valor Unitario' => 'unit_price',
                             'Cantidad' => 'total_quantity',
+                            'Valor Subtotal' => 'sub_total',
                             'Fecha' => 'last_created_at',
                         ],
                         'table_rows' => $data,
@@ -52,11 +52,12 @@
         </div>
     </div>
 
+    
 
+    {{-- <script src="{{ asset('js/apexcharts.js') }}"></script> --}}
 
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
-
+   
+   
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var myDoughnutChart; // Declarar la variable fuera del listener
@@ -121,6 +122,5 @@
             });
         });
     </script>
-
 
 </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Reportes;
+namespace App\Livewire\Reports;
 
 use Livewire\Component;
 use App\Traits\CrudModelsTrait;
@@ -13,11 +13,12 @@ use App\Models\SaleDetail;
 use App\Models\Price;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf; // Usa el facade en lugar de la clase
+use Illuminate\Support\Facades\Log;
 
 
 
 
-class Reportes extends Component
+class Reports extends Component
 {
     use WithFileUploads;
     use CrudModelsTrait;
@@ -67,7 +68,7 @@ class Reportes extends Component
         // dd('Evento updateChart despachado', $this->products, $this->quantities);
         $this->graficaDetalle();
         $this->pdf();
-        return view('livewire.reportes.reportes', [
+        return view('livewire.reports.reports', [
             'data' => $data,
             'quantities' => $this->quantities,
             'productNames' => $this->products,
@@ -104,7 +105,7 @@ class Reportes extends Component
         // dd($data);
     
         // Genera el PDF con los datos filtrados
-        $pdf = Pdf::loadView('livewire.reportes.reportePdf', compact('data'));
+        $pdf = Pdf::loadView('livewire.reports.reportPdf', compact('data'));
         
         // Devuelve el PDF para visualizarlo
         return $pdf->stream('reporte.pdf');
@@ -154,7 +155,7 @@ class Reportes extends Component
         $quantities = $this->quantities;
 
         // Log para depurar
-        \Log::info('Datos para updateChart', [
+        Log::info('Datos para updateChart', [
             'products' => $products,
             'quantities' => $quantities,
         ]);

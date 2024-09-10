@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Reportes;
+namespace App\Livewire\Reports;
 
 use Livewire\Component;
 use App\Traits\CrudModelsTrait;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 
 
-class ReporteInv extends Component
+class ReportInv extends Component
 {
     use WithFileUploads;
     use CrudModelsTrait;
@@ -69,7 +69,7 @@ class ReporteInv extends Component
 
         // dd('Evento updateChart despachado', $this->products, $this->quantities);
         $this->graficaDetalle();
-        return view('livewire.reportes.reporteinv', [
+        return view('livewire.reports.reportinv', [
             'data' => $data,
             'quantities' => $this->quantities,
             'productNames' => $this->products,
