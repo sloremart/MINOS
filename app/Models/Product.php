@@ -57,4 +57,8 @@ class Product extends Model
     {
         return $this->belongsToMany(Supplier::class, 'product_suppliers')->where('user_id', Auth::user()->id);
     }
+    public function saleDetails()
+    {
+        return $this->hasMany(SaleDetail::class, 'product_id');
+    }
 }

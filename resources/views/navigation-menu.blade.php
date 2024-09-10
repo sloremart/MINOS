@@ -1,4 +1,3 @@
-<!-- Primary Navigation Menu -->
 <nav x-data="{ open: false }" class="bg-white py-10">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 pt-2 sm:px-6 bg-white lg:px-8 bg-gray-0 rounded-full shadow-lg"
@@ -13,7 +12,6 @@
                 </div>
             </div>
             <div class="flex w-full justify-end">
-
                 <!-- Navigation Links -->
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -151,8 +149,6 @@
                         </ul>
                         <!-- Agrega más opciones de navegación aquí -->
                     </div>
-                    </div> --}}
-
                 </div>
             </div>
 
@@ -247,9 +243,9 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                                <x-dropdown-link href="{{ route('profile.show') }}">
-                                    {{ __('Profile') }}
-                                </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('profile.show') }}">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
