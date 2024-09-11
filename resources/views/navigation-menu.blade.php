@@ -319,9 +319,65 @@
             </div>
 
             <div class="pt-2 pb-2 space-y-1">
-                <x-responsive-nav-link href="{{ route('commerce_type.list') }}" :active="request()->routeIs('commerce_type.list')">
-                    {{ __('Admitraciones') }}
-                </x-responsive-nav-link>
+                <button @click="open = !open"
+                    class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
+                    :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
+                    <div class="flex flex-col items-center">
+                        <span>{{ __('Admitraciones') }}</span>
+                    </div>
+                </button>
+
+
+                <div x-show="open" @click.away="open = false"
+                        class="p-2 pb-0 text-gray-900 md:pb-4 dark:text-white rounded-md" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
+                        <ul class="text-sm text-gray-700 dark:text-gray-200">
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('commerce_type.list') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    {{ __('Tipos de comercio') }}
+                                </a>
+                            </li>
+
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('group.list') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }">
+                                    {{ __('Grupos') }}
+                                </a>
+                            </li>
+
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('subgroup_all.list') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('subgroup_all.list') ? 'true' : 'false' }} }">
+                                    {{ __('Subgrupos') }}
+                                </a>
+                            </li>
+
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('unit.list') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
+                                    {{ __('Unidades') }}
+                                </a>
+                            </li>
+                            
+                            <li
+                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <a href="{{ route('vat_percentage.list') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
+                                    {{ __('Porcentajes de impuesto') }}
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- Agrega más opciones de navegación aquí -->
+                    </div>
             </div>
         </div>
 
