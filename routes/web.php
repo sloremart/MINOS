@@ -124,6 +124,10 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Reports\ReportCustomer::class)
             ->name("reportCust.list");
     });
+    Route::prefix("reportes/compraPoveedor")->group(function () {
+        Route::get('listado', \App\Livewire\Reports\ReportPurchaseSuplier::class)
+            ->name("reportCust.list");
+    });
 
 //////////////////////////////////termina rutas reportes
 
