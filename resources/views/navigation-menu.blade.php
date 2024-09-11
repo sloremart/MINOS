@@ -27,7 +27,7 @@
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('images/Iconos Menu/INVENTARIO/Terceros Proveedores.png') }}"
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Provedores') }}</span>
+                            <span>{{ __('Proveedores') }}</span>
                         </div>
                     </x-nav-link>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Usuarios.png') }}"
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Clietes') }}</span>
+                            <span>{{ __('Clientes') }}</span>
                         </div>
                     </x-nav-link>
                 </div>
@@ -81,7 +81,7 @@
                         <div class="flex flex-col items-center">
                             <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/ADMINISTRACION.png') }}"
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Admitraciones') }}</span>
+                            <span>{{ __('Administraciones') }}</span>
                         </div>
                         {{-- <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -323,7 +323,7 @@
                     class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
                     :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
                     <div class="flex flex-col items-center">
-                        <span>{{ __('Admitraciones') }}</span>
+                        <span>{{ __('Administraciones') }}</span>
                     </div>
                 </button>
 
