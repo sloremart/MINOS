@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 pt-2 sm:px-6 bg-white lg:px-8 bg-gray-0 rounded-full shadow-lg"
         style=" position: relative; z-index: 1; ">
         <div class="flex justify-between h-20">
-            <div class="flex ">
+            <div class="flex pr-10">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -11,7 +11,7 @@
                     </a>
                 </div>
             </div>
-            <div class="flex w-full justify-end">
+            <div class="flex w-full justify-evenly">
                 <!-- Navigation Links -->
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -152,7 +152,7 @@
                 </div>
             </div>
 
-            <div class="hidden md:flex sm:items-center sm:ms-6 lg:border-l border-blue-600 my-3">
+            <div class="hidden md:flex sm:items-center lg:border-l border-blue-600 my-3">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ms-3 relative">
@@ -319,7 +319,7 @@
             </div>
 
             <div class="pt-2 pb-2 space-y-1">
-                <button @click="open = !open"
+                <button @click="open2 = !open2"
                     class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
                     :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
                     <div class="flex flex-col items-center">
@@ -328,7 +328,7 @@
                 </button>
 
 
-                <div x-show="open" @click.away="open = false"
+                <div x-data="{ open2: false }" @click.away="open2 = false"
                         class="p-2 pb-0 text-gray-900 md:pb-4 dark:text-white rounded-md" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
                         <ul class="text-sm text-gray-700 dark:text-gray-200">
                             <li

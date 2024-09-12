@@ -110,13 +110,14 @@
     <!-- Modal para ingresar la cantidad y el precio del producto -->
     @if($isModalOpen)
         <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-            <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-                <div class="bg-gray-100 px-4 py-3 sm:px-6">
+            <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
+            style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                <div class="bg-blue-900 px-4 py-3 sm:px-6 bg-opacity-90">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
                         Agregar Producto: {{ $selectedProduct->name ?? '' }}
                     </h3>
                 </div>
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 bg-opacity-75">
                     <div class="mt-2">
                         <label for="quantity" class="block text-sm font-medium text-gray-700">Cantidad</label>
                         <input type="number" id="quantity" wire:model.live="selectedProductQuantity" min="1" class="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
@@ -126,7 +127,7 @@
                         <input type="number" id="price" wire:model.live="selectedProductPrice" min="0" step="0.01" class="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse bg-opacity-75">
                     <button wire:click="confirmAddProductToPurchase" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
                         Confirmar
                     </button>
