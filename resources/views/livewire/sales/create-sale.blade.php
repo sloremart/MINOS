@@ -68,9 +68,9 @@
             @if($isCashModalOpen)
                 <!-- Modal para pago en efectivo -->
                 <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
+                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full"
                     style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
-                        <div class="bg-blue-900 px-4 py-3 sm:px-6 bg-opacity-90">
+                        <div class="bg-blue-900 px-4 py-3 sm:px-6 ">
                             <h3 class="text-lg leading-6 font-medium text-white">
                                 Pago en Efectivo
                             </h3>
@@ -78,7 +78,7 @@
                         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 bg-opacity-75">
                             <!-- Sección de Billetes -->
                             <h4 class="text-md font-semibold text-gray-800">Billetes</h4>
-                            <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="grid grid-cols-3 gap-4 mb-4">
                                 @foreach ($billQuantities as $bill => $quantity)
                                     <div>
                                         <label for="bill-{{ $bill }}" class="block text-sm font-medium text-gray-700">Billetes de ${{ number_format($bill, 0, ',', '.') }}</label>
@@ -94,7 +94,7 @@
 
                             <!-- Sección de Monedas -->
                             <h4 class="text-md font-semibold text-gray-800">Monedas</h4>
-                            <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="grid grid-cols-3 gap-4 mb-4">
                                 @foreach ($coinQuantities as $coin => $quantity)
                                     <div>
                                         <label for="coin-{{ $coin }}" class="block text-sm font-medium text-gray-700">Monedas de ${{ number_format($coin, 0, ',', '.') }}</label>
