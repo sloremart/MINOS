@@ -70,7 +70,7 @@
                 <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
                     <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full"
                     style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
-                        <div class="bg-blue-900 px-4 py-3 sm:px-6 ">
+                        <div class="bg-blue-900 px-4 py-3 sm:px-6 bg-opacity-90">
                             <h3 class="text-lg leading-6 font-medium text-white">
                                 Pago en Efectivo
                             </h3>
