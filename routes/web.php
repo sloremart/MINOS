@@ -103,22 +103,59 @@ Route::middleware([
             ->name("commerce_type.list");
     });
 /////Rutas para los reportes 
+///reportee de ventas + pdf
     Route::prefix("reporte/venta")->group(function () {
         Route::get('listado', \App\Livewire\Reports\Reports::class)
             ->name("reportSale.list");
     });
+   
     Route::prefix('reportes/venta')->group(function () {
-        Route::get('pdf', function () {
+        Route::get('pdf', function (\Illuminate\Http\Request $request) {
+            // Log para verificar que las fechas llegan correctamente
+            \Log::info('Valores de búsqueda recibidos:', [
+                'search' => $request->input('search'),
+                'search_1' => $request->input('search_1'),
+            ]);
+    
             $component = app()->make(\App\Livewire\Reports\Reports::class);
-            // Renderizar el contenido de la vista
+            
+            // Capturar los parámetros de la URL
+            $component->search = $request->input('search');
+            $component->search_1 = $request->input('search_1');
+            
+            // Generar el PDF
             return $component->pdf();
         })->name('reportpdf.list');
     });
+    
+///-------------------------------------------------------------
+
+///reportes inventario +pdf
 
     Route::prefix("reportes/inventario")->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportInv::class)
             ->name("reportInv.list");
     });
+    Route::prefix('reportes/inventario')->group(function () {
+        Route::get('pdf', function (\Illuminate\Http\Request $request) {
+            // Log para verificar que las fechas llegan correctamente
+            \Log::info('Valores de búsqueda recibidos:', [
+                'search' => $request->input('search'),
+                'search_1' => $request->input('search_1'),
+            ]);
+    
+            $component = app()->make(\App\Livewire\Reports\ReportInv::class);
+            
+            // Capturar los parámetros de la URL
+            $component->search = $request->input('search');
+            $component->search_1 = $request->input('search_1');
+            
+            // Generar el PDF
+            return $component->pdf();
+        })->name('reporte_inventario.list');
+    });
+
+////-------------------------------------------------------------
 
     Route::prefix("reportes/ventaCliente")->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportCustomer::class)
@@ -129,7 +166,36 @@ Route::middleware([
             ->name("reportCust.list");
     });
 
-//////////////////////////////////termina rutas reportes
+//--------------------------------------- termina rutas reportes
+
+
+
+// Rutas para el desplegable del Menu - Administraciones 
+// -------------------------------------------------------------
+
+// Ruta Unidades
+Route::prefix("unidades")->group(function () {
+    Route::get('listado', \App\Livewire\Units\Unit::class)
+        ->name("unit.list");
+});
+
+// Ruta Iva
+Route::prefix("iva")->group(function () {
+    Route::get('listado', \App\Livewire\VatPercentages\VatPercentage::class)
+        ->name("vat_percentage.list");
+});
+
+// Rutas para Group
+Route::prefix("grupos")->group(function () {
+    Route::get('listado', \App\Livewire\Groups\Group::class)
+        ->name("group.list");
+});
+
+// Rutas para Subgroup
+Route::prefix("subgrupos")->group(function () {
+    Route::get('listado-todos', \App\Livewire\Subgroups\SubgroupAll::class)
+        ->name("subgroup_all.list");
+}); 
 
 
 });

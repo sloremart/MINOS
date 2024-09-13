@@ -4,14 +4,14 @@ namespace App\Livewire\Reports;
 
 use Livewire\Component;
 use App\Traits\CrudModelsTrait;
-use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use App\Models\PurchaseDetail;
-use App\Models\Product;
 use App\Models\Inventory;
-use App\Models\SaleDetail;
-use App\Models\Price;
+
+
+
+use Barryvdh\DomPDF\Facade\Pdf; // Usa el facade en lugar de la clase
+// use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
 
@@ -75,6 +75,45 @@ class ReportInv extends Component
             'productNames' => $this->products,
         ])->layout('layouts.app');
     }
+
+    public function pdf()
+{
+    \Log::info('Generando PDF con las fechas:', [
+        'search' => $this->search,
+        'search_1' => $this->search_1,
+    ]);
+
+    // Copia la misma consulta del método render(), incluyendo los filtros
+    $query = Inventory::join('products', 'inventories.product_id', '=', 'products.id')
+    ->select(
+        'products.name',
+        DB::raw('SUM(inventories.quantity) as total_quantity'),
+        DB::raw('MAX(inventories.created_at) as last_created_at')  
+    )
+    ->groupBy('products.name');
+
+    // Aplicar filtros de fecha
+    if (!empty($this->search)) {
+        $query->where('inventories.created_at', '>=', $this->search);
+        \Log::info('Aplicando filtro de fecha desde: ' . $this->search);
+    }
+    if (!empty($this->search_1)) {
+        $query->where('inventories.created_at', '<=', $this->search_1);
+        \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
+    }
+    
+    // Obtener los datos filtrados
+    $data = $query->get();
+    
+    // Log de la cantidad de datos obtenidos
+    \Log::info('Cantidad de registros obtenidos: ' . $data->count());
+    
+    // Generar el PDF con los datos filtrados
+    $pdf = Pdf::loadView('livewire.reports.reportInvePdf', compact('data'));
+    
+    // Devuelve el PDF para visualizarlo o descargarlo
+    return $pdf->stream('reporte.pdf');
+}
 
     public function graficaDetalle(): void
     {

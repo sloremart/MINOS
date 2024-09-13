@@ -82,8 +82,8 @@
 
         <!-- Segunda columna: Tabla de productos para agregar -->
         <div class="mt-16">
-            <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0">Productos Disponibles</h3>
-            <div class="bg-blue-100 rounded-lg shadow-lg">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0" >Productos Disponibles</h3>
+            <div class="bg-blue-100 rounded-lg shadow-lg overflow-hidden">
                 @include("partials.v1.table.primary-table", [
                     "filter_active" => true,
                     "search" => "search",

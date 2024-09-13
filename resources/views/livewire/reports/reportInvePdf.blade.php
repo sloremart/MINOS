@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reporte PDF</title>
+    <title>Reporte Inventario PDF</title>
     <style>
         /* Eliminar márgenes y padding por defecto */
         html,
@@ -106,15 +106,13 @@
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
         <img src="../public/images/LogoM.png" alt="LOGO" width="150px" height="150px">
-        <h3>REPORTES DE VENTAS MENSUAL</h3>
+        <h3>REPORTES DE INVETARIO </h3>
         <table class="tabla">
             <thead class="thead">
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Valor Unitario</th>
                     <th>Cantidad</th>
-                    <th>Valor Subtotal</th>
                     <th>Fecha</th>
                 </tr>
             </thead>
@@ -123,9 +121,7 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td> <!-- Si no tienes ID explícito -->
                         <td>{{ $item->name }}</td>
-                        <td>{{ number_format($item->unit_price, 2) }}</td>
-                        <td>{{ $item->total_quantity }}</td>
-                        <td>{{ number_format($item->sub_total, 2) }}</td>
+                        <td>{{ number_format($item->total_quantity) }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->last_created_at)->format('d/m/Y') }}</td>
                     </tr>
                 @endforeach

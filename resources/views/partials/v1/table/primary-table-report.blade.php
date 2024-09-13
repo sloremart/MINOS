@@ -5,13 +5,24 @@
             <input type="text" wire:model.live="{{$buscar}}" placeholder="{{$buscar_placeholder ?? ""}}" class="px-4 py-2 border rounded">
         @endif
         @if(($search_placeholder ?? null) != null)
-            <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="px-4 py-2 border rounded">
+            <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" id="search" name="search" value="{{ old('search') }}" class="px-4 py-2 border rounded">
         @endif
         @if(($search_1_placeholder ?? null) != null)
-            <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" class="px-4 py-2 border rounded">
+            <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="px-4 py-2 border rounded">
         @endif
       
-       <a href="{{ route('reportpdf.list') }}" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" target="_blank">Exportar PDF</a>
+       {{-- <a href="{{ route('reportpdf.list') }}" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" target="_blank">Exportar PDF</a> --}}
+       {{-- <a href="{{ route('reportpdf.list', ['search' => $search, 'search_1' => $search_1]) }}" 
+        type="button" 
+        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" 
+        target="_blank">
+        Exportar PDF
+     </a> --}}
+     <a href="#" id="exportPdfBtn" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" target="_blank">Exportar PDF</a>
+
+     
+     
+     
        
 
     </div>
@@ -152,4 +163,19 @@
     @endif
     <br><br>
 </div>
+<script>
+    document.getElementById('exportPdfBtn').addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        // Obtener los valores de las fechas
+        let search = document.getElementById('search').value;
+        let search_1 = document.getElementById('search_1').value;
+        
+        // Crear la URL con los parámetros de búsqueda
+        let url = '{{ route('reportpdf.list') }}' + '?search=' + search + '&search_1=' + search_1;
+        
+        // Abrir la URL en una nueva pestaña
+        window.open(url, '_blank');
+    });
+</script>
 </div>

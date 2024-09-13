@@ -105,9 +105,9 @@
 
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('commerce_type.list') }}"
+                                <a href="{{ route('group.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }">
                                     {{ __('Grupos') }}
                                 </a>
                                 <img src="{{ asset('') }}"
@@ -116,9 +116,9 @@
 
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('commerce_type.list') }}"
+                                <a href="{{ route('subgroup_all.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('subgroup_all.list') ? 'true' : 'false' }} }">
                                     {{ __('Subgrupos') }}
                                 </a>
                                 <img src="{{ asset('') }}"
@@ -127,9 +127,9 @@
 
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('commerce_type.list') }}"
+                                <a href="{{ route('unit.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
                                     {{ __('Unidades') }}
                                 </a>
                                 <img src="{{ asset('') }}"
@@ -138,9 +138,9 @@
                             
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <a href="{{ route('commerce_type.list') }}"
+                                <a href="{{ route('vat_percentage.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
                                     {{ __('Porcentajes de impuesto') }}
                                 </a>
                                 <img src="{{ asset('') }}"
