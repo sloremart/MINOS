@@ -126,7 +126,7 @@
                         <td>{{ number_format($item->quantity) }}</td>
                         <td>$ {{ number_format($item->unit_price,2) }}</td>
                         <td>$ {{ number_format($item->sub_total,2) }}</td>
-                        <td>{{ \Carbon\Carbon::parse($item->purchase_date)->format('d/m/Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
                     </tr>
 
                     'ID' => 'id',

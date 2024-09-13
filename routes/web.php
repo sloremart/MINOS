@@ -156,11 +156,13 @@ Route::middleware([
     });
 
 ////-------------------------------------------------------------
-
+// reportes venta cliente + pdf
     Route::prefix("reportes/ventaCliente")->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportCustomer::class)
             ->name("reportCust.list");
     });
+
+ //------------------------------------------   
     //reporte proveedor + pdf
     Route::prefix("reportes/compraPoveedor")->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportPurchaseSuplier::class)

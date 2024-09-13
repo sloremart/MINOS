@@ -12,7 +12,9 @@
         @endif
 
 
-       
+        <a href="#" id="exportPdfBtn" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" target="_blank">Exportar PDF</a>
+        </div>
+        
         
     @endif
     
@@ -149,5 +151,20 @@
         <br><br>
     </div>
     </div>
-   
+    <script>
+        document.getElementById('exportPdfBtn').addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            // Obtener los valores de las fechas
+            let search = document.getElementById('search').value;
+            let search_1 = document.getElementById('search_1').value;
+            
+            // Crear la URL con los parámetros de búsqueda
+            let url = '{{ route('reporte_inventario.list') }}' + '?search=' + search + '&search_1=' + search_1;
+            
+            // Abrir la URL en una nueva pestaña
+            window.open(url, '_blank');
+        });
+    </script>
+
 </div>
