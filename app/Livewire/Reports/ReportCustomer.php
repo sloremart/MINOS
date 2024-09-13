@@ -82,6 +82,49 @@ class ReportCustomer extends Component
         ])->layout('layouts.app');
     }
 
+
+    public function pdf()
+    {
+        \Log::info('Generando PDF con las fechas:', [
+            'search' => $this->search,
+            'search_1' => $this->search_1,
+        ]);
+    
+        $query = Sale::join('customers', 'sales.customer_id', '=', 'customers.id')
+        ->select(
+            'customers.name',
+            'customers.email',
+            'customers.document',
+            'customers.phone',
+            DB::raw('DATE(sales.sale_date) as sale_date'),  // Agrupar por fecha
+            DB::raw('SUM(sales.total_amount) as total_amount')  // Sumar el total de las ventas por fecha
+        )
+        ->groupBy('customers.name', 'customers.email', 'customers.document', 'customers.phone',
+         DB::raw('DATE(sales.sale_date)'));
+    
+        // Aplicar filtros de fecha
+        if (!empty($this->search)) {
+            $query->where('sales.sale_date', '>=', $this->search);
+            \Log::info('Aplicando filtro de fecha desde: ' . $this->search);
+        }
+        if (!empty($this->search_1)) {
+            $query->where('sales.sale_date', '<=', $this->search_1);
+            \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
+        }
+        
+        // Obtener los datos filtrados
+        $data = $query->get();
+        
+        // Log de la cantidad de datos obtenidos
+        \Log::info('Cantidad de registros obtenidos: ' . $data->count());
+        
+        // Generar el PDF con los datos filtrados
+        $pdf = Pdf::loadView('livewire.reports.reportInvePdf', compact('data'));
+        
+        // Devuelve el PDF para visualizarlo o descargarlo
+        return $pdf->stream('reporte.pdf');
+    }
+
     public function graficaDetalle(): void
     {
         

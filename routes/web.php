@@ -161,10 +161,31 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Reports\ReportCustomer::class)
             ->name("reportCust.list");
     });
+    //reporte proveedor + pdf
     Route::prefix("reportes/compraPoveedor")->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportPurchaseSuplier::class)
             ->name("reportCust.list");
     });
+
+    Route::prefix('reportes/compraPoveedor')->group(function () {
+        Route::get('pdf', function (\Illuminate\Http\Request $request) {
+            // Log para verificar que las fechas llegan correctamente
+            \Log::info('Valores de búsqueda recibidos:', [
+                'search' => $request->input('search'),
+                'search_1' => $request->input('search_1'),
+            ]);
+    
+            $component = app()->make(\App\Livewire\Reports\ReportPurchaseSuplier::class);
+            
+            // Capturar los parámetros de la URL
+            $component->search = $request->input('search');
+            $component->search_1 = $request->input('search_1');
+            
+            // Generar el PDF
+            return $component->pdf();
+        })->name('reporte_proveedor.list');
+    });
+//////---------------------------------------------------------------
 
 //--------------------------------------- termina rutas reportes
 

@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 use App\Models\PurchaseDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportPurchaseSuplier extends Component
 {
@@ -75,6 +76,51 @@ class ReportPurchaseSuplier extends Component
             'name' => $this->name,
             'quantity' => $this->quantities,
         ])->layout('layouts.app');
+    }
+
+
+
+    public function pdf()
+    {
+        \Log::info('Generando PDF con las fechas:', [
+            'search' => $this->search,
+            'search_1' => $this->search_1,
+        ]);
+    
+        $query = PurchaseDetail::join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
+            ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+            ->join('products', 'purchase_details.product_id', '=', 'products.id')
+            ->select(
+                'suppliers.name as supplier_name',        // Nombre del proveedor
+                'products.name as product_name',          // Nombre del producto
+                'purchase_details.quantity as quantity',              // Cantidad del producto
+                'purchase_details.unit_price',            // Valor unitario de la compra
+                'purchase_details.sub_total',              // Subtotal de la compra
+                'purchases.purchase_date'                 // Fecha de la compra
+            );
+
+    
+        // Aplicar filtros de fecha
+        if (!empty($this->search)) {
+            $query->where('purchase_date', '>=', $this->search);
+            \Log::info('Aplicando filtro de fecha desde: ' . $this->search);
+        }
+        if (!empty($this->search_1)) {
+            $query->where('purchase_date', '<=', $this->search_1);
+            \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
+        }
+        
+        // Obtener los datos filtrados
+        $data = $query->get();
+        
+        // Log de la cantidad de datos obtenidos
+        \Log::info('Cantidad de registros obtenidos: ' . $data->count());
+        
+        // Generar el PDF con los datos filtrados
+        $pdf = Pdf::loadView('livewire.reports.reportSupplierPdf', compact('data'));
+        
+        // Devuelve el PDF para visualizarlo o descargarlo
+        return $pdf->stream('reporte_proveedor.pdf');
     }
 
     public function graficaDetalle(): void
