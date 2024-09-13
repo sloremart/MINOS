@@ -26,7 +26,7 @@
                     <!-- Tabla -->
                     <div
                         class="relative z-40 bg-white col-span-1 md:col-span-2 p-4 rounded-lg shadow-md overflow-x-auto">
-                        @include('partials.v1.table.primary-table-report', [
+                        @include('partials.v1.table.primary-table-reportCustomers', [
                             'filter_active' => true,
                             'buscar' => 'buscar',
                             'search' => 'search',

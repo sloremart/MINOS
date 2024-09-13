@@ -14,6 +14,7 @@ use App\Models\SaleDetail;
 use App\Models\Price;
 use App\Models\Sale;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Log;
 
 class ReportCustomer extends Component
@@ -119,10 +120,10 @@ class ReportCustomer extends Component
         \Log::info('Cantidad de registros obtenidos: ' . $data->count());
         
         // Generar el PDF con los datos filtrados
-        $pdf = Pdf::loadView('livewire.reports.reportInvePdf', compact('data'));
+        $pdf = Pdf::loadView('livewire.reports.reportCustomersPdf', compact('data'));
         
         // Devuelve el PDF para visualizarlo o descargarlo
-        return $pdf->stream('reporte.pdf');
+        return $pdf->stream('reporte_clientes.pdf');
     }
 
     public function graficaDetalle(): void
