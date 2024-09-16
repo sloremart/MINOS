@@ -106,7 +106,7 @@ Route::middleware([
 
 // -------------------------------------------------------------
 // Agrego Rutas por que no se encontraban en la actualizacion
-// Rutas para el desplegable del Menu - Administraciones 
+// Rutas para el desplegable del Menu - Administraciones
 // -------------------------------------------------------------
 
 // Ruta Unidades
@@ -115,34 +115,57 @@ Route::middleware([
             ->name("unit.list");
     });
 
-// Ruta Iva
-    Route::prefix("iva")->group(function () {
-        Route::get('listado', \App\Livewire\VatPercentages\VatPercentage::class)
-            ->name("vat_percentage.list");
+// Rutas para Sale
+    Route::prefix("ventas")->group(function () {
+        Route::get('listado', \App\Livewire\Sales\Sale::class)
+            ->name("sale.list");
+    });
+ // Rutas para FormSale
+    Route::prefix("ventas/detalles/{sale?}")->group(function () {
+        Route::get('listado', \App\Livewire\SaleDetails\SaleDetail::class)
+            ->name("sale_detail.list");
     });
 
-// Rutas para Group
-    Route::prefix("grupos")->group(function () {
-        Route::get('listado', \App\Livewire\Groups\Group::class)
-            ->name("group.list");
+
+// Rutas para crear Venta
+    Route::prefix("ventas")->group(function () {
+        Route::get('crear', \App\Livewire\Sales\CreateSale::class)
+            ->name("sale.create");
+    });
+// Rutas para File
+    Route::prefix("archivos")->group(function () {
+        Route::get('listado', \App\Livewire\Files\File::class)
+            ->name("file.list");
     });
 
-// Rutas para Subgroup
-    Route::prefix("subgrupos")->group(function () {
-        Route::get('listado-todos', \App\Livewire\Subgroups\SubgroupAll::class)
-            ->name("subgroup_all.list");
-    }); 
-
-// Rutas para Product
-    Route::prefix("productos")->group(function () {
-        Route::get('listado', \App\Livewire\Products\Product::class)
-            ->name("product.list");
+// Rutas para Entity
+    Route::prefix("entidades")->group(function () {
+        Route::get('listado', \App\Livewire\Entities\Entity::class)
+            ->name("entity.list");
+    });
+    Route::prefix("reportes")->group(function () {
+        Route::get('listado', \App\Livewire\Reportes\Reportes::class)
+            ->name("reporte.list");
+    });
+    Route::prefix("reportes/inventario")->group(function () {
+        Route::get('listado', \App\Livewire\Reportes\ReporteInv::class)
+            ->name("reporInv.list");
+    });
+    Route::prefix("reportes/ventaCliente")->group(function () {
+        Route::get('listado', \App\Livewire\Reportes\ReporteCliente::class)
+            ->name("reporInv.list");
     });
 
-// Rutas para Price
-    Route::prefix("precios")->group(function () {
-        Route::get('listado/{product?}', \App\Livewire\Prices\Price::class)
-            ->name("price.list");
+
+
+    Route::prefix('reportes/venta')->group(function () {
+        Route::get('pdf', function () {
+            $component = app()->make(\App\Livewire\Reportes\Reportes::class);
+            // Renderizar el contenido de la vista
+            return $component->pdf();
+        })->name('reportespdf.list');
     });
+
+
 
 });

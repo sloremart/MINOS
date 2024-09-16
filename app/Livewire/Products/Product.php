@@ -45,7 +45,7 @@ class Product extends Component
             $query->where($this->search_1_field, 'like', '%' . $this->search_1 . '%');
         }
 
-        $data = $query->pagination();
+        $data = $query->paginate(10);
         return $data;
     }
 

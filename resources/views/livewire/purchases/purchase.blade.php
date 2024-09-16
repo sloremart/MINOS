@@ -54,65 +54,71 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-3 gap-4 mb-6">
-                    <!-- Select para Cliente -->
-                    <div class="col-span-1">
-                        <label for="supplier_id" class="block text-sm font-medium text-gray-700">Proveedor</label>
-                        <select id="supplier_id" wire:model.live="modelForm.supplier_id" class="block w-full mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            <option value="">Seleccionar Proveedor</option>
-                            @foreach($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('modelForm.supplier_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                    </div>
-                    <!-- Input para Nombre -->
-                    <div class="col-span-1">
-                        <label class="block text-sm font-medium text-gray-700">Nombre del Proveedor</label>
-                        <div class="relative mt-1">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-user text-gray-400"></i>
-                            </div>
-                            <input wire:model="supplier_id.name" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-                    </div>
 
-                    <!-- Input para Teléfono del Proveedor -->
-                    <div class="col-span-1">
-                        <label class="block text-sm font-medium text-gray-700">Teléfono del Proveedor</label>
-                        <div class="relative mt-1">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-phone text-gray-400"></i>
-                            </div>
-                            <input wire:model="supplier.phone" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-                    </div>
+                @include("partials.v1.form.primary_form",[
+                    "form_toast"=>false,
+                    "form_grid_col"=>3,
+                    "session_message"=>"message",
+                    "form_submit_action"=>"submitForm",
+                    "show_form_submit_action"=>false,
+                    "form_inputs"=>[
 
-                    <!-- Input para Correo Electrónico del Proveedor -->
-                    <div class="col-span-1">
-                        <label class="block text-sm font-medium text-gray-700">Correo Electrónico del Proveedor</label>
-                        <div class="relative mt-1">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-envelope text-gray-400"></i>
-                            </div>
-                            <input wire:model="supplier.email" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-                    </div>
-
-                    <!-- Input para Dirección del Proveedor -->
-                    <div class="col-span-2">
-                        <label class="block text-sm font-medium text-gray-700">Dirección del Proveedor</label>
-                        <div class="relative mt-1">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fas fa-map-marker-alt text-gray-400"></i>
-                            </div>
-                            <input wire:model="supplier.address" type="text" class="block w-full pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-                    </div>
-
-
-                </div>
-
+                        [
+                            "input_type"=>"select",
+                            "input_model"=>"modelForm.supplier_id",
+                            "icon_class"=>"fas fa-truck-loading",
+                            "placeholder"=>"Proveedor",
+                            "input_field"=>"Proveedor",
+                            "options"=>$suppliers, // Asume que $suppliers es un array pasado a la vista con los proveedores disponibles
+                            "option_value_field"=>"id",
+                            "option_display_field"=>"name",
+                            "col_with"=>2,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ],
+                        [
+                            "input_type"=>"select",
+                            "input_model"=>"modelForm.user_id",
+                            "icon_class"=>"fas fa-user",
+                            "placeholder"=>"Usuario",
+                            "input_field"=>"Usuario",
+                            "options"=>$users, // Asume que $users es un array pasado a la vista con los usuarios disponibles
+                            "option_value_field"=>"id",
+                            "option_display_field"=>"name",
+                            "col_with"=>2,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ],
+                        [
+                            "input_type"=>"date",
+                            "input_model"=>"modelForm.purchase_date",
+                            "icon_class"=>"fas fa-calendar-alt",
+                            "placeholder"=>"Fecha de Compra",
+                            "input_field"=>"Fecha de Compra",
+                            "col_with"=>1,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ],
+                        [
+                            "input_type"=>"text",
+                            "input_model"=>"modelForm.total_amount",
+                            "icon_class"=>"fas fa-dollar-sign",
+                            "placeholder"=>"Monto Total",
+                            "input_field"=>"Monto Total",
+                            "col_with"=>1,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ],
+                        [
+                            "input_type"=>"textarea",
+                            "input_model"=>"modelForm.details",
+                            "icon_class"=>"fas fa-info-circle",
+                            "placeholder"=>"Detalles",
+                            "input_field"=>"Detalles",
+                            "col_with"=>3,
+                            "required"=>true,
+                            "disabled"=>$action == 'details',
+                        ]
 
 
 

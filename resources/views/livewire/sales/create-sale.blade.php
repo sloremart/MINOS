@@ -1,9 +1,7 @@
-<!-- resources/views/livewire/sales/create-sale.blade.php -->
-
 <div class="py-12 flex justify-center">
     <div class="max-w-7xl mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-2 gap-4 mt-16">
         <!-- Primera columna: Formulario -->
-        <div>
+        <div class="col-span-1">
             <div class="grid grid-cols-1 gap-4 mb-6">
                 <!-- Fila de Select y detalles del cliente -->
                 <div class="grid grid-cols-3 gap-5 items-end">
@@ -286,13 +284,11 @@
                         </select>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
         <!-- Segunda columna: Tabla de productos para agregar -->
-        <div class="mt-16">
+        <div class="col-span-1">
             <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0">
                 Productos
             </h3>
@@ -319,12 +315,14 @@
                 ])
             </div>
         </div>
+
+        <!-- Botón para guardar -->
         <div class="mt-6 flex justify-end space-x-4">
             <button wire:click="submitForm" class="bg-blue-900 text-white font-bold py-2 px-4 rounded shadow hover:bg-blue-700">
-                CREAR VENTA
+                Guardar
             </button>
             <button wire:click="cancel" class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow hover:bg-gray-400">
-                CANCELAR
+                Cancelar
             </button>
         </div>
     </div>

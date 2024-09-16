@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@heroicons/react": "^2.1.5",
+        "chart.js": "^4.4.4",
         "flowbite": "^2.4.1",
         "sweetalert2": "^11.12.2"
     }
