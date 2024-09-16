@@ -143,10 +143,19 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Reportes\Reportes::class)
             ->name("reporte.list");
     });
+    Route::prefix('reportes/venta')->group(function () {
+        Route::get('pdf', function () {
+            $component = app()->make(\App\Livewire\Reportes\Reportes::class);
+            // Renderizar el contenido de la vista
+            return $component->pdf();
+        })->name('reportespdf.list');
+    });
+
     Route::prefix("reportes/inventario")->group(function () {
         Route::get('listado', \App\Livewire\Reportes\ReporteInv::class)
             ->name("reporInv.list");
     });
+
     Route::prefix("reportes/ventaCliente")->group(function () {
         Route::get('listado', \App\Livewire\Reportes\ReporteCliente::class)
             ->name("reporInv.list");

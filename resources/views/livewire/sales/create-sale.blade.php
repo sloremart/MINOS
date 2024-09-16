@@ -1,3 +1,5 @@
+<!-- resources/views/livewire/sales/create-sale.blade.php -->
+
 <div class="py-12 flex justify-center">
     <div class="max-w-7xl mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-2 gap-4 mt-16">
         <!-- Primera columna: Formulario -->
@@ -129,7 +131,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse bg-opacity-75">
+                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                             <button wire:click="closeCashModal" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
                                 Confirmar
                             </button>
@@ -144,7 +146,7 @@
             <!-- Modal para agregar producto -->
             @if($isModalOpen)
                 <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full z-0" 
+                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full z-0"
                     style="background-image: url('/images/icono_central.png'); background-size: cover; background-repeat: no-repeat; background-position: center;">
                         <div class="bg-blue-900 px-4 py-3 sm:px-6 bg-opacity-90">
                             <h3 class="text-lg leading-6 font-medium text-white">
@@ -284,11 +286,13 @@
                         </select>
                     </div>
                 </div>
+
             </div>
+
         </div>
 
         <!-- Segunda columna: Tabla de productos para agregar -->
-        <div class="col-span-1">
+        <div class="mt-16">
             <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0">
                 Productos
             </h3>
