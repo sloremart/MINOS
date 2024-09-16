@@ -73,12 +73,12 @@
                 </div>
 
                 <!-- Dropdown -->
-                <div class="hidden lg:flex sm:items-center md:flex-col px-3"
+                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3"
                     x-data="{ open: false }">
                     <button @click="open = !open"
                         class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
                         :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col items-center text-sm pt-1">
                             <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/ADMINISTRACION.png') }}"
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
                             <span>{{ __('Administraciones') }}</span>
@@ -137,7 +137,7 @@
                             </li>
                             
                             <li
-                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <a href="{{ route('vat_percentage.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
@@ -318,18 +318,19 @@
                 </x-responsive-nav-link>
             </div>
 
-            <div class="pt-2 pb-2 space-y-1">
-                <button @click="open2 = !open2"
-                    class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
-                    :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
-                    <div class="flex flex-col items-center">
-                        <span>{{ __('Administraciones') }}</span>
-                    </div>
-                </button>
+            <div x-data="{ open2: false }">
+                <div class="pt-2 pb-2 space-y-1">
+                    <button @click="open2 = !open2"
+                        class="flex items-center w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 focus:outline-none"
+                        :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
+                        <div class="flex flex-col items-center">
+                            <span>{{ __('Administraciones') }}</span>
+                        </div>
+                    </button>
+                </div>
 
-
-                <div x-data="{ open2: false }" @click.away="open2 = false"
-                        class="p-2 pb-0 text-gray-900 md:pb-4 dark:text-white rounded-md" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
+                <div x-show="open2" @click.away="open2 = false"
+                        class="p-2 pt-0 pb-0 text-gray-900 dark:text-white rounded-md" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
                         <ul class="text-sm text-gray-700 dark:text-gray-200">
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -368,7 +369,7 @@
                             </li>
                             
                             <li
-                                class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <a href="{{ route('vat_percentage.list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
