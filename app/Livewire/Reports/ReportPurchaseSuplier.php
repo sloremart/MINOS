@@ -18,12 +18,12 @@ class ReportPurchaseSuplier extends Component
     use CrudModelsTrait;
     use WithPagination;
 
-    public $buscar = ''; // Fecha de inicio
+    public $search_2 = ''; // Fecha de inicio
     public $search = ''; // Fecha de inicio
     public $search_1 = ''; // Fecha de fin
-    public $buscar_placeholder = 'Bucar...';
     public $search_placeholder = 'Fecha inicio';
     public $search_1_placeholder = 'Fecha fin';
+    public $search_2_placeholder = 'Buscar proveedor ...';
     private $paginacion = 4;
 
     public function updating($field)
@@ -50,8 +50,8 @@ class ReportPurchaseSuplier extends Component
             );
 
         // dd($query);
-        if ($this->buscar) {
-            $query->where('suppliers.name', '>=', $this->buscar);
+        if ($this->search_2) {
+            $query->where('suppliers.name', '>=', $this->search_2);
             // dd($query);
         }
         if ($this->search) {
@@ -82,9 +82,10 @@ class ReportPurchaseSuplier extends Component
 
     public function pdf()
     {
-        \Log::info('Generando PDF con las fechas:', [
+        Log::info('Generando PDF con las fechas:', [
             'search' => $this->search,
             'search_1' => $this->search_1,
+            'search_2' => $this->search_2,
         ]);
     
         $query = PurchaseDetail::join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
@@ -103,18 +104,24 @@ class ReportPurchaseSuplier extends Component
         // Aplicar filtros de fecha
         if (!empty($this->search)) {
             $query->where('purchase_date', '>=', $this->search);
-            \Log::info('Aplicando filtro de fecha desde: ' . $this->search);
+            Log::info('Aplicando filtro de fecha desde: ' . $this->search);
         }
+
         if (!empty($this->search_1)) {
             $query->where('purchase_date', '<=', $this->search_1);
-            \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
+            Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
+        } 
+        if (!empty($this->search_2)) {
+            $query->where('supplier_name', '<=', $this->search_2);
+            Log::info('Aplicando filtro de fecha hasta: ' . $this->search_2);
         }
+       
         
         // Obtener los datos filtrados
         $data = $query->get();
         
         // Log de la cantidad de datos obtenidos
-        \Log::info('Cantidad de registros obtenidos: ' . $data->count());
+        Log::info('Cantidad de registros obtenidos: ' . $data->count());
         
         // Generar el PDF con los datos filtrados
         $pdf = Pdf::loadView('livewire.reports.reportSupplierPdf', compact('data'));
@@ -139,8 +146,8 @@ class ReportPurchaseSuplier extends Component
             );
 
         // Filtrar por fechas si se proporcionan
-        if ($this->buscar) {
-            $query->where('suppliers.name', '>=', $this->buscar);
+        if ($this->search_2) {
+            $query->where('suppliers.name', '>=', $this->search_2);
             // dd($query);
         }
         if ($this->search) {

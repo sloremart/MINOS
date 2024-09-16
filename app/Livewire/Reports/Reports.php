@@ -26,8 +26,10 @@ class Reports extends Component
 
     public $search = ''; // Fecha de inicio
     public $search_1 = ''; // Fecha de fin
+    public $search_2 = ''; // Fecha de fin
     public $search_placeholder = 'Fecha inicio';
     public $search_1_placeholder = 'Fecha fin';
+    public $search_2_placeholder = 'Buscar Producto ...';
     private $paginacion = 4;
 
     public function updating($field)
@@ -56,6 +58,9 @@ class Reports extends Component
 
         if ($this->search_1) {
             $query->where('sale_details.created_at', '<=', $this->search_1);
+        }
+        if ($this->search_2) {
+            $query->where('products.name', '<=', $this->search_2);
         }
 
         $data = $query->paginate($this->paginacion);
@@ -119,6 +124,7 @@ class Reports extends Component
     \Log::info('Generando PDF con las fechas:', [
         'search' => $this->search,
         'search_1' => $this->search_1,
+        'search_1' => $this->search_2,
     ]);
 
     // Copia la misma consulta del método render(), incluyendo los filtros
@@ -140,6 +146,10 @@ class Reports extends Component
     if (!empty($this->search_1)) {
         $query->where('sale_details.created_at', '<=', $this->search_1);
         \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
+    }
+    if (!empty($this->search_2)) {
+        $query->where('products.name', '<=', $this->search_2);
+        \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_2);
     }
     
     // Obtener los datos filtrados
@@ -180,6 +190,9 @@ class Reports extends Component
 
         if ($this->search_1) {
             $query->where('sale_details.created_at', '<=', $this->search_1);
+        }
+        if ($this->search_2) {
+            $query->where('products.name', '<=', $this->search_2);
         }
 
         // Ejecutar la consulta

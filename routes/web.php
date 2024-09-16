@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tablas;
 use App\Livewire\Forms\ProductForm;
 use App\Livewire\Forms\SaleForm;
+use Illuminate\Support\Facades\Log;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -112,7 +113,7 @@ Route::middleware([
     Route::prefix('reportes/venta')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
-            \Log::info('Valores de búsqueda recibidos:', [
+            Log::info('Valores de búsqueda recibidos:', [
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
             ]);
@@ -139,7 +140,7 @@ Route::middleware([
     Route::prefix('reportes/inventario')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
-            \Log::info('Valores de búsqueda recibidos:', [
+            Log::info('Valores de búsqueda recibidos:', [
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
             ]);
@@ -164,7 +165,7 @@ Route::middleware([
     Route::prefix('reportes/ventaCliente')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
-            \Log::info('Valores de búsqueda recibidos:', [
+            Log::info('Valores de búsqueda recibidos:', [
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
             ]);
@@ -190,7 +191,7 @@ Route::middleware([
     Route::prefix('reportes/compraPoveedor')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
-            \Log::info('Valores de búsqueda recibidos:', [
+            Log::info('Valores de búsqueda recibidos:', [
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
             ]);
