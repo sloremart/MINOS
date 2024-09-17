@@ -1,8 +1,8 @@
 <div>
     <!-- Contenedor principal con espaciado y bordes redondeados -->
-    <div class="py-12 rounded-3xl">
+    <div class="py-12 rounded-3xl ">
         <!-- Contenedor central con máximo ancho y espaciado -->
-        <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8 rounded-3xl">
+        <div class=" relative z-50 max-w-screen-2xl mx-auto sm:px-6 lg:px-8 rounded-3xl">
             <!-- Contenedor con bordes redondeados y espaciado -->
             <div class="overflow-hidden sm:rounded-lg rounded-3xl p-6 bg-white ">
                 <!-- Grid para mostrar las tarjetas de estadísticas -->
@@ -82,51 +82,41 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="p-4 rounded-lg dark:bg-gray-800" role="tabpanel"
-                                        aria-labelledby="stats-tab">
+                                    <div class="p-4 rounded-lg dark:bg-gray-800" role="tabpanel" aria-labelledby="stats-tab">
                                         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xxl:grid-cols-3">
-                                            {{-- @foreach ($productos as $producto)
-                                            @php
-                                            $class = '';
-                                            if ($producto->valor <= $minPrice + $range) {
-                                                $class='bg-lime-400' ; // Precio bajo
-                                                } elseif ($producto->valor <= $minPrice + 2 * $range) {
-                                                    $class='bg-yellow-400' ; // Precio medio
+                                            @foreach ($productos as $producto)
+                                                @php
+                                                    $class = '';
+                                                    if ($producto->valor <= $minPrice + $range) {
+                                                        $class = 'bg-lime-400'; // Precio bajo
+                                                    } elseif ($producto->valor <= $minPrice + 2 * $range) {
+                                                        $class = 'bg-yellow-400'; // Precio medio
                                                     } else {
-                                                    $class='bg-red-400' ; // Precio alto
+                                                        $class = 'bg-red-400'; // Precio alto
                                                     }
-                                                    @endphp
-                                                    <div class="relative p-1 rounded-lg  border-1 border-transparent bg-gradient-to-r from-purple-400 to-blue-400 shadow-lg">
-                                                    <div class="flex items-center h-full gap-2 justify-evenly  border rounded  bg-white p-1">
+                                                @endphp
+                                                <div class="relative p-1 rounded-full border-1 border-transparent bg-gradient-to-r from-purple-600 to-purple-600 shadow-lg ">
+                                                    <div class="flex items-center h-full gap-2 justify-evenly border rounded-full bg-white p-1">
                                                         <div class="flex justify-center items-center w-90px h-90px flex-shrink-0 xl:w-110px xl:h-110px rounded overflow-hidden mx-20px lg:mx-30px">
-                                                            <img class="object-cover max-w-24"
-                                                                src="{{ asset('storage/productos/' . $producto->image) }}"
-                                                                alt="{{ $producto->name }}">
+                                                            <img class="object-cover max-w-24" src="{{ asset('storage/productos/' . $producto->image) }}" alt="{{ $producto->product_name }}">
                                                         </div>
-                                                        <div class="flex flex-col items-end"><span
-                                                                class="font-semibold text-gray-900 mb-1">
-                                                                <p class="text-end">{{ $producto->name }}</p>
+                                                        <div class="flex flex-col items-end">
+                                                            <span class="font-semibold text-gray-900 mb-1">
+                                                                <p class="text-end">{{ $producto->product_name }}</p>
                                                             </span>
                                                             <p class="flex items-end">
-                                                                <span
-                                                                    class="text-gray-500 text-11px capitalize">{{ $producto->proveedor }}
-                                                                </span>
+                                                                <span class="text-gray-500 text-11px capitalize">{{ $producto->supplier_name }}</span>
                                                             </p>
-                                                            <button class="p-2.5 ms-2 text-sm font-medium text-green mb-2{{ $class }} rounded-lg border {{ $class }} hover:bg-opacity-80 focus:ring-4 focus:outline-none">
-                                                                $ {{ $producto->valor }}
+                                                            <button class="p-2.5 ms-2 text-sm font-medium text-green mb-2 {{ $class }} rounded-lg border {{ $class }} hover:bg-opacity-80 focus:ring-4 focus:outline-none">
+                                                                $ {{ number_format($producto->valor, 2) }}
                                                             </button>
-
                                                         </div>
                                                     </div>
+                                                </div>
+                                            @endforeach
                                         </div>
-
-                                        @endforeach --}}
-
-
-
-                                        </div>
-                                        {{-- {{ $productos->links() }} --}}
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
