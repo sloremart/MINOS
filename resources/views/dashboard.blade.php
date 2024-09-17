@@ -7,7 +7,7 @@
 
 
     <div>
-                           
+                   @livewire('dashboard.dashboardd-component')
     </div>
 
 </x-app-layout>

@@ -4,78 +4,62 @@
         <!-- Contenedor central con máximo ancho y espaciado -->
         <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8 rounded-3xl">
             <!-- Contenedor con bordes redondeados y espaciado -->
-            <div class="overflow-hidden sm:rounded-lg rounded-3xl p-6">
+            <div class="overflow-hidden sm:rounded-lg rounded-3xl p-6 bg-white ">
                 <!-- Grid para mostrar las tarjetas de estadísticas -->
                 <div
-                    class="grid max-w-screen-xl grid-cols-1 gap-8 p-1 mx-auto text-gray-900 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-4 dark:text-white">
+                    class="grid max-w-screen-xl grid-cols-1 gap-8 p-1 mx-auto text-gray-900 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 dark:text-white">
                     <!-- Tarjeta de Usuarios -->
-                    <div class="flex flex-col items-center justify-center bg-white rounded-lg shadow-lg">
-                        <div class="grid grid-cols-6 text-3xl font-extrabold">
-                            <div class="col-span-4 row-span-4 p-2">
-                                <h1 class="text-3xl">{{ $userCount }}</h1>
-                                <span class="text-lg">USUARIOS</span>
-                            </div>
-                            <div class="col-span-2 row-span-4 p-2 flex justify-center items-center">
-                                <img src="{{ asset('images/Iconos_Menu/ADMINISTRACION/Usuarios.png') }}" alt="Usuarios"
-                                    class="rounded-full shadow-lg">
-                            </div>
+                    <div class="flex items-center justify-center p-2 bg-blue-800 rounded-full shadow-lg ">
+                        <div class="flex flex-col  justify-center  flex-grow px-10 text-white">
+                            <span class="text-xl">USUARIOS</span>
+                            <h1 class="text-4xl">{{ $userCount }}</h1>
+                            <span class="text-xl ">ACTUALES</span>
+                        </div>
+                        <div class="flex items-center justify-center bg-blue-700 p-3  rounded-r-full"
+                            style="width: 30%; height: 100%;">
+                            <img src="{{ asset('images/Iconos Menu/user.svg') }}" class="text-white" alt="">
                         </div>
                     </div>
 
                     <!-- Tarjeta de Proveedores -->
-                    <div class="flex flex-col items-center justify-center bg-white rounded-lg shadow-lg">
-                        <div class="grid grid-cols-6 text-3xl font-extrabold">
-                            <div class="col-span-4 row-span-4 p-2">
-                                <h1 class="text-3xl">{{ $proveedorCount }}</h1>
-                                <span class="text-lg">PROVEEDORES</span>
-                            </div>
-                            <div class="col-span-2 row-span-4 p-2 flex justify-center items-center">
-                                <img src="{{ asset('images/Iconos_Menu/ADMINISTRACION/Roles.png') }}" alt="Proveedores"
-                                    class="rounded-full shadow-lg">
-                            </div>
+                    <div class="flex items-center justify-center p-2 bg-purple-800 rounded-full shadow-lg ">
+                        <div class="flex flex-col  justify-center  flex-grow px-10 text-white">
+                            <span class="text-xl">CLIENTES</span>
+                            <h1 class="text-4xl">{{ $Client }}</h1>
+                            <span class="text-xl ">ACTUALES</span>
+                        </div>
+                        <div class="flex items-center justify-center bg-purple-700 p-3  rounded-r-full"
+                            style="width: 30%; height: 100%;">
+                            <img src="{{ asset('images/Iconos Menu/customers.svg') }}" class="text-white"
+                                alt="">
                         </div>
                     </div>
+
 
                     <!-- Tarjeta de Ventas Hoy -->
-                    <div class="flex flex-col items-center justify-center bg-white rounded-lg shadow-lg">
-                        <div class="grid grid-cols-6 text-3xl font-extrabold">
-                            <div class="col-span-4 row-span-4 p-2">
-                                <h1 class="text-3xl">VENTAS HOY</h1>
-                                <button
-                                    class="p-2.5 ms-2 text-sm font-medium text-green bg-lime-300 rounded-lg border border-lime-300 hover:bg-lime-300 focus:ring-4 focus:outline-none dark:bg-purple-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">$
-                                    0.00</button>
-                            </div>
-                            <div class="col-span-2 row-span-4 p-2 flex justify-center items-center">
-                                <img src="{{ asset('images/Iconos_Menu/VENTAS/VENTAS.png') }}" alt="Ventas Hoy"
-                                    class="rounded-full shadow-lg">
-                            </div>
+                    <div class="flex items-center justify-center p-2 bg-blue-500 rounded-full shadow-lg ">
+                        <div class="flex flex-col  justify-center  flex-grow px-10 text-white">
+                            <span class="text-xl">TOTAL VENTAS</span>
+                            <h1 class=" text-2xl">$ {{ $totalSalesFormatted }}</h1>
+                            <span class="text-xl ">ACTUALES</span>
+                        </div>
+                        <div class="flex items-center justify-center bg-blue-400 p-3  rounded-r-full"
+                            style="width: 30%; height: 100%;">
+                            <img src="{{ asset('images/Iconos Menu/sale-svgrepo-com.svg') }}" class="text-white"
+                                alt="">
                         </div>
                     </div>
 
-                    <!-- Tarjeta de Venta Mensual -->
-                    <div class="flex flex-col items-center justify-center bg-white rounded-lg shadow-lg">
-                        <div class="grid grid-cols-6 text-3xl font-extrabold">
-                            <div class="col-span-4 row-span-4 p-2">
-                                <h1 class="text-3xl">VENTA MENSUAL</h1>
-                                <button
-                                    class="p-2.5 ms-2 text-sm font-medium text-green bg-lime-300 rounded-lg border border-lime-300 hover:bg-lime-300 focus:ring-4 focus:outline-none dark:bg-purple-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">$
-                                    0.00</button>
-                            </div>
-                            <div class="col-span-2 row-span-4 p-2 flex justify-center items-center">
-                                <img src="{{ asset('images/Iconos_Menu/VENTAS/Ventas2.png') }}" alt="Venta Mensual"
-                                    class="rounded-full shadow-lg">
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
-           
+
             <!-- Contenedor para productos y gráfico -->
             <div class="overflow-hidden sm:rounded-lg rounded-3xl p-6">
                 <div class="relative overflow-x-auto p-2 rounded-3xl">
-                    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
                         <!-- Tarjeta de productos -->
-                        <div class="bg-white shadow-lg rounded-lg lg:col-span-4 sm:col-span-4 lg:row-span-12">
+                        <div class="bg-white shadow-lg rounded-lg lg:col-span-7 sm:col-span-12  lg:row-span-7">
                             <div class="w-full bg-white rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div id="fullWidthTabContent" class="border-t dark:border-gray-600">
                                     <div class="grid grid-cols-2 items-center p-2">
@@ -100,9 +84,8 @@
                                     </div>
                                     <div class="p-4 rounded-lg dark:bg-gray-800" role="tabpanel"
                                         aria-labelledby="stats-tab">
-                                        <div
-                                            class="grid grid-cols-1 gap-4 md:grid-cols-2 xxl:grid-cols-3">
-                                            @foreach ($productos as $producto)
+                                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xxl:grid-cols-3">
+                                            {{-- @foreach ($productos as $producto)
                                             @php
                                             $class = '';
                                             if ($producto->valor <= $minPrice + $range) {
@@ -137,30 +120,28 @@
                                                     </div>
                                         </div>
 
-                                        @endforeach
+                                        @endforeach --}}
 
 
 
+                                        </div>
+                                        {{-- {{ $productos->links() }} --}}
                                     </div>
-                                    {{ $productos->links() }}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Tarjeta del gráfico de productos -->
-                    <div
-                        class="grid justify-center place-items-center p-2 bg-white shadow-lg rounded-lg lg:col-span-2 sm:col-span-4 lg:row-span-6">
-                        <livewire:principal.products-chart>
-                    </div>
-                    <div
-                        class="grid justify-center place-items-center p-2 bg-white shadow-lg rounded-lg lg:col-span-2 sm:col-span-4 lg:row-span-6">
-                        2
+                        <!-- Tarjeta del gráfico de productos -->
+                        <div  class="grid justify-center place-items-center p-2 bg-white shadow-lg rounded-lg lg:col-span-5 sm:col-span-5 lg:row-span-5">
+                            {{-- <livewire:principal.products-chart> --}}
+                        </div>
+                        <div class="grid justify-center place-items-center p-2 bg-white shadow-lg rounded-lg lg:col-span-5 sm:col-span-5 lg:row-span-5">
+                            2
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
