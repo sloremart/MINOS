@@ -239,5 +239,4 @@ Route::prefix("subgrupos")->group(function () {
         ->name("subgroup_all.list");
 }); 
 
-
 });

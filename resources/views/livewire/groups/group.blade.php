@@ -34,7 +34,7 @@
                                    "customs"=>[
                                                 [
                                                    "redirect"=>[
-                                                               "route"=>"subgroup.list",
+                                                               "route"=>"group.list",
                                                                "binding"=>"group"
                                                          ],
                                                        "button_color"=>"bg-blue-500",

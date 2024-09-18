@@ -4,12 +4,12 @@
         <!-- Contenedor central con máximo ancho y espaciado -->
         <div class=" relative z-50 max-w-screen-2xl mx-auto sm:px-6 lg:px-8 rounded-3xl">
             <!-- Contenedor con bordes redondeados y espaciado -->
-            <div class="overflow-hidden sm:rounded-lg rounded-3xl p-6 bg-white ">
+            <div class="overflow-hidden sm:rounded-lg rounded-3xl p-6 bg-white shadow-2xl ">
                 <!-- Grid para mostrar las tarjetas de estadísticas -->
                 <div
                     class="grid max-w-screen-xl grid-cols-1 gap-8 p-1 mx-auto text-gray-900 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 dark:text-white">
                     <!-- Tarjeta de Usuarios -->
-                    <div class="flex items-center justify-center p-2 bg-blue-800 rounded-full shadow-lg ">
+                    <div class="flex items-center justify-center p-2 bg-blue-800 rounded-full shadow-2xl ">
                         <div class="flex flex-col  justify-center  flex-grow px-10 text-white">
                             <span class="text-xl">USUARIOS</span>
                             <h1 class="text-4xl">{{ $userCount }}</h1>
@@ -22,7 +22,7 @@
                     </div>
 
                     <!-- Tarjeta de Proveedores -->
-                    <div class="flex items-center justify-center p-2 bg-purple-800 rounded-full shadow-lg ">
+                    <div class="flex items-center justify-center p-2 bg-purple-800 rounded-full shadow-2xl">
                         <div class="flex flex-col  justify-center  flex-grow px-10 text-white">
                             <span class="text-xl">CLIENTES</span>
                             <h1 class="text-4xl">{{ $Client }}</h1>
@@ -37,7 +37,7 @@
 
 
                     <!-- Tarjeta de Ventas Hoy -->
-                    <div class="flex items-center justify-center p-2 bg-blue-500 rounded-full shadow-lg ">
+                    <div class="flex items-center justify-center p-2 bg-blue-500 rounded-full shadow-2xl ">
                         <div class="flex flex-col  justify-center  flex-grow px-10 text-white">
                             <span class="text-xl">TOTAL VENTAS</span>
                             <h1 class=" text-2xl">$ {{ $totalSalesFormatted }}</h1>
@@ -55,24 +55,22 @@
             </div>
 
             <!-- Contenedor para productos y gráfico -->
-            <div class="overflow-hidden sm:rounded-lg rounded-3xl p-6">
-                <div class="relative overflow-x-auto p-2 rounded-3xl">
+            <div class="overflow-hidden rounded-lg  ">
+                <div class="relative overflow-x-auto  rounded-3xl py-20 px-10">
                     <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
                         <!-- Tarjeta de productos -->
-                        <div class="bg-white shadow-lg rounded-lg lg:col-span-7 sm:col-span-12  lg:row-span-7">
+                        <div class="bg-white shadow-2xl  rounded-lg lg:col-span-9 sm:col-span-12">
                             <div class="w-full bg-white rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div id="fullWidthTabContent" class="border-t dark:border-gray-600">
                                     <div class="grid grid-cols-2 items-center p-2">
                                         <div class="col-span-1 p-3">
-                                            <img src="{{ asset('images/Logo_Minos/LOGO.png') }}" width="40%"
-                                                alt="Logo">
+                                            <img src="{{ asset('images/Logo_Minos/LOGO.png') }}" width="40%" alt="Logo">
                                         </div>
                                         <div class="col-span-1 flex justify-end">
                                             <div class="flex items-end">
                                                 <label for="simple-search" class="sr-only">productos</label>
                                                 <div class="relative w-full max-w-xs">
-                                                    <div
-                                                        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                                         <i class="fa fa-edit fa-solid"></i>
                                                     </div>
                                                     <input type="text" id="simple-search" wire:model.live="buscar"
@@ -82,56 +80,65 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="p-4 rounded-lg dark:bg-gray-800" role="tabpanel" aria-labelledby="stats-tab">
-                                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xxl:grid-cols-3">
+                                    <div class="p-4 rounded-lg bg-gray-100 dark:bg-gray-800" role="tabpanel" aria-labelledby="stats-tab">
+                                        <div class="grid grid-cols-3 gap-6">
                                             @foreach ($productos as $producto)
-                                                @php
-                                                    $class = '';
-                                                    if ($producto->valor <= $minPrice + $range) {
-                                                        $class = 'bg-lime-400'; // Precio bajo
-                                                    } elseif ($producto->valor <= $minPrice + 2 * $range) {
-                                                        $class = 'bg-yellow-400'; // Precio medio
+                                            @php
+                                            $class = '';
+                                            if ($producto->valor <= $minPrice + $range) {
+                                                $class='bg-lime-400' ; // Precio bajo
+                                                } elseif ($producto->valor <= $minPrice + 2 * $range) {
+                                                    $class='bg-yellow-400' ; // Precio medio
                                                     } else {
-                                                        $class = 'bg-red-400'; // Precio alto
+                                                    $class='bg-red-400' ; // Precio alto
                                                     }
-                                                @endphp
-                                                <div class="relative p-1 rounded-full border-1 border-transparent bg-gradient-to-r from-purple-600 to-purple-600 shadow-lg ">
-                                                    <div class="flex items-center h-full gap-2 justify-evenly border rounded-full bg-white p-1">
-                                                        <div class="flex justify-center items-center w-90px h-90px flex-shrink-0 xl:w-110px xl:h-110px rounded overflow-hidden mx-20px lg:mx-30px">
-                                                            <img class="object-cover max-w-24" src="{{ asset('storage/productos/' . $producto->image) }}" alt="{{ $producto->product_name }}">
-                                                        </div>
-                                                        <div class="flex flex-col items-end">
-                                                            <span class="font-semibold text-gray-900 mb-1">
-                                                                <p class="text-end">{{ $producto->product_name }}</p>
-                                                            </span>
-                                                            <p class="flex items-end">
-                                                                <span class="text-gray-500 text-11px capitalize">{{ $producto->supplier_name }}</span>
-                                                            </p>
-                                                            <button class="p-2.5 ms-2 text-sm font-medium text-green mb-2 {{ $class }} rounded-lg border {{ $class }} hover:bg-opacity-80 focus:ring-4 focus:outline-none">
-                                                                $ {{ number_format($producto->valor, 2) }}
-                                                            </button>
-                                                        </div>
+                                                    @endphp
+                                                    <div class="flex items-center justify-between p-4 bg-gray-200 rounded-full shadow-md dark:bg-gray-700">
+                                                    <!-- Imagen del producto -->
+                                                    <div class="flex-shrink-0">
+                                                        <img class="w-12 h-12 rounded-full object-cover" src="{{ asset('storage/productos/' . $producto->image) }}" alt="{{ $producto->product_name }}">
                                                     </div>
-                                                </div>
-                                            @endforeach
+
+                                                    <!-- Información del producto -->
+                                                    <div class="mx-4">
+                                                        <p class="text-md text-gray-500 dark:text-gray-400">{{ $producto->product_name }}</p>
+                                                    </div>
+
+                                                    <!-- Precio del producto -->
+                                                    <div class="text-right">
+                                                        <p class="text-md text-gray-500 dark:text-gray-400">{{ $producto->supplier_name }}</p>
+                                                    </div>
+
+                                                    <!-- Indicador de estado (punto) -->
+                                                    <div class="ml-4">
+                                                        <span class="text-sm font-semibold text-gray-900 dark:text-white">${{ number_format($producto->valor, 0) }}</span>
+                                                        <span class="inline-block w-3 h-3 rounded-full {{ $class }}"></span>
+                                                    </div>
                                         </div>
+                                        @endforeach
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
-                        <!-- Tarjeta del gráfico de productos -->
-                        <div  class="grid justify-center place-items-center p-2 bg-white shadow-lg rounded-lg lg:col-span-5 sm:col-span-5 lg:row-span-5">
-                            {{-- <livewire:principal.products-chart> --}}
+                    </div>
+
+                    <!-- Tarjeta del gráfico de productos 1 y 2 -->
+                    <div class="lg:col-span-3 sm:col-span-12 grid grid-cols-1 gap-4  ">
+                        <div class="bg-white shadow-lg rounded-lg p-2">
+                            1
                         </div>
-                        <div class="grid justify-center place-items-center p-2 bg-white shadow-lg rounded-lg lg:col-span-5 sm:col-span-5 lg:row-span-5">
+                        <div class="bg-white shadow-lg rounded-lg p-2">
                             2
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+</div>
+</div>
+</div>
 
 
 
