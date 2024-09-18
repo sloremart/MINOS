@@ -22,7 +22,7 @@ class ReportInv extends Component
     use CrudModelsTrait;
     use WithPagination;
 
-   
+
     public $search = ''; // Fecha de inicio
     public $search_1 = ''; // Fecha de fin
     public $search_2 = ''; // Fecha de fin
@@ -45,7 +45,7 @@ class ReportInv extends Component
             ->select(
                 'products.name',
                 DB::raw('SUM(inventories.quantity) as total_quantity'),
-                DB::raw('MAX(inventories.created_at) as last_created_at')  
+                DB::raw('MAX(inventories.created_at) as last_created_at')
             )
             ->groupBy('products.name');
 
@@ -78,48 +78,48 @@ class ReportInv extends Component
     }
 
     public function pdf()
-{
-    \Log::info('Generando PDF con las fechas:', [
-        'search' => $this->search,
-        'search_1' => $this->search_1,
-        'search_2' => $this->search_2,
-    ]);
+    {
+        \Log::info('Generando PDF con las fechas:', [
+            'search' => $this->search,
+            'search_1' => $this->search_1,
+            'search_2' => $this->search_2,
+        ]);
 
-    // Copia la misma consulta del método render(), incluyendo los filtros
-    $query = Inventory::join('products', 'inventories.product_id', '=', 'products.id')
-    ->select(
-        'products.name',
-        DB::raw('SUM(inventories.quantity) as total_quantity'),
-        DB::raw('MAX(inventories.created_at) as last_created_at')  
-    )
-    ->groupBy('products.name');
+        // Copia la misma consulta del método render(), incluyendo los filtros
+        $query = Inventory::join('products', 'inventories.product_id', '=', 'products.id')
+            ->select(
+                'products.name',
+                DB::raw('SUM(inventories.quantity) as total_quantity'),
+                DB::raw('MAX(inventories.created_at) as last_created_at')
+            )
+            ->groupBy('products.name');
 
-    // Aplicar filtros de fecha
-    if (!empty($this->search)) {
-        $query->where('inventories.created_at', '>=', $this->search);
-        \Log::info('Aplicando filtro de fecha desde: ' . $this->search);
+        // Aplicar filtros de fecha
+        if (!empty($this->search)) {
+            $query->where('inventories.created_at', '>=', $this->search);
+            \Log::info('Aplicando filtro de fecha desde: ' . $this->search);
+        }
+        if (!empty($this->search_1)) {
+            $query->where('inventories.created_at', '<=', $this->search_1);
+            \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
+        }
+        if (!empty($this->search_2)) {
+            $query->where('products.name', '<=', $this->search_2);
+            \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_2);
+        }
+
+        // Obtener los datos filtrados
+        $data = $query->get();
+
+        // Log de la cantidad de datos obtenidos
+        \Log::info('Cantidad de registros obtenidos: ' . $data->count());
+
+        // Generar el PDF con los datos filtrados
+        $pdf = Pdf::loadView('livewire.reports.reportInvePdf', compact('data'));
+
+        // Devuelve el PDF para visualizarlo o descargarlo
+        return $pdf->stream('reporte.pdf');
     }
-    if (!empty($this->search_1)) {
-        $query->where('inventories.created_at', '<=', $this->search_1);
-        \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
-    }
-    if (!empty($this->search_2)) {
-        $query->where('products.name', '<=', $this->search_2);
-        \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_2);
-    }
-    
-    // Obtener los datos filtrados
-    $data = $query->get();
-    
-    // Log de la cantidad de datos obtenidos
-    \Log::info('Cantidad de registros obtenidos: ' . $data->count());
-    
-    // Generar el PDF con los datos filtrados
-    $pdf = Pdf::loadView('livewire.reports.reportInvePdf', compact('data'));
-    
-    // Devuelve el PDF para visualizarlo o descargarlo
-    return $pdf->stream('reporte.pdf');
-}
 
     public function graficaDetalle(): void
     {
@@ -131,7 +131,7 @@ class ReportInv extends Component
             ->groupBy('products.name');
 
         // Filtrar por fechas si se proporcionan
-       
+
         if ($this->search) {
             $query->where('inventories.created_at', '>=', $this->search);
         }
