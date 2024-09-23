@@ -28,7 +28,7 @@ class DashboarddComponent extends Component
         $totalSales = Sale::sum('total_amount');
 
         // Formatear el número
-        $this->totalSalesFormatted = number_format($totalSales, 2, '.', '.');
+        $this->totalSalesFormatted = number_format($totalSales);
     }
 
     public function render()

@@ -39,7 +39,7 @@
                     <!-- Tarjeta de Ventas Hoy -->
                     <div class="flex items-center justify-center p-2 bg-blue-500 rounded-full shadow-2xl ">
                         <div class="flex flex-col  justify-center  flex-grow px-10 text-white">
-                            <span class="text-xl">TOTAL VENTAS</span>
+                            <span class="text-xl"> VENTA TOTAL</span>
                             <h1 class=" text-2xl">$ {{ $totalSalesFormatted }}</h1>
                             <span class="text-xl ">ACTUALES</span>
                         </div>

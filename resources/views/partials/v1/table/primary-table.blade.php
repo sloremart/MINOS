@@ -1,7 +1,7 @@
 <div>
     <div class="py-12">
        
-    <div class="mb-1 pl-20 pr-20">
+    <div class="mb-1 pl-0 pr-2">
         @if($filter_active)
         <div class="relative z-10 flex flex-wrap gap-2 mb-4 ml-8">
             @if(($search_placeholder ?? null) != null)
@@ -17,8 +17,8 @@
     @endif
     
         
-    <div  class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto"> <!-- Añadido overflow-x-auto aquí -->
-        <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap"> <!-- Añadido whitespace-nowrap aquí -->
+    <div  class=" max-w-screen-2xl text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto"> <!-- Añadido overflow-x-auto aquí -->
+        <table class=" w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap"> <!-- Añadido whitespace-nowrap aquí -->
             <thead class="text-xs text-gray-200 h-16 uppercase dark:bg-gray-700 dark:text-gray-400" style="background:#1f68b1;">
                 <tr>
                     @foreach($table_headers as $header_name=>$table_header)
