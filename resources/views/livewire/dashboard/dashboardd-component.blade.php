@@ -2,12 +2,12 @@
     <!-- Contenedor principal con espaciado y bordes redondeados -->
     <div class="py-12 rounded-3xl">
         <!-- Contenedor central con máximo ancho y espaciado -->
-        <div class=" relative z-50 max-w-screen-xl mx-auto  sm:px-6 lg:px-8 rounded-3xl bg-white shadow-2xl">
+        <div class=" relative z-50 max-w-screen-xl mx-auto  sm:px-6 lg:px-0 rounded-3xl bg-white shadow-2xl">
             <!-- Contenedor con bordes redondeados y espaciado -->
             <div class="overflow-hidden sm:rounded-lg rounded-3xl py-4 pb-20">
                 <!-- Grid para mostrar las tarjetas de estadísticas -->
                 <div
-                    class="grid max-w-screen-xl grid-cols-1 gap-8 p-1 mx-auto text-gray-900 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 dark:text-white">
+                    class="grid max-w-screen-xl grid-cols-1  gap-8 m-4  text-gray-900 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 dark:text-white">
                     <!-- Tarjeta de Usuarios -->
                     <div class="flex items-center justify-center p-2 bg-blue-800 rounded-full  shadow-2xl">
                         <div class="flex flex-col  justify-center  flex-grow px-10 text-white">
@@ -55,14 +55,14 @@
             </div>
 
             <!-- Contenedor para productos y gráfico -->
-            <div class="overflow-hidden    rounded-3xl ">
+            <div class="overflow-hidden     rounded-3xl ">
                 <div class="relative overflow-x-auto rounded-3xl py-10  ">
-                    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-8 sm:gap-8">
+                    <div
+                        class="grid grid-cols-1 m-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-8 sm:gap-8">
                         <!-- Tarjeta de productos -->
-                        <div class="bg-gray-200  p-2   max-w-screen-xl rounded-3xl lg:col-span-7 sm:col-span-12 max-h-[340px] overflow-y-auto"  style="-webkit-box-shadow: 1px 14px 22px -6px rgba(0,0,0,0.49);
-                            -moz-box-shadow: 1px 14px 22px -6px rgba(0,0,0,0.49);
-                            box-shadow: 1px 14px 22px -6px rgba(0,0,0,0.49);">
-                            <div class="grid grid-cols-7 items-center p-2">
+                        <div class="bg-gray-100  p-2   max-w-screen-xl rounded-3xl  lg:col-span-7 sm:col-span-12 max-h-[800px] sm:max-h-[370px] overflow-y-auto"
+                        style="box-shadow:rgba(0, 0, 0, 0.474) 0px 4px 8px">
+                            <div class="grid grid-cols-7 items-center p-2 rounded-3xl ">
                                 <div class="col-span-4 p-3">
                                     <img src="{{ asset('images/Logo_Minos/LOGO.png') }}" width="40%" alt="Logo">
                                 </div>
@@ -81,73 +81,76 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-full bg-white rounded-3xl  dark:bg-gray-800 ">
+                            <div>
+                                <div class="w-full bg-white rounded-3xl  dark:bg-gray-800 ">
 
-                                <div id="fullWidthTabContent" class="border-t dark:border-gray-600">
+                                    <div id="fullWidthTabContent" class="border-t dark:border-gray-600">
 
-                                    <div class="p-3  rounded-3xl bg-white  border-2 border-gray-400 dark:bg-gray-800" role="tabpanel"
-                                        aria-labelledby="stats-tab">
-                                        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6">
-                                            @foreach ($productos as $producto)
-                                                @php
-                                                    $class = '';
-                                                    if ($producto->valor <= $minPrice + $range) {
-                                                        $class = 'bg-lime-400'; // Precio bajo
-                                                    } elseif ($producto->valor <= $minPrice + 2 * $range) {
-                                                        $class = 'bg-yellow-400'; // Precio medio
-                                                    } else {
-                                                        $class = 'bg-red-400'; // Precio alto
-                                                    }
-                                                @endphp
-                                                <div
-                                                    class="flex items-center justify-between px-2 py-2 bg-white border-2 border-gray-400 rounded-full shadow-md dark:bg-gray-700">
-                                                    <!-- Imagen del producto -->
-                                                    {{-- <div class="flex-shrink-0">
-                                                    <img class="w-12 h-12 rounded-full object-cover" src="{{ asset('storage/productos/' . $producto->image) }}" alt="{{ $producto->product_name }}">
-                                                </div> --}}
+                                        <div class="p-3  rounded-3xl bg-white  border-2 border-gray-400 dark:bg-gray-800"
+                                            role="tabpanel" aria-labelledby="stats-tab">
+                                            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6">
+                                                @foreach ($productos as $producto)
+                                                    @php
+                                                        $class = '';
+                                                        if ($producto->valor <= $minPrice + $range) {
+                                                            $class = 'bg-lime-400'; // Precio bajo
+                                                        } elseif ($producto->valor <= $minPrice + 2 * $range) {
+                                                            $class = 'bg-yellow-400'; // Precio medio
+                                                        } else {
+                                                            $class = 'bg-red-400'; // Precio alto
+                                                        }
+                                                    @endphp
+                                                    <div
+                                                        class="flex items-center justify-between px-2 py-2 bg-white border-2 border-gray-400 rounded-full shadow-md dark:bg-gray-700">
+                                                        <!-- Imagen del producto -->
+                                                        {{-- <div class="flex-shrink-0">
+                                                        <img class="w-12 h-12 rounded-full object-cover" src="{{ asset('storage/productos/' . $producto->image) }}" alt="{{ $producto->product_name }}">
+                                                    </div> --}}
 
-                                                    <!-- Información del producto -->
-                                                    <div class="mx-4">
-                                                        <p class="text-md text-gray-500 dark:text-gray-400">
-                                                            {{ $producto->product_name }}</p>
+                                                        <!-- Información del producto -->
+                                                        <div class="mx-4">
+                                                            <p class="text-md text-gray-500 dark:text-gray-400">
+                                                                {{ $producto->product_name }}</p>
+                                                        </div>
+
+                                                        <!-- Precio del producto -->
+                                                        <div class="text-right">
+                                                            <p class="text-md text-gray-500 dark:text-gray-400">
+                                                                {{ $producto->supplier_name }}</p>
+                                                        </div>
+
+                                                        <!-- Indicador de estado (punto) -->
+                                                        <div class="mx-4">
+                                                            {{-- <span class="text-sm font-semibold text-gray-900 dark:text-white">${{ number_format($producto->valor, 0) }}</span> --}}
+                                                            <button type="button"
+                                                                class="inline-block py-2 px-4 rounded-full {{ $class }}">
+                                                                ${{ number_format($producto->valor, 0) }}
+                                                            </button>
+                                                        </div>
                                                     </div>
-
-                                                    <!-- Precio del producto -->
-                                                    <div class="text-right">
-                                                        <p class="text-md text-gray-500 dark:text-gray-400">
-                                                            {{ $producto->supplier_name }}</p>
-                                                    </div>
-
-                                                    <!-- Indicador de estado (punto) -->
-                                                    <div class="mx-4">
-                                                        {{-- <span class="text-sm font-semibold text-gray-900 dark:text-white">${{ number_format($producto->valor, 0) }}</span> --}}
-                                                        <button type="button"
-                                                            class="inline-block py-2 px-4 rounded-full {{ $class }}">
-                                                            ${{ number_format($producto->valor, 0) }}
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="mt-4 flex justify-center">
-                                            {{ $productos->links('partials.v1.table.pagination-links') }}
+                                                @endforeach
+                                            </div>
+                                            <div class="mt-4 flex justify-center mx">
+                                                {{ $productos->links('partials.v1.table.pagination-links') }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
+
+
+
                         </div>
+                        
 
                         <!-- Tarjeta del gráfico de productos 1 y 2 -->
-                        <div class="lg:col-span-5 sm:col-span-12 grid grid-cols-1 gap-8 ">
-                            <div class="bg-gray-200  rounded-3xl p-2"
-                                style="-webkit-box-shadow: 1px 14px 22px -6px rgba(0,0,0,0.49);
-                                -moz-box-shadow: 1px 14px 22px -6px rgba(0,0,0,0.49);
-                                box-shadow: 1px 14px 22px -6px rgba(0,0,0,0.49);">
+                        <div class="lg:col-span-5 sm:col-span-12 grid grid-cols-1 gap-8 rounded-3xl ">
+                            <div class="bg-gray-100  rounded-3xl p-2"
+                                style="box-shadow:rgba(0, 0, 0, 0.474) 0px 4px 8px">
                                 <livewire:dashboard.chart-component />
                             </div>
-                            <div class="bg-gray-200  rounded-3xl p-2"style="-webkit-box-shadow: 1px 14px 22px -6px rgba(0,0,0,0.49);
-                                -moz-box-shadow: 1px 14px 22px -6px rgba(0,0,0,0.49);
-                                box-shadow: 1px 14px 22px -6px rgba(0,0,0,0.49);">
+                            <div class="bg-gray-100  rounded-3xl p-2"     style="box-shadow:rgba(0, 0, 0, 0.474) 0px 4px 8px">
                                 <livewire:dashboard.chart-inventario-component />
                             </div>
                         </div>

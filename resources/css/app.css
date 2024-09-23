@@ -12,3 +12,28 @@ button {
     margin: 0;
     padding: 0;
 }
+
+
+/* Estilos globales para las barras de desplazamiento */
+::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra vertical */
+    height: 12px; /* Altura de la barra horizontal */
+    border-radius: 50%;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color de fondo de la pista */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #67a0fb; /* Color de la barra */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #67a0fb; /* Color de la barra al pasar el ratón */
+}
+
+* {
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #67a0fb #f1f1f1; /* Color de la barra y de la pista */
+}

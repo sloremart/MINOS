@@ -4,7 +4,7 @@
     <div class="rounded-full">
         <!-- Añadir el canvas para el gráfico -->
         {{-- <canvas id="chartCanvas"></canvas> --}}
-        <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+        <div id="chartContainer1" style="height: 270px; width: 100%;"></div>
     </div>
 
     {{-- <script>
