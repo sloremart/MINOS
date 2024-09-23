@@ -83,12 +83,14 @@
             var chart = new CanvasJS.Chart("chartContainer1", {
                 backgroundColor: "transparent", // Fondo transparente
                 title: {
-                    text: "Productos con bajo stock",
+                    text: "Productos mas vendidos",
                     fontFamily: "Arial",
                     fontSize: 12,
                     fontWeight: "bold",
                     fontColor: "#5b5a5a"
                 },
+                exportEnabled: true,
+                exportFileName:"Reporte mejores ventas",
                 data: [{
                     type: "doughnut",
                     dataPoints: dataPoints // Añadir los dataPoints generados dinámicamente

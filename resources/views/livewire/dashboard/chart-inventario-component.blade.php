@@ -85,6 +85,8 @@
 
             var chart = new CanvasJS.Chart("chartContainer", {
                 backgroundColor: "transparent", // Fondo transparente
+                exportEnabled: true,
+                exportFileName:"Reporte stock inventario",
                 title: {
                     text: "Productos con bajo stock",
                     fontFamily: "Arial",
