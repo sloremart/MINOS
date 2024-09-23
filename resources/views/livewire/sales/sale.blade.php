@@ -7,7 +7,7 @@
         </h2>
     </x-slot>
     <div class="text-right z-20 relative max-w-6xl mx-auto">
-        <button  class="bg-blue-900 mt-10  hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+        <button  class="bg-blue-900 hover:bg-blue-400 text-white font-bold mt-10 py-2 px-4 rounded inline-flex items-center shadow-md">
             <a href="{{ route('sale.create') }}">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Venta</a>
