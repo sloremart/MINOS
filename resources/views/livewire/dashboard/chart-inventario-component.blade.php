@@ -3,9 +3,11 @@
 
     <div class="rounded-full">
         <!-- Añadir el canvas para el gráfico -->
-        <canvas id="chart"></canvas>
-    </div>
+        {{-- <canvas id="chart"></canvas> --}}
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
+    </div>
+    {{-- 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -56,10 +58,54 @@
                 }
             });
         });
+    </script> --}}
+
+    <script type="text/javascript">
+        window.onload = function() {
+
+            // Adaptar productos y cantidades para los puntos de datos
+            var products = @json($products); // Etiquetas de los productos
+            var quantities = @json($quantities); // Cantidades de stock
+
+            // Colores fijos
+            const fixedColors = [
+                '#1E3A8A', '#3B82F6', '#1E40AF', '#60A5FA', '#2563EB', '#93C5FD',
+                '#2B6CB0', '#BFDBFE', '#3B82F6', '#1E3A8A', '#60A5FA', '#1E40AF'
+            ];
+
+            // Crear los puntos de datos con colores personalizados
+            var dataPoints = [];
+            for (var i = 0; i < products.length; i++) {
+                dataPoints.push({
+                    y: quantities[i],
+                    label: products[i],
+                    color: fixedColors[i % fixedColors.length] // Asignar color a cada punto
+                });
+            }
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                backgroundColor: "transparent", // Fondo transparente
+                title: {
+                    text: "Productos con bajo stock",
+                    fontFamily: "Arial",
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    fontColor: "#5b5a5a"
+                },
+                data: [{
+                    type: "pyramid",
+                    indexLabel: "{label} - {y}",
+                    dataPoints: dataPoints // Asignar los puntos de datos con colores
+                }],
+                creditText: "", // Elimina la marca de agua
+            });
+
+            chart.render();
+        }
     </script>
-    
-    
-    
+
+
+
 
     <style>
         .grid-container {
