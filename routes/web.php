@@ -18,7 +18,9 @@ use App\Livewire\Forms\SaleForm;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/test', function () {
+    return response()->json(['message' => 'Conexión exitosa con Laravel']);
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -139,37 +141,97 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Entities\Entity::class)
             ->name("entity.list");
     });
-    Route::prefix("reportes")->group(function () {
-        Route::get('listado', \App\Livewire\Reportes\Reportes::class)
-            ->name("reporte.list");
-    });
-    Route::prefix('reportes/venta')->group(function () {
-        Route::get('pdf', function () {
-            $component = app()->make(\App\Livewire\Reportes\Reportes::class);
-            // Renderizar el contenido de la vista
-            return $component->pdf();
-        })->name('reportespdf.list');
-    });
+
+
+
+///-------------------------------------------------------------
+
+///reportes inventario +pdf
 
     Route::prefix("reportes/inventario")->group(function () {
-        Route::get('listado', \App\Livewire\Reportes\ReporteInv::class)
-            ->name("reporInv.list");
+        Route::get('listado', \App\Livewire\Reports\ReportInv::class)
+            ->name("reportInv.list");
     });
+    Route::prefix('reportes/inventario')->group(function () {
+        Route::get('pdf', function (\Illuminate\Http\Request $request) {
+            // Log para verificar que las fechas llegan correctamente
+            \Log::info('Valores de búsqueda recibidos:', [
+                'search' => $request->input('search'),
+                'search_1' => $request->input('search_1'),
+            ]);
 
-    Route::prefix("reportes/ventaCliente")->group(function () {
-        Route::get('listado', \App\Livewire\Reportes\ReporteCliente::class)
-            ->name("reporInv.list");
-    });
+            $component = app()->make(\App\Livewire\Reports\ReportInv::class);
 
+            // Capturar los parámetros de la URL
+            $component->search = $request->input('search');
+            $component->search_1 = $request->input('search_1');
 
-
-    Route::prefix('reportes/venta')->group(function () {
-        Route::get('pdf', function () {
-            $component = app()->make(\App\Livewire\Reportes\Reportes::class);
-            // Renderizar el contenido de la vista
+            // Generar el PDF
             return $component->pdf();
-        })->name('reportespdf.list');
+        })->name('reporte_inventario.list');
     });
+
+////-------------------------------------------------------------
+// reportes venta cliente + pdf
+    Route::prefix("reportes/ventaCliente")->group(function () {
+        Route::get('listado', \App\Livewire\Reports\ReportCustomer::class)
+            ->name("reportCust.list");
+    });
+    Route::prefix('reportes/ventaCliente')->group(function () {
+        Route::get('pdf', function (\Illuminate\Http\Request $request) {
+            // Log para verificar que las fechas llegan correctamente
+            \Log::info('Valores de búsqueda recibidos:', [
+                'search' => $request->input('search'),
+                'search_1' => $request->input('search_1'),
+            ]);
+
+            $component = app()->make(\App\Livewire\Reports\ReportCustomer::class);
+
+            // Capturar los parámetros de la URL
+            $component->search = $request->input('search');
+            $component->search_1 = $request->input('search_1');
+
+            // Generar el PDF
+            return $component->pdf();
+        })->name('reporte_clientes.list');
+    });
+
+    //------------------------------------------
+    //reporte proveedor + pdf
+    Route::prefix("reportes/compraPoveedor")->group(function () {
+        Route::get('listado', \App\Livewire\Reports\ReportPurchaseSuplier::class)
+            ->name("reportCust.list");
+    });
+
+    Route::prefix('reportes/compraPoveedor')->group(function () {
+        Route::get('pdf', function (\Illuminate\Http\Request $request) {
+            // Log para verificar que las fechas llegan correctamente
+            \Log::info('Valores de búsqueda recibidos:', [
+                'search' => $request->input('search'),
+                'search_1' => $request->input('search_1'),
+            ]);
+
+            $component = app()->make(\App\Livewire\Reports\ReportPurchaseSuplier::class);
+
+            // Capturar los parámetros de la URL
+            $component->search = $request->input('search');
+            $component->search_1 = $request->input('search_1');
+
+            // Generar el PDF
+            return $component->pdf();
+        })->name('reporte_proveedor.list');
+    });
+
+
+
+
+
+
+
+
+
+
+
 // Rutas para Group
     Route::prefix("grupos")->group(function () {
         Route::get('listado', \App\Livewire\Groups\Group::class)

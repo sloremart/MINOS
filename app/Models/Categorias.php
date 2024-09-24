@@ -13,7 +13,7 @@ class Categorias extends Model
     public function subgrupos(){
         return $this->hasMany(Subgrupo::class,'categorias_id');
     }
-    
+
     public function getImagenAttribute(){
 
         if(file_exists('storage/categorias/'.$this->image))
