@@ -1,23 +1,18 @@
 <div>
 @if($filter_active)
     <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
-    @if(($buscar_placeholder ?? null) != null)
-            <input type="text" wire:model.live="{{$buscar}}" placeholder="{{$buscar_placeholder ?? ""}}" class="px-4 py-2 border rounded">
-        @endif
+        @if(($search_2_placeholder ?? null) != null)
+        <input type="text" wire:model.live="{{$search_2}}" placeholder="{{$search_2_placeholder ?? ""}}" id="search_2" name="search_1" value="{{ old('search_2') }}"class="px-4 py-2 border rounded">
+    @endif
         @if(($search_placeholder ?? null) != null)
             <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" id="search" name="search" value="{{ old('search') }}" class="px-4 py-2 border rounded">
         @endif
         @if(($search_1_placeholder ?? null) != null)
             <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="px-4 py-2 border rounded">
         @endif
+        
       
-       {{-- <a href="{{ route('reportpdf.list') }}" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" target="_blank">Exportar PDF</a> --}}
-       {{-- <a href="{{ route('reportpdf.list', ['search' => $search, 'search_1' => $search_1]) }}" 
-        type="button" 
-        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" 
-        target="_blank">
-        Exportar PDF
-     </a> --}}
+      
      <a href="#" id="exportPdfBtn" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" target="_blank">Exportar PDF</a>
 
      

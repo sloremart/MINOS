@@ -28,8 +28,10 @@
                         'filter_active' => true,
                         'search' => 'search',
                         'search_1' => 'search_1',
+                        'search_2' => 'search_2',
                         'search_placeholder' => $search_placeholder,
                         'search_1_placeholder' => $search_1_placeholder,
+                        'search_2_placeholder' => $search_2_placeholder,
                         'table_headers' => [
                             'ID' => 'id',
                             'Nombre' => 'name',

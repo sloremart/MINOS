@@ -100,7 +100,6 @@ Route::middleware([
             ->name("price.list");
     });
 
-// Rutas para Tipo Comercio
     Route::prefix("tipos-de-comercio")->group(function () {
         Route::get('listado', \App\Livewire\CommerceTypes\CommerceType::class)
             ->name("commerce_type.list");
@@ -225,10 +224,18 @@ Route::middleware([
 
 
 
+//--------------------------------------- termina rutas reportes
 
 
 
+// Rutas para el desplegable del Menu - Administraciones
+// -------------------------------------------------------------
 
+// Ruta Unidades
+Route::prefix("unidades")->group(function () {
+    Route::get('listado', \App\Livewire\Units\Unit::class)
+        ->name("unit.list");
+});
 
 
 

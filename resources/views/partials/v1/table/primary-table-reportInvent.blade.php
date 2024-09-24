@@ -4,12 +4,16 @@
     <div class="mb-1 pl-20 pr-20">
         @if($filter_active)
         <div class="relative z-10 flex flex-wrap gap-2 mb-4 ml-8">
+            @if(($search_2_placeholder ?? null) != null)
+            <input type="text" wire:model.live="{{$search_2}}" placeholder="{{$search_2_placeholder ?? ""}}" id="search_2" name="search_2" value="{{ old('search_2') }}"class="px-4 py-2 border rounded">
+        @endif
             @if(($search_placeholder ?? null) != null)
             <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" id="search" name="search" value="{{ old('search') }}" class="px-4 py-2 border rounded">
         @endif
         @if(($search_1_placeholder ?? null) != null)
             <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="px-4 py-2 border rounded">
         @endif
+      
 
 
         <a href="#" id="exportPdfBtn" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" target="_blank">Exportar PDF</a>
