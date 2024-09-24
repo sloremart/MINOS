@@ -15,7 +15,7 @@ class DashboarddComponent extends Component
     public $userCount, $proveedorCount, $Client, $saleALL;
     public $buscar="";
     public $totalSalesFormatted; // Asegúrate de que esta línea esté presente
-    private $paginacion= 3;
+    private $paginacion= 4;
 
     use WithPagination;
     public function mount()
