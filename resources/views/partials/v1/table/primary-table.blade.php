@@ -1,21 +1,19 @@
 <div>
-@if($filter_active)
-    <div class="z-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 mb-4 ml-8">
-        <div>
+    <div class="overflow-x-auto  relative z-10 max-w-6xl mx-auto ">
+        @if($filter_active)
+        <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
             @if(($search_placeholder ?? null) != null)
                 <input type="text" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="px-4 py-2 border rounded">
             @endif
-        </div>
-        <div>
             @if(($search_1_placeholder ?? null) != null)
-                <input type="text" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" class="px-4 py-2 border rounded">
+                <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="px-4 py-2 border rounded">
             @endif
+    
         </div>
-
+    @endif
     </div>
-@endif
 <div class="mb-1">
-    <div class="overflow-x-auto mx-8 lg:mx-auto mr-50 relative z-10 max-w-6xl">
+    <div class="overflow-x-auto mt-5 relative z-10 max-w-6xl mx-auto">
         <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
             <thead class="bg-blue-900 text-gray-200 uppercase text-sm leading-normal">
                 <tr>
@@ -134,6 +132,7 @@
                                                 @endforeach
                                             @endif
                                         @endforeach
+
                             </td>
                         @endisset
                     </tr>
@@ -142,7 +141,6 @@
             </tbody>
         </table>
     </div>
-    
     @if($table_pageable??true)
         <div class="mt-4 flex justify-center">
             {{$table_rows->links("partials.v1.table.pagination-links")}}

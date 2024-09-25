@@ -82,8 +82,8 @@
 
         <!-- Segunda columna: Tabla de productos para agregar -->
         <div class="mt-16">
-            <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0">Productos Disponibles</h3>
-            <div class="bg-blue-100 rounded-lg shadow-lg">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0" >Productos Disponibles</h3>
+            <div class="bg-blue-100 rounded-lg shadow-lg overflow-hidden">
                 @include("partials.v1.table.primary-table", [
                     "filter_active" => true,
                     "search" => "search",
@@ -127,7 +127,7 @@
                         <input type="number" id="price" wire:model.live="selectedProductPrice" min="0" step="0.01" class="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse bg-opacity-75">
+                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse bg-opacity-90">
                     <button wire:click="confirmAddProductToPurchase" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
                         Confirmar
                     </button>

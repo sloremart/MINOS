@@ -90,7 +90,8 @@
 
 
                     <div x-show="open" @click.away="open = false"
-                        class="absolute mt-20 w-48 bg-white rounded-md shadow-lg z-20">
+                        class="absolute mt-20 w-48 bg-white rounded-md shadow-lg z-20"
+                        style="margin-top: 83px !important">
                         <ul class="text-sm text-gray-700 dark:text-gray-200">
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">

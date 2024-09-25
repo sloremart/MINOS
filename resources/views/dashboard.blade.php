@@ -6,8 +6,8 @@
     </x-slot>
 
 
-    <div>
-                           
+    <div class="relative z-10">
+         @livewire('dashboard.dashboardd-component')
     </div>
 
 </x-app-layout>
