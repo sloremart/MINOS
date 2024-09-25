@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire\Forms;
 
 use App\Models\Supplier;
@@ -15,13 +16,10 @@ class SupplierForm extends Form
 
     #[Validate('required|min:5|unique:suppliers,document')]
     public $document = '';
-
-    #[Validate('required|email|unique:suppliers,email')]
+    #[Validate('required|min:5|email|unique:suppliers,email')]
     public $email = '';
-
     #[Validate('required|min:5')]
     public $phone = '';
-
     #[Validate('required|min:5')]
     public $address = '';
 
@@ -46,6 +44,7 @@ class SupplierForm extends Form
             $this->document = $model->document;
             $this->email = $model->email;
             $this->phone = $model->phone;
+            $this->city = $model->city;
             $this->address = $model->address;
             $this->user_id = $model->user_id;
         }

@@ -3,7 +3,7 @@
 <div class="py-12 flex justify-center">
     <div class="max-w-7xl mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-2 gap-4 mt-16">
         <!-- Primera columna: Formulario -->
-        <div>
+        <div class="col-span-1">
             <div class="grid grid-cols-1 gap-4 mb-6">
                 <!-- Fila de Select y detalles del cliente -->
                 <div class="grid grid-cols-3 gap-5 items-end">
@@ -68,16 +68,17 @@
             @if($isCashModalOpen)
                 <!-- Modal para pago en efectivo -->
                 <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-                        <div class="bg-gray-100 px-4 py-3 sm:px-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full"
+                    style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                        <div class="bg-blue-900 px-4 py-3 sm:px-6 bg-opacity-90">
+                            <h3 class="text-lg leading-6 font-medium text-white">
                                 Pago en Efectivo
                             </h3>
                         </div>
-                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 bg-opacity-75">
                             <!-- Sección de Billetes -->
                             <h4 class="text-md font-semibold text-gray-800">Billetes</h4>
-                            <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="grid grid-cols-3 gap-4 mb-4">
                                 @foreach ($billQuantities as $bill => $quantity)
                                     <div>
                                         <label for="bill-{{ $bill }}" class="block text-sm font-medium text-gray-700">Billetes de ${{ number_format($bill, 0, ',', '.') }}</label>
@@ -93,7 +94,7 @@
 
                             <!-- Sección de Monedas -->
                             <h4 class="text-md font-semibold text-gray-800">Monedas</h4>
-                            <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="grid grid-cols-3 gap-4 mb-4">
                                 @foreach ($coinQuantities as $coin => $quantity)
                                     <div>
                                         <label for="coin-{{ $coin }}" class="block text-sm font-medium text-gray-700">Monedas de ${{ number_format($coin, 0, ',', '.') }}</label>
@@ -144,14 +145,15 @@
 
             <!-- Modal para agregar producto -->
             @if($isModalOpen)
-                <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full" style="background-image: url('/images/icono_central.png'); ; background-size: contain; background-repeat: no-repeat; background-position: center;">
-                        <div class="bg-blue-900   bg-opacity-75 px-4 py-3 sm:px-6">
+                <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full z-0"
+                    style="background-image: url('/images/icono_central.png'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+                        <div class="bg-blue-900 px-4 py-3 sm:px-6 bg-opacity-90">
                             <h3 class="text-lg leading-6 font-medium text-white">
                                 Agregar Producto {{$selectedProduct->name}}
                             </h3>
                         </div>
-                        <div class="  bg-white  bg-opacity-75 px-4 pt-5 pb-4 sm:p-6 sm:pb-4" >
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 bg-opacity-75">
                             <div>
                                 <label for="quantity" class="block text-sm font-medium text-gray-700">Stock Disponible</label>
                                 <input  type="number" id="quantity" wire:model="selectedProduct.quantity" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
@@ -184,8 +186,8 @@
                                 <input type="text" id="price" wire:model="selectedProduct.total" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
                             </div>
                         </div>
-                        <div class="bg-white bg-opacity-75 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                            <button wire:click="confirmAddProductToSale" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-bg-opacity-752 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
+                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse bg-opacity-75">
+                            <button wire:click="confirmAddProductToSale" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
                                 Agregar
                             </button>
                             <button wire:click="closeModal" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
@@ -317,12 +319,14 @@
                 ])
             </div>
         </div>
+
+        <!-- Botón para guardar -->
         <div class="mt-6 flex justify-end space-x-4">
             <button wire:click="submitForm" class="bg-blue-900 text-white font-bold py-2 px-4 rounded shadow hover:bg-blue-700">
-                CREAR VENTA
+                Guardar
             </button>
             <button wire:click="cancel" class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow hover:bg-gray-400">
-                CANCELAR
+                Cancelar
             </button>
         </div>
     </div>
