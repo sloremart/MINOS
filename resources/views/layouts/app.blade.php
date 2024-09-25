@@ -37,7 +37,7 @@
             <!-- Page Content -->
             <main class="relative min-h-screen">
                 <!-- Imagen en la esquina superior izquierda -->
-                <div class="absolute top-0 left-0 m-4 z-0 opacity-100">
+                <div class="absolute top-0 left-0  z-0 opacity-100">
                     <img src="/images/curvas_arriba.png" alt="Top Left Image" class="w-192 h-60 md:w-192 md:h-60">
                 </div>
 
@@ -47,7 +47,7 @@
                 </div>
 
                 <!-- Imagen en la esquina inferior derecha -->
-                <div class="absolute bottom-0 right-0 m-4 z-0 opacity-100">
+                <div class="absolute bottom-0 right-0  z-0 opacity-100">
                     <img src="/images/curvas_abajo.png" alt="Bottom Right Image" class="w-192 h-16 md:w-192 md:h-60">
                 </div>
             </main>

@@ -2,7 +2,7 @@
     <!-- Contenedor principal con espaciado y bordes redondeados -->
     <div class="py-12 rounded-3xl">
         <!-- Contenedor central con máximo ancho y espaciado -->
-        <div class=" relative z-50 max-w-screen-xl mx-auto  sm:px-6 lg:px-0 rounded-3xl bg-white shadow-2xl">
+        <div class=" max-w-screen-xl mx-auto  sm:px-6 lg:px-0 rounded-3xl bg-white shadow-2xl">
             <!-- Contenedor con bordes redondeados y espaciado -->
             <div class="overflow-hidden sm:rounded-lg rounded-3xl py-4  pb-10">
                 <!-- Grid para mostrar las tarjetas de estadísticas -->
@@ -160,9 +160,4 @@
 
     </div>
 </div>
-</div>
-</div>
 
-
-
-</div>
