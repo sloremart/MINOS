@@ -1,7 +1,7 @@
 <!-- resources/views/livewire/sales/create-sale.blade.php -->
 
-<div class="py-12 flex justify-center">
-    <div class="max-w-7xl mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-2 gap-4 mt-16">
+<div class="py-12 flex justify-center ">
+    <div class="max-w-7xl mx-auto p-8 bg-white  relative z-10 shadow-md rounded-xl grid grid-cols-2 gap-4 mt-16 ">
         <!-- Primera columna: Formulario -->
         <div class="col-span-1">
             <div class="grid grid-cols-1 gap-4 mb-6">
@@ -131,7 +131,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse bg-opacity-90">
                             <button wire:click="closeCashModal" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
                                 Confirmar
                             </button>
@@ -292,7 +292,7 @@
         </div>
 
         <!-- Segunda columna: Tabla de productos para agregar -->
-        <div class="mt-16">
+        <div class="mt-0">
             <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0">
                 Productos
             </h3>

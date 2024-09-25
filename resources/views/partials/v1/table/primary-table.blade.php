@@ -1,15 +1,18 @@
 <div>
-@if($filter_active)
-    <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
-        @if(($search_placeholder ?? null) != null)
-            <input type="text" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="px-4 py-2 border rounded">
-        @endif
-        @if(($search_1_placeholder ?? null) != null)
-            <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="px-4 py-2 border rounded">
-        @endif
-
+    <div class="overflow-x-auto  relative z-10 max-w-6xl mx-auto ">
+        @if($filter_active)
+        <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
+            @if(($search_placeholder ?? null) != null)
+                <input type="text" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="px-4 py-2 border rounded">
+            @endif
+            @if(($search_1_placeholder ?? null) != null)
+                <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="px-4 py-2 border rounded">
+            @endif
+    
+        </div>
+    @endif
     </div>
-@endif
+
 <div class="mb-1">
     <div class="overflow-x-auto mt-5 relative z-10 max-w-6xl mx-auto">
         <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">

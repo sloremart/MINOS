@@ -6,8 +6,8 @@
             {{ __('Listado de compras') }}
         </h2>
     </x-slot>
-    <div class="text-right mt-4 z-20 relative max-w-6xl mx-auto">
-        <button wire:click="openModal" class="bg-blue-900 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+    <div class="text-right  z-20 relative max-w-6xl mx-auto">
+        <button wire:click="openModal" class="bg-blue-900 mt-10 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
             <a href="{{ route('purchase.create') }}">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Compra
@@ -121,7 +121,7 @@
                         ]
 
 
-
+                ]])       
                 <!-- Pie del Modal -->
                 <div class="text-gray-200 bg-opacity-75 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
                     @if($action != 'details')
