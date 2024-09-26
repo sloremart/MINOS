@@ -171,6 +171,32 @@ Route::middleware([
     });
 
 ////-------------------------------------------------------------
+///reportee de ventas + pdf
+Route::prefix("reportes/venta")->group(function () {
+    Route::get('listado', \App\Livewire\Reports\Reports::class)
+        ->name("reportSale.list");
+});
+
+Route::prefix('reportes/venta')->group(function () {
+    Route::get('pdf', function (\Illuminate\Http\Request $request) {
+        // Log para verificar que las fechas llegan correctamente
+        Log::info('Valores de búsqueda recibidos:', [
+            'search' => $request->input('search'),
+            'search_1' => $request->input('search_1'),
+        ]);
+
+        $component = app()->make(\App\Livewire\Reports\Reports::class);
+        
+        // Capturar los parámetros de la URL
+        $component->search = $request->input('search');
+        $component->search_1 = $request->input('search_1');
+        
+        // Generar el PDF
+        return $component->pdf();
+    })->name('reportpdf.list');
+});
+
+///-------------------------------------------------------------
 // reportes venta cliente + pdf
     Route::prefix("reportes/ventaCliente")->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportCustomer::class)
