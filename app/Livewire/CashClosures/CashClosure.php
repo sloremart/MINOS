@@ -26,6 +26,8 @@ class CashClosure extends Component
     public $total_sales_transfer = 0;
     public $total_expenses = 0;
     public $final_balance_cash = 0;
+    public $final_balance_card = 0;
+    public $final_balance_transfer = 0;
     public $next_start_balance = 0;
     public $total_sales = 0;
     public $final_balance = 0;
@@ -130,6 +132,9 @@ class CashClosure extends Component
             'total_expenses' => $this->total_expenses,
             'total_sales' => $this->total_sales, // Nuevo campo
             'final_balance' => $this->final_balance, // Nuevo campo
+            'final_balance_cash' => $this->final_balance_cash, // Nuevo campo
+            'final_balance_card' => $this->final_balance_card, // Nuevo campo
+            'final_balance_transfer' => $this->final_balance_transfer, // Nuevo campo
             'next_start_balance' => $this->next_start_balance,
         ]);
 
@@ -145,10 +150,30 @@ class CashClosure extends Component
             'user_name' => 'required|string',
             'closing_date_time' => 'required|date',
             'start_balance' => 'required|numeric',
-            'total_expenses' => 'required|numeric',
-            'final_balance_cash' => 'required|numeric',
             'next_start_balance' => 'required|numeric',
             // Agregar otras reglas según sea necesario
         ];
     }
+    public function resetFields()
+{
+    $this->user_name = '';
+    $this->closing_date_time = null; // Puede ser 'null' o una fecha por defecto si es necesario
+    $this->start_balance = 0;
+    $this->payment_method = null; // o '' si prefieres un string vacío
+    $this->total_sales_cash = 0;
+    $this->total_sales_card = 0;
+    $this->total_sales_transfer = 0;
+    $this->total_expenses = 0;
+    $this->final_balance_cash = 0; // Resetear saldo final en efectivo
+    $this->next_start_balance = 0;
+    $this->total_sales = 0;
+    $this->final_balance = 0;
+    $this->search = '';
+    $this->search_1 = '';
+    $this->search_2 = '';
+    $this->search_placeholder = 'Fecha inicio';
+    $this->search_1_placeholder = 'Fecha fin';
+    $this->search_2_placeholder = 'Buscar Producto ...';
+}
+
 }

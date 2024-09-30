@@ -76,10 +76,8 @@
                                 {{-- <label class="block text-sm font-medium text-gray-700">Total Ventas Efectivo</label> --}}
                                 <input wire:model="total_sales_cash" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    readonly aria-describedby="totalSalesCashHelp" />
-                                    @error('total_sales_cash')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
+                                    readonly aria-describedby="totalSalesCashHelp" disabled/>
+                                   
                                 <small id="totalSalesCashHelp" class="text-gray-500">Total de ventas en
                                     efectivo.</small>
                             </div>
@@ -102,10 +100,8 @@
                                     Transferencia</label> --}}
                                 <input wire:model="total_sales_transfer" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    readonly aria-describedby="totalSalesTransferHelp" />
-                                    @error('total_sales_transfer')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
+                                    readonly aria-describedby="totalSalesTransferHelp" disabled/>
+                                   
                                 <small id="totalSalesTransferHelp" class="text-gray-500">Total de ventas por
                                     transferencia.</small>
                             </div>
@@ -115,10 +111,8 @@
                                 {{-- <label class="block text-sm font-medium text-gray-700">Total Egresos</label> --}}
                                 <input wire:model="total_expenses" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="totalExpensesHelp" />
-                                @error('total_expenses')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
+                                    aria-describedby="totalExpensesHelp" disabled/>
+                              
                                 <small id="totalExpensesHelp" class="text-gray-500">Ingrese el total de egresos.</small>
                             </div>
 
@@ -127,10 +121,8 @@
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Final Efectivo</label> --}}
                                 <input wire:model="final_balance_cash" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="finalBalanceCashHelp" />
-                                @error('final_balance_cash')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
+                                    aria-describedby="finalBalanceCashHelp" disabled/>
+                               
                                 <small id="finalBalanceCashHelp" class="text-gray-500">Ingrese el saldo final en
                                     efectivo.</small>
                             </div>
@@ -153,10 +145,8 @@
                                     Turno</label> --}}
                                 <input wire:model="total_sales" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="nextStartBalanceHelp" />
-                                @error('total_sales')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
+                                    aria-describedby="nextStartBalanceHelp" disabled/>
+                              
                                 <small id="nextStartBalanceHelp" class="text-gray-500">Total venta</small>
                             </div>
                             <div>
@@ -164,10 +154,8 @@
                                     Turno</label> --}}
                                 <input wire:model="final_balance" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="nextStartBalanceHelp" />
-                                @error('final_balance')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
+                                    aria-describedby="nextStartBalanceHelp" disabled/>
+                               
                                 <small id="nextStartBalanceHelp" class="text-gray-500">Total balance</small>
                             </div>
                         </div>
