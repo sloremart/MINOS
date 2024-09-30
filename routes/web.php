@@ -297,3 +297,12 @@ Route::prefix("unidades")->group(function () {
 
 
 });
+
+
+/////////----------------------> ruta para cuerre caja <-------------------/////////////
+
+
+Route::prefix("cierre")->group(function () {
+    Route::get('listado', \App\Livewire\CashClosures\CashClosure::class)
+        ->name("cierre_caja.list");
+});
