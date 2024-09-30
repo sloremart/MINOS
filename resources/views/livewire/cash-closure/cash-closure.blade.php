@@ -32,10 +32,10 @@
                             <!-- Fecha y Hora del Cierre -->
                             <div>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Fecha y Hora del Cierre</label> --}}
-                                <input type="datetime-local" wire:model="closure_time"
+                                <input type="datetime-local" wire:model="closing_date_time"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="closureTimeHelp" />
-                                @error('closure_time')
+                                @error('closing_date_time')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 <small id="closureTimeHelp" class="text-gray-500">Ingrese la fecha y hora del
@@ -61,9 +61,8 @@
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     wire:change="updateTotalSales" aria-describedby="paymentMethodHelp">
                                     <option value="">Seleccione</option>
-                                    <option value="efectivo">Efectivo</option>
-                                    <option value="tarjeta">Tarjeta</option>
-                                    <option value="transferencia">Transferencia</option>
+                                    <option value="cash">Efectivo</option>
+                                    <option value="transfer">Transferencia</option>
                                 </select>
                                 @error('payment_method')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -78,19 +77,24 @@
                                 <input wire:model="total_sales_cash" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     readonly aria-describedby="totalSalesCashHelp" />
+                                    @error('total_sales_cash')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 <small id="totalSalesCashHelp" class="text-gray-500">Total de ventas en
                                     efectivo.</small>
                             </div>
 
                             <!-- Total Ventas Tarjeta -->
-                            <div>
-                                {{-- <label class="block text-sm font-medium text-gray-700">Total Ventas Tarjeta</label> --}}
-                                <input wire:model="total_sales_card" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    readonly aria-describedby="totalSalesCardHelp" />
-                                <small id="totalSalesCardHelp" class="text-gray-500">Total de ventas con
-                                    tarjeta.</small>
-                            </div>
+                                {{-- <div>
+                                    <input wire:model="total_sales_card" type="number" step="0.01"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        readonly aria-describedby="totalSalesCardHelp" />
+                                        @error('total_sales_card')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                    <small id="totalSalesCardHelp" class="text-gray-500">Total de ventas con
+                                        tarjeta.</small>
+                                </div> --}}
 
                             <!-- Total Ventas Transferencia -->
                             <div>
@@ -99,6 +103,9 @@
                                 <input wire:model="total_sales_transfer" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     readonly aria-describedby="totalSalesTransferHelp" />
+                                    @error('total_sales_transfer')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                                 <small id="totalSalesTransferHelp" class="text-gray-500">Total de ventas por
                                     transferencia.</small>
                             </div>
@@ -141,6 +148,28 @@
                                 <small id="nextStartBalanceHelp" class="text-gray-500">Ingrese el saldo inicial para el
                                     próximo turno.</small>
                             </div>
+                            <div>
+                                {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
+                                    Turno</label> --}}
+                                <input wire:model="total_sales" type="number" step="0.01"
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    aria-describedby="nextStartBalanceHelp" />
+                                @error('total_sales')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                                <small id="nextStartBalanceHelp" class="text-gray-500">Total venta</small>
+                            </div>
+                            <div>
+                                {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
+                                    Turno</label> --}}
+                                <input wire:model="final_balance" type="number" step="0.01"
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    aria-describedby="nextStartBalanceHelp" />
+                                @error('final_balance')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                                <small id="nextStartBalanceHelp" class="text-gray-500">Total balance</small>
+                            </div>
                         </div>
 
                         <!-- Botón Enviar -->
@@ -164,17 +193,18 @@
                         'search_1_placeholder' => $search_1_placeholder,
                         'search_2_placeholder' => $search_2_placeholder,
                         'table_headers' => [
-                            'Cerrado por' => 'name',
-                            'Fecha y Hora' => 'unit_price',
-                            'Saldo Inicial' => 'total_quantity',
-                            'Ingresos' => 'sub_total',
-                            'Egresos' => 'sub_total',
-                            'Saldo Final' => 'last_created_at',
-                            'Acciones' => 'last_created_at',
+                            'Cerrado por' => 'user.name', // Accede al nombre del usuario
+                            'Fecha y Hora' => 'created_at',
+                            'Saldo Inicial' => 'start_balance',
+                            'Ingresos' => 'total_sales',
+                            'Egresos' => 'total_expenses',
+                            'Saldo Final' => 'final_balance',
+                            'Acciones' => 'actions', // O el campo que refleje acciones
                         ],
                         'table_rows' => $data,
                     ])
                 </div>
+
             </div>
         </div>
 

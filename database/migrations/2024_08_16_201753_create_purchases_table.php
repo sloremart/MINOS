@@ -13,6 +13,7 @@ class CreatePurchasesTable extends Migration
             $table->foreignId('supplier_id')->constrained('suppliers');
             $table->date('purchase_date');
             $table->decimal('total_amount', 10, 2);
+            $table->string('payment_method')->nullable();
             $table->text('details')->nullable();
             $table->timestamps();
             $table->softDeletes(); // Para Soft Deletes
