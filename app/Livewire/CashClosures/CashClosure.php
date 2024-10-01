@@ -53,6 +53,8 @@ class CashClosure extends Component
     public function render()
     {
         $query = cash_closure::with('user');
+        
+
 
         if ($this->search) {
             $query->where('created_at', '>=', $this->search);
@@ -161,7 +163,17 @@ class CashClosure extends Component
     public function showDetails($closureId)
     {
         // Obtener el cierre de caja específico
-        $closure = cash_closure::find($closureId);
+        $closure = cash_closure::with('user')->find($closureId);
+        if (!$closure) {
+            session()->flash('error', 'cierre no encontrado');
+        }
+         $this->selected_id = $closure->id;
+         $this->user_name = $closure->user->name;
+         $this->closing_date_time = $closure->closing_date_time;
+         $this->start_balance = $closure->start_balance;
+         $this->total_sales = $closure->total_sales;
+         $this->total_expenses = $closure->total_expenses;
+         $this->final_balance = $closure->final_balance;
 
         if (!$closure) {
             session()->flash('error', 'Cierre no encontrado.');
@@ -234,5 +246,9 @@ class CashClosure extends Component
         $this->search_placeholder = 'Fecha inicio';
         $this->search_1_placeholder = 'Fecha fin';
         $this->search_2_placeholder = 'Buscar Producto ...';
+    }
+    public function Destroy($id){
+        $cashClosure=cash_closure::find($id);
+        $cashClosure->delete();
     }
 }
