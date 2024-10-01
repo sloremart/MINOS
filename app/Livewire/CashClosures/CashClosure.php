@@ -8,9 +8,12 @@ use App\Models\Sale as ModelsSale;
 use App\Models\SaleDetail;
 use App\Models\User;
 use App\Traits\CrudModelsTrait;
+use Carbon\Doctrine\CarbonTypeConverter;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CashClosure extends Component
 {
@@ -77,37 +80,42 @@ class CashClosure extends Component
         // Resetear los totales
         $this->total_sales_cash = 0;
         $this->total_sales_transfer = 0;
-    
+
         // Calcular los totales según el método de pago seleccionado
         if ($this->payment_method) {
             // Si el método de pago es "cash" (efectivo)
             if ($this->payment_method === 'cash') {
                 $this->total_sales_cash = $this->calculateSales('cash');
             }
-            
             // Si el método de pago es "transfer" (transferencia)
-            if ($this->payment_method === 'transfer') {
+            elseif ($this->payment_method === 'transfer') {
+                $this->total_sales_transfer = $this->calculateSales('transfer');
+            }
+            // Si el método de pago es "all" (todos)
+            elseif ($this->payment_method === 'all') {
+                $this->total_sales_cash = $this->calculateSales('cash');
                 $this->total_sales_transfer = $this->calculateSales('transfer');
             }
         }
-    
+
         // Calcular el total de ventas
         $this->total_sales = $this->total_sales_cash + $this->total_sales_transfer;
-    
-        // Calcular el saldo final en efectivo (automáticamente)
-        // Fórmula: Saldo Final en Efectivo = Saldo Inicial + Ventas en Efectivo - Egresos en Efectivo
+
+        // Calcular el saldo final en efectivo
         $this->final_balance_cash = $this->start_balance + $this->total_sales_cash - $this->total_expenses;
-    
-        // Actualizar el balance total (si se requiere que combine efectivo y otros métodos)
+
+        // Actualizar el balance total
         $this->final_balance = $this->start_balance + $this->total_sales - $this->total_expenses;
     }
-    
-    
-    
+
+
+
+
 
     protected function calculateSales($method)
     {
         return ModelsSale::where('payment_method', $method)
+            ->whereDate('created_at', now()->format('Y-m-d')) // Filtrar por la fecha actual
             ->get()
             ->sum(function ($sale) {
                 return $sale->total_amount; // Cambia 'total_amount' por el campo correcto que representa el monto
@@ -143,6 +151,58 @@ class CashClosure extends Component
         $this->resetFields();
     }
 
+
+
+
+    public $salesDetails = [];
+    public $showModal = false;
+
+
+    public function showDetails($closureId)
+    {
+        // Obtener el cierre de caja específico
+        $closure = cash_closure::find($closureId);
+
+        if (!$closure) {
+            session()->flash('error', 'Cierre no encontrado.');
+            return;
+        }
+
+        // Convertir la fecha de cierre a un objeto Carbon
+        $closingDateTime = Carbon::parse($closure->closing_date_time);
+
+        // Obtener solo la parte de la fecha (Y-m-d)
+        $closingDate = $closingDateTime->toDateString(); // Esto solo obtiene la fecha sin hora
+
+        // Obtener los detalles de ventas relacionadas a este cierre basadas en la fecha
+        $salesDetails = SaleDetail::with('product')
+            ->whereHas('sale', function ($query) use ($closingDate) {
+                // Comparar solo la fecha, no la hora
+                $query->whereDate('created_at', $closingDate);
+            })
+            ->get();
+
+        // Verificar si se encontraron ventas
+        if ($salesDetails->isNotEmpty()) {
+            // Asignar los detalles de ventas a una propiedad pública
+            $this->salesDetails = $salesDetails;
+            // dd($this->salesDetails);  // Verifica el contenido de la variable antes de mostrar el modal
+            $this->showModal = true;
+        } else {
+            session()->flash('error', 'No se encontraron ventas para este cierre.');
+        }
+    }
+
+
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->salesDetails = []; // Limpiar los detalles de ventas al cerrar
+    }
+
+
+
     // Método para editar un cierre de caja
     protected function validationRules()
     {
@@ -155,25 +215,24 @@ class CashClosure extends Component
         ];
     }
     public function resetFields()
-{
-    $this->user_name = '';
-    $this->closing_date_time = null; // Puede ser 'null' o una fecha por defecto si es necesario
-    $this->start_balance = 0;
-    $this->payment_method = null; // o '' si prefieres un string vacío
-    $this->total_sales_cash = 0;
-    $this->total_sales_card = 0;
-    $this->total_sales_transfer = 0;
-    $this->total_expenses = 0;
-    $this->final_balance_cash = 0; // Resetear saldo final en efectivo
-    $this->next_start_balance = 0;
-    $this->total_sales = 0;
-    $this->final_balance = 0;
-    $this->search = '';
-    $this->search_1 = '';
-    $this->search_2 = '';
-    $this->search_placeholder = 'Fecha inicio';
-    $this->search_1_placeholder = 'Fecha fin';
-    $this->search_2_placeholder = 'Buscar Producto ...';
-}
-
+    {
+        $this->user_name = '';
+        $this->closing_date_time = null; // Puede ser 'null' o una fecha por defecto si es necesario
+        $this->start_balance = 0;
+        $this->payment_method = null; // o '' si prefieres un string vacío
+        $this->total_sales_cash = 0;
+        $this->total_sales_card = 0;
+        $this->total_sales_transfer = 0;
+        $this->total_expenses = 0;
+        $this->final_balance_cash = 0; // Resetear saldo final en efectivo
+        $this->next_start_balance = 0;
+        $this->total_sales = 0;
+        $this->final_balance = 0;
+        $this->search = '';
+        $this->search_1 = '';
+        $this->search_2 = '';
+        $this->search_placeholder = 'Fecha inicio';
+        $this->search_1_placeholder = 'Fecha fin';
+        $this->search_2_placeholder = 'Buscar Producto ...';
+    }
 }

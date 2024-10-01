@@ -13,7 +13,7 @@
     @endif
     </div>
 
-<div class="mb-1">
+    <div class="mb-1">
     <div class="overflow-x-auto mt-5 relative z-10 max-w-6xl mx-auto">
         <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
             <thead class="bg-blue-900 text-gray-200 uppercase text-sm leading-normal">

@@ -30,4 +30,7 @@ class cash_closure extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    
+
 }

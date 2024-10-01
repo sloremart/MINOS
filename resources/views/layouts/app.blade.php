@@ -57,6 +57,7 @@
         <script src="{{ asset('js/canvasjs.min.js') }}"></script>
         <script src="{{ asset('js/chart.min.js') }}"></script>
         <script src="{{ asset('js/chart.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
         @livewireScripts
     </body>
 </html>
