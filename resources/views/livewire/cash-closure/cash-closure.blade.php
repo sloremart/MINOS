@@ -204,7 +204,7 @@
                                             <td class="py-2 px-4">${{ $row->total_expenses }}</td>
                                             <td class="py-2 px-4">${{ $row->final_balance }}</td>
                                             <td class="py-2 px-4">
-                                                <button wire:click="edit({{ $row->id }})"
+                                                <button wire:click="generatePdf({{ $row->id }})"
                                                     class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded"><i
                                                         class="text-bg-green-500 fas fa-pencil"></i></button>
                                                 <button wire:click="Destroy({{ $row->id }})"
@@ -260,19 +260,20 @@
                 <!-- Modal body -->
                 <div class="p-4 md:p-5 space-y-4 bg-white bg-opacity-75">
                     <div class="bg-white max-w-full shadow-lg rounded-lg">
-                        <div class="p-4 grid  grid-cols-2 md:grid-cols-2 lg:grid-cols-2 w-full bg-white border border-gray-300">
+                        <div
+                            class="p-4 grid  grid-cols-2 md:grid-cols-2 lg:grid-cols-2 w-full bg-white border border-gray-300">
                             <div class="border border-gray-300 p-2">Responsable Cierre :</div>
-                            <div class="border border-gray-300 p-2">{{$this->user_name}}</div>
+                            <div class="border border-gray-300 p-2">{{ $this->user_name }}</div>
                             <div class="border border-gray-300 p-2">Fecha de Cierre :</div>
-                            <div class="border border-gray-300 p-2">{{$this->closing_date_time}}</div>
+                            <div class="border border-gray-300 p-2">{{ $this->closing_date_time }}</div>
                             <div class="border border-gray-300 p-2">Saldo Inicial :</div>
-                            <div class="border border-gray-300 p-2">$ {{$this->start_balance}}</div>
+                            <div class="border border-gray-300 p-2">$ {{ $this->start_balance }}</div>
                             <div class="border border-gray-300 p-2">Ingresos :</div>
-                            <div class="border border-gray-300 p-2">$ {{$this->total_sales}}</div>
+                            <div class="border border-gray-300 p-2">$ {{ $this->total_sales }}</div>
                             <div class="border border-gray-300 p-2">Egresos Total:</div>
-                            <div class="border border-gray-300 p-2">$ {{$this->total_expenses}}</div>
+                            <div class="border border-gray-300 p-2">$ {{ $this->total_expenses }}</div>
                             <div class="border border-gray-300 p-2">Total Balance :</div>
-                            <div class="border border-gray-300 p-2">$ {{$this->final_balance}}</div>
+                            <div class="border border-gray-300 p-2">$ {{ $this->final_balance }}</div>
                         </div>
 
                         <table class="table-auto w-full border-collapse bg-white  overflow-hidden">
@@ -305,8 +306,10 @@
                     class="flex  justify-end gap-2 p-4 md:p-5 border-t border-gray-200 bg-white bg-opacity-75 rounded-b dark:border-gray-600">
                     <button wire:click="closeModal" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cerrar</button>
-                    <button wire:click="closeModal" type="button"
-                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Imprimir</button>
+                    <button onclick="printDiv('printable-area')" type="button"
+                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 ...">
+                        Imprimir
+                    </button>
                 </div>
             </div>
         </div>
@@ -316,6 +319,16 @@
     @if ($showModal)
         <div class="modal-backdrop fade show"></div>
     @endif
+    <script>
+        function printDiv(divId) {
+            var content = document.getElementById(divId).innerHTML;
+            var originalContent = document.body.innerHTML;
+
+            document.body.innerHTML = content; // Reemplaza el contenido actual con el del modal
+            window.print(); // Llama a la función de impresión
+            document.body.innerHTML = originalContent; // Restaura el contenido original después de imprimir
+        }
+    </script>
 
 
 

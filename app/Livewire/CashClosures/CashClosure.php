@@ -14,6 +14,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CashClosure extends Component
 {
@@ -53,7 +54,7 @@ class CashClosure extends Component
     public function render()
     {
         $query = cash_closure::with('user');
-        
+
 
 
         if ($this->search) {
@@ -167,13 +168,13 @@ class CashClosure extends Component
         if (!$closure) {
             session()->flash('error', 'cierre no encontrado');
         }
-         $this->selected_id = $closure->id;
-         $this->user_name = $closure->user->name;
-         $this->closing_date_time = $closure->closing_date_time;
-         $this->start_balance = $closure->start_balance;
-         $this->total_sales = $closure->total_sales;
-         $this->total_expenses = $closure->total_expenses;
-         $this->final_balance = $closure->final_balance;
+        $this->selected_id = $closure->id;
+        $this->user_name = $closure->user->name;
+        $this->closing_date_time = $closure->closing_date_time;
+        $this->start_balance = $closure->start_balance;
+        $this->total_sales = $closure->total_sales;
+        $this->total_expenses = $closure->total_expenses;
+        $this->final_balance = $closure->final_balance;
 
         if (!$closure) {
             session()->flash('error', 'Cierre no encontrado.');
@@ -203,6 +204,44 @@ class CashClosure extends Component
         } else {
             session()->flash('error', 'No se encontraron ventas para este cierre.');
         }
+    }
+
+
+
+    public function generatePdf($closureId)
+    {
+        // Obtener el cierre de caja específico
+        $closure = cash_closure::with('user')->find($closureId);
+        if (!$closure) {
+            session()->flash('error', 'Cierre no encontrado.');
+            return;
+        }
+
+        // Obtener la fecha de cierre
+        $closingDateTime = Carbon::parse($closure->closing_date_time);
+        $closingDate = $closingDateTime->toDateString(); // Solo fecha, sin hora
+
+        // Obtener los detalles de ventas relacionados a este cierre
+        $salesDetails = SaleDetail::with('product')
+            ->whereHas('sale', function ($query) use ($closingDate) {
+                $query->whereDate('created_at', $closingDate);
+            })
+            ->get();
+
+        // Preparar los datos para la vista del PDF
+        $data = [
+            'closure' => $closure,
+            'salesDetails' => $salesDetails
+        ];
+
+        // Generar el PDF
+        $pdf = Pdf::loadView('livewire.cash-closure.closure-pdf', $data);
+
+        // Retornar el PDF generado para ser descargado
+        return response()->streamDownload(
+            fn() => print($pdf->output()),
+            'cierre_de_caja_' . $closureId . '.pdf'
+        );
     }
 
 
@@ -247,8 +286,9 @@ class CashClosure extends Component
         $this->search_1_placeholder = 'Fecha fin';
         $this->search_2_placeholder = 'Buscar Producto ...';
     }
-    public function Destroy($id){
-        $cashClosure=cash_closure::find($id);
+    public function Destroy($id)
+    {
+        $cashClosure = cash_closure::find($id);
         $cashClosure->delete();
     }
 }

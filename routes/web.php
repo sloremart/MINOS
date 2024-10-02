@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tablas;
 use App\Livewire\Forms\ProductForm;
 use App\Livewire\Forms\SaleForm;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -305,4 +306,15 @@ Route::prefix("unidades")->group(function () {
 Route::prefix("cierre")->group(function () {
     Route::get('listado', \App\Livewire\CashClosures\CashClosure::class)
         ->name("cierre_caja.list");
+});
+
+
+
+Route::prefix('reportes/cierreCaja')->group(function () {
+    Route::get('pdf/{closureId}', function ($closureId) {
+        // Crear una instancia del componente Livewire
+        $component = app()->make(\App\Livewire\CashClosures\CashClosure::class);
+        // Llamar al método que genera el PDF pasando el ID del cierre
+        return $component->generatePdf($closureId);
+    })->name('cierre_caja.pdf');
 });

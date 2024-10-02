@@ -82,42 +82,7 @@ class Reports extends Component
 
 
    
-    // public function pdf()
-    // {
-    //     $this->search;
-    //     $this->search_1;
-      
-    //     // Copia la misma consulta del método render(), incluyendo los filtros
-    //     $query = SaleDetail::join('products', 'sale_details.product_id', '=', 'products.id')
-    //         ->select(
-    //             'products.name',
-    //             DB::raw('SUM(sale_details.quantity) as total_quantity'),
-    //             DB::raw('MAX(sale_details.unit_price) as unit_price'),
-    //             DB::raw('MAX(sale_details.sub_total) as sub_total'),
-    //             DB::raw('MAX(sale_details.created_at) as last_created_at')
-    //         )
-    //         ->groupBy('products.name', 'sale_details.created_at');
     
-    //     // Aplicar filtros de fecha
-    //     if (!empty($this->search)) {
-    //         $query->where('sale_details.created_at', '>=', $this->search);
-           
-    //     }
-    //     if (!empty($this->search_1)) {
-    //         $query->where('sale_details.created_at', '<=', $this->search_1);
-           
-    //     }
-        
-    
-    //     // Obtén los datos filtrados
-    //     $data = $query->get();
-        
-    //     // Genera el PDF con los datos filtrados
-    //     $pdf = Pdf::loadView('livewire.reports.reportPdf', compact('data'));
-        
-    //     // Devuelve el PDF para visualizarlo o descargarlo
-    //     return $pdf->stream('reporte.pdf');
-    // }
 
     public function pdf()
 {
