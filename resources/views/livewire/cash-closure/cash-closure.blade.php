@@ -113,7 +113,7 @@
                                 <input wire:model="final_balance_cash" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="finalBalanceCashHelp" disabled />
-
+                                   
                                 <small id="finalBalanceCashHelp" class="text-gray-500">Ingrese el saldo final en
                                     efectivo.</small>
                             </div>
@@ -171,12 +171,12 @@
                         <!-- Inputs de búsqueda -->
                         <div class="overflow-x-auto  relative z-10 max-w-6xl mx-auto ">
                             <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
-                                <input type="text" placeholder="{{ $search_1 }}"
-                                    class="p-2 border border-gray-300 rounded-md" wire:model="search">
-                                <input type="date" placeholder="{{ $search_placeholder }}"
-                                    class="p-2 border border-gray-300 rounded-md" wire:model="search_placeholder">
-                                <input type="date" placeholder="{{ $search_placeholder }}"
-                                    class="p-2 border border-gray-300 rounded-md" wire:model="search_1_placeholder">
+                                <input type="text" placeholder="buscar ..."
+                                    class="p-2 border border-gray-300 rounded-md" wire:model.live="search">
+                                <input type="date" 
+                                    class="p-2 border border-gray-300 rounded-md" wire:model.live="search_1">
+                                <input type="date" 
+                                    class="p-2 border border-gray-300 rounded-md" wire:model.live="search_2">
                             </div>
                         </div>
 
@@ -205,8 +205,7 @@
                                             <td class="py-2 px-4">${{ $row->final_balance }}</td>
                                             <td class="py-2 px-4">
                                                 <button wire:click="generatePdf({{ $row->id }})"
-                                                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded"><i
-                                                        class="text-bg-green-500 fas fa-pencil"></i></button>
+                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded"><i class="fa-regular fa-file-pdf"></i></button>
                                                 <button wire:click="Destroy({{ $row->id }})"
                                                     class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded"><i
                                                         class="text-bg-red-500 fas fa-trash"></i></button>

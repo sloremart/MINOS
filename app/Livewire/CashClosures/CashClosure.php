@@ -39,9 +39,7 @@ class CashClosure extends Component
     public $search = '';
     public $search_1 = '';
     public $search_2 = '';
-    public $search_placeholder = 'Fecha inicio';
-    public $search_1_placeholder = 'Fecha fin';
-    public $search_2_placeholder = 'Buscar Producto ...';
+    
 
     private $paginacion = 4;
     public $users;
@@ -58,7 +56,9 @@ class CashClosure extends Component
 
 
         if ($this->search) {
-            $query->where('created_at', '>=', $this->search);
+            $query->whereHas('user', function ($q) {
+                $q->where('name', 'LIKE', "%{$this->search}%");
+            });
         }
 
         if ($this->search_1) {
@@ -66,10 +66,9 @@ class CashClosure extends Component
         }
 
         if ($this->search_2) {
-            $query->whereHas('user', function ($q) {
-                $q->where('name', 'LIKE', "%{$this->search_2}%");
-            });
+            $query->where('created_at', '<=', $this->search_2);
         }
+        
 
         $data = $query->paginate($this->paginacion);
 
@@ -242,6 +241,8 @@ class CashClosure extends Component
             fn() => print($pdf->output()),
             'cierre_de_caja_' . $closureId . '.pdf'
         );
+        
+         
     }
 
 
