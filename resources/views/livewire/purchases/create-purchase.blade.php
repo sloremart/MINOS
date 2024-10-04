@@ -17,7 +17,9 @@
                                 <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                             @endforeach
                         </select>
-                        @error('modelForm.supplier_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        @error('modelForm.supplier_id')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Input para Nombre del Proveedor -->

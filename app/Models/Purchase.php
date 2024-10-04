@@ -12,7 +12,7 @@ class Purchase extends Model
     use SoftDeletes;
     use PaginatorTrait;
     use ImageableTrait;
-    protected $fillable = ['supplier_id', 'user_id', 'purchase_date', 'total_amount', 'details'];
+    protected $fillable = ['supplier_id', 'user_id', 'purchase_date', 'total_amount','payment_method', 'details'];
 
     public function supplier()
     {
