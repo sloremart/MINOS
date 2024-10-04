@@ -258,6 +258,7 @@ Route::prefix("unidades")->group(function () {
     });
 
 // Rutas para Price
+// Rutas para Price
     Route::prefix("precios")->group(function () {
         Route::get('listado/{product?}', \App\Livewire\Prices\Price::class)
             ->name("price.list");

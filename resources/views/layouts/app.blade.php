@@ -54,6 +54,8 @@
         </div>
 
         @stack('modals')
+        <script src="{{ asset('js/chart.js') }}"></script>
+        <script src="{{ asset('js/canvasjs.min.js') }}"></script>
 
         @livewireScripts
     </body>
