@@ -25,16 +25,16 @@ class CashClosure extends Component
     public $closing_date_time; // Cambiar closure_time a closing_date_time
     public $start_balance;
     public $payment_method;
-    public $total_sales_cash = 0;
+    public $total_sales_cash;
     public $total_sales_card = 0;
-    public $total_sales_transfer = 0;
-    public $total_expenses = 0;
-    public $final_balance_cash = 0;
-    public $final_balance_card = 0;
+    public $total_sales_transfer;
+    public $total_expenses;
+    public $final_balance_cash ;
+    public $final_balance_card ;
     public $final_balance_transfer = 0;
-    public $next_start_balance = 0;
-    public $total_sales = 0;
-    public $final_balance = 0;
+    public $next_start_balance ;
+    public $total_sales ;
+    public $final_balance;
     public $selected_id;
     public $search = '';
     public $search_1 = '';

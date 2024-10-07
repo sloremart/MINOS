@@ -1,10 +1,17 @@
 <div>
-    <div class="py-12  max-w-screen-7xl">
-        <div class="  max-w-screen-7xl justify-center  place-content-center p-4  pt-8  ">
+    <div class="py-2    max-w-screen-7xl pb-0 mb-0">
+        <div class="max-w-screen-7xl justify-center  place-content-center p-4">
             <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 relative z-40">
-                <div class="relative z-40 bg-white col-span-2 md:col-span-1 p-4 rounded-lg shadow-md overflow-x-auto">
-                    <div class="max-w-2xl mx-auto p-4 bg-white shadow-md rounded-lg">
-                        <h2 class="text-2xl font-bold mb-4">Cierre de Caja</h2>
+                <div class="relative z-40 bg-white col-span-2 md:col-span-1  rounded-lg shadow-md overflow-x-auto"
+                    style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                    <div
+                        class="w-full bg-blue-900  bg-opacity-75 rounded-t-lg p-4 pb-4 flex justify-between items-center">
+                        <h2 class="text-2xl font-bold text-white">Cierre de Caja</h2>
+                        <span class="text-white">{{ \Carbon\Carbon::now()->format('d/m/Y') }}</span>
+                    </div>
+
+                    <div class="p-4 bg-white bg-opacity-75">
+                        <!-- Contenedor de la cabecera -->
 
                         @if (session()->has('message'))
                             <div class="mb-4 text-green-600">
@@ -13,54 +20,71 @@
                         @endif
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
                             <!-- Nombre del Usuario -->
-                            <div>
+                            <div class="relative">
+                                <!-- Input con espacio a la izquierda para el ícono -->
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+
                                 <input list="userList" wire:model="user_name"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="userNameHelp" />
+                                    class="mt-1 block w-full pl-10 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    aria-describedby="userNameHelp" placeholder=" Nombre responsable" />
+
+                                <!-- Lista de opciones -->
                                 <datalist id="userList">
                                     @foreach ($users as $user)
                                         <option value="{{ $user->name }}">{{ $user->name }}</option>
                                     @endforeach
                                 </datalist>
+                                <!-- Mensajes de error y ayuda -->
                                 @error('user_name')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                <small id="userNameHelp" class="text-gray-500">Seleccione su nombre de la lista.</small>
+                                {{-- <small id="userNameHelp" class="text-gray-500">Seleccione su nombre de la lista.</small> --}}
                             </div>
 
+
+
                             <!-- Fecha y Hora del Cierre -->
-                            <div>
-                                {{-- <label class="block text-sm font-medium text-gray-700">Fecha y Hora del Cierre</label> --}}
+                            <div class="relative">
+
                                 <input type="date" wire:model="closing_date_time"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="closureTimeHelp" />
                                 @error('closing_date_time')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                <small id="closureTimeHelp" class="text-gray-500">Ingrese la fecha y hora del
-                                    cierre.</small>
+                                {{-- <small id="closureTimeHelp" class="text-gray-500">Ingrese la fecha y hora del
+                                    cierre.</small> --}}
                             </div>
 
                             <!-- Saldo Inicial -->
-                            <div>
+                            <div class="relative">
+                                <!-- Input con espacio a la izquierda para el ícono -->
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-solid fa-money-bill-1"></i>
+                                </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial</label> --}}
                                 <input wire:model="start_balance" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="startBalanceHelp" />
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    aria-describedby="startBalanceHelp" placeholder="Saldo inicial" />
                                 @error('start_balance')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                <small id="startBalanceHelp" class="text-gray-500">Ingrese el saldo inicial.</small>
+                                {{-- <small id="startBalanceHelp" class="text-gray-500">Ingrese el saldo inicial.</small> --}}
                             </div>
 
                             <!-- Método de Pago -->
-                            <div>
-
+                            <div class="relative">
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </span>
                                 <select wire:model="payment_method"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300  pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     wire:change="updateTotalSales" aria-describedby="paymentMethodHelp">
-                                    <option value="">Seleccione</option>
+                                    <option value="" class="text-gray-500"> Metodo de pago</option>
                                     <option value="cash">Efectivo</option>
                                     <option value="transfer">Transferencia</option>
                                     <option value="all">Todos</option> <!-- Nueva opción "Todos" -->
@@ -68,99 +92,126 @@
                                 @error('payment_method')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                <small id="paymentMethodHelp" class="text-gray-500">Seleccione el método de pago
-                                    utilizado.</small>
+                                {{-- <small id="paymentMethodHelp" class="text-gray-500">Seleccione el método de pago
+                                    utilizado.</small> --}}
                             </div>
 
                             <!-- Total Ventas Efectivo -->
-                            <div>
+                            <div class="relative">
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-solid fa-money-bill-1-wave"></i>
+                                </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Total Ventas Efectivo</label> --}}
                                 <input wire:model="total_sales_cash" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    readonly aria-describedby="totalSalesCashHelp" disabled />
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    readonly aria-describedby="totalSalesCashHelp" disabled
+                                    placeholder="Total de ventas en
+                                    efectivo." />
 
-                                <small id="totalSalesCashHelp" class="text-gray-500">Total de ventas en
-                                    efectivo.</small>
+                                {{-- <small id="totalSalesCashHelp" class="text-gray-500">Total de ventas en
+                                    efectivo.</small> --}}
                             </div>
 
 
 
                             <!-- Total Ventas Transferencia -->
-                            <div>
+                            <div class="relative">
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-duotone fa-solid fa-credit-card"></i>
+                                </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Total Ventas
                                     Transferencia</label> --}}
                                 <input wire:model="total_sales_transfer" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    readonly aria-describedby="totalSalesTransferHelp" disabled />
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    readonly aria-describedby="totalSalesTransferHelp" disabled
+                                    placeholder="Total de transferencia" />
 
-                                <small id="totalSalesTransferHelp" class="text-gray-500">Total de ventas por
-                                    transferencia.</small>
+                                {{-- <small id="totalSalesTransferHelp" class="text-gray-500">Total de ventas por
+                                    transferencia.</small> --}}
                             </div>
 
                             <!-- Total Egresos -->
-                            <div>
+                            <div class="relative">
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                                </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Total Egresos</label> --}}
                                 <input wire:model="total_expenses" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="totalExpensesHelp" disabled />
+                                    class="mt-1 block w-full border-gray-300  pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    aria-describedby="totalExpensesHelp" disabled placeholder="total de egresos." />
 
-                                <small id="totalExpensesHelp" class="text-gray-500">Ingrese el total de egresos.</small>
+                                {{-- <small id="totalExpensesHelp" class="text-gray-500">total de egresos.</small> --}}
                             </div>
-
                             <!-- Saldo Final Efectivo -->
-                            <div>
+                            <div class="relative">
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-sharp fa-solid fa-money-bill"></i>
+                                </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Final Efectivo</label> --}}
                                 <input wire:model="final_balance_cash" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="finalBalanceCashHelp" disabled />
-                                   
-                                <small id="finalBalanceCashHelp" class="text-gray-500">Ingrese el saldo final en
-                                    efectivo.</small>
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    aria-describedby="finalBalanceCashHelp" disabled
+                                    placeholder="saldo final en efectivo." />
+
+                                {{-- <small id="finalBalanceCashHelp" class="text-gray-500">Ingrese el saldo final en
+                                    efectivo.</small> --}}
                             </div>
 
                             <!-- Saldo Inicial Próximo Turno -->
-                            <div>
+                            <div class="relative">
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-sharp fa-solid fa-money-bill"></i>
+                                </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
                                     Turno</label> --}}
                                 <input wire:model="next_start_balance" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="nextStartBalanceHelp" />
+                                    class="mt-1 block w-full border-gray-300 rounded-md  pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    aria-describedby="nextStartBalanceHelp"
+                                    placeholder="saldo para el próximo turno." />
                                 @error('next_start_balance')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                <small id="nextStartBalanceHelp" class="text-gray-500">Ingrese el saldo inicial para el
-                                    próximo turno.</small>
+                                {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Ingrese el saldo inicial para el
+                                    próximo turno.</small> --}}
                             </div>
-                            <div>
+                            <div class="relative">
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-sharp fa-solid fa-money-bill"></i>
+                                </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
                                     Turno</label> --}}
                                 <input wire:model="total_sales" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="nextStartBalanceHelp" disabled />
+                                    class="mt-1 block w-full border-gray-300 rounded-md pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    aria-describedby="nextStartBalanceHelp" disabled placeholder="Total venta" />
 
-                                <small id="nextStartBalanceHelp" class="text-gray-500">Total venta</small>
+                                {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Total venta</small> --}}
                             </div>
-                            <div>
+                            <div class="relative">
+                                <span class="absolute py-4 left-0 flex items-center pl-3">
+                                    <i class="fa-sharp fa-solid fa-money-bill"></i>
+                                </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
                                     Turno</label> --}}
                                 <input wire:model="final_balance" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="nextStartBalanceHelp" disabled />
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    aria-describedby="nextStartBalanceHelp" disabled placeholder="Total balance" />
 
-                                <small id="nextStartBalanceHelp" class="text-gray-500">Total balance</small>
+                                {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Total balance</small> --}}
                             </div>
                         </div>
 
                         <!-- Botón Enviar -->
-                        <div class="flex justify-end mt-6">
+                        <div class="flex justify-end mt-6 gap-2">
+                            <button wire:click="resetFields"
+                                class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+                                Cancelar
+                            </button>
                             <button wire:click="store"
-                                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                                class="px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-900">
                                 Registrar Cierre de Caja
                             </button>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="relative z-40 bg-white col-span-1 md:col-span-2 p-4 rounded-lg shadow-md ">
 
@@ -173,10 +224,10 @@
                             <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
                                 <input type="text" placeholder="buscar ..."
                                     class="p-2 border border-gray-300 rounded-md" wire:model.live="search">
-                                <input type="date" 
-                                    class="p-2 border border-gray-300 rounded-md" wire:model.live="search_1">
-                                <input type="date" 
-                                    class="p-2 border border-gray-300 rounded-md" wire:model.live="search_2">
+                                <input type="date" class="p-2 border border-gray-300 rounded-md"
+                                    wire:model.live="search_1">
+                                <input type="date" class="p-2 border border-gray-300 rounded-md"
+                                    wire:model.live="search_2">
                             </div>
                         </div>
 
@@ -205,7 +256,8 @@
                                             <td class="py-2 px-4">${{ $row->final_balance }}</td>
                                             <td class="py-2 px-4">
                                                 <button wire:click="generatePdf({{ $row->id }})"
-                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded"><i class="fa-regular fa-file-pdf"></i></button>
+                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded"><i
+                                                        class="fa-regular fa-file-pdf"></i></button>
                                                 <button wire:click="Destroy({{ $row->id }})"
                                                     class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded"><i
                                                         class="text-bg-red-500 fas fa-trash"></i></button>
@@ -258,25 +310,51 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-4 md:p-5 space-y-4 bg-white bg-opacity-75">
-                    <div class="bg-white max-w-full shadow-lg rounded-lg">
+                    <div class="bg-white max-w-full shadow-lg rounded-xl">
                         <div
-                            class="p-4 grid  grid-cols-2 md:grid-cols-2 lg:grid-cols-2 w-full bg-white border border-gray-300">
-                            <div class="border border-gray-300 p-2">Responsable Cierre :</div>
-                            <div class="border border-gray-300 p-2">{{ $this->user_name }}</div>
-                            <div class="border border-gray-300 p-2">Fecha de Cierre :</div>
-                            <div class="border border-gray-300 p-2">{{ $this->closing_date_time }}</div>
-                            <div class="border border-gray-300 p-2">Saldo Inicial :</div>
-                            <div class="border border-gray-300 p-2">$ {{ $this->start_balance }}</div>
-                            <div class="border border-gray-300 p-2">Ingresos :</div>
-                            <div class="border border-gray-300 p-2">$ {{ $this->total_sales }}</div>
-                            <div class="border border-gray-300 p-2">Egresos Total:</div>
-                            <div class="border border-gray-300 p-2">$ {{ $this->total_expenses }}</div>
-                            <div class="border border-gray-300 p-2">Total Balance :</div>
-                            <div class="border border-gray-300 p-2">$ {{ $this->final_balance }}</div>
-                        </div>
+                            class="p-4 grid  grid-cols-1 md:grid-cols-1 lg:grid-cols-1 w-full bg-white border border-gray-300 rounded-lg">
+                            <table class="border border-gray-300 max-w-full rounded-xl">
+                                <thead>
+                                    <tr>
+                                        <th class="border border-gray-300 p-2 text-left rounded-tl-lg">Responsable
+                                            Cierre :</th>
+                                        <th class="border border-gray-300 p-2 rounded-tr-lg">{{ $this->user_name }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 p-2 text-left">Fecha de Cierre :</td>
+                                        <td class="border border-gray-300 p-2">{{ $this->closing_date_time }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 p-2 text-left">Saldo Inicial :</td>
+                                        <td class="border border-gray-300 p-2">$ {{ $this->start_balance }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 p-2 text-left">Ingresos :</td>
+                                        <td class="border border-gray-300 p-2">$ {{ $this->total_sales }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 p-2 text-left">Egresos Total:</td>
+                                        <td class="border border-gray-300 p-2">$ {{ $this->total_expenses }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 p-2 text-left rounded-bl-lg">Total Balance :
+                                        </td>
+                                        <td class="border border-gray-300 p-2 rounded-br-lg">$
+                                            {{ $this->final_balance }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                        <table class="table-auto w-full border-collapse bg-white  overflow-hidden">
-                            <thead class="bg-blue-900 text-gray-200 uppercase text-sm leading-normal">
+
+
+                        </div>
+                    </div>
+                    <div class="bg-white max-w-full shadow-lg rounded-lg">
+                        <table class="table-auto w-full border-collapse bg-white  overflow-hidden rounded-xl">
+                            <thead class="bg-purple-900 text-gray-200 uppercase text-sm  leading-normal">
                                 <tr>
                                     <th class="px-4 py-2 border-b">Producto</th>
                                     <th class="px-4 py-2 border-b">Cantidad</th>
@@ -301,14 +379,13 @@
                 </div>
 
                 <!-- Modal footer -->
-                <div
-                    class="flex  justify-end gap-2 p-4 md:p-5 border-t border-gray-200 bg-white bg-opacity-75 rounded-b dark:border-gray-600">
+                <div class="flex  justify-end gap-2 p-4 md:p-5 border-t border-gray-200 bg-white bg-opacity-95 rounded-b dark:border-gray-600">
                     <button wire:click="closeModal" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cerrar</button>
-                    <button onclick="printDiv('printable-area')" type="button"
+                    {{-- <button onclick="printDiv('printable-area')" type="button"
                         class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 ...">
                         Imprimir
-                    </button>
+                    </button> --}}
                 </div>
             </div>
         </div>
