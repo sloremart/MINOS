@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white py-10">
+<nav x-data="{ open: false }" class=" py-10">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 pt-2 sm:px-6 bg-white lg:px-8 bg-gray-0 rounded-full shadow-lg"
         style=" position: relative; z-index: 1; ">

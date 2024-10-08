@@ -68,7 +68,7 @@
         
             // Colores fijos
             const fixedColors = [
-                '#1E3A8A', '#3B82F6', '#1E40AF', '#60A5FA', '#2563EB', '#93C5FD',
+                '#662483', '#21529b', '#1E40AF', '#60A5FA', '#2563EB', '#93C5FD',
                 '#2B6CB0', '#BFDBFE', '#3B82F6', '#1E3A8A', '#60A5FA', '#1E40AF'
             ];
         

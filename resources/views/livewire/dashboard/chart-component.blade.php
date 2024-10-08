@@ -63,7 +63,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Colores fijos para el gráfico
             const fixedColors = [
-                '#e1bee7', '#ce93d8', '#ba68c8', '#ab47bc', '#9c27b0', '#8e24aa',
+                '#662483', '#ce93d8', '#ba68c8', '#ab47bc', '#9c27b0', '#8e24aa',
                 '#c5cae9', '#9fa8da', '#7986cb', '#5c6bc0', '#3f51b5', '#3949ab'
             ];
 
