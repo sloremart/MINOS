@@ -1,43 +1,43 @@
 <!-- resources/views/livewire/suppliers/supplier.blade.php -->
 <div>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Listado de proveedores') }}
-        </h2>
-    </x-slot>
+   
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center  pt-5" style="font-size: 34px;">
+        {{ __('Listado de proveedores') }}
+    </h2>
     <div class="text-right z-20 relative max-w-6xl mx-auto">
         <button wire:click="openModal" class="bg-blue-900 hover:bg-blue-400 text-white font-bold mt-10 py-2 px-4 rounded inline-flex items-center shadow-md">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Proveedor
         </button>
     </div>
+ 
+    <div class="   sm:pl-10 sm:pr-10 md:pl-30 md:pr-30  lg:pl-35 lg:pr-35  relative z-10">
+        @include("partials.v1.table.primary-table",[
+                "filter_active" => true,
+                "search" => "search",
+                "search_1" => "search_1",
+                "search_placeholder"=>$search_placeholder,
+                "search_1_placeholder"=>$search_1_placeholder,
+                "table_headers"=>["ID"=>"id",
+                                    "Nombre"=>"name",
+                                    "Documento"=>"document",
+                                    "Correo Electrónico"=>"email",
+                                    "Teléfono"=>"phone",
+                                    "Dirección"=>"address",
 
 
-    @include("partials.v1.table.primary-table",[
-               "filter_active" => true,
-               "search" => "search",
-               "search_1" => "search_1",
-               "search_placeholder"=>$search_placeholder,
-               "search_1_placeholder"=>$search_1_placeholder,
-               "table_headers"=>["ID"=>"id",
-                                 "Nombre"=>"name",
-                                 "Documento"=>"document",
-                                 "Correo Electrónico"=>"email",
-                                 "Teléfono"=>"phone",
-                                 "Dirección"=>"address",
+                    ],
+                    "table_actions"=>[
+                                    "edit"=>"edit",
+                                    "delete"=>"delete",
+                                    "details"=>"details",
 
+                                        ],
 
-                ],
-                 "table_actions"=>[
-                                   "edit"=>"edit",
-                                   "delete"=>"delete",
-                                   "details"=>"details",
-
-                                    ],
-
-               "table_rows"=>$data
-           ])
+                "table_rows"=>$data
+            ])
+            </div>
 
     @if($isOpen)
         <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">

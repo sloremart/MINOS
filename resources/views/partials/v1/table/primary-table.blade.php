@@ -13,10 +13,10 @@
     @endif
     </div>
 
-    <div class="mb-1">
-    <div class="overflow-x-auto mt-5 relative z-10 max-w-6xl mx-auto">
-        <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
-            <thead class="bg-blue-900 text-gray-200 uppercase text-sm leading-normal">
+    <div class="mb-1 m-6">
+        <div  class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto"> <!-- Añadido overflow-x-auto aquí -->
+            <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap"> <!-- Añadido whitespace-nowrap aquí -->
+                <thead class="text-xs text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400" style="background:#406eab;">
                 <tr>
                     @foreach($table_headers as $header_name=>$table_header)
                         <th class="px-4 py-2 border-b">{{$header_name}}
