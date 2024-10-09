@@ -2,7 +2,7 @@
 
 <div class="py-12 flex justify-center"> <!-- Contenedor principal con márgenes y flex para centrar -->
 
-    <div class="max-w-screen-xl w-full mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-2 gap-4 mt-16">
+    <div class="max-w-screen-xl w-full mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-2 gap-4 mt-16 relative z-10">
         <!-- Ajuste de ancho máximo y padding -->
         <!-- Primera columna: Formulario -->
         <div>
@@ -72,7 +72,7 @@
             </div>
 
             <!-- Productos seleccionados -->
-            <div class="mt-6">
+            <div class="mt-6 relative z-10">
                 <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Productos Seleccionados</h3>
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-100">
@@ -106,7 +106,7 @@
         </div>
 
         <!-- Segunda columna: Tabla de productos para agregar -->
-        <div class="mt-16">
+        <div class="mt-16 ">
             <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0">Productos Disponibles</h3>
             <div class="bg-blue-100 rounded-lg shadow-lg overflow-hidden">
                 @include('partials.v1.table.primary-table', [

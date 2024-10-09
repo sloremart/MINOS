@@ -3,10 +3,10 @@
         @if($filter_active)
         <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
             @if(($search_placeholder ?? null) != null)
-                <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="px-4 py-2 border rounded">
+                <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="mt-1 block   border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             @endif
             @if(($search_1_placeholder ?? null) != null)
-                <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="px-4 py-2 border rounded">
+                <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="mt-1 block   border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             @endif
     
         </div>
