@@ -1,5 +1,5 @@
 <div>
-    <div class="overflow-x-auto  relative z-10 max-w-6xl mx-auto ">
+    <div class="relative z-10 max-w-7xl mx-auto ">
         @if($filter_active)
         <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
             @if(($search_placeholder ?? null) != null)

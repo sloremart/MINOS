@@ -1,18 +1,16 @@
 <!-- resources/views/livewire/customers/customer.blade.php -->
 <div>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center pt-4" style="font-size: 34px;">
             {{ __('Listado de clientes') }}
         </h2>
-    </x-slot>
     <div class="text-right  z-20 relative max-w-6xl mx-auto">
         <button wire:click="openModal" class="bg-blue-900 text-gray-200 mt-10 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Cliente
         </button>
     </div>
-
+    <div class=" sm:pl-10 sm:pr-10 md:pl-10 md:pr-10  lg:pl-52 lg:pr-52  relative z-10">
     @include("partials.v1.table.primary-table",[
     "filter_active" => true,
                "search" => "search",
@@ -37,7 +35,7 @@
 
                "table_rows"=>$data
            ])
-
+    </div>
     @if($isOpen)
         <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full z-10"

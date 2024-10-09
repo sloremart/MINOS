@@ -11,7 +11,7 @@
             Crear Unidad
         </button>
     </div>
-    <div class="   sm:pl-10 sm:pr-10 md:pl-30 md:pr-30  lg:pl-35 lg:pr-35  relative z-10">
+    <div class=" sm:pl-10 sm:pr-10 md:pl-10 md:pr-10  lg:pl-52 lg:pr-52  relative z-10">
     @include("partials.v1.table.primary-table",[
     "filter_active" => true,
                "search" => "search",
