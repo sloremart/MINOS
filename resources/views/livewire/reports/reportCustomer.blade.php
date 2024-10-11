@@ -3,11 +3,10 @@
         <!-- resources/views/livewire/suppliers/supplier.blade.php -->
         <div>
 
-            <x-slot name="header">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Reportes Venta por Cliente ') }}
-                </h2>
-            </x-slot>
+           
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight pt-10 text-center" style="font-size: 34px">
+                {{ __('Reportes Venta por Cliente ') }}
+            </h2>
             <style>
                 .chart-container {
                     min-height: 300px;

@@ -17,7 +17,7 @@
                         </div>
                         <div class="flex items-center justify-center  p-3  rounded-r-full"
                             style="width: 30%; height: 100%; background: #2e6cb4;">
-                            <img src="{{ asset('images/Iconos Menu/user.svg') }}" class="text-white" alt="">
+                            <img src="{{ asset('images/DASHBOARD/IconoUsuarios.png') }}" class="text-white" alt="" style="width: 70%">
                         </div>
                     </div>
 
@@ -31,7 +31,7 @@
                         </div>
                         <div class="flex items-center justify-center b p-3  rounded-r-full"
                             style="width: 30%; height: 100%;  background: #754997;">
-                            <img src="{{ asset('images/Iconos Menu/customers.svg') }}" class="text-white"
+                            <img src="{{ asset('images/DASHBOARD/IconoClientes.png') }}" class="text-white" width="70"
                                 alt="">
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="flex items-center justify-center  p-3  rounded-r-full"
                             style="width: 30%; height: 100%; background: #a8d7f5;">
-                            <img src="{{ asset('images/Iconos Menu/sale-svgrepo-com.svg') }}" class="text-white"
+                            <img src="{{ asset('images/DASHBOARD/IconoVentas.png') }}" class="text-white" width="70"
                                 alt="">
                         </div>
                     </div>

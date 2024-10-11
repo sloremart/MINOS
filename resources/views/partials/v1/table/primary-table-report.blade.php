@@ -1,26 +1,31 @@
 <div>
 @if($filter_active)
-    <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
+<div class="grid grid-cols-12 sm:grid-cols-12 md:grid-cols-12 items-center mb-4">
+    <!-- Inputs de búsqueda alineados a la izquierda -->
+    <div class="col-span-8 flex space-x-4 ml-4 sm:ml-0">
         @if(($search_2_placeholder ?? null) != null)
-        <input type="text" wire:model.live="{{$search_2}}" placeholder="{{$search_2_placeholder ?? ""}}" id="search_2" name="search_1" value="{{ old('search_2') }}"class="px-4 py-2 border rounded">
-    @endif
+            <input type="text" wire:model.live="{{$search_2}}" placeholder="{{$search_2_placeholder ?? ""}}" id="search_2" name="search_1" value="{{ old('search_2') }}" class="px-4 py-2 border rounded w-full">
+        @endif
         @if(($search_placeholder ?? null) != null)
-            <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" id="search" name="search" value="{{ old('search') }}" class="px-4 py-2 border rounded">
+            <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" id="search" name="search" value="{{ old('search') }}" class="px-4 py-2 border rounded w-full">
         @endif
         @if(($search_1_placeholder ?? null) != null)
-            <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="px-4 py-2 border rounded">
+            <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}" class="px-4 py-2 border rounded w-full">
         @endif
-        
-      
-      
-     <a href="#" id="exportPdfBtn" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" target="_blank">Exportar PDF</a>
-
-     
-     
-     
-       
-
     </div>
+    
+    <!-- Botón de exportar PDF alineado a la derecha -->
+    <div class="col-span-4 text-right">
+        <button type="submit"  id="exportPdfBtn" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-4 py-4">
+            <a href="#"   target="_blank">
+                <img src="{{ asset("images/exportar/PDFI.png") }}" alt="Exportar PDF" style="width: 30px; vertical-align: middle;">
+               
+            </a>
+        </button>
+        
+    </div>
+</div>
+
 @endif
 <div class="mb-1">
     <div  class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto"> <!-- Añadido overflow-x-auto aquí -->
