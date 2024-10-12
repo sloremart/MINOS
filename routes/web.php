@@ -177,6 +177,7 @@ Route::prefix("reportes/venta")->group(function () {
     Route::get('listado', \App\Livewire\Reports\Reports::class)
         ->name("reportSale.list");
 });
+Route::get('/export-excel', [\App\Livewire\Reports\Reports::class, 'exportExcel'])->name('export-excel');
 
 Route::prefix('reportes/venta')->group(function () {
     Route::get('pdf', function (\Illuminate\Http\Request $request) {

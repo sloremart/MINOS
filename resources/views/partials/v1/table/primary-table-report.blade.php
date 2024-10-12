@@ -22,6 +22,10 @@
                
             </a>
         </button>
+        <button type="button" wire:click="exportExcel" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-4">
+    <img src="{{ asset('images/exportar/EXCEL.png') }}" alt="Exportar Excel" style="width: 30px; vertical-align: middle;">
+</button>
+
         
     </div>
 </div>
