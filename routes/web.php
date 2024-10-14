@@ -152,6 +152,7 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Reports\ReportInv::class)
             ->name("reportInv.list");
     });
+    Route::get('/export-excel', [\App\livewire\Reports\ReportInv::class, 'exportExcel'])->name('export-excel');
     Route::prefix('reportes/inventario')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
@@ -179,6 +180,7 @@ Route::prefix("reportes/venta")->group(function () {
 });
 Route::get('/export-excel', [\App\Livewire\Reports\Reports::class, 'exportExcel'])->name('export-excel');
 
+
 Route::prefix('reportes/venta')->group(function () {
     Route::get('pdf', function (\Illuminate\Http\Request $request) {
         // Log para verificar que las fechas llegan correctamente
@@ -204,6 +206,7 @@ Route::prefix('reportes/venta')->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportCustomer::class)
             ->name("reportCust.list");
     });
+    Route::get('/export-excel', [\App\livewire\Reports\ReportCustomer::class, 'exportExcel'])->name('export-excel');
     Route::prefix('reportes/ventaCliente')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
@@ -229,6 +232,7 @@ Route::prefix('reportes/venta')->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportPurchaseSuplier::class)
             ->name("reportCust.list");
     });
+    Route::get('/export-excel', [\App\livewire\Reports\ReportPurchaseSuplier::class, 'exportExcel'])->name('export-excel');
 
     Route::prefix('reportes/compraPoveedor')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {

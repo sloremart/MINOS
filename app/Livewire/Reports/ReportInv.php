@@ -8,6 +8,19 @@ use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use App\Models\Inventory;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+// Incluir las librerías necesarias
+
+use PhpOffice\PhpSpreadsheet\Chart\Chart;
+use PhpOffice\PhpSpreadsheet\Chart\DataSeries;
+use PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues;
+use PhpOffice\PhpSpreadsheet\Chart\PlotArea;
+use PhpOffice\PhpSpreadsheet\Chart\Legend;
+use PhpOffice\PhpSpreadsheet\Chart\Title;
+
+
 
 
 use Barryvdh\DomPDF\Facade\Pdf; // Usa el facade en lugar de la clase
@@ -120,6 +133,115 @@ class ReportInv extends Component
         // Devuelve el PDF para visualizarlo o descargarlo
         return $pdf->stream('reporte.pdf');
     }
+
+    public function exportExcel()
+    {
+        // Define una ruta constante para el directorio donde se guardará el archivo
+        $directoryPath = public_path('reportes');
+    
+        // Verifica si la carpeta existe, si no, la crea
+        if (!file_exists($directoryPath)) {
+            mkdir($directoryPath, 0755, true);
+        }
+    
+        // Crear un nuevo archivo de Excel
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+    
+        // Insertar logo
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('Logo');
+        $drawing->setPath(public_path('images/exportar/Excel.png')); // Ruta al logo
+        $drawing->setCoordinates('A1'); // Posición del logo en la hoja
+        $drawing->setHeight(100); // Ajustar tamaño del logo
+        $drawing->setWorksheet($spreadsheet->getActiveSheet());
+    
+        // Combinar celdas A1:C10 para el logo
+        $sheet->mergeCells('A1:C10');
+    
+        // Establecer el título de la hoja 2 filas debajo del logo
+        $sheet->setCellValue('A12', 'Reporte de Inventario');
+    
+        // Combinar las celdas A12:H12 para centrar el título
+        $sheet->mergeCells('A12:H12');
+    
+        // Aplicar estilo al título
+        $titleStyle = [
+            'font' => [
+                'bold' => true,
+                'size' => 16,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ];
+        $sheet->getStyle('A12:H12')->applyFromArray($titleStyle);
+    
+        // Encabezados (2 filas debajo del título)
+        $headers = ['ID', 'Nombre del Producto', 'Cantidad Total', 'Última Fecha de Inventario'];
+    
+        // Colocar los encabezados en las celdas combinadas
+        $sheet->fromArray($headers, null, 'A14');
+    
+        // Estilo para encabezados
+        $headerStyle = [
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF']
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '0000FF'], // Azul
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ];
+        $sheet->getStyle('A14:D14')->applyFromArray($headerStyle);
+    
+        // Establecer filtros para la tabla de datos
+        $sheet->setAutoFilter('A14:D14');
+    
+        // Consulta a la base de datos para obtener los productos e inventarios
+        $query = Inventory::join('products', 'inventories.product_id', '=', 'products.id')
+            ->select(
+                'products.id',
+                'products.name',
+                DB::raw('SUM(inventories.quantity) as total_quantity'),
+                DB::raw('MAX(inventories.created_at) as last_created_at')
+            )
+            ->groupBy('products.id', 'products.name');
+    
+        // Filtros por búsqueda (opcional)
+        if ($this->search_2) {
+            $query->where('products.name', '>=', $this->search_2);
+        }
+        if ($this->search) {
+            $query->where('inventories.created_at', '>=', $this->search);
+        }
+        if ($this->search_1) {
+            $query->where('inventories.created_at', '<=', $this->search_1);
+        }
+    
+        // Obtener los datos
+        $data = $query->get()->toArray();
+    
+        // Escribir los datos debajo de los encabezados (comienza en A15)
+        $sheet->fromArray($data, null, 'A15');
+    
+        // Guardar el archivo Excel
+        $fileName = 'reporte_inventario.xlsx';
+        $filePath = $directoryPath . DIRECTORY_SEPARATOR . $fileName;
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($filePath);
+    
+        // Retornar la ruta del archivo para descargar
+        return response()->download($filePath)->deleteFileAfterSend(true);
+    }
+    
+
 
     public function graficaDetalle(): void
     {
