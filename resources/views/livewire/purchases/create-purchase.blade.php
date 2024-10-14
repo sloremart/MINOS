@@ -2,13 +2,13 @@
 
 <div class="py-12 flex justify-center"> <!-- Contenedor principal con márgenes y flex para centrar -->
 
-    <div class="max-w-screen-xl w-full mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-2 gap-4 mt-16 relative z-10">
+    <div class="max-w-screen-2xl w-full mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mt-16 relative z-10">
         <!-- Ajuste de ancho máximo y padding -->
         <!-- Primera columna: Formulario -->
-        <div>
+        <div class="col-span-2">
             <div class="grid grid-cols-1 gap-4 mb-6">
                 <!-- Fila de Select y detalles del proveedor -->
-                <div class="grid grid-cols-3 gap-5 items-end">
+                <div class="grid grid-cols-2 gap-5 items-end">
                     <!-- Select para Proveedor -->
                     <div class="col-span-1">
                         <label for="supplier_id" class="block text-sm font-medium text-gray-700">Proveedor</label>
@@ -16,11 +16,11 @@
                             class="block w-full mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             <option value="">Seleccionar Proveedor</option>
                             @foreach ($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                            <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                             @endforeach
                         </select>
                         @error('modelForm.supplier_id')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -34,9 +34,10 @@
 
                     <!-- Input para Nombre del Proveedor -->
                     <div class="col-span-1">
+                        <label class="block text-sm font-medium text-gray-700">Metodo de Pago</label>
                         <select wire:model="payment_method"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                           aria-describedby="paymentMethodHelp">
+                            aria-describedby="paymentMethodHelp">
                             <option value="">Seleccione</option>
                             <option value="cash">Efectivo</option>
                             <option value="transfer">Transferencia</option>
@@ -74,66 +75,68 @@
             <!-- Productos seleccionados -->
             <div class="mt-6 relative z-10">
                 <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Productos Seleccionados</h3>
-                <table class="min-w-full bg-white">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="px-4 py-2 text-left">Producto</th>
-                            <th class="px-4 py-2 text-left">Cantidad</th>
-                            <th class="px-4 py-2 text-left">Precio Unitario</th>
-                            <th class="px-4 py-2 text-left">Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($selectedProducts as $product)
+                <div class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto"> <!-- Añadido overflow-x-auto aquí -->
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap"> <!-- Añadido whitespace-nowrap aquí -->
+                        <thead class="text-xs text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400" style="background:#406eab;">
+                            <tr>
+                                <th class="px-4 py-2 text-left">Producto</th>
+                                <th class="px-4 py-2 text-left">Cantidad</th>
+                                <th class="px-4 py-2 text-left">Precio Unitario</th>
+                                <th class="px-4 py-2 text-left">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($selectedProducts as $product)
                             <tr>
                                 <td class="border px-4 py-2">{{ $product['name'] }}</td>
                                 <td class="border px-4 py-2">{{ $product['number'] }}</td>
                                 <td class="border px-4 py-2">${{ number_format($product['price'], 2) }}</td>
                                 <td class="border px-4 py-2">${{ number_format($product['subtotal'], 2) }}</td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-4">
+                    <button wire:click="submitForm"
+                        class="bg-blue-900 text-white font-bold py-2 px-4 rounded shadow hover:bg-blue-700">Guardar
+                        Compra</button>
+                    <button wire:click="cancel"
+                        class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow hover:bg-gray-400">Cancelar</button>
+                </div>
             </div>
 
-            <div class="mt-6 flex justify-end space-x-4">
-                <button wire:click="submitForm"
-                    class="bg-blue-900 text-white font-bold py-2 px-4 rounded shadow hover:bg-blue-700">Guardar
-                    Compra</button>
-                <button wire:click="cancel"
-                    class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow hover:bg-gray-400">Cancelar</button>
-            </div>
-        </div>
-
-        <!-- Segunda columna: Tabla de productos para agregar -->
-        <div class="mt-16 ">
-            <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0">Productos Disponibles</h3>
-            <div class="bg-blue-100 rounded-lg shadow-lg overflow-hidden">
-                @include('partials.v1.table.primary-table', [
+            <!-- Segunda columna: Tabla de productos para agregar -->
+            <div class="mt-16  col-span-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0">Productos Disponibles</h3>
+                <div class="bg-blue-100 rounded-lg shadow-lg overflow-hidden">
+                    @include('partials.v1.table.primary-table', [
                     'filter_active' => true,
                     'search' => 'search',
                     'search_1' => 'search_1',
                     'search_placeholder' => $search_placeholder,
                     'search_1_placeholder' => $search_1_placeholder,
                     'table_headers' => [
-                        'ID' => 'id',
-                        'Nombre' => 'name',
-                        'Código' => 'code',
-                        'Unidad' => 'unit.name',
-                        'Precio' => 'activePrice.price',
-                        'Stock' => 'inventory.quantity',
+                    'ID' => 'id',
+                    'Nombre' => 'name',
+                    'Código' => 'code',
+                    'Unidad' => 'unit.name',
+                    'Precio' => 'activePrice.price',
+                    'Stock' => 'inventory.quantity',
                     ],
                     'table_actions' => [
-                        'add' => 'addProductToPurchase',
+                    'add' => 'addProductToPurchase',
                     ],
                     'table_rows' => $data,
-                ])
+                    ])
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Modal para ingresar la cantidad y el precio del producto -->
-    @if ($isModalOpen)
+        <!-- Modal para ingresar la cantidad y el precio del producto -->
+        @if ($isModalOpen)
         <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
             <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
                 style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
@@ -167,5 +170,5 @@
                 </div>
             </div>
         </div>
-    @endif
-</div>
+        @endif
+    </div>
