@@ -19,9 +19,9 @@
 
         /* Estilos del fondo */
         body {
-            background-image: url('../public/images/sena.png');
-            background-repeat: repeat;
-            background-size: 50px 40px;
+            background-image: url('../public/images/FONDOPDF.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100% ;
             background-position: center;
             /* Centra la imagen de fondo */
             background-attachment: fixed;
@@ -29,7 +29,7 @@
         }
 
         /* Capa semi-transparente */
-        .overlay {
+        /* .overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -38,7 +38,7 @@
             background-color: rgba(255, 255, 255, 0.841);
             /* Ajusta la opacidad aquí */
             z-index: 1;
-        }
+        } */
 
         /* Estilo del contenedor de la tabla */
         .content {
@@ -105,7 +105,7 @@
 <body>
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
-        <img src="../public/images/LogoM.png" alt="LOGO" width="150px" height="150px">
+        {{-- <img src="../public/images/LogoM.png" alt="LOGO" width="150px" height="150px"> --}}
         <h3>REPORTES DE COMPRAS PROVEEDOR </h3>
         <table class="tabla">
             <thead class="thead">
