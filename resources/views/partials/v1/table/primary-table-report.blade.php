@@ -176,8 +176,7 @@
             let search_1 = document.getElementById('search_1').value;
 
             // Crear la URL con los parámetros de búsqueda
-            let url = '{{ route('
-            reportpdf.list ') }}' + '?search=' + search + '&search_1=' + search_1;
+            let url = '{{ route('reportpdf.list') }}' + '?search=' + search + '&search_1=' + search_1;
 
             // Abrir la URL en una nueva pestaña
             window.open(url, '_blank');
