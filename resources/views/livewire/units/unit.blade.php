@@ -1,18 +1,17 @@
 <!-- resources/views/livewire/units/unit.blade.php -->
 <div>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Listado de unidades') }}
-        </h2>
-    </x-slot>
+    
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center" style="font-size: 34px">
+        {{ __('Listado de unidades') }}
+    </h2>
     <div class="text-right z-20 relative max-w-6xl mx-auto">
-        <button wire:click="openModal" class="bg-blue-900 hover:bg-blue-400 text-white font-bold mt-10 py-2 px-4 rounded inline-flex items-center shadow-md">
+        <button wire:click="openModal" class="bg-blue-900 mt-10 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md" >
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Unidad
         </button>
     </div>
-
+    <div class=" sm:pl-10 sm:pr-10 md:pl-10 md:pr-10  lg:pl-52 lg:pr-52  relative z-10">
     @include("partials.v1.table.primary-table",[
     "filter_active" => true,
                "search" => "search",
@@ -32,6 +31,7 @@
                                     ],
                "table_rows"=>$data
            ])
+    </div>
 
     @if($isOpen)
         <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">

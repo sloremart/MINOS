@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white py-10">
+<nav x-data="{ open: false }" class=" py-10">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 pt-2 sm:px-6 bg-white lg:px-8 bg-gray-0 rounded-full shadow-lg"
         style=" position: relative; z-index: 1; ">
@@ -90,9 +90,9 @@
 
 
                     <div x-show="open" @click.away="open = false"
-                        class="absolute mt-20 w-48 bg-white rounded-md shadow-lg z-20"
-                        style="margin-top: 83px !important">
-                        <ul class="text-sm text-gray-700 dark:text-gray-200">
+                        class="absolute mt-20 w-48 bg-white rounded-md shadow-lg z-20" style=" margin-top: 83px !important;
+">
+                        <ul class="text-sm text-gray-700 dark:text-gray-200 relative">
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <a href="{{ route('commerce_type.list') }}"

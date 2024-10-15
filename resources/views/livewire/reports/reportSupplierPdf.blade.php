@@ -19,9 +19,9 @@
 
         /* Estilos del fondo */
         body {
-            background-image: url('../public/images/sena.png');
-            background-repeat: repeat;
-            background-size: 50px 40px;
+            background-image: url('../public/images/FONDOPDF.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100% ;
             background-position: center;
             /* Centra la imagen de fondo */
             background-attachment: fixed;
@@ -29,16 +29,16 @@
         }
 
         /* Capa semi-transparente */
-        .overlay {
+        /* .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(255, 255, 255, 0.841);
-            /* Ajusta la opacidad aquí */
+            /* Ajusta la opacidad aquí 
             z-index: 1;
-        }
+        } */
 
         /* Estilo del contenedor de la tabla */
         .content {
@@ -51,9 +51,10 @@
             height: auto;
             margin: 40px auto;
             /* Mantén un margen alrededor del contenido */
-            background-color: #ffffff;
+            
             /* Fondo blanco para el contenido */
             padding: 20px;
+            padding-top: 40%;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -75,7 +76,7 @@
         .tabla thead {
             background-color: #0127cf;
             color: #ffffff;
-            border-radius: 20% 20% 0 0;
+            border-radius: 40%; 
         }
 
 
@@ -105,7 +106,7 @@
 <body>
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
-        <img src="../public/images/LogoM.png" alt="LOGO" width="150px" height="150px">
+        {{-- <img src="../public/images/LogoM.png" alt="LOGO" width="150px" height="150px"> --}}
         <h3>REPORTES DE COMPRAS PROVEEDOR </h3>
         <table class="tabla">
             <thead class="thead">

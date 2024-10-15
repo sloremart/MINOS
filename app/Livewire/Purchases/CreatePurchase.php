@@ -22,6 +22,7 @@ class CreatePurchase extends Component
     public $suppliers;
     public $selectedSupplier = null; // Proveedor seleccionado
     public $unitName;
+    public $payment_method; //////agregue este campo payment_method
     public $selectedProducts = [];
     public $selectedProduct;
     public $selectedProductQuantity = 1;
@@ -55,6 +56,7 @@ class CreatePurchase extends Component
                 'user_id' => auth()->user()->id,
                 'purchase_date' => Carbon::now()->format('Y-m-d'),
                 'total_amount' => $this->total,
+                'payment_method' => $this->payment_method,//////agregue este campo payment_method
                 'details' => $this->modelForm['details'],
             ]);
 

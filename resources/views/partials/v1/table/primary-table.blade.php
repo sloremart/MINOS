@@ -1,21 +1,22 @@
 <div>
-    <div class="overflow-x-auto  relative z-10 max-w-6xl mx-auto ">
+    <div class="relative z-10 max-w-7xl mx-auto ">
         @if($filter_active)
         <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
             @if(($search_placeholder ?? null) != null)
-                <input type="text" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="px-4 py-2 border rounded">
+                <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="mt-1 block   border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             @endif
             @if(($search_1_placeholder ?? null) != null)
-                <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="px-4 py-2 border rounded">
+                <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="mt-1 block   border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             @endif
     
         </div>
     @endif
     </div>
-<div class="mb-1">
-    <div class="overflow-x-auto mt-5 relative z-10 max-w-6xl mx-auto">
-        <table class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
-            <thead class="bg-blue-900 text-gray-200 uppercase text-sm leading-normal">
+
+    <div class="mb-1 m-6">
+        <div  class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto"> <!-- Añadido overflow-x-auto aquí -->
+            <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap"> <!-- Añadido whitespace-nowrap aquí -->
+                <thead class="text-xs text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400" style="background:#406eab;">
                 <tr>
                     @foreach($table_headers as $header_name=>$table_header)
                         <th class="px-4 py-2 border-b">{{$header_name}}

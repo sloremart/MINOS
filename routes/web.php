@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tablas;
 use App\Livewire\Forms\ProductForm;
 use App\Livewire\Forms\SaleForm;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -151,6 +152,7 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Reports\ReportInv::class)
             ->name("reportInv.list");
     });
+    Route::get('/export-excel', [\App\livewire\Reports\ReportInv::class, 'exportExcel'])->name('export-excel');
     Route::prefix('reportes/inventario')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
@@ -171,11 +173,40 @@ Route::middleware([
     });
 
 ////-------------------------------------------------------------
+///reportee de ventas + pdf
+Route::prefix("reportes/venta")->group(function () {
+    Route::get('listado', \App\Livewire\Reports\Reports::class)
+        ->name("reportSale.list");
+});
+Route::get('/export-excel', [\App\Livewire\Reports\Reports::class, 'exportExcel'])->name('export-excel');
+
+
+Route::prefix('reportes/venta')->group(function () {
+    Route::get('pdf', function (\Illuminate\Http\Request $request) {
+        // Log para verificar que las fechas llegan correctamente
+        Log::info('Valores de búsqueda recibidos:', [
+            'search' => $request->input('search'),
+            'search_1' => $request->input('search_1'),
+        ]);
+
+        $component = app()->make(\App\Livewire\Reports\Reports::class);
+        
+        // Capturar los parámetros de la URL
+        $component->search = $request->input('search');
+        $component->search_1 = $request->input('search_1');
+        
+        // Generar el PDF
+        return $component->pdf();
+    })->name('reportpdf.list');
+});
+
+///-------------------------------------------------------------
 // reportes venta cliente + pdf
     Route::prefix("reportes/ventaCliente")->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportCustomer::class)
             ->name("reportCust.list");
     });
+    Route::get('/export-excel', [\App\livewire\Reports\ReportCustomer::class, 'exportExcel'])->name('export-excel');
     Route::prefix('reportes/ventaCliente')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
@@ -201,6 +232,7 @@ Route::middleware([
         Route::get('listado', \App\Livewire\Reports\ReportPurchaseSuplier::class)
             ->name("reportCust.list");
     });
+    Route::get('/export-excel', [\App\livewire\Reports\ReportPurchaseSuplier::class, 'exportExcel'])->name('export-excel');
 
     Route::prefix('reportes/compraPoveedor')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
@@ -270,4 +302,24 @@ Route::prefix("unidades")->group(function () {
     });
 
 
+});
+
+
+/////////----------------------> ruta para cuerre caja <-------------------/////////////
+
+
+Route::prefix("cierre")->group(function () {
+    Route::get('listado', \App\Livewire\CashClosures\CashClosure::class)
+        ->name("cierre_caja.list");
+});
+
+
+
+Route::prefix('reportes/cierreCaja')->group(function () {
+    Route::get('pdf/{closureId}', function ($closureId) {
+        // Crear una instancia del componente Livewire
+        $component = app()->make(\App\Livewire\CashClosures\CashClosure::class);
+        // Llamar al método que genera el PDF pasando el ID del cierre
+        return $component->generatePdf($closureId);
+    })->name('cierre_caja.pdf');
 });
