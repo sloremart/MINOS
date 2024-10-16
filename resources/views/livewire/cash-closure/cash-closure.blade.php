@@ -348,38 +348,42 @@
                                 </tbody>
                             </table>
 
-
-
                         </div>
                     </div>
-                    <div class="bg-white max-w-full shadow-lg rounded-lg">
-                        <table class="table-auto w-full border-collapse bg-white  overflow-hidden rounded-xl">
-                            <thead class="bg-purple-900 text-gray-200 uppercase text-sm  leading-normal">
-                                <tr>
-                                    <th class="px-4 py-2 border-b">Producto</th>
-                                    <th class="px-4 py-2 border-b">Cantidad</th>
-                                    <th class="px-4 py-2 border-b">Precio Unitario</th>
-                                    <th class="px-4 py-2 border-b">Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($salesDetails as $detail)
+                    <div class="bg-white max-w-full shadow-lg rounded-lg overflow-hidden" style="min-height: 12vh;">
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            <table class="table-auto w-full border-collapse bg-white  rounded-3xl">
+                                <thead class="bg-purple-900 text-gray-200 uppercase text-sm leading-normal">
                                     <tr>
-                                        <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}</td>
-                                        <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
-                                        <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
-                                        <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
+                                        <th class="px-4 py-2 border-b">Producto</th>
+                                        <th class="px-4 py-2 border-b">Cantidad</th>
+                                        <th class="px-4 py-2 border-b">Precio Unitario</th>
+                                        <th class="px-4 py-2 border-b">Subtotal</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($salesDetails as $detail)
+                                        <tr>
+                                            <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
+                                            </td>
+                                            <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
+                                            <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
+                                            <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
+
 
 
                 </div>
 
                 <!-- Modal footer -->
-                <div class="flex  justify-end gap-2 p-4 md:p-5 border-t border-gray-200 bg-white bg-opacity-95 rounded-b dark:border-gray-600">
+                <div
+                    class="flex  justify-end gap-2 p-4 md:p-5 border-t border-gray-200 bg-white bg-opacity-95 rounded-b dark:border-gray-600">
                     <button wire:click="closeModal" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cerrar</button>
                     {{-- <button onclick="printDiv('printable-area')" type="button"

@@ -28,7 +28,7 @@ class CashClosure extends Component
     public $total_sales_cash;
     public $total_sales_card = 0;
     public $total_sales_transfer;
-    public $total_expenses;
+    public $total_expenses=0;
     public $final_balance_cash ;
     public $final_balance_card ;
     public $final_balance_transfer = 0;
