@@ -22,36 +22,6 @@
                         </div>
                     </x-nav-link>
                 </div>
-                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
-                    <x-nav-link href="{{ route('supplier.list') }}" :active="request()->routeIs('supplier.list')">
-                        <div class="flex flex-col items-center">
-                            <img src="{{ asset('images/Iconos Menu/INVENTARIO/Terceros Proveedores.png') }}"
-                                alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Proveedores') }}</span>
-                        </div>
-                    </x-nav-link>
-                </div>
-
-
-                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
-                    <x-nav-link href="{{ route('product.list') }}" :active="request()->routeIs('product.list')">
-                        <div class="flex flex-col items-center">
-                            <img src="{{ asset('images/Iconos Menu/INVENTARIO/INVENTARIO.png') }}" alt="aca va el icono"
-                                class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Productos') }}</span>
-                        </div>
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
-                    <x-nav-link href="{{ route('customer.list') }}" :active="request()->routeIs('customer.list')">
-                        <div class="flex flex-col items-center">
-                            <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Usuarios.png') }}"
-                                alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Clientes') }}</span>
-                        </div>
-                    </x-nav-link>
-                </div>
 
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link href="{{ route('sale.list') }}" :active="request()->routeIs('sale.list')">
@@ -140,7 +110,7 @@
                                 </li>
     
                                 <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportInv.list') ? 'true' : 'false' }} }">
+                                    class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportInv.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('reportInv.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportInv.list') ? 'true' : 'false' }} }">
@@ -161,7 +131,7 @@
                                 alt="aca va el icono" class="w-10 h-auto pb-2.5">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400  hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
-                                    {{ __('Config') }}
+                                    {{ __('Administración') }}
                                     <div class="ms-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20">
@@ -177,6 +147,40 @@
                             <ul class="text-sm text-gray-700 dark:text-gray-200 relative">
                                 <li
                                     class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    <a href="{{ route('supplier.list') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('supplier.list') ? 'true' : 'false' }} }">
+                                        {{ __('Proveedores') }}
+                                    </a>
+                                    <img src="{{ asset('images/Iconos Menu/INVENTARIO/Terceros Proveedores.png') }}"
+                                        style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                </li>
+
+                                <li
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    <a href="{{ route('customer.list') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('customer.list') ? 'true' : 'false' }} }">
+                                        {{ __('Clientes') }}
+                                    </a>
+                                    <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Usuarios.png') }}"
+                                        style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                </li>
+    
+                                <li
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    <a href="{{ route('product.list') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('product.list') ? 'true' : 'false' }} }">
+                                        {{ __('Inventarios') }}
+                                    </a>
+                                    <img src="{{ asset('images/Iconos Menu/INVENTARIO/INVENTARIO.png') }}"
+                                        style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                </li>
+    
+
+                                <li
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('commerce_type.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
@@ -185,6 +189,7 @@
                                     <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Roles.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                                 </li>
+    
     
                                 <li
                                     class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }"> 
