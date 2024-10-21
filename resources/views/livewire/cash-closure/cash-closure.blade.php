@@ -14,9 +14,9 @@
                         <!-- Contenedor de la cabecera -->
 
                         @if (session()->has('message'))
-                            <div class="mb-4 text-green-600">
-                                {{ session('message') }}
-                            </div>
+                        <div class="mb-4 text-green-600">
+                            {{ session('message') }}
+                        </div>
                         @endif
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -35,12 +35,12 @@
                                 <!-- Lista de opciones -->
                                 <datalist id="userList">
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->name }}">{{ $user->name }}</option>
+                                    <option value="{{ $user->name }}">{{ $user->name }}</option>
                                     @endforeach
                                 </datalist>
                                 <!-- Mensajes de error y ayuda -->
                                 @error('user_name')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="userNameHelp" class="text-gray-500">Seleccione su nombre de la lista.</small> --}}
                             </div>
@@ -54,7 +54,7 @@
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="closureTimeHelp" />
                                 @error('closing_date_time')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="closureTimeHelp" class="text-gray-500">Ingrese la fecha y hora del
                                     cierre.</small> --}}
@@ -71,7 +71,7 @@
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="startBalanceHelp" placeholder="Saldo inicial" />
                                 @error('start_balance')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="startBalanceHelp" class="text-gray-500">Ingrese el saldo inicial.</small> --}}
                             </div>
@@ -90,7 +90,7 @@
                                     <option value="all">Todos</option> <!-- Nueva opción "Todos" -->
                                 </select>
                                 @error('payment_method')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="paymentMethodHelp" class="text-gray-500">Seleccione el método de pago
                                     utilizado.</small> --}}
@@ -169,7 +169,7 @@
                                     aria-describedby="nextStartBalanceHelp"
                                     placeholder="saldo para el próximo turno." />
                                 @error('next_start_balance')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Ingrese el saldo inicial para el
                                     próximo turno.</small> --}}
@@ -231,10 +231,9 @@
                             </div>
                         </div>
 
-                        <div class="overflow-x-auto mt-5 relative z-10 max-w-6xl mx-auto">
-                            <table
-                                class="table-auto w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
-                                <thead class="bg-blue-900 text-gray-200 uppercase text-sm leading-normal">
+                        <div class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto"> <!-- Añadido overflow-x-auto aquí -->
+                            <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap"> <!-- Añadido whitespace-nowrap aquí -->
+                                <thead class="text-xs text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400" style="background:#406eab;">
                                     <tr>
                                         <th class="py-3 px-4 text-left text-sm font-semibold">Cerrado por</th>
                                         <th class="py-3 px-4 text-left text-sm font-semibold">Fecha y Hora</th>
@@ -247,25 +246,25 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $row)
-                                        <tr class="border-b hover:bg-gray-100">
-                                            <td class="py-2 px-4">{{ $row->user->name }}</td>
-                                            <td class="py-2 px-4">{{ $row->created_at }}</td>
-                                            <td class="py-2 px-4">${{ $row->start_balance }}</td>
-                                            <td class="py-2 px-4">${{ $row->total_sales }}</td>
-                                            <td class="py-2 px-4">${{ $row->total_expenses }}</td>
-                                            <td class="py-2 px-4">${{ $row->final_balance }}</td>
-                                            <td class="py-2 px-4">
-                                                <button wire:click="generatePdf({{ $row->id }})"
-                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded"><i
-                                                        class="fa-regular fa-file-pdf"></i></button>
-                                                <button wire:click="Destroy({{ $row->id }})"
-                                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded"><i
-                                                        class="text-bg-red-500 fas fa-trash"></i></button>
-                                                <button wire:click="showDetails({{ $row->id }})"
-                                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded"><i
-                                                        class="text-bg-blue-500 fas fa-sitemap"></i></button>
-                                            </td>
-                                        </tr>
+                                    <tr class="border-b hover:bg-gray-100">
+                                        <td class="py-2 px-4">{{ $row->user->name }}</td>
+                                        <td class="py-2 px-4">{{ $row->created_at }}</td>
+                                        <td class="py-2 px-4">${{ $row->start_balance }}</td>
+                                        <td class="py-2 px-4">${{ $row->total_sales }}</td>
+                                        <td class="py-2 px-4">${{ $row->total_expenses }}</td>
+                                        <td class="py-2 px-4">${{ $row->final_balance }}</td>
+                                        <td class="py-2 px-4">
+                                            <button wire:click="generatePdf({{ $row->id }})"
+                                                class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded"><i
+                                                    class="fa-regular fa-file-pdf"></i></button>
+                                            <button wire:click="Destroy({{ $row->id }})"
+                                                class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded"><i
+                                                    class="text-bg-red-500 fas fa-trash"></i></button>
+                                            <button wire:click="showDetails({{ $row->id }})"
+                                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded"><i
+                                                    class="text-bg-blue-500 fas fa-sitemap"></i></button>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -287,7 +286,7 @@
         class="{{ $showModal ? 'fixed' : 'hidden' }} flex z-50 inset-0 items-center justify-center bg-gray-900 bg-opacity-50">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <!-- Modal content -->
-            <div class="relative bg-white bg-opacity-95 rounded-lg shadow dark:bg-gray-700 "style="background-image: url(/images/icono_central.png);
+            <div class="relative bg-white bg-opacity-95 rounded-lg shadow dark:bg-gray-700 " style="background-image: url(/images/icono_central.png);
             background-size: contain; /* Cambiado a cover */
             background-repeat: no-repeat;
             background-position: center;">
@@ -343,7 +342,8 @@
                                         <td class="border border-gray-300 p-2 text-left rounded-bl-lg">Total Balance :
                                         </td>
                                         <td class="border border-gray-300 p-2 rounded-br-lg">$
-                                            {{ $this->final_balance }}</td>
+                                            {{ $this->final_balance }}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -363,13 +363,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($salesDetails as $detail)
-                                        <tr>
-                                            <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
-                                            </td>
-                                            <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
-                                            <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
-                                            <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
-                                        </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
+                                        </td>
+                                        <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
+                                        <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
+                                        <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -397,7 +397,7 @@
 
 
     @if ($showModal)
-        <div class="modal-backdrop fade show"></div>
+    <div class="modal-backdrop fade show"></div>
     @endif
     <script>
         function printDiv(divId) {
