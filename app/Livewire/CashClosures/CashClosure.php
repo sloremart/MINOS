@@ -28,18 +28,18 @@ class CashClosure extends Component
     public $total_sales_cash;
     public $total_sales_card = 0;
     public $total_sales_transfer;
-    public $total_expenses;
-    public $final_balance_cash ;
-    public $final_balance_card ;
+    public $total_expenses = 0;
+    public $final_balance_cash;
+    public $final_balance_card;
     public $final_balance_transfer = 0;
-    public $next_start_balance ;
-    public $total_sales ;
+    public $next_start_balance;
+    public $total_sales;
     public $final_balance;
     public $selected_id;
     public $search = '';
     public $search_1 = '';
     public $search_2 = '';
-    
+
 
     private $paginacion = 4;
     public $users;
@@ -68,7 +68,7 @@ class CashClosure extends Component
         if ($this->search_2) {
             $query->where('created_at', '<=', $this->search_2);
         }
-        
+
 
         $data = $query->paginate($this->paginacion);
 
@@ -80,34 +80,42 @@ class CashClosure extends Component
     public function updateTotalSales()
     {
         // Resetear los totales
-        $this->total_sales_cash = 0;
+        
         $this->total_sales_transfer = 0;
+        $this->total_expenses = 0; // Reiniciar los egresos
 
-        // Calcular los totales según el método de pago seleccionado
+        // Calcular las ventas según el método de pago seleccionado
         if ($this->payment_method) {
-            // Si el método de pago es "cash" (efectivo)
             if ($this->payment_method === 'cash') {
                 $this->total_sales_cash = $this->calculateSales('cash');
-            }
-            // Si el método de pago es "transfer" (transferencia)
-            elseif ($this->payment_method === 'transfer') {
+            } elseif ($this->payment_method === 'transfer') {
                 $this->total_sales_transfer = $this->calculateSales('transfer');
-            }
-            // Si el método de pago es "all" (todos)
-            elseif ($this->payment_method === 'all') {
+            } elseif ($this->payment_method === 'all') {
                 $this->total_sales_cash = $this->calculateSales('cash');
                 $this->total_sales_transfer = $this->calculateSales('transfer');
             }
         }
 
+        $this->total_expenses = $this->calculateExpenses();
         // Calcular el total de ventas
         $this->total_sales = $this->total_sales_cash + $this->total_sales_transfer;
+
+        // Calcular los egresos (asumiendo que tienes una tabla de egresos o algo similar)
+      
 
         // Calcular el saldo final en efectivo
         $this->final_balance_cash = $this->start_balance + $this->total_sales_cash - $this->total_expenses;
 
         // Actualizar el balance total
         $this->final_balance = $this->start_balance + $this->total_sales - $this->total_expenses;
+    }
+
+    protected function calculateExpenses()
+    {
+        // Aquí asumimos que hay una tabla llamada 'expenses' para los egresos
+        return DB::table('purchases')
+            ->whereDate('created_at', now()->format('Y-m-d')) // Filtrar por la fecha actual
+            ->sum('total_amount'); // Cambia 'amount' por el campo que represente el monto de los egresos
     }
 
 
@@ -241,8 +249,6 @@ class CashClosure extends Component
             fn() => print($pdf->output()),
             'cierre_de_caja_' . $closureId . '.pdf'
         );
-        
-         
     }
 
 

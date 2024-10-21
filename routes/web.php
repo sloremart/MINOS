@@ -230,7 +230,7 @@ Route::prefix('reportes/venta')->group(function () {
     //reporte proveedor + pdf
     Route::prefix("reportes/compraPoveedor")->group(function () {
         Route::get('listado', \App\Livewire\Reports\ReportPurchaseSuplier::class)
-            ->name("reportCust.list");
+            ->name("reportSupplier.list");
     });
     Route::get('/export-excel', [\App\livewire\Reports\ReportPurchaseSuplier::class, 'exportExcel'])->name('export-excel');
 

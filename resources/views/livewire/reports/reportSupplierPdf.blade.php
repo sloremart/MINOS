@@ -21,11 +21,11 @@
         body {
             background-image: url('../public/images/FONDOPDF.png');
             background-repeat: no-repeat;
-            background-size: 100% 100% ;
-            background-position: center;
-            /* Centra la imagen de fondo */
             background-attachment: fixed;
-            /* Hace que el fondo no se mueva con el scroll */
+            background-size: 100% 120%;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
         }
 
         /* Capa semi-transparente */
@@ -37,8 +37,8 @@
             height: 100%;
             background-color: rgba(255, 255, 255, 0.841);
             /* Ajusta la opacidad aquí 
-            z-index: 1;
-        } */
+            z-index: 
+        } 
 
         /* Estilo del contenedor de la tabla */
         .content {
@@ -50,13 +50,10 @@
             width: 80%;
             height: auto;
             margin: 40px auto;
-            /* Mantén un margen alrededor del contenido */
-            
             /* Fondo blanco para el contenido */
             padding: 20px;
-            padding-top: 40%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding-top: 20%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);            
         }
 
         /* Estilo de la tabla */
@@ -65,6 +62,8 @@
             border-collapse: collapse;
             font-size: 14px;
             text-align: left;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .tabla th,
@@ -74,9 +73,9 @@
         }
 
         .tabla thead {
-            background-color: #0127cf;
+            background-color: #652581;
             color: #ffffff;
-            border-radius: 40%; 
+            border-radius: 20% 20%;
         }
 
 
@@ -106,8 +105,7 @@
 <body>
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
-        {{-- <img src="../public/images/LogoM.png" alt="LOGO" width="150px" height="150px"> --}}
-        <h3>REPORTES DE COMPRAS PROVEEDOR </h3>
+        <h2>REPORTES DE COMPRAS PROVEEDOR </h2>
         <table class="tabla">
             <thead class="thead">
                 <tr>
