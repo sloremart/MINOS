@@ -162,7 +162,7 @@
                                 </li>
 
                                 <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('product.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('product.list') ? 'true' : 'false' }} }">
@@ -533,7 +533,7 @@
                             class="flex items-center w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 focus:outline-none"
                             :class="{ 'text-blue-500': {{ request()->routeIs('commerce_type.list', 'group.list') ? 'true' : 'false' }} }">
                             <div class="flex flex-col items-center">
-                                <span>{{ __('Administraciones') }}</span>
+                                <span>{{ __('Configuración') }}</span>
                             </div>
                         </button>
                     </div>
