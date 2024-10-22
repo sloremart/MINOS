@@ -45,7 +45,7 @@ class PriceForm extends Form
         $this->validate();
         Price::create($this->all());
         session()->flash('message', 'Precio creado correctamente.');
-        return redirect('/precios/listado');
+        // return redirect('/precios/listado');
     }
 
     public function edit()
@@ -55,7 +55,7 @@ class PriceForm extends Form
         if ($model) {
             $model->update($this->all());
             session()->flash('message', 'Precio actualizado correctamente.');
-            return redirect('/precios/listado');
+            // return redirect('/precios/listado');
         }
     }
 
@@ -66,7 +66,7 @@ class PriceForm extends Form
             $model->delete();
             session()->flash('message', 'Precio eliminado correctamente.');
         }
-        return redirect('/precios/listado');
+        // return redirect('/precios/listado');
     }
 
     public function resetForm()

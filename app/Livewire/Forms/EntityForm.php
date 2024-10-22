@@ -47,7 +47,7 @@ class EntityForm extends Form
         $this->validate();
         Entity::create($this->all());
         session()->flash('message', 'Entidad creada correctamente.');
-        return redirect('/entidades/listado');
+        // return redirect('/entidades/listado');
     }
 
     public function edit()
@@ -57,7 +57,7 @@ class EntityForm extends Form
         if ($model) {
             $model->update($this->all());
             session()->flash('message', 'Entidad actualizada correctamente.');
-            return redirect('/entidades/listado');
+            // return redirect('/entidades/listado');
         }
     }
 
@@ -68,7 +68,7 @@ class EntityForm extends Form
             $model->delete();
             session()->flash('message', 'Entidad eliminada correctamente.');
         }
-        return redirect('/entidades/listado');
+        // return redirect('/entidades/listado');
     }
 
     public function resetForm()

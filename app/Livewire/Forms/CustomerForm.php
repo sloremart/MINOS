@@ -58,7 +58,7 @@ class CustomerForm extends Form
         $data['user_id'] = Auth::id();
         Customer::create($data);
         session()->flash('message', 'Cliente creado correctamente.');
-        return redirect('/clientes/listado');
+        // return redirect('/clientes/listado');
     }
 
     public function edit()
@@ -68,7 +68,7 @@ class CustomerForm extends Form
         if ($model) {
             $model->update($this->all());
             session()->flash('message', 'Cliente actualizado correctamente.');
-            return redirect('/clientes/listado');
+            // return redirect('/clientes/listado');
         }
     }
 
@@ -76,10 +76,10 @@ class CustomerForm extends Form
     {
         $model = Customer::find($id);
         if ($model) {
-            $model->delete();
+            $model->forceDelete();
             session()->flash('message', 'Cliente eliminado correctamente.');
         }
-        return redirect('/clientes/listado');
+        // return redirect('/clientes/listado');
     }
 
     public function resetForm()
