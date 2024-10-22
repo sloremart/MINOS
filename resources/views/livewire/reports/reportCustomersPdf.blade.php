@@ -58,7 +58,7 @@
 
         /* Estilo de la tabla */
         .tabla {
-            width: 100%;
+            width: 80%;
             border-collapse: collapse;
             font-size: 14px;
             text-align: left;
@@ -105,7 +105,8 @@
 <body>
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
-        <h2>REPORTES DE VENTAS POR CLIENTE</h2>
+       
+        <h3>REPORTES DE VENTAS POR CLIENTE </h3>
         <table class="tabla">
             <thead class="thead">
                 <tr>

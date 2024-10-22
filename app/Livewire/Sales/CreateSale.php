@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire\Sales;
 
 use App\Livewire\Forms\CustomerForm;
@@ -39,6 +40,9 @@ class CreateSale extends Component
     public $isCashModalOpen = false;
     public $cashGiven = 0;
     public $change = 0;
+
+
+
     public $billQuantities = [
         100000 => 0,
         50000 => 0,
@@ -55,7 +59,12 @@ class CreateSale extends Component
         100 => 0,
         50 => 0,
     ];
-
+    public function updatedCashGiven($value)
+    {
+        // Actualiza el valor recibido y calcula el cambio
+        $this->cashGiven = $value;
+        $this->calculateChange();
+    }
     public function updatedBillQuantities()
     {
         $this->calculateTotalCash();
@@ -84,12 +93,25 @@ class CreateSale extends Component
         $this->calculateChange();
     }
 
+    // public function calculateChange()
+    // {
+    //     // Calcula el cambio a devolver
+    //     $this->change = $this->cashGiven - $this->total;
+        
+    // }
     public function calculateChange()
-    {
-        // Calcula el cambio a devolver
-        $this->change = $this->cashGiven - $this->total;
-    }
+{
+    // Asegúrate de que los valores sean numéricos, incluso si están vacíos
+    $total = is_numeric($this->total) ? $this->total : 0;
+    $cashGiven = is_numeric($this->cashGiven) ? $this->cashGiven : 0;
 
+    // Calcula el cambio a devolver
+    $this->change = $cashGiven - $total;
+}
+
+
+    
+    
     public function mount()
     {
         $this->customers = Customer::all();
@@ -100,7 +122,7 @@ class CreateSale extends Component
     public function submitForm()
     {
 
-        if ($this->customer->id != ""){
+        if ($this->customer->id != "") {
 
             $sale = \App\Models\Sale::create([
                 'customer_id' => $this->customer->id,
@@ -109,10 +131,10 @@ class CreateSale extends Component
                 'total_amount' => $this->total,
                 'payment_method' => $this->paymentMethod,
             ]);
-            foreach ($this->selectedProducts as $item){
+            foreach ($this->selectedProducts as $item) {
                 \App\Models\SaleDetail::create([
                     'sale_id' => $sale->id,
-                    'product_id'=>$item['id'],
+                    'product_id' => $item['id'],
                     'quantity' => $item['number'],
                     'unit_price' => $item['price'],
                     'sub_total' => $item['subtotal']
@@ -123,7 +145,6 @@ class CreateSale extends Component
                 $inventory->save();
             }
             return redirect('/ventas/listado');
-
         }
     }
 
@@ -149,7 +170,7 @@ class CreateSale extends Component
 
     public function updatedCustomer()
     {
-        if($this->customer->id == ""){
+        if ($this->customer->id == "") {
             $this->customer->resetForm();
             return;
         }
@@ -157,8 +178,8 @@ class CreateSale extends Component
     }
     public function updatedSelectedProductNumber()
     {
-        $this->selectedProduct->subtotal = (int)$this->selectedProduct->price*(int)$this->selectedProduct->number;
-        $this->selectedProduct->total = ((int)$this->selectedProduct->subtotal * (int)$this->vatPercentage/100) + (int)$this->selectedProduct->subtotal;
+        $this->selectedProduct->subtotal = (int)$this->selectedProduct->price * (int)$this->selectedProduct->number;
+        $this->selectedProduct->total = ((int)$this->selectedProduct->subtotal * (int)$this->vatPercentage / 100) + (int)$this->selectedProduct->subtotal;
     }
 
     public function closeModal()
@@ -195,7 +216,7 @@ class CreateSale extends Component
     }
     public function confirmAddProductToSale()
     {
-        $this->selectedProducts[]=$this->selectedProduct->toArray();
+        $this->selectedProducts[] = $this->selectedProduct->toArray();
         $this->selectedProduct->resetForm();
         $this->calculateAmount();
         $this->closeModal();
@@ -204,11 +225,11 @@ class CreateSale extends Component
     {
         $this->total = 0;
         $this->subtotal = 0;
-        foreach ($this->selectedProducts as $item){
+        foreach ($this->selectedProducts as $item) {
             $this->subtotal = $this->subtotal + $item['subtotal'];
             $this->total = $this->total + $item['total'];
         }
-        $this->vat = $this->total-$this->subtotal;
+        $this->vat = $this->total - $this->subtotal;
     }
 
 
@@ -226,7 +247,4 @@ class CreateSale extends Component
 
         return $query->paginate(10);
     }
-
-
-
 }
