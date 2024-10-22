@@ -53,7 +53,7 @@
                 </div>
 
                 <!-- Dropdown -->
-               
+
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2">
                     <x-dropdown width="48">
                         <x-slot name="trigger">
@@ -86,7 +86,7 @@
                                     <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Roles.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
                                     class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportCust.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('reportCust.list') }}"
@@ -97,7 +97,7 @@
                                     <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Grupos.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 2" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
                                     class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportSupplier.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('reportSupplier.list') }}"
@@ -108,7 +108,7 @@
                                     <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Subgrupos.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 3" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
                                     class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportInv.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('reportInv.list') }}"
@@ -166,9 +166,9 @@
                                     <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Usuarios.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('product.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('product.list') ? 'true' : 'false' }} }">
@@ -177,70 +177,12 @@
                                     <img src="{{ asset('images/Iconos Menu/INVENTARIO/INVENTARIO.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                                 </li>
-    
-
-                                <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
-                                    <a href="{{ route('commerce_type.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
-                                        {{ __('Tipos de comercio') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Roles.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
-                                </li>
-    
-    
-                                <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }"> 
-                                    <a href="{{ route('group.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }">
-                                        {{ __('Grupos') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Grupos.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 2" class="w-4 h-4">
-                                </li>
-    
-                                <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('subgroup_all.list') ? 'true' : 'false' }} }">
-                                    <a href="{{ route('subgroup_all.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('subgroup_all.list') ? 'true' : 'false' }} }">
-                                        {{ __('Subgrupos') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Subgrupos.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 3" class="w-4 h-4">
-                                </li>
-    
-                                <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
-                                    <a href="{{ route('unit.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
-                                        {{ __('Unidades') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Unidades.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 4" class="w-4 h-4">
-                                </li>
-    
-                                <li
-                                    class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
-                                    <a href="{{ route('vat_percentage.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
-                                        {{ __('Porcentajes de impuesto') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Porcentajes.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 5" class="w-4 h-4">
-                                </li>
-                            </ul>
                         </x-slot>
                     </x-dropdown>
                 </div>
 
-               
-               
+
+
             </div>
 
             <div class="hidden md:flex sm:items-center lg:border-l border-blue-600 my-3">
@@ -301,30 +243,23 @@
                 @endif
 
                 <!-- Settings Dropdown -->
+                <!-- Settings Dropdown -->
                 <div class="ms-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                <button
-                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover"
-                                        src="{{ Auth::user()->profile_photo_url }}"
-                                        alt="{{ Auth::user()->name }}" />
-                                </button>
+                            <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                            </button>
                             @else
-                                <span class="inline-flex rounded-md">
-                                    <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                        {{ Auth::user()->name }}
-
-                                        <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                        </svg>
-                                    </button>
-                                </span>
+                            <span class="inline-flex rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                    {{ Auth::user()->name }}
+                                    <svg class="ml-auto h-5 w-5 transition-transform transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </span>
                             @endif
                         </x-slot>
 
@@ -338,26 +273,51 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            <li class="dropdown">
-                                <a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Option 3 ?</a>
-                                <ul class="dropdown-content absolute hidden text-gray-700 pl-5 ml-24 -mt-10">
-                                    <li><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Option 3-1</a>
-                                    <li><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Option 3-2</a>
-                                </ul>
-                            </li>
-                            
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
-                                </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('api-tokens.index') }}">
+                                {{ __('API Tokens') }}
+                            </x-dropdown-link>
                             @endif
+
+                            <!-- Multinivel -->
+                            <div x-data="{ open: false }" @click.away="if (open) { open = false; }">
+                                <!-- Botón para abrir/cerrar el submenú -->
+                                <button @click.stop="open = !open" class="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100">
+                                    <span>{{ __('Configuraciones') }}</span>
+                                    <svg class="ml-auto h-5 w-5 transition-transform transform" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+
+                                <!-- Submenú que se despliega -->
+                                <div x-show="open" class="mt-2 space-y-2 pl-6" x-transition>
+                                    <x-dropdown-link href="{{ route('commerce_type.list') }}">
+                                        {{ __('Tipos de comercio') }}
+                                    </x-dropdown-link>
+
+                                    <x-dropdown-link href="{{ route('group.list') }}">
+                                        {{ __('Grupos') }}
+                                    </x-dropdown-link>
+
+                                    <x-dropdown-link href="{{ route('subgroup_all.list') }}">
+                                        {{ __('Subgrupos') }}
+                                    </x-dropdown-link>
+
+                                    <x-dropdown-link href="{{ route('unit.list') }}">
+                                        {{ __('Unidades') }}
+                                    </x-dropdown-link>
+
+                                    <x-dropdown-link href="{{ route('vat_percentage.list') }}">
+                                        {{ __('Porcentajes de impuesto') }}
+                                    </x-dropdown-link>
+                                </div>
+                            </div>
 
                             <div class="border-t border-gray-200"></div>
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
-
                                 <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
@@ -472,7 +432,7 @@
                             </a>
                         </li>
 
-                        
+
                     </ul>
                     <!-- Agrega más opciones de navegación aquí -->
                 </div>
