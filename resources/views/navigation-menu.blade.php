@@ -22,36 +22,6 @@
                         </div>
                     </x-nav-link>
                 </div>
-                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
-                    <x-nav-link href="{{ route('supplier.list') }}" :active="request()->routeIs('supplier.list')">
-                        <div class="flex flex-col items-center">
-                            <img src="{{ asset('images/Iconos Menu/INVENTARIO/Terceros Proveedores.png') }}"
-                                alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Proveedores') }}</span>
-                        </div>
-                    </x-nav-link>
-                </div>
-
-
-                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
-                    <x-nav-link href="{{ route('product.list') }}" :active="request()->routeIs('product.list')">
-                        <div class="flex flex-col items-center">
-                            <img src="{{ asset('images/Iconos Menu/INVENTARIO/INVENTARIO.png') }}" alt="aca va el icono"
-                                class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Productos') }}</span>
-                        </div>
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
-                    <x-nav-link href="{{ route('customer.list') }}" :active="request()->routeIs('customer.list')">
-                        <div class="flex flex-col items-center">
-                            <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Usuarios.png') }}"
-                                alt="aca va el icono" class="w-10 h-auto pb-2.5">
-                            <span>{{ __('Clientes') }}</span>
-                        </div>
-                    </x-nav-link>
-                </div>
 
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2 px-3">
                     <x-nav-link href="{{ route('sale.list') }}" :active="request()->routeIs('sale.list')">
@@ -83,22 +53,19 @@
                 </div>
 
                 <!-- Dropdown -->
-               
+
                 <div class="hidden lg:flex sm:items-center md:flex-col md:space-y-2">
                     <x-dropdown width="48">
                         <x-slot name="trigger">
                             <div class="flex flex-col items-center">
                                 <img src="{{ asset('images/Iconos Menu/REPORTES/REPORTES.png') }}" alt="aca va el icono"
-                                class="w-10 h-auto pb-2.5">
+                                    class="w-10 h-auto pb-2.5">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400  hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
                                     {{ __('Reportes') }}
                                     <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
+                                        <svg class="ml-auto h-5 w-5 transition-transform transform" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                         </svg>
                                     </div>
                                 </button>
@@ -116,9 +83,9 @@
                                     <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Roles.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportCust.list') ? 'true' : 'false' }} }">
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportCust.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('reportCust.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportCust.list') ? 'true' : 'false' }} }">
@@ -127,9 +94,9 @@
                                     <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Grupos.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 2" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportSupplier.list') ? 'true' : 'false' }} }">
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportSupplier.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('reportSupplier.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportSupplier.list') ? 'true' : 'false' }} }">
@@ -138,9 +105,9 @@
                                     <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Subgrupos.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 3" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportInv.list') ? 'true' : 'false' }} }">
+                                    class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportInv.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('reportInv.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('reportInv.list') ? 'true' : 'false' }} }">
@@ -158,16 +125,13 @@
                         <x-slot name="trigger">
                             <div class="flex flex-col items-center">
                                 <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/ADMINISTRACION.png') }}"
-                                alt="aca va el icono" class="w-10 h-auto pb-2.5">
+                                    alt="aca va el icono" class="w-10 h-auto pb-2.5">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400  hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
-                                    {{ __('Reportes') }}
+                                    {{ __('Administración') }}
                                     <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
+                                        <svg class="ml-auto h-5 w-5 transition-transform transform" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                         </svg>
                                     </div>
                                 </button>
@@ -176,7 +140,41 @@
                         <x-slot name="content">
                             <ul class="text-sm text-gray-700 dark:text-gray-200 relative">
                                 <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    <a href="{{ route('supplier.list') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('supplier.list') ? 'true' : 'false' }} }">
+                                        {{ __('Proveedores') }}
+                                    </a>
+                                    <img src="{{ asset('images/Iconos Menu/INVENTARIO/Terceros Proveedores.png') }}"
+                                        style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                </li>
+
+                                <li
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    <a href="{{ route('customer.list') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('customer.list') ? 'true' : 'false' }} }">
+                                        {{ __('Clientes') }}
+                                    </a>
+                                    <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Usuarios.png') }}"
+                                        style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                </li>
+
+                                <li
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    <a href="{{ route('product.list') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('product.list') ? 'true' : 'false' }} }">
+                                        {{ __('Inventarios') }}
+                                    </a>
+                                    <img src="{{ asset('images/Iconos Menu/INVENTARIO/INVENTARIO.png') }}"
+                                        style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                </li>
+
+
+                                <li
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('commerce_type.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
@@ -185,9 +183,10 @@
                                     <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Roles.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                                 </li>
-    
+
+
                                 <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }"> 
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('group.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }">
@@ -196,7 +195,7 @@
                                     <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Grupos.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 2" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
                                     class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('subgroup_all.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('subgroup_all.list') }}"
@@ -207,9 +206,9 @@
                                     <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Subgrupos.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 3" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
+                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('unit.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
@@ -218,9 +217,9 @@
                                     <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Unidades.png') }}"
                                         style="width:40px; height: 40px;" alt="Icono 4" class="w-4 h-4">
                                 </li>
-    
+
                                 <li
-                                    class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"  :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
+                                    class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('vat_percentage.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
@@ -234,65 +233,62 @@
                     </x-dropdown>
                 </div>
 
-               
-               
+
+
             </div>
 
             <div class="hidden md:flex sm:items-center lg:border-l border-blue-600 my-3">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                    <div class="ms-3 relative">
-                        <x-dropdown align="right" width="60">
-                            <x-slot name="trigger">
-                                <span class="inline-flex rounded-md">
-                                    <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                        {{ Auth::user()->currentTeam->name }}
+                <div class="ms-3 relative">
+                    <x-dropdown align="right" width="60">
+                        <x-slot name="trigger">
+                            <span class="inline-flex rounded-md">
+                                <button type="button"
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                    {{ Auth::user()->currentTeam->name }}
 
-                                        <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                        </svg>
-                                    </button>
-                                </span>
-                            </x-slot>
+                                    <svg class="ml-auto h-5 w-5 transition-transform transform" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </span>
+                        </x-slot>
 
-                            <x-slot name="content">
-                                <div class="w-60">
-                                    <!-- Team Management -->
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
-                                        {{ __('Manage Team') }}
-                                    </div>
-
-                                    <!-- Team Settings -->
-                                    <x-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                        {{ __('Team Settings') }}
-                                    </x-dropdown-link>
-
-                                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                        <x-dropdown-link href="{{ route('teams.create') }}">
-                                            {{ __('Create New Team') }}
-                                        </x-dropdown-link>
-                                    @endcan
-
-                                    <!-- Team Switcher -->
-                                    @if (Auth::user()->allTeams()->count() > 1)
-                                        <div class="border-t border-gray-200"></div>
-
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
-                                            {{ __('Switch Teams') }}
-                                        </div>
-
-                                        @foreach (Auth::user()->allTeams() as $team)
-                                            <x-switchable-team :team="$team" />
-                                        @endforeach
-                                    @endif
+                        <x-slot name="content">
+                            <div class="w-60">
+                                <!-- Team Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    {{ __('Manage Team') }}
                                 </div>
-                            </x-slot>
-                        </x-dropdown>
-                    </div>
+
+                                <!-- Team Settings -->
+                                <x-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
+                                    {{ __('Team Settings') }}
+                                </x-dropdown-link>
+
+                                @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                                <x-dropdown-link href="{{ route('teams.create') }}">
+                                    {{ __('Create New Team') }}
+                                </x-dropdown-link>
+                                @endcan
+
+                                <!-- Team Switcher -->
+                                @if (Auth::user()->allTeams()->count() > 1)
+                                <div class="border-t border-gray-200"></div>
+
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    {{ __('Switch Teams') }}
+                                </div>
+
+                                @foreach (Auth::user()->allTeams() as $team)
+                                <x-switchable-team :team="$team" />
+                                @endforeach
+                                @endif
+                            </div>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
                 @endif
 
                 <!-- Settings Dropdown -->
@@ -300,26 +296,18 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                <button
-                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover"
-                                        src="{{ Auth::user()->profile_photo_url }}"
-                                        alt="{{ Auth::user()->name }}" />
-                                </button>
+                            <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                            </button>
                             @else
-                                <span class="inline-flex rounded-md">
-                                    <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                        {{ Auth::user()->name }}
-
-                                        <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                        </svg>
-                                    </button>
-                                </span>
+                            <span class="inline-flex rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                    {{ Auth::user()->name }}
+                                    <svg class="ml-auto h-5 w-5 transition-transform transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </span>
                             @endif
                         </x-slot>
 
@@ -334,17 +322,40 @@
                             </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
-                                </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('api-tokens.index') }}">
+                                {{ __('API Tokens') }}
+                            </x-dropdown-link>
                             @endif
+
+                            <!-- Multinivel -->
+                            <div x-data="{ open: false }" @click.away="if (open) { open = false; }">
+                                <!-- Botón para abrir/cerrar el submenú -->
+                                <button @click.stop="open = !open" class="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100">
+                                    <span>{{ __('More Options') }}</span>
+                                    <svg class="ml-auto h-5 w-5 transition-transform transform" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+
+                                <!-- Submenú que se despliega -->
+                                <div x-show="open" class="mt-2 space-y-2 pl-6" x-transition>
+                                    <x-dropdown-link href="#">
+                                        {{ __('Sub Option 1') }}
+                                    </x-dropdown-link>
+                                    <x-dropdown-link href="#">
+                                        {{ __('Sub Option 2') }}
+                                    </x-dropdown-link>
+                                    <x-dropdown-link href="#">
+                                        {{ __('Sub Option 3') }}
+                                    </x-dropdown-link>
+                                </div>
+                            </div>
 
                             <div class="border-t border-gray-200"></div>
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
-
                                 <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
@@ -352,6 +363,9 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
+
+
+
             </div>
 
             <!-- Hamburger -->
@@ -371,7 +385,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div class="bg-white" :class="{ 'block': open, 'hidden': !open }" class="hidden"  >
+    <div class="bg-white" :class="{ 'block': open, 'hidden': !open }" class="hidden">
         <div class="p-3">
             <div class="pt-2 pb-2 space-y-1 ">
                 <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -459,7 +473,7 @@
                             </a>
                         </li>
 
-                        
+
                     </ul>
                     <!-- Agrega más opciones de navegación aquí -->
                 </div>
@@ -534,10 +548,10 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <div class="shrink-0 me-3">
-                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
-                            alt="{{ Auth::user()->name }}" />
-                    </div>
+                <div class="shrink-0 me-3">
+                    <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
+                        alt="{{ Auth::user()->name }}" />
+                </div>
                 @endif
 
                 <div>
@@ -553,9 +567,9 @@
                 </x-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                        {{ __('API Tokens') }}
-                    </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
+                    {{ __('API Tokens') }}
+                </x-responsive-nav-link>
                 @endif
 
                 <!-- Authentication -->
@@ -568,36 +582,36 @@
 
                 <!-- Team Management -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                    <div class="border-t border-gray-200"></div>
+                <div class="border-t border-gray-200"></div>
 
-                    <div class="block px-4 py-2 text-xs text-gray-400">
-                        {{ __('Manage Team') }}
-                    </div>
+                <div class="block px-4 py-2 text-xs text-gray-400">
+                    {{ __('Manage Team') }}
+                </div>
 
-                    <!-- Team Settings -->
-                    <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"
-                        :active="request()->routeIs('teams.show')">
-                        {{ __('Team Settings') }}
-                    </x-responsive-nav-link>
+                <!-- Team Settings -->
+                <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"
+                    :active="request()->routeIs('teams.show')">
+                    {{ __('Team Settings') }}
+                </x-responsive-nav-link>
 
-                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                        <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
-                            {{ __('Create New Team') }}
-                        </x-responsive-nav-link>
-                    @endcan
+                @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
+                    {{ __('Create New Team') }}
+                </x-responsive-nav-link>
+                @endcan
 
-                    <!-- Team Switcher -->
-                    @if (Auth::user()->allTeams()->count() > 1)
-                        <div class="border-t border-gray-200"></div>
+                <!-- Team Switcher -->
+                @if (Auth::user()->allTeams()->count() > 1)
+                <div class="border-t border-gray-200"></div>
 
-                        <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Switch Teams') }}
-                        </div>
+                <div class="block px-4 py-2 text-xs text-gray-400">
+                    {{ __('Switch Teams') }}
+                </div>
 
-                        @foreach (Auth::user()->allTeams() as $team)
-                            <x-switchable-team :team="$team" component="responsive-nav-link" />
-                        @endforeach
-                    @endif
+                @foreach (Auth::user()->allTeams() as $team)
+                <x-switchable-team :team="$team" component="responsive-nav-link" />
+                @endforeach
+                @endif
                 @endif
             </div>
         </div>

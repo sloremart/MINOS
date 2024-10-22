@@ -188,7 +188,7 @@
                 </h3>
                 <div class="flex overflow-x-auto max-h-40 space-x-4">
                     <table class="bg-white rounded-lg shadow-lg overflow-hidden text-sm flex-grow" style="min-width: 0;">
-                        <thead class="bg-blue-900 text-gray-200 uppercase text-xs leading-tight">
+                        <thead class=" text-gray-200 uppercase text-xs leading-tight" style="background: #652581;">
                             <tr>
                                 <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 40%;">
                                     Nombre

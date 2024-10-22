@@ -77,7 +77,7 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Productos Seleccionados</h3>
                 <div class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto"> <!-- Añadido overflow-x-auto aquí -->
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap"> <!-- Añadido whitespace-nowrap aquí -->
-                        <thead class="text-xs text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400" style="background:#406eab;">
+                        <thead class="text-xs text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400" style="background:#652581;">
                             <tr>
                                 <th class="px-4 py-2 text-left">Producto</th>
                                 <th class="px-4 py-2 text-left">Cantidad</th>
