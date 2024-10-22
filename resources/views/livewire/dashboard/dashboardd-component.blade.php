@@ -1,6 +1,6 @@
 <div>
     <!-- Contenedor principal con espaciado y bordes redondeados -->
-    <div class="py-12 rounded-3xl">
+    <div class="pb-4 rounded-3xl">
         <!-- Contenedor central con máximo ancho y espaciado -->
         <div class=" max-w-screen-xl mx-auto  sm:px-6 lg:px-0 rounded-3xl bg-white shadow-2xl">
             <!-- Contenedor con bordes redondeados y espaciado -->

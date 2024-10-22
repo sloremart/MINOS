@@ -1,7 +1,7 @@
 <!-- resources/views/livewire/sales/create-sale.blade.php -->
 
-<div class="py-12 flex justify-center ">
-    <div class="max-w-screen-2xl m-5 p-2 bg-white  relative z-10 shadow-md rounded-xl grid grid-cols-1  md:grid-cols-1  lg:grid-cols-2  sm:grid-cols-2 gap-4 mt-16 ">
+<div class=" flex justify-center ">
+    <div class="max-w-screen-2xl  p-2 bg-white  relative z-10 shadow-md rounded-xl grid grid-cols-1  md:grid-cols-1  lg:grid-cols-2  sm:grid-cols-2 gap-4 " style="margin: 0% 2% 0% 2%;">
         <!-- Primera columna: Formulario -->
         <div class="col-span-1">
             <div class="grid grid-cols-1 gap-4 mb-6">

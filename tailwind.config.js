@@ -19,6 +19,9 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            // fontFamily: {
+            //     sans: ['Adelle Sans Devanagari', ...defaultTheme.fontFamily.sans],
+            // },
         },
     },
     darkMode:true,

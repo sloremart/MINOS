@@ -11,7 +11,7 @@
             Crear Proveedor
         </button>
     </div>
-    <div class=" sm:pl-10 sm:pr-10 md:pl-10 md:pr-10  lg:pl-20 lg:pr-20  relative z-10">
+    <div class="  sm:pl-10 sm:pr-10 md:pl-10 md:pr-10  lg:pl-20 lg:pr-20  relative z-10">
 
         @include('partials.v1.table.primary-table', [
             'filter_active' => true,

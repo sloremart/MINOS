@@ -172,62 +172,6 @@
                                         style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
                                 </li>
 
-
-                                <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
-                                    <a href="{{ route('commerce_type.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
-                                        {{ __('Tipos de comercio') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ADMINISTRACION/Roles.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
-                                </li>
-
-
-                                <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }">
-                                    <a href="{{ route('group.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('group.list') ? 'true' : 'false' }} }">
-                                        {{ __('Grupos') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Grupos.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 2" class="w-4 h-4">
-                                </li>
-
-                                <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('subgroup_all.list') ? 'true' : 'false' }} }">
-                                    <a href="{{ route('subgroup_all.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('subgroup_all.list') ? 'true' : 'false' }} }">
-                                        {{ __('Subgrupos') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Subgrupos.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 3" class="w-4 h-4">
-                                </li>
-
-                                <li
-                                    class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
-                                    <a href="{{ route('unit.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('unit.list') ? 'true' : 'false' }} }">
-                                        {{ __('Unidades') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Unidades.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 4" class="w-4 h-4">
-                                </li>
-
-                                <li
-                                    class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
-                                    <a href="{{ route('vat_percentage.list') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('vat_percentage.list') ? 'true' : 'false' }} }">
-                                        {{ __('Porcentajes de impuesto') }}
-                                    </a>
-                                    <img src="{{ asset('images/Iconos Menu/ICONOS MENU ADMINISTRACION/Iconos Reportes/Porcentajes.png') }}"
-                                        style="width:40px; height: 40px;" alt="Icono 5" class="w-4 h-4">
-                                </li>
                             </ul>
                         </x-slot>
                     </x-dropdown>

@@ -1,8 +1,8 @@
 <!-- resources/views/livewire/purchases/create-purchase.blade.php -->
 
-<div class="py-12 flex justify-center"> <!-- Contenedor principal con márgenes y flex para centrar -->
+<div class="pb-4 flex justify-center"> <!-- Contenedor principal con márgenes y flex para centrar -->
 
-    <div class="max-w-screen-2xl w-full mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mt-16 relative z-10">
+    <div class="max-w-screen-2xl w-full mx-auto p-8 bg-white shadow-md rounded-xl grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4  relative z-10" style="margin: 0% 2% 0% 2%;">
         <!-- Ajuste de ancho máximo y padding -->
         <!-- Primera columna: Formulario -->
         <div class="col-span-2">
