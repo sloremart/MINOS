@@ -344,7 +344,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div class="bg-white" :class="{ 'block': open, 'hidden': !open }" class="hidden"  >
+    <div class="bg-white hidden" :class="{ 'block': open, 'hidden': !open }">
         <div class="p-3">
             <div class="pt-2 pb-2 space-y-1 ">
                 <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
