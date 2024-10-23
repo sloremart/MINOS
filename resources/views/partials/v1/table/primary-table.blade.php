@@ -34,16 +34,20 @@
             @isset($table_rows)
                 @foreach($table_rows as $index=>$table_row)
                     <tr class="border-b hover:bg-blue-100">
-                    @foreach($table_headers as $header_name=>$table_header)
+                        @foreach($table_headers as $header_name => $table_header)
                             <td class="px-4 py-2 border-b">
-                                @if(str_contains($table_header,".") and !str_contains($table_header,"*") and ($table_row->{explode(".",$table_header)[0]} != null))
-
-                                    {{ $table_row->{explode(".",$table_header)[0]}->{explode(".",$table_header)[1]} }}  {{--Se usa para traer datos de una relacion user.client.name--}}
+                                @if(str_contains($table_header, ".") && !str_contains($table_header, "*") && ($table_row->{explode(".", $table_header)[0]} != null))
+                                    {{ $table_row->{explode(".", $table_header)[0]}->{explode(".", $table_header)[1]} }} {{-- Se usa para traer datos de una relación user.client.name --}}
                                 @else
-                                    {{ $table_row->{$table_header} }}
+                                    @if($table_header === 'total_amount')
+                                        ${{ intval($table_row->{$table_header}) }} {{-- Agregar símbolo de dólar sin decimales --}}
+                                    @else
+                                        {{ $table_row->{$table_header} }}
+                                    @endif
                                 @endif
                             </td>
                         @endforeach
+                    
                         @isset($table_actions)
                             <td class="px-4 py-2 border-b flex space-x-2">
 
