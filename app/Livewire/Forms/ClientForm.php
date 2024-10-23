@@ -65,7 +65,7 @@ class ClientForm extends Form
     {
         $model = Client::find($id);
         if ($model) {
-            $model->delete();
+            $model->forceDelete();
         }
         session()->flash('message', 'Supplier deleted successfully.');
         return redirect('/clientes/listado');

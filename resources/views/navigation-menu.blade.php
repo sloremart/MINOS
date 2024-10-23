@@ -168,8 +168,18 @@
                                 </li>
 
                                 <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('commerce_type.list') ? 'true' : 'false' }} }">
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('product.list') ? 'true' : 'false' }} }">
                                     <a href="{{ route('product.list') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('product.list') ? 'true' : 'false' }} }">
+                                        {{ __('Productos') }}
+                                    </a>
+                                    <img src="{{ asset('images/Iconos Menu/INVENTARIO/INVENTARIO.png') }}"
+                                        style="width:40px; height: 40px;" alt="Icono 1" class="w-4 h-4">
+                                </li>
+                                <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('inventory.list') ? 'true' : 'false' }} }">
+                                    <a href="{{ route('inventory.list') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         :class="{ 'bg-blue-100 text-blue-700': {{ request()->routeIs('product.list') ? 'true' : 'false' }} }">
                                         {{ __('Inventarios') }}

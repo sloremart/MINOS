@@ -5,12 +5,13 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight pt-4 text-center" style="font-size: 34px;">
             {{ __('Listado de ventas') }}
         </h2>
-    <div class="text-right  z-20 relative max-w-6xl mx-auto">
-        <button class="bg-blue-900 mt-10  hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+    <div class="text-right  z-20 relative max-w-6xl " style="margin-left: 145px;
+    margin-right: auto;">
+        <button class="bg-blue-900 mt-10  hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full inline-flex items-center shadow-md">
             <a href="{{ route('sale.create') }}">
                 <i class="fa-solid fa-circle-plus mr-2"></i>
                 Crear Venta</a>
-        </button>
+        </button >
     </div>
     <div class=" sm:pl-10 sm:pr-10 md:pl-10 md:pr-10  lg:pl-52 lg:pr-52  relative z-10">
 

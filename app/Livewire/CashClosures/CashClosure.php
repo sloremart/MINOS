@@ -30,7 +30,7 @@ class CashClosure extends Component
     public $total_sales_transfer;
     public $total_expenses = 0;
     public $final_balance_cash;
-    public $final_balance_card;
+    public $final_balance_card ;
     public $final_balance_transfer = 0;
     public $next_start_balance;
     public $total_sales;
@@ -307,6 +307,7 @@ class CashClosure extends Component
         $this->total_sales_transfer = 0;
         $this->total_expenses = 0;
         $this->final_balance_cash = 0; // Resetear saldo final en efectivo
+        $this->final_balance_card = 0; // Resetear saldo final en tarjeta
         $this->next_start_balance = 0;
         $this->total_sales = 0;
         $this->final_balance = 0;

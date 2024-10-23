@@ -49,7 +49,7 @@ class UnitForm extends Form
     {
         $model = Unit::find($id);
         if ($model) {
-            $model->delete();
+            $model->forceDelete();
             session()->flash('message', 'Unidad eliminada correctamente.');
         }
         // return redirect('/unidades/listado');

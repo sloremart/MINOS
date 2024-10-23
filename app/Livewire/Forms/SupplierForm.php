@@ -82,10 +82,10 @@ class SupplierForm extends Form
     {
         $model = Supplier::find($id);
         if ($model) {
-            $model->delete();
+            $model->forceDelete();
             session()->flash('message', 'Proveedor eliminado correctamente.');
         }
-        return redirect('/proveedores/listado');
+        // return redirect('/proveedores/listado');
     }
 
     public function resetForm()
