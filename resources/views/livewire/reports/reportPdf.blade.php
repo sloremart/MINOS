@@ -105,7 +105,8 @@
 <body>
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
-        <h2>REPORTES DE VENTAS MENSUAL</h2>
+      
+        <h3>REPORTES DE VENTAS MENSUAL</h3>
         <table class="tabla">
             <thead class="thead">
                 <tr>

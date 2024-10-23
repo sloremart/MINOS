@@ -40,6 +40,8 @@ class CashClosure extends Component
     public $search_1 = '';
     public $search_2 = '';
 
+    public $isDisabled = false;
+
 
     private $paginacion = 4;
     public $users;
@@ -47,6 +49,28 @@ class CashClosure extends Component
     public function mount()
     {
         $this->users = User::all();
+        // Obtener el último registro de cierre de caja
+        $lastCashClosure = cash_closure::latest('created_at')->first();
+
+        // Si existe un cierre de caja anterior, asignar el saldo inicial al valor de next_start_balance
+        if ($lastCashClosure) {
+            $this->start_balance = $lastCashClosure->next_start_balance;
+        } else {
+            // Si no hay registros previos, dejar el saldo inicial en 0 o permitir que se ingrese manualmente
+            $this->start_balance = 0; // O puedes dejarlo en null si quieres permitir entrada manual
+        }
+
+        // Verificar si ya existe un saldo inicial
+        if ($this->start_balance) {
+            $this->isDisabled = true;
+        }
+
+        
+    }
+    public function updatedStartBalance($value)
+    {
+        // Si el valor de start_balance cambia, verifica si debe habilitar o deshabilitar
+        $this->isDisabled = !empty($value);
     }
 
     public function render()
@@ -80,7 +104,7 @@ class CashClosure extends Component
     public function updateTotalSales()
     {
         // Resetear los totales
-        
+
         $this->total_sales_transfer = 0;
         $this->total_expenses = 0; // Reiniciar los egresos
 
@@ -101,7 +125,7 @@ class CashClosure extends Component
         $this->total_sales = $this->total_sales_cash + $this->total_sales_transfer;
 
         // Calcular los egresos (asumiendo que tienes una tabla de egresos o algo similar)
-      
+
 
         // Calcular el saldo final en efectivo
         $this->final_balance_cash = $this->start_balance + $this->total_sales_cash - $this->total_expenses;
@@ -142,7 +166,7 @@ class CashClosure extends Component
 
         cash_closure::create([
             'user_id' => Auth::id(),
-            'closing_date_time' => $this->closing_date_time, // Incluir closing_date_time
+            // 'closing_date_time' => $this->closing_date_time, // Incluir closing_date_time
             'start_balance' => $this->start_balance,
             'total_sales_cash' => $this->total_sales_cash,
             'total_sales_card' => $this->total_sales_card,
@@ -266,7 +290,7 @@ class CashClosure extends Component
     {
         return [
             'user_name' => 'required|string',
-            'closing_date_time' => 'required|date',
+            // 'closing_date_time' => 'required|date',
             'start_balance' => 'required|numeric',
             'next_start_balance' => 'required|numeric',
             // Agregar otras reglas según sea necesario
@@ -275,7 +299,7 @@ class CashClosure extends Component
     public function resetFields()
     {
         $this->user_name = '';
-        $this->closing_date_time = null; // Puede ser 'null' o una fecha por defecto si es necesario
+        // $this->closing_date_time = null; // Puede ser 'null' o una fecha por defecto si es necesario
         $this->start_balance = 0;
         $this->payment_method = null; // o '' si prefieres un string vacío
         $this->total_sales_cash = 0;

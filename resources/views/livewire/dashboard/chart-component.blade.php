@@ -82,6 +82,7 @@
             // Crear la gráfica
             var chart = new CanvasJS.Chart("chartContainer1", {
                 backgroundColor: "transparent", // Fondo transparente
+                animationEnabled: true,
                 title: {
                     text: "Productos mas vendidos",
                     fontFamily: "Arial",

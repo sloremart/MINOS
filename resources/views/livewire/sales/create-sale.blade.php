@@ -1,7 +1,7 @@
 <!-- resources/views/livewire/sales/create-sale.blade.php -->
 
-<div class="py-12 flex justify-center ">
-    <div class="max-w-screen-2xl m-5 p-2 bg-white  relative z-10 shadow-md rounded-xl grid grid-cols-2  md:grid-cols-1  lg:grid-cols-2  sm:grid-cols-1 gap-4 mt-16 ">
+<div class=" flex justify-center ">
+    <div class="max-w-screen-2xl  p-2 bg-white  relative z-10 shadow-md rounded-xl grid grid-cols-1  md:grid-cols-1  lg:grid-cols-2  sm:grid-cols-2 gap-4 " style="margin: 0% 2% 0% 2%;">
         <!-- Primera columna: Formulario -->
         <div class="col-span-1">
             <div class="grid grid-cols-1 gap-4 mb-6">
@@ -77,59 +77,42 @@
                     </div>
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 bg-opacity-75">
                         <!-- Sección de Billetes -->
-                        <h4 class="text-md font-semibold text-gray-800">Billetes</h4>
-                        <div class="grid grid-cols-3 gap-4 mb-4">
-                            @foreach ($billQuantities as $bill => $quantity)
-                            <div>
-                                <label for="bill-{{ $bill }}" class="block text-sm font-medium text-gray-700">Billetes de ${{ number_format($bill, 0, ',', '.') }}</label>
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div class="col-span-1">
+                                <label for="totalCash" class="block text-sm font-medium text-gray-700">Total transacion de la venta</label>
                                 <div class="relative mt-1">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i class="fas fa-money-bill-wave text-gray-400"></i>
+                                        <span class="text-gray-400">$</span>
                                     </div>
-                                    <input type="number" id="bill-{{ $bill }}" wire:model.live="billQuantities.{{ $bill }}" min="0" class="block w-full pl-10 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    <input type="text" id="total" wire:model.live="total" readonly
+                                        class="block w-full pl-7 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" disabled>
                                 </div>
                             </div>
-                            @endforeach
-                        </div>
-
-                        <!-- Sección de Monedas -->
-                        <h4 class="text-md font-semibold text-gray-800">Monedas</h4>
-                        <div class="grid grid-cols-3 gap-4 mb-4">
-                            @foreach ($coinQuantities as $coin => $quantity)
-                            <div>
-                                <label for="coin-{{ $coin }}" class="block text-sm font-medium text-gray-700">Monedas de ${{ number_format($coin, 0, ',', '.') }}</label>
+                            <div class="col-span-1">
+                                <label for="totalCash" class="block text-sm font-medium text-gray-700">Total Recibido</label>
                                 <div class="relative mt-1">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i class="fas fa-coins text-gray-400"></i>
+                                        <span class="text-gray-400">$</span>
                                     </div>
-                                    <input type="number" id="coin-{{ $coin }}" wire:model.live="coinQuantities.{{ $coin }}" min="0" class="block w-full pl-10 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    <input type="text" id="totalCash" wire:model.live="cashGiven"
+                                        class="block w-full pl-7 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+
                                 </div>
                             </div>
-                            @endforeach
-                        </div>
 
+                            <div class="col-span-1">
+                                <label for="change" class="block text-sm font-medium text-gray-700">Cambio</label>
+                                <div class="relative mt-1">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-400">$</span>
+                                    </div>
+                                    <input type="text" id="change" wire:model.live="change" readonly
+                                        class="block w-full pl-7 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" disabled>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Total y Cambio -->
-                        <div class="mt-4">
-                            <label for="totalCash" class="block text-sm font-medium text-gray-700">Total Recibido</label>
-                            <div class="relative mt-1">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <span class="text-gray-400">$</span>
-                                </div>
-                                <input type="text" id="totalCash" wire:model.live="cashGiven" readonly
-                                    class="block w-full pl-7 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            </div>
-                        </div>
 
-                        <div class="mt-4">
-                            <label for="change" class="block text-sm font-medium text-gray-700">Cambio</label>
-                            <div class="relative mt-1">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <span class="text-gray-400">$</span>
-                                </div>
-                                <input type="text" id="change" wire:model.live="change" readonly
-                                    class="block w-full pl-7 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            </div>
-                        </div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse bg-opacity-90">
                         <button wire:click="closeCashModal" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
@@ -205,7 +188,7 @@
                 </h3>
                 <div class="flex overflow-x-auto max-h-40 space-x-4">
                     <table class="bg-white rounded-lg shadow-lg overflow-hidden text-sm flex-grow" style="min-width: 0;">
-                        <thead class="bg-blue-900 text-gray-200 uppercase text-xs leading-tight">
+                        <thead class=" text-gray-200 uppercase text-xs leading-tight" style="background: #652581;">
                             <tr>
                                 <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 40%;">
                                     Nombre

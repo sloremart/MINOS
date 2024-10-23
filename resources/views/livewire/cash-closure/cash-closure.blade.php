@@ -1,6 +1,6 @@
 <div>
-    <div class="py-2    max-w-screen-7xl pb-0 mb-0">
-        <div class="max-w-screen-7xl justify-center  place-content-center p-4">
+    <div class="pb-4    max-w-screen-7xl ">
+        <div class="max-w-screen-7xl justify-center  place-content-center p-4" style="margin: -2% 2% 0% 2%;">
             <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 relative z-40">
                 <div class="relative z-40 bg-white col-span-2 md:col-span-1  rounded-lg shadow-md overflow-x-auto"
                     style="background-image: url('/images/icono_central.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
@@ -14,15 +14,16 @@
                         <!-- Contenedor de la cabecera -->
 
                         @if (session()->has('message'))
-                        <div class="mb-4 text-green-600">
-                            {{ session('message') }}
-                        </div>
+                            <div class="mb-4 text-green-600">
+                                {{ session('message') }}
+                            </div>
                         @endif
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
                             <!-- Nombre del Usuario -->
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">Nombre responsable</label>
                                 <!-- Input con espacio a la izquierda para el ícono -->
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-solid fa-user"></i>
@@ -35,49 +36,36 @@
                                 <!-- Lista de opciones -->
                                 <datalist id="userList">
                                     @foreach ($users as $user)
-                                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                                        <option value="{{ $user->name }}">{{ $user->name }}</option>
                                     @endforeach
                                 </datalist>
                                 <!-- Mensajes de error y ayuda -->
                                 @error('user_name')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="userNameHelp" class="text-gray-500">Seleccione su nombre de la lista.</small> --}}
                             </div>
 
 
-
-                            <!-- Fecha y Hora del Cierre -->
-                            <div class="relative">
-
-                                <input type="date" wire:model="closing_date_time"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="closureTimeHelp" />
-                                @error('closing_date_time')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                                {{-- <small id="closureTimeHelp" class="text-gray-500">Ingrese la fecha y hora del
-                                    cierre.</small> --}}
-                            </div>
-
                             <!-- Saldo Inicial -->
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">Saldo inicial</label>
                                 <!-- Input con espacio a la izquierda para el ícono -->
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-solid fa-money-bill-1"></i>
                                 </span>
-                                {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial</label> --}}
                                 <input wire:model="start_balance" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="startBalanceHelp" placeholder="Saldo inicial" />
+                                    aria-describedby="startBalanceHelp" placeholder="Saldo inicial"
+                                    {{-- Si isDisabled es true, el campo estará deshabilitado --}} @if ($isDisabled) disabled @endif />
                                 @error('start_balance')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                {{-- <small id="startBalanceHelp" class="text-gray-500">Ingrese el saldo inicial.</small> --}}
                             </div>
 
                             <!-- Método de Pago -->
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">Metodo de pago</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </span>
@@ -90,7 +78,7 @@
                                     <option value="all">Todos</option> <!-- Nueva opción "Todos" -->
                                 </select>
                                 @error('payment_method')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="paymentMethodHelp" class="text-gray-500">Seleccione el método de pago
                                     utilizado.</small> --}}
@@ -98,6 +86,7 @@
 
                             <!-- Total Ventas Efectivo -->
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">Total de ventas en efectivo.</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-solid fa-money-bill-1-wave"></i>
                                 </span>
@@ -116,6 +105,7 @@
 
                             <!-- Total Ventas Transferencia -->
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">Total de transferencia</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-duotone fa-solid fa-credit-card"></i>
                                 </span>
@@ -132,6 +122,7 @@
 
                             <!-- Total Egresos -->
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">Total de egresos</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-solid fa-hand-holding-dollar"></i>
                                 </span>
@@ -144,6 +135,7 @@
                             </div>
                             <!-- Saldo Final Efectivo -->
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">saldo final en efectivo.</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
@@ -159,6 +151,7 @@
 
                             <!-- Saldo Inicial Próximo Turno -->
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">saldo para el próximo turno</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
@@ -169,12 +162,13 @@
                                     aria-describedby="nextStartBalanceHelp"
                                     placeholder="saldo para el próximo turno." />
                                 @error('next_start_balance')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Ingrese el saldo inicial para el
                                     próximo turno.</small> --}}
                             </div>
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">Total venta</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
@@ -187,6 +181,7 @@
                                 {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Total venta</small> --}}
                             </div>
                             <div class="relative">
+                                <label for="text" class="text-gray-700 text-xs">Total balance</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
@@ -231,9 +226,14 @@
                             </div>
                         </div>
 
-                        <div class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto"> <!-- Añadido overflow-x-auto aquí -->
-                            <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap"> <!-- Añadido whitespace-nowrap aquí -->
-                                <thead class="text-xs text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400" style="background:#406eab;">
+                        <div
+                            class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto">
+                            <!-- Añadido overflow-x-auto aquí -->
+                            <table
+                                class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap">
+                                <!-- Añadido whitespace-nowrap aquí -->
+                                <thead class="text-xs text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400"
+                                    style="background:#652581;">
                                     <tr>
                                         <th class="py-3 px-4 text-left text-sm font-semibold">Cerrado por</th>
                                         <th class="py-3 px-4 text-left text-sm font-semibold">Fecha y Hora</th>
@@ -246,25 +246,25 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $row)
-                                    <tr class="border-b hover:bg-gray-100">
-                                        <td class="py-2 px-4">{{ $row->user->name }}</td>
-                                        <td class="py-2 px-4">{{ $row->created_at }}</td>
-                                        <td class="py-2 px-4">${{ $row->start_balance }}</td>
-                                        <td class="py-2 px-4">${{ $row->total_sales }}</td>
-                                        <td class="py-2 px-4">${{ $row->total_expenses }}</td>
-                                        <td class="py-2 px-4">${{ $row->final_balance }}</td>
-                                        <td class="py-2 px-4">
-                                            <button wire:click="generatePdf({{ $row->id }})"
-                                                class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded"><i
-                                                    class="fa-regular fa-file-pdf"></i></button>
-                                            <button wire:click="Destroy({{ $row->id }})"
-                                                class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded"><i
-                                                    class="text-bg-red-500 fas fa-trash"></i></button>
-                                            <button wire:click="showDetails({{ $row->id }})"
-                                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded"><i
-                                                    class="text-bg-blue-500 fas fa-sitemap"></i></button>
-                                        </td>
-                                    </tr>
+                                        <tr class="border-b hover:bg-gray-100">
+                                            <td class="py-2 px-4">{{ $row->user->name }}</td>
+                                            <td class="py-2 px-4">{{ $row->created_at }}</td>
+                                            <td class="py-2 px-4">${{ $row->start_balance }}</td>
+                                            <td class="py-2 px-4">${{ $row->total_sales }}</td>
+                                            <td class="py-2 px-4">${{ $row->total_expenses }}</td>
+                                            <td class="py-2 px-4">${{ $row->final_balance }}</td>
+                                            <td class="py-2 px-4">
+                                                <button wire:click="generatePdf({{ $row->id }})"
+                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded"><i
+                                                        class="fa-regular fa-file-pdf"></i></button>
+                                                <button wire:click="Destroy({{ $row->id }})"
+                                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded"><i
+                                                        class="text-bg-red-500 fas fa-trash"></i></button>
+                                                <button wire:click="showDetails({{ $row->id }})"
+                                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded"><i
+                                                        class="text-bg-blue-500 fas fa-sitemap"></i></button>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -286,7 +286,8 @@
         class="{{ $showModal ? 'fixed' : 'hidden' }} flex z-50 inset-0 items-center justify-center bg-gray-900 bg-opacity-50">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <!-- Modal content -->
-            <div class="relative bg-white bg-opacity-95 rounded-lg shadow dark:bg-gray-700 " style="background-image: url(/images/icono_central.png);
+            <div class="relative bg-white bg-opacity-95 rounded-lg shadow dark:bg-gray-700 "
+                style="background-image: url(/images/icono_central.png);
             background-size: contain; /* Cambiado a cover */
             background-repeat: no-repeat;
             background-position: center;">
@@ -363,13 +364,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($salesDetails as $detail)
-                                    <tr>
-                                        <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
-                                        </td>
-                                        <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
-                                        <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
-                                        <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
-                                    </tr>
+                                        <tr>
+                                            <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
+                                            </td>
+                                            <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
+                                            <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
+                                            <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -397,7 +398,7 @@
 
 
     @if ($showModal)
-    <div class="modal-backdrop fade show"></div>
+        <div class="modal-backdrop fade show"></div>
     @endif
     <script>
         function printDiv(divId) {

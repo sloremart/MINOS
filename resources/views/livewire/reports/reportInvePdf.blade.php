@@ -49,7 +49,7 @@
             z-index: 2;
             width: 80%;
             height: auto;
-            margin: 40px auto;
+            margin: 40px;
             /* Fondo blanco para el contenido */
             padding: 20px;
             padding-top: 20%;
@@ -105,8 +105,8 @@
 <body>
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
-        <img src="../public/images/LogoM.png" alt="LOGO" width="150px" height="150px">
-        <h2>REPORTES DE INVETARIO </h2>
+       
+        <h3>REPORTES DE INVETARIO </h3>
         <table class="tabla">
             <thead class="thead">
                 <tr>
