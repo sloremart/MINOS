@@ -247,4 +247,8 @@ class CreateSale extends Component
 
         return $query->paginate(10);
     }
+
+        public function cancel(){
+            return redirect('/ventas/listado');
+        }
 }

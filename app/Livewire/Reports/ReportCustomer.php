@@ -74,7 +74,7 @@ class ReportCustomer extends Component
 
 
         if ($this->search_2) {
-            $query->where('customers.name', '>=', $this->search_2);
+            $query->where('customers.name','like', $this->search_2);
             // dd($query);
         }
         if ($this->search) {

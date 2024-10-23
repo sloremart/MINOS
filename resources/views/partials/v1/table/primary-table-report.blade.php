@@ -4,7 +4,7 @@
         <!-- Inputs de búsqueda alineados a la izquierda -->
         <div class="col-span-8 flex space-x-4 ml-4 sm:ml-0">
             @if(($search_2_placeholder ?? null) != null)
-            <input type="text" wire:model.live="{{$search_2}}" placeholder="{{$search_2_placeholder ?? ""}}" id="search_2" name="search_1" value="{{ old('search_2') }}" class="px-4 py-2 border rounded-full w-full">
+            <input type="text" wire:model.live="{{$search_2}}" placeholder="{{$search_2_placeholder ?? ""}}" id="search_2" name="search_2" value="{{ old('search_2') }}" class="px-4 py-2 border rounded-full w-full">
             @endif
             @if(($search_placeholder ?? null) != null)
             <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" id="search" name="search" value="{{ old('search') }}" class="px-4 py-2 border rounded-full w-full">
@@ -174,9 +174,10 @@
             // Obtener los valores de las fechas
             let search = document.getElementById('search').value;
             let search_1 = document.getElementById('search_1').value;
+            let search_2 = document.getElementById('search_2').value;
 
             // Crear la URL con los parámetros de búsqueda
-            let url = '{{ route('reportpdf.list') }}' + '?search=' + search + '&search_1=' + search_1;
+            let url = '{{ route('reportpdf.list') }}' + '?search=' + search + '&search_1=' + search_1 + '$search_2='+search_2;
 
             // Abrir la URL en una nueva pestaña
             window.open(url, '_blank');

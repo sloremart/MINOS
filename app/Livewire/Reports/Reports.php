@@ -30,7 +30,7 @@ class Reports extends Component
 
     public $search = ''; // Fecha de inicio
     public $search_1 = ''; // Fecha de fin
-    public $search_2 = ''; // Fecha de fin
+    public $search_2 = ''; 
     public $search_placeholder = 'Fecha inicio';
     public $search_1_placeholder = 'Fecha fin';
     public $search_2_placeholder = 'Buscar Producto ...';
@@ -64,7 +64,9 @@ class Reports extends Component
             $query->where('sale_details.created_at', '<=', $this->search_1);
         }
         if ($this->search_2) {
-            $query->where('products.name', '<=', $this->search_2);
+            $query->where('products.name', 'like', $this->search_2);
+            // $query->where('products.name', 'like', '%' . $this->search . '%');
+
         }
 
         $data = $query->paginate($this->paginacion);

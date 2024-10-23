@@ -63,7 +63,7 @@ class ReportInv extends Component
             ->groupBy('products.name');
 
         if ($this->search_2) {
-            $query->where('products.name', '>=', $this->search_2);
+            $query->where('products.name', 'like', $this->search_2);
             // dd($query);
         }
         if ($this->search) {

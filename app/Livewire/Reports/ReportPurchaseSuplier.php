@@ -228,7 +228,7 @@ class ReportPurchaseSuplier extends Component
 
         // Aplicar filtros de búsqueda
         if ($this->search_2) {
-            $query->where('suppliers.name', '>=', $this->search_2);
+            $query->where('suppliers.name', 'like', $this->search_2);
         }
         if ($this->search) {
             $query->where('purchases.purchase_date', '>=', $this->search);
