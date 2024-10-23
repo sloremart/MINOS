@@ -45,7 +45,7 @@ class CommerceTypeForm extends Form
     {
         $model = CommerceType::find($id);
         if ($model) {
-            $model->delete();
+            $model->forceDelete();
             session()->flash('message', 'Tipo de comercio eliminado correctamente.');
         }
         return redirect('/tipos-de-comercio/listado');

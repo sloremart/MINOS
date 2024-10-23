@@ -21,6 +21,7 @@ class cash_closure extends Model
         'total_expenses',
         'total_sales',      // Este campo debe existir
         'final_balance_cash',
+        'final_balance_card',
         'final_balance',   
         'next_start_balance',
     ];

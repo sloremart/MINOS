@@ -3,14 +3,17 @@
         @if($filter_active)
         <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
             @if(($search_placeholder ?? null) != null)
-                <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="mt-1 block   border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <input type="text" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="mt-1 block   border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             @endif
             @if(($search_1_placeholder ?? null) != null)
-                <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="mt-1 block   border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}"class="mt-1 block   border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             @endif
     
         </div>
     @endif
+
+
+    
     </div>
 
     <div class="mb-1 m-6">
@@ -31,7 +34,7 @@
             @isset($table_rows)
                 @foreach($table_rows as $index=>$table_row)
                     <tr class="border-b hover:bg-blue-100">
-                        @foreach($table_headers as $header_name=>$table_header)
+                    @foreach($table_headers as $header_name=>$table_header)
                             <td class="px-4 py-2 border-b">
                                 @if(str_contains($table_header,".") and !str_contains($table_header,"*") and ($table_row->{explode(".",$table_header)[0]} != null))
 
@@ -48,18 +51,17 @@
                                             @if($action_type=="edit")
                                                 @include("partials.v1.table.table-action-button",[
                                                             "button_action"=>$action_value,
-                                                            "button_color"=>"bg-green-500",
+                                                            "button_color"=>"bg-green-500 rounded-full px-2 py-2",
                                                             "button_hover"=>"bg-green-700",
                                                             "icon_color"=>"bg-green-500",
                                                             "model_id"=>$table_row->{$table_headers[array_keys($table_headers)[0]]},
                                                             "icon"=>"fas fa-pencil",
                                                             "tooltip_title"=>"Editar"
-
                                                         ])
                                             @elseif($action_type=="delete")
                                                 @include("partials.v1.table.table-action-button",[
                                                          "button_action"=>$action_value,
-                                                         "button_color"=>"bg-red-500",
+                                                         "button_color"=>"bg-red-500 rounded-full px-2 py-2",
                                                          "button_hover"=>"bg-red-700",
                                                          "icon_color"=>"bg-red-500",
                                                          "model_id"=>$table_row->{$table_headers[array_keys($table_headers)[0]]},
@@ -70,7 +72,7 @@
                                             @elseif($action_type=="details")
                                                 @include("partials.v1.table.table-action-button",[
                                                          "button_action"=>$action_value,
-                                                         "button_color"=>"bg-yellow-500",
+                                                         "button_color"=>"bg-yellow-500 rounded-full px-2 py-2",
                                                          "button_hover"=>"bg-yellow-700",
                                                          "icon_color"=>"bg-yellow-500",
                                                          "model_id"=>$table_row->{$table_headers[array_keys($table_headers)[0]]},
@@ -80,7 +82,7 @@
                                     @elseif($action_type == "add")
                                         @include("partials.v1.table.table-action-button", [
                                             "button_action" => $action_value,
-                                            "button_color" => "bg-blue-500",
+                                            "button_color" => "bg-blue-500 rounded-full px-2 py-2",
                                             "button_hover" => "bg-blue-700",
                                             "icon_color" => "bg-blue-500",
                                             "model_id" => $table_row->{$table_headers[array_keys($table_headers)[0]]},
@@ -94,7 +96,7 @@
                                                     @else
                                                         @if(array_key_exists("popup",$custom))
                                                             @include("partials.v1.table.table-popup-button",[
-                                                                                "icon_color"=>"secondary",
+                                                                                "icon_color"=>"secondary ",
                                                                                 "modal_title"=>$custom["popup"]["modal_title"],
                                                                                 "view_name"=>$custom["popup"]["view_name"],
                                                                                 "view_data"=>$custom["popup"]["view_data"],
@@ -133,7 +135,6 @@
                                                 @endforeach
                                             @endif
                                         @endforeach
-
                             </td>
                         @endisset
                     </tr>

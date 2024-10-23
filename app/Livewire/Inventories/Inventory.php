@@ -15,6 +15,9 @@ class Inventory extends Component
 
     public InventoryForm $modelForm;
     public $products;
+    public $search_placeholder;
+    public $search_1_placeholder;
+    
 
     public function mount()
     {
@@ -28,14 +31,16 @@ class Inventory extends Component
     }
     public function getData()
     {
-        $data = Auth::user()->inventories;
+        // Cambiamos a paginate() en lugar de obtener todos los datos
+        $data = Auth::user()->inventories()->paginate(10); // 10 es el número de registros por página
         return $data;
     }
-
+    
     public function render()
     {
         return view('livewire.inventories.inventory', [
             "data" => $this->getData()
         ])->layout('layouts.app');
     }
+    
 }

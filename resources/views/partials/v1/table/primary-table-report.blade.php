@@ -4,13 +4,13 @@
         <!-- Inputs de búsqueda alineados a la izquierda -->
         <div class="col-span-8 flex space-x-4 ml-4 sm:ml-0">
             @if(($search_2_placeholder ?? null) != null)
-            <input type="text" wire:model.live="{{$search_2}}" placeholder="{{$search_2_placeholder ?? ""}}" id="search_2" name="search_1" value="{{ old('search_2') }}" class="px-4 py-2 border rounded w-full">
+            <input type="text" wire:model.live="{{$search_2}}" placeholder="{{$search_2_placeholder ?? ""}}" id="search_2" name="search_1" value="{{ old('search_2') }}" class="px-4 py-2 border rounded-full w-full">
             @endif
             @if(($search_placeholder ?? null) != null)
-            <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" id="search" name="search" value="{{ old('search') }}" class="px-4 py-2 border rounded w-full">
+            <input type="date" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" id="search" name="search" value="{{ old('search') }}" class="px-4 py-2 border rounded-full w-full">
             @endif
             @if(($search_1_placeholder ?? null) != null)
-            <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}" class="px-4 py-2 border rounded w-full">
+            <input type="date" wire:model.live="{{$search_1}}" placeholder="{{$search_1_placeholder ?? ""}}" id="search_1" name="search_1" value="{{ old('search_1') }}" class="px-4 py-2 border rounded-full w-full">
             @endif
         </div>
 

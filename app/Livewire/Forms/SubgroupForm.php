@@ -40,7 +40,7 @@ class SubgroupForm extends Form
         $subgroup->code = $subgroup->group_id.$subgroup->id;
         $subgroup->save();
         session()->flash('message', 'Subgrupo creado correctamente.');
-        return redirect('/subgrupos/listado');
+        // return redirect('/subgrupos/listado');
     }
 
     public function edit()
@@ -50,7 +50,7 @@ class SubgroupForm extends Form
         if ($model) {
             $model->update($this->all());
             session()->flash('message', 'Subgrupo actualizado correctamente.');
-            return redirect('/subgrupos/listado');
+            // return redirect('/subgrupos/listado');
         }
     }
 
@@ -58,10 +58,10 @@ class SubgroupForm extends Form
     {
         $model = Subgroup::find($id);
         if ($model) {
-            $model->delete();
+            $model->forceDelete();
             session()->flash('message', 'Subgrupo eliminado correctamente.');
         }
-        return redirect('/subgrupos/listado');
+        // return redirect('/subgrupos/listado');
     }
 
     public function resetForm()

@@ -30,7 +30,7 @@
                                 </span>
 
                                 <input list="userList" wire:model="user_name"
-                                    class="mt-1 block w-full pl-10 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full pl-10 border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="userNameHelp" placeholder=" Nombre responsable" />
 
                                 <!-- Lista de opciones -->
@@ -55,7 +55,7 @@
                                     <i class="fa-solid fa-money-bill-1"></i>
                                 </span>
                                 <input wire:model="start_balance" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="startBalanceHelp" placeholder="Saldo inicial"
                                     {{-- Si isDisabled es true, el campo estará deshabilitado --}} @if ($isDisabled) disabled @endif />
                                 @error('start_balance')
@@ -70,7 +70,7 @@
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </span>
                                 <select wire:model="payment_method"
-                                    class="mt-1 block w-full border-gray-300  pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     wire:change="updateTotalSales" aria-describedby="paymentMethodHelp">
                                     <option value="" class="text-gray-500"> Metodo de pago</option>
                                     <option value="cash">Efectivo</option>
@@ -92,7 +92,7 @@
                                 </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Total Ventas Efectivo</label> --}}
                                 <input wire:model="total_sales_cash" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     readonly aria-describedby="totalSalesCashHelp" disabled
                                     placeholder="Total de ventas en
                                     efectivo." />
@@ -112,7 +112,7 @@
                                 {{-- <label class="block text-sm font-medium text-gray-700">Total Ventas
                                     Transferencia</label> --}}
                                 <input wire:model="total_sales_transfer" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     readonly aria-describedby="totalSalesTransferHelp" disabled
                                     placeholder="Total de transferencia" />
 
@@ -128,7 +128,7 @@
                                 </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Total Egresos</label> --}}
                                 <input wire:model="total_expenses" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300  pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="totalExpensesHelp" disabled placeholder="total de egresos." />
 
                                 {{-- <small id="totalExpensesHelp" class="text-gray-500">total de egresos.</small> --}}
@@ -141,7 +141,7 @@
                                 </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Final Efectivo</label> --}}
                                 <input wire:model="final_balance_cash" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="finalBalanceCashHelp" disabled
                                     placeholder="saldo final en efectivo." />
 
@@ -158,7 +158,7 @@
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
                                     Turno</label> --}}
                                 <input wire:model="next_start_balance" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md  pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300 rounded-full  pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp"
                                     placeholder="saldo para el próximo turno." />
                                 @error('next_start_balance')
@@ -175,7 +175,7 @@
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
                                     Turno</label> --}}
                                 <input wire:model="total_sales" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-md pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300 rounded-full pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp" disabled placeholder="Total venta" />
 
                                 {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Total venta</small> --}}
@@ -188,7 +188,7 @@
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
                                     Turno</label> --}}
                                 <input wire:model="final_balance" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp" disabled placeholder="Total balance" />
 
                                 {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Total balance</small> --}}
@@ -198,11 +198,11 @@
                         <!-- Botón Enviar -->
                         <div class="flex justify-end mt-6 gap-2">
                             <button wire:click="resetFields"
-                                class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+                                class="px-4 py-2 bg-gray-600 text-white rounded-full hover:bg-gray-700">
                                 Cancelar
                             </button>
                             <button wire:click="store"
-                                class="px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-900">
+                                class="px-4 py-2 bg-blue-900 text-white rounded-full hover:bg-blue-900">
                                 Registrar Cierre de Caja
                             </button>
                         </div>
@@ -218,10 +218,10 @@
                         <div class="overflow-x-auto  relative z-10 max-w-6xl mx-auto ">
                             <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
                                 <input type="text" placeholder="buscar ..."
-                                    class="p-2 border border-gray-300 rounded-md" wire:model.live="search">
-                                <input type="date" class="p-2 border border-gray-300 rounded-md"
+                                    class="p-2 border border-gray-300 rounded-full" wire:model.live="search">
+                                <input type="date" class="p-2 border border-gray-300 rounded-full"
                                     wire:model.live="search_1">
-                                <input type="date" class="p-2 border border-gray-300 rounded-md"
+                                <input type="date" class="p-2 border border-gray-300 rounded-full"
                                     wire:model.live="search_2">
                             </div>
                         </div>
@@ -255,13 +255,13 @@
                                             <td class="py-2 px-4">${{ $row->final_balance }}</td>
                                             <td class="py-2 px-4">
                                                 <button wire:click="generatePdf({{ $row->id }})"
-                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded"><i
+                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-3 rounded-full"><i
                                                         class="fa-regular fa-file-pdf"></i></button>
                                                 <button wire:click="Destroy({{ $row->id }})"
-                                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded"><i
+                                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-full"><i
                                                         class="text-bg-red-500 fas fa-trash"></i></button>
                                                 <button wire:click="showDetails({{ $row->id }})"
-                                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded"><i
+                                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-full"><i
                                                         class="text-bg-blue-500 fas fa-sitemap"></i></button>
                                             </td>
                                         </tr>

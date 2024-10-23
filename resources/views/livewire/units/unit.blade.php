@@ -5,8 +5,9 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center" style="font-size: 34px">
         {{ __('Listado de unidades') }}
     </h2>
-    <div class="text-right z-20 relative max-w-6xl mx-auto">
-        <button wire:click="openModal" class="bg-blue-900 mt-10 text-gray-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center shadow-md" >
+    <div class="text-right z-20 relative max-w-6xl " style="margin-left: 145px;
+    margin-right: 26px;">
+        <button wire:click="openModal" class="bg-blue-900 mt-10  hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full inline-flex items-center shadow-md" >
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Unidad
         </button>
@@ -66,6 +67,7 @@
                                 "icon_class"=>"fas fa-ruler",
                                 "placeholder"=>"Nombre",
                                 "input_field"=>"Nombre",
+                                "class"=>"rounded-full",
                                 "col_with"=>2,
                                 "required"=>true,
                                 "disabled"=>$action == 'details',
@@ -76,6 +78,7 @@
                                 "icon_class"=>"fas fa-font",
                                 "placeholder"=>"Abreviatura",
                                 "input_field"=>"Abreviatura",
+                                "class"=>"rounded-full",
                                 "col_with"=>1,
                                 "required"=>true,
                                 "disabled"=>$action == 'details',
