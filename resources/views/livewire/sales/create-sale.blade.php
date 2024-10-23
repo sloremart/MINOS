@@ -287,25 +287,25 @@
                 Productos
             </h3>
             <div class="bg-blue-100 rounded-lg shadow-lg">
-                @include("partials.v1.table.primary-table",[
-                "filter_active" => true,
-                "search" => "search",
-                "search_1" => "search_1",
-                "search_placeholder" => $search_placeholder,
-                "search_1_placeholder" => $search_1_placeholder,
-                "table_headers" => [
-                "ID" => "id",
-                "Nombre" => "name",
-                "Código" => "code",
-                "Porcentaje de IVA" => "vatPercentage.percentage",
-                "Unidad" => "unit.name",
-                "Precio" => "activePrice.price",
-                "Stock" => "inventory.quantity",
-                ],
-                "table_actions" => [
-                "add" => "addProductToSale",
-                ],
-                "table_rows" => $data
+            @include("partials.v1.table.primary-table",[
+                    "filter_active" => true,
+                    "search" => "search",
+                    "search_1" => "search_1",
+                    "search_placeholder" => $search_placeholder,
+                    "search_1_placeholder" => $search_1_placeholder,
+                    "table_headers" => [
+                        "ID" => "id",
+                        "Nombre" => "name",
+                        "Código" => "code",
+                        "Porcentaje de IVA" => "vatPercentage.percentage",
+                        "Unidad" => "unit.name",
+                        "Precio" => "activePrice.price",
+                        "Stock" => "inventory.quantity",
+                    ],
+                    "table_actions" => [
+                        "add" => "addProductToSale",
+                    ],
+                    "table_rows" => $data
                 ])
             </div>
         </div>
