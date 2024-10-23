@@ -310,9 +310,9 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-4 md:p-5 space-y-4 bg-white bg-opacity-75">
-                    <div class="bg-white max-w-full shadow-lg rounded-xl">
-                        <div
-                            class="p-4 grid  grid-cols-1 md:grid-cols-1 lg:grid-cols-1 w-full bg-white border border-gray-300 rounded-lg">
+
+                    <div class="bg-white max-w-full shadow-lg rounded-xl">    
+                        <div class="p-4 grid  grid-cols-1 md:grid-cols-1 lg:grid-cols-1 w-full bg-white border border-gray-300 rounded-lg">
                             <table class="border border-gray-300 max-w-full rounded-xl">
                                 <thead>
                                     <tr>
@@ -351,6 +351,7 @@
 
                         </div>
                     </div>
+                    
                     <div class="bg-white max-w-full shadow-lg rounded-lg overflow-hidden" style="min-height: 12vh;">
                         <div style="max-height: 300px; overflow-y: auto;">
                             <table class="table-auto w-full border-collapse bg-white  rounded-3xl">
