@@ -566,6 +566,7 @@
                         </button>
                     </div>
 
+
                     <div x-show="open2" @click.away="open2 = false"
                         class="m-3 p-2 pt-0 pb-0 text-gray-900 dark:text-white rounded-md"
                         style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
@@ -579,6 +580,7 @@
                                 </a>
                             </li>
 
+
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <a href="{{ route('group.list') }}"
@@ -587,6 +589,7 @@
                                     {{ __('Grupos') }}
                                 </a>
                             </li>
+
 
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -597,6 +600,7 @@
                                 </a>
                             </li>
 
+
                             <li
                                 class="flex justify-between border-b-2 items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <a href="{{ route('unit.list') }}"
@@ -605,6 +609,7 @@
                                     {{ __('Unidades') }}
                                 </a>
                             </li>
+
 
                             <li
                                 class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -670,3 +675,4 @@
         </div>
     </div>
 </nav>
+
