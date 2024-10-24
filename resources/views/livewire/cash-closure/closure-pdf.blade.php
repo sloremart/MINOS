@@ -57,8 +57,11 @@
 
         /* Estilo de la tabla */
         .grid-contain {
-            padding: 16px;
-            border: solid #000000;
+            padding: 1rem; /* Espaciado interno */
+            width: 100%; /* Ancho completo */
+            background-color: white; /* Fondo blanco */
+            border: 1px solid #d1d5db; /* Borde gris claro */
+            border-radius: 0.5rem; /* Bordes redondeados */
         }
         .table {
             width: 100%;
@@ -91,13 +94,14 @@
             /* Color de fondo para las celdas de datos */
         }
 
-
-
+        /* Estilo de la tabla */
         .tabla {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
             text-align: left;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .tabla th,
@@ -107,11 +111,10 @@
         }
 
         .tabla thead {
-            background-color: #0127cf;
+            background-color: #652581;
             color: #ffffff;
             border-radius: 20% 20%;
         }
-
 
         .tabla tbody tr {
             background-color: #ffffff;
@@ -131,7 +134,7 @@
         }
 
         .tabla tbody tr:last-child td {
-            border-bottom: 2px solid #0127cf;
+            border-bottom: 2px solid #652581;
         }
     </style>
 </head>
@@ -140,50 +143,53 @@
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
         <h1>Reporte de Cierre de Caja </h1>
-        <div class="grid-container">
-            <table class="table">
-                <tr>
-                    <th><strong>Usuario:</strong></th>
-                    <td>
-                        <div>{{ $closure->user->name }}</div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><strong>Fecha de Cierre:</strong></th>
-                    <td>
-                        <div>{{ $closure->closing_date_time }}</div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><strong>Saldo Inicial:</strong></th>
-                    <td>
-                        <div> ${{ number_format($closure->start_balance, 0, ',', '.') }}</div>
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <th><strong>Total Ventas:</strong></th>
-                    <td>
-                        <div>${{ number_format($closure->total_sales, 0, ',', '.') }}</div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><strong>Total Gastos:</strong></th>
-                    <td>
-                        <div> ${{ number_format($closure->total_expenses, 0, ',', '.') }}</div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><strong>Saldo Final:</strong></th>
-                    <td>
-                        <div>${{ number_format($closure->final_balance, 0, ',', '.') }}</div>
-                    </td>
-                </tr>
-            </table>
-
-
-
+        <div class="grid-contain">
+            <div class="grid-container">
+                <table class="table">
+                    <tr>
+                        <th><strong>Usuario:</strong></th>
+                        <td>
+                            <div>{{ $closure->user->name }}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>Fecha de Cierre:</strong></th>
+                        <td>
+                            <div>{{ $closure->closing_date_time }}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>Saldo Inicial:</strong></th>
+                        <td>
+                            <div> ${{ number_format($closure->start_balance, 0, ',', '.') }}</div>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <th><strong>Total Ventas:</strong></th>
+                        <td>
+                            <div>${{ number_format($closure->total_sales, 0, ',', '.') }}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>Total Gastos:</strong></th>
+                        <td>
+                            <div> ${{ number_format($closure->total_expenses, 0, ',', '.') }}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><strong>Saldo Final:</strong></th>
+                        <td>
+                            <div>${{ number_format($closure->final_balance, 0, ',', '.') }}</div>
+                        </td>
+                    </tr>
+                </table>
+    
+    
+    
+            </div>
         </div>
+       
         <h2>Detalles de Ventas</h2>
         <table class="tabla">
             <thead class="thead">
