@@ -14,13 +14,12 @@
                         <!-- Contenedor de la cabecera -->
 
                         @if (session()->has('message'))
-                            <div class="mb-4 text-green-600">
-                                {{ session('message') }}
-                            </div>
+                        <div class="mb-4 text-green-600">
+                            {{ session('message') }}
+                        </div>
                         @endif
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
                             <!-- Nombre del Usuario -->
                             <div class="relative">
                                 <label for="text" class="text-gray-700 text-xs">Nombre responsable</label>
@@ -36,12 +35,12 @@
                                 <!-- Lista de opciones -->
                                 <datalist id="userList">
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->name }}">{{ $user->name }}</option>
+                                    <option value="{{ $user->name }}">{{ $user->name }}</option>
                                     @endforeach
                                 </datalist>
                                 <!-- Mensajes de error y ayuda -->
                                 @error('user_name')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="userNameHelp" class="text-gray-500">Seleccione su nombre de la lista.</small> --}}
                             </div>
@@ -54,12 +53,12 @@
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-solid fa-money-bill-1"></i>
                                 </span>
-                                <input wire:model="start_balance" type="number" step="0.01"
+                                <input wire:model="start_balance" id="start_balance" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="startBalanceHelp" placeholder="Saldo inicial"
+                                    aria-describedby="startBalanceHelp" placeholder="Saldo inicial" oninput="calculateFinalBalance()"
                                     {{-- Si isDisabled es true, el campo estará deshabilitado --}} @if ($isDisabled) disabled @endif />
                                 @error('start_balance')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -69,7 +68,7 @@
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </span>
-                                <select wire:model="payment_method"
+                                <select wire:model="payment_method" id="payment_method"
                                     class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     wire:change="updateTotalSales" aria-describedby="paymentMethodHelp">
                                     <option value="" class="text-gray-500"> Metodo de pago</option>
@@ -78,7 +77,7 @@
                                     <option value="all">Todos</option> <!-- Nueva opción "Todos" -->
                                 </select>
                                 @error('payment_method')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="paymentMethodHelp" class="text-gray-500">Seleccione el método de pago
                                     utilizado.</small> --}}
@@ -90,12 +89,12 @@
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-solid fa-money-bill-1-wave"></i>
                                 </span>
-                                {{-- <label class="block text-sm font-medium text-gray-700">Total Ventas Efectivo</label> --}}
-                                <input wire:model="total_sales_cash" type="number" step="0.01"
+
+                                <input wire:model="total_sales_cash" type="number" step="0.01" id="total_sales_cash"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     readonly aria-describedby="totalSalesCashHelp" disabled
                                     placeholder="Total de ventas en
-                                    efectivo." />
+                                    efectivo." oninput="calculateFinalBalance()" />
 
                                 {{-- <small id="totalSalesCashHelp" class="text-gray-500">Total de ventas en
                                     efectivo.</small> --}}
@@ -109,9 +108,8 @@
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-duotone fa-solid fa-credit-card"></i>
                                 </span>
-                                {{-- <label class="block text-sm font-medium text-gray-700">Total Ventas
-                                    Transferencia</label> --}}
-                                <input wire:model="total_sales_transfer" type="number" step="0.01"
+
+                                <input wire:model="total_sales_transfer" type="number" step="0.01" id="total_sales_transfer"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     readonly aria-describedby="totalSalesTransferHelp" disabled
                                     placeholder="Total de transferencia" />
@@ -127,46 +125,42 @@
                                     <i class="fa-solid fa-hand-holding-dollar"></i>
                                 </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Total Egresos</label> --}}
-                                <input wire:model="total_expenses" type="number" step="0.01"
+                                <input wire:model="total_expenses" type="number" step="0.01" id="total_expenses"
                                     class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="totalExpensesHelp" disabled placeholder="total de egresos." />
+                                    aria-describedby="totalExpensesHelp" disabled placeholder="total de egresos." oninput="calculateFinalBalance()" />
 
                                 {{-- <small id="totalExpensesHelp" class="text-gray-500">total de egresos.</small> --}}
                             </div>
                             <!-- Saldo Final Efectivo -->
                             <div class="relative">
-                                <label for="text" class="text-gray-700 text-xs">saldo final en efectivo.</label>
+                                <label for="text" class="text-gray-700 text-xs">Saldo final en efectivo.</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
-                                {{-- <label class="block text-sm font-medium text-gray-700">Saldo Final Efectivo</label> --}}
-                                <input wire:model="final_balance_cash" type="number" step="0.01"
+                                <input wire:model="final_balance_cash" type="number" step="0.01" id="final_balance_cash"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="finalBalanceCashHelp" disabled
-                                    placeholder="saldo final en efectivo." />
-
-                                {{-- <small id="finalBalanceCashHelp" class="text-gray-500">Ingrese el saldo final en
-                                    efectivo.</small> --}}
+                                    aria-describedby="finalBalanceCashHelp" readonly placeholder="Saldo final en efectivo." oninput="calculateFinalBalance()" disabled />
                             </div>
 
-                            <!-- Saldo Inicial Próximo Turno -->
+
+                            <!-- saldo proximo turno -->
                             <div class="relative">
-                                <label for="text" class="text-gray-700 text-xs">saldo para el próximo turno</label>
+                                <label for="next_start_balance" class="text-gray-700 text-xs">Saldo para el próximo turno</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
-                                {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
-                                    Turno</label> --}}
                                 <input wire:model="next_start_balance" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 rounded-full  pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    class="mt-1 block w-full border-gray-300 rounded-full pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp"
-                                    placeholder="saldo para el próximo turno." />
+                                    placeholder="Saldo para el próximo turno."
+                                    @if (!$hasPreviousRecord) disabled @endif />
+
                                 @error('next_start_balance')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Ingrese el saldo inicial para el
-                                    próximo turno.</small> --}}
                             </div>
+
+
                             <div class="relative">
                                 <label for="text" class="text-gray-700 text-xs">Total venta</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
@@ -174,7 +168,7 @@
                                 </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
                                     Turno</label> --}}
-                                <input wire:model="total_sales" type="number" step="0.01"
+                                <input wire:model="total_sales" type="number" step="0.01" id="total_sales"
                                     class="mt-1 block w-full border-gray-300 rounded-full pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp" disabled placeholder="Total venta" />
 
@@ -187,7 +181,7 @@
                                 </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
                                     Turno</label> --}}
-                                <input wire:model="final_balance" type="number" step="0.01"
+                                <input wire:model="final_balance" type="number" step="0.01" id="final_balance"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp" disabled placeholder="Total balance" />
 
@@ -246,25 +240,25 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $row)
-                                        <tr class="border-b hover:bg-gray-100">
-                                            <td class="py-2 px-4">{{ $row->user->name }}</td>
-                                            <td class="py-2 px-4">{{ $row->created_at }}</td>
-                                            <td class="py-2 px-4">${{ $row->start_balance }}</td>
-                                            <td class="py-2 px-4">${{ $row->total_sales }}</td>
-                                            <td class="py-2 px-4">${{ $row->total_expenses }}</td>
-                                            <td class="py-2 px-4">${{ $row->final_balance }}</td>
-                                            <td class="py-2 px-4">
-                                                <button wire:click="generatePdf({{ $row->id }})"
-                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-3 rounded-full"><i
-                                                        class="fa-regular fa-file-pdf"></i></button>
-                                                <button wire:click="Destroy({{ $row->id }})"
-                                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-full"><i
-                                                        class="text-bg-red-500 fas fa-trash"></i></button>
-                                                <button wire:click="showDetails({{ $row->id }})"
-                                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-full"><i
-                                                        class="text-bg-blue-500 fas fa-sitemap"></i></button>
-                                            </td>
-                                        </tr>
+                                    <tr class="border-b hover:bg-gray-100">
+                                        <td class="py-2 px-4">{{ $row->user->name }}</td>
+                                        <td class="py-2 px-4">{{ $row->created_at }}</td>
+                                        <td class="py-2 px-4">${{ $row->start_balance }}</td>
+                                        <td class="py-2 px-4">${{ $row->total_sales }}</td>
+                                        <td class="py-2 px-4">${{ $row->total_expenses }}</td>
+                                        <td class="py-2 px-4">${{ $row->final_balance }}</td>
+                                        <td class="py-2 px-4">
+                                            <button wire:click="generatePdf({{ $row->id }})"
+                                                class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-3 rounded-full"><i
+                                                    class="fa-regular fa-file-pdf"></i></button>
+                                            <button wire:click="Destroy({{ $row->id }})"
+                                                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-full"><i
+                                                    class="text-bg-red-500 fas fa-trash"></i></button>
+                                            <button wire:click="showDetails({{ $row->id }})"
+                                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-full"><i
+                                                    class="text-bg-blue-500 fas fa-sitemap"></i></button>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -295,7 +289,7 @@
                 <div
                     class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 bg-blue-900 bg-opacity-75">
                     <h3 class="text-xl font-semibold text-gray-100 dark:text-white">
-                        Detalles de Ventas
+                        Detalles de Ventas & Compras
                     </h3>
                     <button type="button"
                         class="text-gray-100 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -351,6 +345,9 @@
 
                         </div>
                     </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Detalles de Ventas
+                    </h3>
                     <div class="bg-white max-w-full shadow-lg rounded-lg overflow-hidden" style="min-height: 12vh;">
                         <div style="max-height: 300px; overflow-y: auto;">
                             <table class="table-auto w-full border-collapse bg-white  rounded-3xl">
@@ -364,13 +361,42 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($salesDetails as $detail)
-                                        <tr>
-                                            <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
-                                            </td>
-                                            <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
-                                            <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
-                                            <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
-                                        </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
+                                        </td>
+                                        <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
+                                        <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
+                                        <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Detalles de Compras
+                    </h3>
+                    <div class="bg-white max-w-full shadow-lg rounded-lg overflow-hidden" style="min-height: 12vh;">
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            <table class="table-auto w-full border-collapse bg-white  rounded-3xl">
+                                <thead class="bg-purple-900 text-gray-200 uppercase text-sm leading-normal">
+                                    <tr>
+                                        <th class="px-4 py-2 border-b">Proveedor</th>
+                                        <th class="px-4 py-2 border-b">Producto</th>
+                                        <th class="px-4 py-2 border-b">cantidad</th>
+                                        <th class="px-4 py-2 border-b">Precio Unitario</th>
+                                        <th class="px-4 py-2 border-b">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($purchaseDetails as $detail)
+                                    <tr>
+                                        <td class="px-4 py-2 border-b text-start">{{ $detail->supplier_name }}</td>
+                                        <td class="px-4 py-2 border-b text-start">{{ $detail->product_name }}</td>
+                                        <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
+                                        <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
+                                        <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -387,10 +413,7 @@
                     class="flex  justify-end gap-2 p-4 md:p-5 border-t border-gray-200 bg-white bg-opacity-95 rounded-b dark:border-gray-600">
                     <button wire:click="closeModal" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cerrar</button>
-                    {{-- <button onclick="printDiv('printable-area')" type="button"
-                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 ...">
-                        Imprimir
-                    </button> --}}
+
                 </div>
             </div>
         </div>
@@ -398,7 +421,7 @@
 
 
     @if ($showModal)
-        <div class="modal-backdrop fade show"></div>
+    <div class="modal-backdrop fade show"></div>
     @endif
     <script>
         function printDiv(divId) {
@@ -409,7 +432,30 @@
             window.print(); // Llama a la función de impresión
             document.body.innerHTML = originalContent; // Restaura el contenido original después de imprimir
         }
+
+
+
+        function calculateFinalBalance() {
+            // Obtiene los valores de los campos de entrada
+            const startBalance = parseFloat(document.getElementById('start_balance').value);
+            const totalSalesCash = parseFloat(document.getElementById('total_sales_cash').value) || 0;
+            const totalExpenses = parseFloat(document.getElementById('total_expenses').value) || 0;
+
+            // Verifica si el saldo inicial es un número
+            if (isNaN(startBalance)) {
+                // Si el saldo inicial está vacío, deja el saldo final vacío
+                document.getElementById('final_balance_cash').value = ""; // Deja vacío
+                return; // Salir de la función
+            }
+
+            // Calcula el saldo final en efectivo
+            const finalBalanceCash = startBalance + totalSalesCash - totalExpenses;
+
+            // Actualiza el campo de saldo final
+            document.getElementById('final_balance_cash').value = finalBalanceCash.toFixed(2);
+        }
     </script>
+
 
 
 

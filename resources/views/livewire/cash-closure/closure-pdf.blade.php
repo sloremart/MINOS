@@ -139,7 +139,7 @@
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
         <img src="../public/images/LogoM.png" alt="LOGO" width="150px" height="150px">
-        <h1>Reporte de Cierre de Caja</h1>
+        <h1>Reporte de Cierre de Caja </h1>
         <div class="grid-container">
             <table class="table">
                 <tr>
@@ -198,7 +198,30 @@
                     <tr>
                         <td>{{ $detail->product->name }}</td>
                         <td>{{ $detail->quantity }}</td>
-                        <td>$ {{ $detail->unit_price }}</td>
+                        <td>$ {{ number_format($detail->unit_price, 2) }}</td>
+                        <td>$ {{ number_format($detail->sub_total, 2) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <h2>Detalles de Compras</h2>
+        <table class="tabla">
+            <thead class="thead">
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($purchaseDetails as $detail)
+                    <tr>
+                        <td>{{ $detail->supplier_name }}</td>
+                        <td>{{ $detail->product_name }}</td>
+                        <td>{{ $detail->quantity }}</td>
+                        <td>$ {{ number_format($detail->unit_price, 2) }}</td>
                         <td>$ {{ number_format($detail->sub_total, 2) }}</td>
                     </tr>
                 @endforeach
