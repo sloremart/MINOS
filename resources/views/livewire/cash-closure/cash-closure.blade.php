@@ -72,8 +72,8 @@
                                     class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     wire:change="updateTotalSales" aria-describedby="paymentMethodHelp">
                                     <option value="" class="text-gray-500"> Metodo de pago</option>
-                                    <option value="cash">Efectivo</option>
-                                    <option value="transfer">Transferencia</option>
+                                    <option value="efectivo">Efectivo</option>
+                                    <option value="transferencia">Transferencia</option>
                                     <option value="all">Todos</option> <!-- Nueva opción "Todos" -->
                                 </select>
                                 @error('payment_method')
@@ -153,8 +153,8 @@
                                     class="mt-1 block w-full border-gray-300 rounded-full pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp"
                                     placeholder="Saldo para el próximo turno."
-                                    @if (!$hasPreviousRecord) disabled @endif />
-
+                                   />
+                                   {{-- @if (!$hasPreviousRecord) disabled @endif --}}
                                 @error('next_start_balance')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -235,6 +235,7 @@
                                         <th class="py-3 px-4 text-left text-sm font-semibold">Ingresos</th>
                                         <th class="py-3 px-4 text-left text-sm font-semibold">Egresos</th>
                                         <th class="py-3 px-4 text-left text-sm font-semibold">Saldo Final</th>
+                                        <th class="py-3 px-4 text-left text-sm font-semibold">Saldo Siguiente</th>
                                         <th class="py-3 px-4 text-left text-sm font-semibold">Acciones</th>
                                     </tr>
                                 </thead>
@@ -243,10 +244,12 @@
                                     <tr class="border-b hover:bg-gray-100">
                                         <td class="py-2 px-4">{{ $row->user->name }}</td>
                                         <td class="py-2 px-4">{{ $row->created_at }}</td>
-                                        <td class="py-2 px-4">${{ $row->start_balance }}</td>
-                                        <td class="py-2 px-4">${{ $row->total_sales }}</td>
-                                        <td class="py-2 px-4">${{ $row->total_expenses }}</td>
-                                        <td class="py-2 px-4">${{ $row->final_balance }}</td>
+                                        <td class="py-2 px-4">${{ number_format($row->start_balance, 0, ',', '.') }}</td>
+                                        <td class="py-2 px-4">${{ number_format($row->total_sales, 0, ',', '.') }}</td>
+                                        <td class="py-2 px-4">${{ number_format($row->total_expenses, 0, ',', '.') }}</td>
+                                        <td class="py-2 px-4">${{ number_format($row->final_balance, 0, ',', '.') }}</td>
+                                        <td class="py-2 px-4">${{ number_format($row->next_start_balance, 0, ',', '.') }}</td>
+                                        
                                         <td class="py-2 px-4">
                                             <button wire:click="generatePdf({{ $row->id }})"
                                                 class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-3 rounded-full"><i
@@ -303,7 +306,7 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-4 md:p-5 space-y-4 bg-white bg-opacity-75">
+                <div class="p-4 md:p-5 space-y-4 bg-white bg-opacity-75" style="max-height: 500px; overflow-y: auto;">
                     <div class="bg-white max-w-full shadow-lg rounded-xl">
                         <div
                             class="p-4 grid  grid-cols-1 md:grid-cols-1 lg:grid-cols-1 w-full bg-white border border-gray-300 rounded-lg">
@@ -323,21 +326,25 @@
                                     </tr>
                                     <tr>
                                         <td class="border border-gray-300 p-2 text-left">Saldo Inicial :</td>
-                                        <td class="border border-gray-300 p-2">$ {{ $this->start_balance }}</td>
+                                        <td class="border border-gray-300 p-2">${{ number_format($start_balance, 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
+                                        <td class="border border-gray-300 p-2 text-left">Saldo Proximo turno :</td>
+                                        <td class="border border-gray-300 p-2">${{ number_format($next_start_balance, 0, ',', '.') }}</td>
+                                    </tr>      
+
+                                    <tr>
                                         <td class="border border-gray-300 p-2 text-left">Ingresos :</td>
-                                        <td class="border border-gray-300 p-2">$ {{ $this->total_sales }}</td>
+                                        <td class="border border-gray-300 p-2">${{ number_format($total_sales, 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="border border-gray-300 p-2 text-left">Egresos Total:</td>
-                                        <td class="border border-gray-300 p-2">$ {{ $this->total_expenses }}</td>
+                                        <td class="border border-gray-300 p-2">${{ number_format($total_expenses, 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="border border-gray-300 p-2 text-left rounded-bl-lg">Total Balance :
                                         </td>
-                                        <td class="border border-gray-300 p-2 rounded-br-lg">$
-                                            {{ $this->final_balance }}
+                                        <td class="border border-gray-300 p-2 rounded-br-lg">${{ number_format($final_balance, 0, ',', '.') }}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -365,8 +372,9 @@
                                         <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
                                         </td>
                                         <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
-                                        <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
-                                        <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
+                                      
+                                        <td class="px-4 py-2 border-b text-center">  ${{ number_format($detail->unit_price, 0, ',', '.') }}</td>
+                                        <td class="px-4 py-2 border-b text-end">${{ number_format($detail->sub_total, 0, ',', '.') }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -394,8 +402,8 @@
                                         <td class="px-4 py-2 border-b text-start">{{ $detail->supplier_name }}</td>
                                         <td class="px-4 py-2 border-b text-start">{{ $detail->product_name }}</td>
                                         <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
-                                        <td class="px-4 py-2 border-b text-center">{{ $detail->unit_price }}</td>
-                                        <td class="px-4 py-2 border-b text-end">{{ $detail->sub_total }}</td>
+                                        <td class="px-4 py-2 border-b text-center">  ${{ number_format($detail->unit_price, 0, ',', '.') }}</td>
+                                        <td class="px-4 py-2 border-b text-end">${{ number_format($detail->sub_total, 0, ',', '.') }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

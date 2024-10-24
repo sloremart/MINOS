@@ -66,6 +66,7 @@ class EntityForm extends Form
         $model = Entity::find($id);
         if ($model) {
             $model->forceDelete();
+            // $model->delete();
             session()->flash('message', 'Entidad eliminada correctamente.');
         }
         // return redirect('/entidades/listado');

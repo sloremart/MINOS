@@ -24,11 +24,10 @@
         "search_1_placeholder"=>$search_1_placeholder,
         "table_headers"=>["ID"=>"id",
         "Proveedor"=>"supplier_id",
-        "Usuario"=>"user_id",
+        
         "Fecha de Compra"=>"purchase_date",
         "Monto Total"=>"total_amount",
         "Metodo de pago"=>"payment_method",
-        "Detalles"=>"details",
         "Fecha de Creación"=>"created_at",
 
 

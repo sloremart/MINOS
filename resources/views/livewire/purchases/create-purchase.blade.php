@@ -23,7 +23,6 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
-
                     <!-- Input para Nombre del Proveedor -->
                     <div class="col-span-1">
                         <label class="block text-sm font-medium text-gray-700">Nombre del Proveedor</label>
@@ -39,8 +38,8 @@
                             class="mt-1 block w-full border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             aria-describedby="paymentMethodHelp">
                             <option value="">Seleccione</option>
-                            <option value="cash">Efectivo</option>
-                            <option value="transfer">Transferencia</option>
+                            <option value="efectivo">Efectivo</option>
+                            <option value="transferencia">Transferencia</option>
                         </select>
                     </div>
                     <!-- Input para Teléfono del Proveedor -->
@@ -83,18 +82,30 @@
                                 <th class="px-4 py-2 text-left">Cantidad</th>
                                 <th class="px-4 py-2 text-left">Precio Unitario</th>
                                 <th class="px-4 py-2 text-left">Subtotal</th>
+                                {{-- <th class="px-4 py-2 text-left">Eliminar</th> --}}
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($selectedProducts as $product)
+                            @foreach ($selectedProducts as $index => $product)
                             <tr>
                                 <td class="border px-4 py-2">{{ $product['name'] }}</td>
                                 <td class="border px-4 py-2">{{ $product['number'] }}</td>
                                 <td class="border px-4 py-2">${{ number_format($product['price'], 2) }}</td>
                                 <td class="border px-4 py-2">${{ number_format($product['subtotal'], 2) }}</td>
+                                {{-- <td class="border px-4 py-2">
+                                    <button 
+                                        class="bg-red-500 rounded-full px-2 py-2 hover:bg-red-700 text-white font-bold py-1 px-3 rounded" 
+                                        data-toggle="tooltip" 
+                                        data-placement="top" 
+                                        title="Eliminar" 
+                                        wire:click="deleteProduct({{ $index }})">
+                                        <i class="text-bg-red-500 fas fa-trash"></i>
+                                    </button>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>
+                        
                     </table>
                 </div>
                 </div>

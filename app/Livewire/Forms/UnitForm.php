@@ -50,6 +50,7 @@ class UnitForm extends Form
         $model = Unit::find($id);
         if ($model) {
             $model->forceDelete();
+            // $model->delete();
             session()->flash('message', 'Unidad eliminada correctamente.');
         }
         // return redirect('/unidades/listado');

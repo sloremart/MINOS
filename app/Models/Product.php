@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class Product extends Model
 {
     use SoftDeletes;
+    use SoftDeletes;
    //use PaginatorTrait;
  // use ImageableTrait;
     protected $fillable = [

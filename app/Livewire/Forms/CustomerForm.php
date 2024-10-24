@@ -77,6 +77,7 @@ class CustomerForm extends Form
         $model = Customer::find($id);
         if ($model) {
             $model->forceDelete();
+            $model->delete();
             session()->flash('message', 'Cliente eliminado correctamente.');
         }
         // return redirect('/clientes/listado');

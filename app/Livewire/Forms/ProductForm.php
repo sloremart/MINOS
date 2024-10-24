@@ -120,7 +120,8 @@ class ProductForm extends Form
     {
         $model = Product::find($id);
         if ($model) {
-            $model->forceDelete();
+            // $model->forceDelete();
+            $model->delete();
             session()->flash('message', 'Producto eliminado correctamente.');
         }
         return redirect('/productos/listado');

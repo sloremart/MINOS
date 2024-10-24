@@ -59,6 +59,7 @@ class SubgroupForm extends Form
         $model = Subgroup::find($id);
         if ($model) {
             $model->forceDelete();
+            $model->delete();
             session()->flash('message', 'Subgrupo eliminado correctamente.');
         }
         // return redirect('/subgrupos/listado');

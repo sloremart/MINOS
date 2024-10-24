@@ -56,6 +56,7 @@ class InventoryForm extends Form
         $model = Inventory::find($id);
         if ($model) {
             $model->forceDelete();
+            // $model->delete();
             session()->flash('message', 'Inventario eliminado correctamente.');
         }
         return redirect('/inventarios/listado');

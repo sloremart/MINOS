@@ -22,7 +22,8 @@ class CreatePurchase extends Component
     public $suppliers;
     public $selectedSupplier = null; // Proveedor seleccionado
     public $unitName;
-    public $payment_method; //////agregue este campo payment_method
+    public $payment_method = null;
+
     public $selectedProducts = [];
     public $selectedProduct;
     public $selectedProductQuantity = 1;
@@ -35,6 +36,9 @@ class CreatePurchase extends Component
     public $search_1 = '';
     public $search_placeholder = 'Buscar por nombre';
     public $search_1_placeholder = 'Buscar por código';
+
+
+
 
     public function mount()
     {
@@ -50,17 +54,38 @@ class CreatePurchase extends Component
 
     public function submitForm()
     {
+
+        // Verifica si hay un proveedor seleccionado
         if ($this->modelForm['supplier_id']) {
+            $rules = [
+                'payment_method' => 'required',
+            ];
+
+            $messages = [
+                'payment_method.required' => 'El método de pago es obligatorio',
+            ];
+
+            $this->validate($rules, $messages);
+            // Crea la compra
             $purchase = Purchase::create([
                 'supplier_id' => $this->modelForm['supplier_id'],
                 'user_id' => auth()->user()->id,
                 'purchase_date' => Carbon::now()->format('Y-m-d'),
                 'total_amount' => $this->total,
-                'payment_method' => $this->payment_method,//////agregue este campo payment_method
+                'payment_method' => $this->payment_method, // Campo agregado
                 'details' => $this->modelForm['details'],
             ]);
 
-            foreach ($this->selectedProducts as $item) {
+            // Filtrar solo los productos que no han sido eliminados
+            // Filtrar solo los productos que no han sido eliminados
+            $filteredProducts = array_filter($this->selectedProducts, function ($item) {
+                // Verificar si el índice 'deleted' está presente y su valor es `false`
+                return !isset($item['deleted']) || !$item['deleted'];
+            });
+
+            // Iterar sobre los productos filtrados
+            foreach ($filteredProducts as $item) {
+                // Crear detalles de la compra para cada producto
                 PurchaseDetail::create([
                     'purchase_id' => $purchase->id,
                     'product_id' => $item['id'],
@@ -76,9 +101,11 @@ class CreatePurchase extends Component
                 $inventory->save();
             }
 
+            // Redirigir al listado de compras después de guardar
             return redirect('/compras/listado');
         }
     }
+
 
     public function addProductToPurchase($productId)
     {
@@ -117,11 +144,26 @@ class CreatePurchase extends Component
         $this->vat = $this->total - $this->subtotal;
     }
 
+
+
     public function closeModal()
     {
         $this->isModalOpen = false;
         $this->selectedProduct = null;
     }
+
+    // public function deleteProduct($index)
+    // {
+    //     // Verificar si el índice existe en el array de productos seleccionados
+    //     if (isset($this->selectedProducts[$index])) {
+    //         // Eliminar el producto de la lista temporal
+    //         unset($this->selectedProducts[$index]);
+
+    //         // Reindexar el array para evitar problemas con las claves
+    //         $this->selectedProducts = array_values($this->selectedProducts);
+    //     }
+    // }
+
 
     public function getData()
     {
@@ -143,5 +185,9 @@ class CreatePurchase extends Component
         return view('livewire.purchases.create-purchase', [
             'data' => $this->getData(),
         ])->layout('layouts.app');
+    }
+    public function cancel()
+    {
+        return redirect('/compras/listado');
     }
 }

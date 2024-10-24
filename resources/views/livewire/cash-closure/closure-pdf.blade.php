@@ -18,13 +18,13 @@
 
         /* Estilos del fondo */
         body {
-            background-image: url('../public/images/sena.png');
-            background-repeat: repeat;
-            background-size: 50px 40px;
-            background-position: center;
-            /* Centra la imagen de fondo */
+            background-image: url('../public/images/FONDOPDF.png');
+            background-repeat: no-repeat;
             background-attachment: fixed;
-            /* Hace que el fondo no se mueva con el scroll */
+            background-size: 100% 120%;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
         }
 
         /* Capa semi-transparente */
@@ -34,7 +34,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.841);
             /* Ajusta la opacidad aquí */
             z-index: 1;
         }
@@ -49,15 +48,51 @@
             width: 80%;
             height: auto;
             margin: 40px auto;
-            /* Mantén un margen alrededor del contenido */
-            background-color: #ffffff;
             /* Fondo blanco para el contenido */
-            padding: 20px;
+            padding: 40px;
+            padding-top: 18%;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         /* Estilo de la tabla */
+        .grid-contain {
+            padding: 16px;
+            border: solid #000000;
+        }
+        .table {
+            width: 100%;
+            /* Ajusta el ancho de la tabla al 100% de su contenedor */
+            border: 1px;
+            border-collapse: collapse;
+            /* Colapsa los bordes para un diseño más limpio */
+        }
+        
+        .table th,
+        .table td {
+            padding: 10px;
+            /* Espaciado interno para celdas */
+            text-align: right;
+            /* Alinea el texto a la izquierda */
+            border: 1px solid #ddd;
+            /* Borde alrededor de las celdas */
+        }
+        
+        .table th {
+            background-color: #f2f2f2;
+            /* Color de fondo para los encabezados */
+            font-weight: bold;
+            text-align: left;
+            /* Negrita para los encabezados */
+        }
+        
+        .table td {
+            background-color: #ffffff;
+            /* Color de fondo para las celdas de datos */
+        }
+
+
+
         .tabla {
             width: 100%;
             border-collapse: collapse;
@@ -74,7 +109,7 @@
         .tabla thead {
             background-color: #0127cf;
             color: #ffffff;
-            border-radius: 20% 20% 0 0;
+            border-radius: 20% 20%;
         }
 
 
@@ -98,47 +133,12 @@
         .tabla tbody tr:last-child td {
             border-bottom: 2px solid #0127cf;
         }
-
-
-        
-
-        .table {
-            width: 100%;
-            /* Ajusta el ancho de la tabla al 100% de su contenedor */
-            border-collapse: collapse;
-           
-            /* Colapsa los bordes para un diseño más limpio */
-        }
-
-        .table th,
-        .table td {
-            padding: 10px;
-            /* Espaciado interno para celdas */
-            text-align: right;
-            /* Alinea el texto a la izquierda */
-            border: 1px solid #ddd;
-            /* Borde alrededor de las celdas */
-        }
-
-        .table th {
-            background-color: #f2f2f2;
-            /* Color de fondo para los encabezados */
-            font-weight: bold;
-            text-align: left;
-            /* Negrita para los encabezados */
-        }
-
-        .table td {
-            background-color: #ffffff;
-            /* Color de fondo para las celdas de datos */
-        }
     </style>
 </head>
 
 <body>
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
-        <img src="../public/images/LogoM.png" alt="LOGO" width="150px" height="150px">
         <h1>Reporte de Cierre de Caja </h1>
         <div class="grid-container">
             <table class="table">
@@ -157,25 +157,26 @@
                 <tr>
                     <th><strong>Saldo Inicial:</strong></th>
                     <td>
-                        <div>${{ number_format($closure->start_balance, 2) }}</div>
+                        <div> ${{ number_format($closure->start_balance, 0, ',', '.') }}</div>
                     </td>
+                    
                 </tr>
                 <tr>
                     <th><strong>Total Ventas:</strong></th>
                     <td>
-                        <div>${{ number_format($closure->total_sales, 2) }}</div>
+                        <div>${{ number_format($closure->total_sales, 0, ',', '.') }}</div>
                     </td>
                 </tr>
                 <tr>
                     <th><strong>Total Gastos:</strong></th>
                     <td>
-                        <div>${{ number_format($closure->total_expenses, 2) }}</div>
+                        <div> ${{ number_format($closure->total_expenses, 0, ',', '.') }}</div>
                     </td>
                 </tr>
                 <tr>
                     <th><strong>Saldo Final:</strong></th>
                     <td>
-                        <div>${{ number_format($closure->final_balance, 2) }}</div>
+                        <div>${{ number_format($closure->final_balance, 0, ',', '.') }}</div>
                     </td>
                 </tr>
             </table>
@@ -198,8 +199,8 @@
                     <tr>
                         <td>{{ $detail->product->name }}</td>
                         <td>{{ $detail->quantity }}</td>
-                        <td>$ {{ number_format($detail->unit_price, 2) }}</td>
-                        <td>$ {{ number_format($detail->sub_total, 2) }}</td>
+                        <td>$ {{ number_format($detail->unit_price, 0, ',', '.') }}</td>
+                        <td>$ {{ number_format($detail->sub_total, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -221,8 +222,8 @@
                         <td>{{ $detail->supplier_name }}</td>
                         <td>{{ $detail->product_name }}</td>
                         <td>{{ $detail->quantity }}</td>
-                        <td>$ {{ number_format($detail->unit_price, 2) }}</td>
-                        <td>$ {{ number_format($detail->sub_total, 2) }}</td>
+                        <td>$ {{ number_format($detail->unit_price, 0, ',', '.') }}</td>
+                        <td>$ {{ number_format($detail->sub_total, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>

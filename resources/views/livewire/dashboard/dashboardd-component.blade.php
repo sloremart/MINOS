@@ -93,62 +93,58 @@
                                     aria-labelledby="stats-tab">
                                     <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6">
                                         @php
-                                        // Agrupar productos por nombre (o ID)
+                                        // Agrupar productos por nombre y proveedor
                                         $groupedProducts = [];
                                         foreach ($productos as $producto) {
-                                        $groupedProducts[$producto->product_name][] = $producto;
+                                            // Crear una clave única que combine el nombre del producto y el proveedor
+                                            $key = $producto->product_name . '|' . $producto->supplier_name;
+                                            $groupedProducts[$key] = $producto; // Almacenar solo una instancia del producto
                                         }
-                                        @endphp
-
-                                        @foreach ($groupedProducts as $productGroup)
+                                    @endphp
+                                
+                                    @foreach ($groupedProducts as $producto)
                                         @php
-                                        // Determinar los precios mínimo y máximo dentro del grupo
-                                        $minPrice = min(array_column($productGroup, 'valor'));
-                                        $maxPrice = max(array_column($productGroup, 'valor'));
-                                        $range = ($maxPrice - $minPrice) / 3; // Dividir el rango en 3 partes
+                                            // Determinar los precios mínimo y máximo
+                                            // Aquí no necesitas calcular min y max de precios ya que solo muestras un producto por proveedor
+                                            $class = '';
+                                            // Asignar color según el precio del producto
+                                            if ($producto->valor <= 10000) { // Aquí ajusta el valor según tu rango
+                                                $class = "#3AAA35"; // Precio bajo
+                                            } elseif ($producto->valor <= 20000) {
+                                                $class = '#FCEA10'; // Precio medio
+                                            } else {
+                                                $class = '#E6332A'; // Precio alto
+                                            }
                                         @endphp
-
-                                        @foreach ($productGroup as $producto)
-                                        @php
-                                        $class = '';
-                                        // Asignar color según el precio del producto en comparación con los demás en el mismo grupo
-                                        if ($producto->valor <= $minPrice + $range) {
-                                            $class="#3AAA35" ; // Precio bajo
-                                            } elseif ($producto->valor <= $minPrice + 2 * $range) {
-                                                $class='#FCEA10' ; // Precio medio
-                                                } else {
-                                                $class='#E6332A' ; // Precio alto
-                                                }
-                                                @endphp
-
-                                                <div class="flex items-center justify-between px-2 py-2 bg-white border-2 rounded-full shadow-md dark:bg-gray-700" style="border-color: #B1B7C3">
-                                                <!-- Información del producto -->
-                                                <div class="mx-1">
-                                                    <p class="text-sm text-gray-500 dark:text-gray-400 text-center font-bold">
-                                                        {{ $producto->product_name }}
-                                                    </p>
-                                                </div>
-
-                                                <!-- Proveedor del producto -->
-                                                <div class="text-right">
-                                                    <p class="text-sm text-center text-gray-500 dark:text-gray-400">
-                                                        <strong class="text-black">{{ $producto->supplier_name }}</strong>
-                                                    </p>
-                                                </div>
-
-                                                <!-- Precio del producto -->
-                                                <div class="mx-4">
-                                                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                                                        <strong class="text-black">${{ number_format($producto->valor, 0) }}</strong>
-                                                    </p>
-                                                </div>
-
-                                                <!-- Indicador de estado (punto) -->
-                                                <div class="mx-4">
-                                                    <button type="button" class="inline-block w-4 h-4 rounded-full" style="background:{{$class}};"></button>
-                                                </div>
-                                    </div>
-                                    @endforeach
+                                
+                                        <div class="flex items-center justify-between px-2 py-2 bg-white border-2 rounded-full shadow-md dark:bg-gray-700" style="border-color: #B1B7C3">
+                                            <!-- Información del producto -->
+                                            <div class="mx-1">
+                                                <p class="text-sm text-gray-500 dark:text-gray-400 text-center font-bold">
+                                                    {{ $producto->product_name }}
+                                                </p>
+                                            </div>
+                                
+                                            <!-- Proveedor del producto -->
+                                            <div class="text-right">
+                                                <p class="text-sm text-center text-gray-500 dark:text-gray-400">
+                                                    <strong class="text-black">{{ $producto->supplier_name }}</strong>
+                                                </p>
+                                            </div>
+                                
+                                            <!-- Precio del producto -->
+                                            <div class="mx-4">
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                    <strong class="text-black">${{ number_format($producto->valor, 0) }}</strong>
+                                                </p>
+                                            </div>
+                                
+                                            <!-- Indicador de estado (punto) -->
+                                            <div class="mx-4">
+                                                <button type="button" class="inline-block w-4 h-4 rounded-full" style="background:{{$class}};"></button>
+                                            </div>
+                                        </div>
+                                    
                                     @endforeach
 
                                 </div>

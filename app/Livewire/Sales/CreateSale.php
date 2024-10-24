@@ -151,12 +151,13 @@ class CreateSale extends Component
     public function updatedPaymentMethod($value)
     {
         // Abre el modal de efectivo cuando se selecciona "Efectivo"
-        if ($value === 'cash') {
+        if ($value === 'efectivo') {
             $this->isCashModalOpen = true;
         } else {
             $this->isCashModalOpen = false;
         }
     }
+
     public function closeCashModal()
     {
         $this->isCashModalOpen = false;
@@ -187,10 +188,6 @@ class CreateSale extends Component
         $this->isModalOpen = false;
         $this->selectedProduct->resetForm();
     }
-
-
-
-
 
 
 

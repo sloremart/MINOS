@@ -73,6 +73,7 @@ class PurchaseForm extends Form
     {
         $model = Purchase::find($id);
         if ($model) {
+            // $model->forceDelete();
             $model->delete();
             session()->flash('message', 'Compra eliminada correctamente.');
         }
