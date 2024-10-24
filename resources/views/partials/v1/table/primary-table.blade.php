@@ -54,7 +54,8 @@
                                     {{ $table_row->supplier->name ?? 'Sin proveedor' }} {{-- Mostrar el nombre del proveedor o "Sin proveedor" si no existe --}}
                                 @elseif($table_header === 'percentage')
                                     %{{ $table_row->{$table_header} }} {{-- Mostrar el valor seguido del símbolo de porcentaje --}}
-                                
+                                @elseif($table_header === 'vat_percentage_id') {{-- Comprobación para el IVA --}}
+                                    {{ $table_row->{$table_header} == 1 ? 'Sí' : 'No' }} {{-- Muestra 'Sí' o 'No' según el valor --}}
                                 @else
                                     {{ $table_row->{$table_header} }}
                                 @endif

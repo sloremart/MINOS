@@ -135,7 +135,7 @@
                             </div>
                             <!-- Saldo Final Efectivo -->
                             <div class="relative">
-                                <label for="text" class="text-gray-700 text-xs">saldo final en efectivo.</label>
+                                <label for="text" class="text-gray-700 text-xs">Saldo final en efectivo.</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
@@ -151,7 +151,7 @@
 
                             <!-- Saldo Inicial Próximo Turno -->
                             <div class="relative">
-                                <label for="text" class="text-gray-700 text-xs">saldo para el próximo turno</label>
+                                <label for="text" class="text-gray-700 text-xs">Saldo para el próximo turno</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
