@@ -10,10 +10,7 @@
             @endif
     
         </div>
-    @endif
-
-
-    
+    @endif 
     </div>
 
     <div class="mb-1 m-6">
@@ -36,32 +33,30 @@
                     <tr class="border-b hover:bg-blue-100">
                         @foreach($table_headers as $header_name => $table_header)
                             <td class="px-4 py-2 border-b">
-                            @if(str_contains($table_header, ".") && !str_contains($table_header, "*") && ($table_row->{explode(".", $table_header)[0]} != null))
-                                @if($table_header === 'vatPercentage.percentage')
-                                % {{ $table_row->{explode(".", $table_header)[0]}->{explode(".", $table_header)[1]} }} {{-- Mostrar el valor seguido del símbolo de porcentaje --}}
-
-                                @elseif($table_header === 'activePrice.price')
-                                ${{ number_format($table_row->activePrice->price ?? 0, 2) }} {{-- Formatear el precio con dos decimales y símbolo de dólar --}}
+                                @if(str_contains($table_header, ".") && !str_contains($table_header, "*") && ($table_row->{explode(".", $table_header)[0]} != null))
+                                    @if($table_header === 'vatPercentage.percentage')
+                                        % {{ $table_row->{explode(".", $table_header)[0]}->{explode(".", $table_header)[1]} }} {{-- Mostrar el valor seguido del símbolo de porcentaje --}}
+                                    @elseif($table_header === 'activePrice.price')
+                                        ${{ number_format($table_row->activePrice->price ?? 0, 2) }} {{-- Formatear el precio con dos decimales y símbolo de dólar --}}
+                                    @else
+                                        {{ $table_row->{explode(".", $table_header)[0]}->{explode(".", $table_header)[1]} }}
+                                    @endif     
                                 @else
-                                 {{ $table_row->{explode(".", $table_header)[0]}->{explode(".", $table_header)[1]} }}
-                                @endif                            
-                            @else
-                                @if($table_header === 'total_amount')
-                                    ${{ number_format(intval($table_row->{$table_header})) }} {{-- Formatear el número con separadores de miles --}}
-                                @elseif($table_header === 'customer_id')
-                                    {{ $table_row->customer->name ?? 'Sin cliente' }} {{-- Mostrar el nombre del cliente o "Sin cliente" si no existe --}}
-                                @elseif($table_header === 'supplier_id')
-                                    {{ $table_row->supplier->name ?? 'Sin proveedor' }} {{-- Mostrar el nombre del proveedor o "Sin proveedor" si no existe --}}
-                                @elseif($table_header === 'percentage')
-                                    %{{ $table_row->{$table_header} }} {{-- Mostrar el valor seguido del símbolo de porcentaje --}}
-                                @elseif($table_header === 'vat_percentage_id') {{-- Comprobación para el IVA --}}
-                                    {{ $table_row->{$table_header} == 1 ? 'Sí' : 'No' }} {{-- Muestra 'Sí' o 'No' según el valor --}}
-                                @else
-                                    {{ $table_row->{$table_header} }}
+                                    @if($table_header === 'total_amount')
+                                        ${{ number_format(intval($table_row->{$table_header})) }} {{-- Formatear el número con separadores de miles --}}
+                                    @elseif($table_header === 'customer_id')
+                                        {{ $table_row->customer->name ?? 'Sin cliente' }} {{-- Mostrar el nombre del cliente o "Sin cliente" si no existe --}}
+                                    @elseif($table_header === 'supplier_id')
+                                        {{ $table_row->supplier->name ?? 'Sin proveedor' }} {{-- Mostrar el nombre del proveedor o "Sin proveedor" si no existe --}}
+                                    @elseif($table_header === 'applies_iva') {{-- Comprobación de IVA --}}
+                                        {{ $table_row->{$table_header} == 1 ? 'Sí' : 'No' }} {{-- Mostrar 'Sí' o 'No' --}}
+                                    @else
+                                        {{ $table_row->{$table_header} }}
+                                    @endif
                                 @endif
-                            @endif
                             </td>
                         @endforeach
+
                     
                         @isset($table_actions)
                             <td class="px-4 py-2 border-b flex space-x-2">
