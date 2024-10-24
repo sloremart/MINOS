@@ -39,8 +39,8 @@
                             class="mt-1 block w-full border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             aria-describedby="paymentMethodHelp">
                             <option value="">Seleccione</option>
-                            <option value="cash">Efectivo</option>
-                            <option value="transfer">Transferencia</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Transferencia">Transferencia</option>
                         </select>
                     </div>
                     <!-- Input para Teléfono del Proveedor -->

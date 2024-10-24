@@ -23,6 +23,7 @@
         "search_1_placeholder"=>$search_1_placeholder,
         "table_headers"=>["ID"=>"id",
         "Cliente"=>"customer_id",
+        "Metodo de Pago"=>"payment_method",
         "Fecha de Venta"=>"sale_date",
         "Monto Total"=>"total_amount",
         "Fecha de Creación"=>"created_at",

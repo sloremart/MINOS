@@ -144,4 +144,8 @@ class CreatePurchase extends Component
             'data' => $this->getData(),
         ])->layout('layouts.app');
     }
+
+    public function cancel(){
+        return redirect('/compras/listado');
+    }
 }

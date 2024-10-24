@@ -14,8 +14,8 @@ class Sale extends Model
     use ImageableTrait;
     protected $fillable = ['customer_id','user_id',  'sale_date', 'total_amount', 'details','payment_method'];
 
-    public const PAYMENT_METHOD_CASH = "cash";
-    public const PAYMENT_METHOD_TRANSFER = "transfer";
+    public const PAYMENT_METHOD_CASH = "Efectivo";
+    public const PAYMENT_METHOD_TRANSFER = "Transferencia";
 
     public function customer()
     {
