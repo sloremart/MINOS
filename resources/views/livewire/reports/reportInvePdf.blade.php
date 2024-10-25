@@ -97,7 +97,7 @@
         }
 
         .tabla tbody tr:last-child td {
-            border-bottom: 2px solid #652581;
+            border-bottom: 2px solid #0127cf;
         }
     </style>
 </head>

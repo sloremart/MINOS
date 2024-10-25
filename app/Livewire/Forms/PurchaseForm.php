@@ -73,6 +73,7 @@ class PurchaseForm extends Form
     {
         $model = Purchase::find($id);
         if ($model) {
+            // $model->forceDelete();
             $model->delete();
             session()->flash('message', 'Compra eliminada correctamente.');
         }
@@ -94,7 +95,6 @@ class PurchaseForm extends Form
             'purchase_date.required' => 'La fecha de compra es obligatoria.',
             'purchase_date.date' => 'La fecha de compra debe ser una fecha válida.',
             'total_amount.required' => 'El monto total es obligatorio.',
-            'payment_method.required' => 'El monto total es obligatorio.',
             'total_amount.numeric' => 'El monto total debe ser un número.',
             'total_amount.min' => 'El monto total no puede ser negativo.',
         ];

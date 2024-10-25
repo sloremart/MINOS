@@ -63,7 +63,7 @@ class ReportPurchaseSuplier extends Component
 
         // dd($query);
         if ($this->search_2) {
-            $query->where('suppliers.name', '>=', $this->search_2);
+            $query->where('suppliers.name', 'like', $this->search_2);
             // dd($query);
         }
         if ($this->search) {
@@ -94,6 +94,8 @@ class ReportPurchaseSuplier extends Component
 
     public function pdf()
     {
+        $this->search_2 = urldecode($this->search_2);
+
         Log::info('Generando PDF con las fechas:', [
             'search' => $this->search,
             'search_1' => $this->search_1,
@@ -124,7 +126,7 @@ class ReportPurchaseSuplier extends Component
             Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
         }
         if (!empty($this->search_2)) {
-            $query->where('supplier_name', '<=', $this->search_2);
+            $query->where('suppliers.name', 'like', $this->search_2);
             Log::info('Aplicando filtro de fecha hasta: ' . $this->search_2);
         }
 
@@ -228,7 +230,7 @@ class ReportPurchaseSuplier extends Component
 
         // Aplicar filtros de búsqueda
         if ($this->search_2) {
-            $query->where('suppliers.name', '>=', $this->search_2);
+            $query->where('suppliers.name', 'like', $this->search_2);
         }
         if ($this->search) {
             $query->where('purchases.purchase_date', '>=', $this->search);

@@ -151,12 +151,13 @@ class CreateSale extends Component
     public function updatedPaymentMethod($value)
     {
         // Abre el modal de efectivo cuando se selecciona "Efectivo"
-        if ($value === 'Efectivo') {
+        if ($value === 'efectivo') {
             $this->isCashModalOpen = true;
         } else {
             $this->isCashModalOpen = false;
         }
     }
+
     public function closeCashModal()
     {
         $this->isCashModalOpen = false;
@@ -187,6 +188,9 @@ class CreateSale extends Component
         $this->isModalOpen = false;
         $this->selectedProduct->resetForm();
     }
+
+
+
 
     public function render()
     {
@@ -241,7 +245,7 @@ class CreateSale extends Component
         return $query->paginate(10);
     }
 
-    public function cancel(){
-        return redirect('/ventas/listado');
-    }
+        public function cancel(){
+            return redirect('/ventas/listado');
+        }
 }

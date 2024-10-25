@@ -23,28 +23,27 @@
         "search_1_placeholder"=>$search_1_placeholder,
         "table_headers"=>["ID"=>"id",
         "Cliente"=>"customer_id",
-        "Metodo de Pago"=>"payment_method",
+        "Metodo de pago"=>"payment_method",
         "Fecha de Venta"=>"sale_date",
         "Monto Total"=>"total_amount",
         "Fecha de Creación"=>"created_at",
-
-
         ],
         "table_actions"=>[
 
         "customs"=>[
-        [
-        "redirect"=>[
-        "route"=>"sale_detail.list",
-        "binding"=>"sale"
-        ],
-        "button_color"=>"bg-blue-500",
-        "button_hover"=>"bg-blue-700",
-        "icon_color"=>"bg-blue-500",
-        "icon"=>"fas fa-sitemap",
-        "tooltip_title"=>"Detalle",
-        ],
-        ]
+                [
+                    "redirect"=>[
+                    "route"=>"sale_detail.list",
+                    "binding"=>"sale"
+                    ],
+                        "button_color"=>"bg-blue-500",
+                        "button_hover"=>"bg-blue-700",
+                        "icon_color"=>"bg-blue-500",
+                        "icon"=>"fas fa-sitemap",
+                        "tooltip_title"=>"Detalle",
+                ],
+    ],
+    "delete"=>"delete",
         ],
 
         "table_rows"=>$data

@@ -74,7 +74,7 @@ class ReportCustomer extends Component
 
 
         if ($this->search_2) {
-            $query->where('customers.name', '>=', $this->search_2);
+            $query->where('customers.name','like', $this->search_2);
             // dd($query);
         }
         if ($this->search) {
@@ -104,7 +104,9 @@ class ReportCustomer extends Component
 
     public function pdf()
     {
-        \Log::info('Generando PDF con las fechas:', [
+        // Decodifica el parámetro search_2
+    $this->search_2 = urldecode($this->search_2);
+        \Log::info('Generando PDF con las fechas venta cliente:', [
             'search' => $this->search,
             'search_1' => $this->search_1,
             'search_2' => $this->search_2,
@@ -137,9 +139,11 @@ class ReportCustomer extends Component
             \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
         }
         if (!empty($this->search_2)) {
-            $query->where('customers.name', '<=', $this->search_2);
-            \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_2);
+            $query->where('customers.name', 'like', $this->search_2);
+            \Log::info('Aplicando filtro nombre: ' . $this->search_2);
         }
+
+        
 
         // Obtener los datos filtrados
         $data = $query->get();

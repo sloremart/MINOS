@@ -64,6 +64,7 @@ class PriceForm extends Form
         $model = Price::find($id);
         if ($model) {
             $model->forceDelete();
+            // $model->delete();
             session()->flash('message', 'Precio eliminado correctamente.');
         }
         // return redirect('/precios/listado');

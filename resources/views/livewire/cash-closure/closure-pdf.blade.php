@@ -142,7 +142,7 @@
 <body>
     <div class="overlay"></div> <!-- Capa semi-transparente -->
     <div class="content">
-        <h2>Reporte de Cierre de Caja</h2>
+        <h1>Reporte de Cierre de Caja </h1>
         <div class="grid-contain">
             <div class="grid-container">
                 <table class="table">
@@ -161,30 +161,35 @@
                     <tr>
                         <th><strong>Saldo Inicial:</strong></th>
                         <td>
-                            <div>${{ number_format($closure->start_balance, 2) }}</div>
+                            <div> ${{ number_format($closure->start_balance, 0, ',', '.') }}</div>
                         </td>
+                        
                     </tr>
                     <tr>
                         <th><strong>Total Ventas:</strong></th>
                         <td>
-                            <div>${{ number_format($closure->total_sales, 2) }}</div>
+                            <div>${{ number_format($closure->total_sales, 0, ',', '.') }}</div>
                         </td>
                     </tr>
                     <tr>
                         <th><strong>Total Gastos:</strong></th>
                         <td>
-                            <div>${{ number_format($closure->total_expenses, 2) }}</div>
+                            <div> ${{ number_format($closure->total_expenses, 0, ',', '.') }}</div>
                         </td>
                     </tr>
                     <tr>
                         <th><strong>Saldo Final:</strong></th>
                         <td>
-                            <div>${{ number_format($closure->final_balance, 2) }}</div>
+                            <div>${{ number_format($closure->final_balance, 0, ',', '.') }}</div>
                         </td>
                     </tr>
                 </table>
+    
+    
+    
             </div>
         </div>
+       
         <h2>Detalles de Ventas</h2>
         <table class="tabla">
             <thead class="thead">
@@ -200,8 +205,31 @@
                     <tr>
                         <td>{{ $detail->product->name }}</td>
                         <td>{{ $detail->quantity }}</td>
-                        <td>$ {{ $detail->unit_price }}</td>
-                        <td>$ {{ number_format($detail->sub_total, 2) }}</td>
+                        <td>$ {{ number_format($detail->unit_price, 0, ',', '.') }}</td>
+                        <td>$ {{ number_format($detail->sub_total, 0, ',', '.') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <h2>Detalles de Compras</h2>
+        <table class="tabla">
+            <thead class="thead">
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($purchaseDetails as $detail)
+                    <tr>
+                        <td>{{ $detail->supplier_name }}</td>
+                        <td>{{ $detail->product_name }}</td>
+                        <td>{{ $detail->quantity }}</td>
+                        <td>$ {{ number_format($detail->unit_price, 0, ',', '.') }}</td>
+                        <td>$ {{ number_format($detail->sub_total, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>

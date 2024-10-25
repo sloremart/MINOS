@@ -49,7 +49,8 @@ class VatPercentageForm extends Form
     {
         $model = VatPercentage::find($id);
         if ($model) {
-            $model->delete();
+            // $model->delete();
+            $model->forceDelete();
             session()->flash('message', 'Porcentaje de IVA eliminado correctamente.');
         }
         // return redirect('/iva/listado');

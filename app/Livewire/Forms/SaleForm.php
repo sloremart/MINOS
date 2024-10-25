@@ -64,6 +64,7 @@ class SaleForm extends Form
         $model = Sale::find($id);
         if ($model) {
             $model->delete();
+            // $model->forceDelete();
             session()->flash('message', 'Venta eliminada correctamente.');
         }
         return redirect('/ventas/listado');
