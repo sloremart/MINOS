@@ -53,58 +53,71 @@ class CreatePurchase extends Component
     }
 
     public function submitForm()
-    {
+{
+    // Verifica si hay un proveedor seleccionado
+    if ($this->modelForm['supplier_id']) {
+        $rules = [
+            'payment_method' => 'required',
+        ];
 
-        // Verifica si hay un proveedor seleccionado
-        if ($this->modelForm['supplier_id']) {
-            $rules = [
-                'payment_method' => 'required',
-            ];
+        $messages = [
+            'payment_method.required' => 'El método de pago es obligatorio',
+        ];
 
-            $messages = [
-                'payment_method.required' => 'El método de pago es obligatorio',
-            ];
+        $this->validate($rules, $messages);
 
-            $this->validate($rules, $messages);
-            // Crea la compra
-            $purchase = Purchase::create([
-                'supplier_id' => $this->modelForm['supplier_id'],
-                'user_id' => auth()->user()->id,
-                'purchase_date' => Carbon::now()->format('Y-m-d'),
-                'total_amount' => $this->total,
-                'payment_method' => $this->payment_method, // Campo agregado
-                'details' => $this->modelForm['details'],
+        // Crea la compra
+        $purchase = Purchase::create([
+            'supplier_id' => $this->modelForm['supplier_id'],
+            'user_id' => auth()->user()->id,
+            'purchase_date' => Carbon::now()->format('Y-m-d'),
+            'total_amount' => $this->total,
+            'payment_method' => $this->payment_method, // Campo agregado
+            'details' => $this->modelForm['details'],
+        ]);
+
+        // Filtrar solo los productos que no han sido eliminados
+        $filteredProducts = array_filter($this->selectedProducts, function ($item) {
+            return !isset($item['deleted']) || !$item['deleted'];
+        });
+
+        // Iterar sobre los productos filtrados
+        foreach ($filteredProducts as $item) {
+            // Crear detalles de la compra para cada producto
+            PurchaseDetail::create([
+                'purchase_id' => $purchase->id,
+                'product_id' => $item['id'],
+                'quantity' => $item['number'],
+                'unit_price' => $item['price'],  // Precio de compra
+                'sub_total' => $item['subtotal'],
             ]);
 
-            // Filtrar solo los productos que no han sido eliminados
-            // Filtrar solo los productos que no han sido eliminados
-            $filteredProducts = array_filter($this->selectedProducts, function ($item) {
-                // Verificar si el índice 'deleted' está presente y su valor es `false`
-                return !isset($item['deleted']) || !$item['deleted'];
-            });
+            // Actualizar o crear inventario
+            $inventory = Inventory::where('product_id', $item['id'])->first();
 
-            // Iterar sobre los productos filtrados
-            foreach ($filteredProducts as $item) {
-                // Crear detalles de la compra para cada producto
-                PurchaseDetail::create([
-                    'purchase_id' => $purchase->id,
+            if ($inventory) {
+                // Si el inventario ya existe, simplemente sumamos la cantidad
+                $inventory->quantity += $item['number'];
+            } else {
+                // Si no existe, lo creamos con la cantidad inicial o 0
+                $inventory = Inventory::create([
                     'product_id' => $item['id'],
-                    'quantity' => $item['number'],
-                    'unit_price' => $item['price'],  // Precio de compra
-                    'sub_total' => $item['subtotal'],
+                    'user_id' => auth()->user()->id,
+                    'quantity' => $item['number'], // Puede ser 0 o el valor inicial proporcionado
+                    'last_updated_date' => Carbon::now()->format('Y-m-d'),
                 ]);
-
-                // Actualizar inventario
-                $inventory = Inventory::whereProductId($item['id'])->first();
-                $inventory->quantity += $item['number']; // Sumar al inventario
-                $inventory->last_updated_date = Carbon::now()->format('Y-m-d');
-                $inventory->save();
             }
 
-            // Redirigir al listado de compras después de guardar
-            return redirect('/compras/listado');
+            // Actualizamos la fecha de última actualización y guardamos
+            $inventory->last_updated_date = Carbon::now()->format('Y-m-d');
+            $inventory->save();
         }
+
+        // Redirigir al listado de compras después de guardar
+        return redirect('/compras/listado');
     }
+}
+
 
 
     public function addProductToPurchase($productId)

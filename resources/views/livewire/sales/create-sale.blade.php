@@ -1,6 +1,6 @@
 <!-- resources/views/livewire/sales/create-sale.blade.php -->
 
-<div class=" flex justify-center ">
+<div class="pb-4 flex justify-center ">
     <div class="max-w-screen-2xl  p-2 bg-white  relative z-10 shadow-md rounded-xl grid grid-cols-1  md:grid-cols-1  lg:grid-cols-2  sm:grid-cols-2 gap-4 " style="margin: 0% 2% 0% 2%;">
         <!-- Primera columna: Formulario -->
         <div class="col-span-1">
@@ -126,60 +126,7 @@
             </div>
             @endif
 
-            <!-- Modal para agregar producto -->
-            @if($isModalOpen)
-            <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full z-0"
-                    style="background-image: url('/images/icono_central.png'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-                    <div class="bg-blue-900 px-4 py-3 sm:px-6 bg-opacity-90">
-                        <h3 class="text-lg leading-6 font-medium text-white">
-                            Agregar Producto {{$selectedProduct->name}}
-                        </h3>
-                    </div>
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 bg-opacity-75">
-                        <div>
-                            <label for="quantity" class="block text-sm font-medium text-gray-700">Stock Disponible</label>
-                            <input type="number" id="quantity" wire:model="selectedProduct.quantity" min="1" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                            @error('quantity') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                        </div>
-                        <div>
-                            <label for="quantity" class="block text-sm font-medium text-gray-700">Cantidad</label>
-                            <input type="number" id="quantity" wire:model.live="selectedProduct.number" min="1" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            @error('selectedProduct.number') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                        </div>
-                        <div>
-                            <label for="quantity" class="block text-sm font-medium text-gray-700">Unidad</label>
-                            <input type="text" id="quantity" wire:model="unitName" min="1" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-                        <div class="mt-4">
-                            <label for="price" class="block text-sm font-medium text-gray-700">Precio</label>
-                            <input type="text" id="price" wire:model="selectedProduct.price" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-
-                        <div>
-                            <label for="quantity" class="block text-sm font-medium text-gray-700">Iva</label>
-                            <input type="text" id="quantity" wire:model="vatPercentage" min="1" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-                        <div class="mt-4">
-                            <label for="price" class="block text-sm font-medium text-gray-700">Subtotal</label>
-                            <input type="text" id="price" wire:model="selectedProduct.subtotal" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-                        <div class="mt-4">
-                            <label for="price" class="block text-sm font-medium text-gray-700">Total</label>
-                            <input type="text" id="price" wire:model="selectedProduct.total" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse bg-opacity-75">
-                        <button wire:click="confirmAddProductToSale" class="w-full inline-flex justify-center rounded-full border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
-                            Agregar
-                        </button>
-                        <button wire:click="closeModal" class="mt-3 w-full inline-flex justify-center rounded-full border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
-            </div>
-            @endif
+            
 
             <!-- Productos Seleccionados -->
             <div class="mt-6">
@@ -313,4 +260,58 @@
         <!-- Botón para guardar -->
 
     </div>
+    <!-- Modal para agregar producto -->
+    @if($isModalOpen)
+            <div class="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full z-0"
+                    style="background-image: url('/images/icono_central.png'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+                    <div class="bg-blue-900 px-4 py-3 sm:px-6 bg-opacity-90">
+                        <h3 class="text-lg leading-6 font-medium text-white">
+                            Agregar Producto {{$selectedProduct->name}}
+                        </h3>
+                    </div>
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 bg-opacity-75">
+                        <div>
+                            <label for="quantity" class="block text-sm font-medium text-gray-700">Stock Disponible</label>
+                            <input type="number" id="quantity" wire:model="selectedProduct.quantity" min="1" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                            @error('quantity') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div>
+                            <label for="quantity" class="block text-sm font-medium text-gray-700">Cantidad</label>
+                            <input type="number" id="quantity" wire:model.live="selectedProduct.number" min="1" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            @error('selectedProduct.number') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div>
+                            <label for="quantity" class="block text-sm font-medium text-gray-700">Unidad</label>
+                            <input type="text" id="quantity" wire:model="unitName" min="1" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                        </div>
+                        <div class="mt-4">
+                            <label for="price" class="block text-sm font-medium text-gray-700">Precio</label>
+                            <input type="text" id="price" wire:model="selectedProduct.price" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                        </div>
+
+                        <div>
+                            <label for="quantity" class="block text-sm font-medium text-gray-700">Iva</label>
+                            <input type="text" id="quantity" wire:model="vatPercentage" min="1" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                        </div>
+                        <div class="mt-4">
+                            <label for="price" class="block text-sm font-medium text-gray-700">Subtotal</label>
+                            <input type="text" id="price" wire:model="selectedProduct.subtotal" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                        </div>
+                        <div class="mt-4">
+                            <label for="price" class="block text-sm font-medium text-gray-700">Total</label>
+                            <input type="text" id="price" wire:model="selectedProduct.total" class="mt-1 block w-full border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" readonly>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse bg-opacity-75">
+                        <button wire:click="confirmAddProductToSale" class="w-full inline-flex justify-center rounded-full border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm">
+                            Agregar
+                        </button>
+                        <button wire:click="closeModal" class="mt-3 w-full inline-flex justify-center rounded-full border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            @endif
 </div>

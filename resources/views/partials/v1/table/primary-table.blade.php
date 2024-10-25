@@ -1,7 +1,7 @@
 <div>
-    <div class="relative z-10 max-w-7xl mx-auto ">
+    <div class="max-w-7xl mx-auto ">
         @if($filter_active)
-        <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
+        <div class="flex space-x-4 mb-4 ml-8">
             @if(($search_placeholder ?? null) != null)
                 <input type="text" wire:model.live="{{$search}}" placeholder="{{$search_placeholder ?? ""}}" class="mt-1 block   border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             @endif

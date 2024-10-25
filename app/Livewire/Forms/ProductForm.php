@@ -31,7 +31,7 @@ class ProductForm extends Form
    // #[Validate('required')]
     public $subtotal = '';
     #[Validate('required')]
-    public $quantity = '';
+    public $quantity ='';
     //#[Validate('required|numeric|lt:quantity')]
     public $number = '';
     #[Validate('required|boolean')]
@@ -58,7 +58,7 @@ class ProductForm extends Form
             $this->vat_percentage_id = $model->vat_percentage_id;
             $this->unit_id = $model->unit_id;
             $this->price = $model->activePrice ? $model->activePrice->price : '';
-            $this->quantity = $model->inventory->quantity;
+            $this->quantity = 0;
             $this->subgroup_id = $model->subgroup_id;
             $this->number = 1;
             $this->subtotal = $this->number * $this->price;
