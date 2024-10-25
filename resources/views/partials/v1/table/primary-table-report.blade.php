@@ -54,6 +54,11 @@
                             @if(str_contains($table_header,".") and !str_contains($table_header,"*") and ($table_row->{explode(".",$table_header)[0]} != null))
 
                             {{ $table_row->{explode(".",$table_header)[0]}->{explode(".",$table_header)[1]} }} {{--Se usa para traer datos de una relacion user.client.name--}}
+                            @elseif($table_header === 'unit_price')
+                                    ${{ number_format(intval($table_row->{$table_header})) }} {{-- Formatear el número con separadores de miles --}}
+                            @elseif($table_header === 'sub_total')
+                                    ${{ number_format(intval($table_row->{$table_header})) }} {{-- Formatear el número con separadores de miles --}}
+                           
                             @else
                             {{ $table_row->{$table_header} }}
                             @endif
@@ -170,17 +175,18 @@
     <script>
         document.getElementById('exportPdfBtn').addEventListener('click', function(e) {
             e.preventDefault();
-
+    
             // Obtener los valores de las fechas
             let search = document.getElementById('search').value;
             let search_1 = document.getElementById('search_1').value;
             let search_2 = document.getElementById('search_2').value;
-
-            // Crear la URL con los parámetros de búsqueda
-            let url = '{{ route('reportpdf.list') }}' + '?search=' + search + '&search_1=' + search_1 + '$search_2='+search_2;
-
+    
+            // Crear la URL con los parámetros de búsqueda usando encodeURIComponent para manejar espacios
+            let url = '{{ route('reportpdf.list') }}' + '?search=' + encodeURIComponent(search) + '&search_1=' + encodeURIComponent(search_1) + '&search_2=' + encodeURIComponent(search_2);
+    
             // Abrir la URL en una nueva pestaña
             window.open(url, '_blank');
         });
     </script>
+    
 </div>

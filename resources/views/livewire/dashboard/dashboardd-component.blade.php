@@ -6,7 +6,8 @@
             <!-- Contenedor con bordes redondeados y espaciado -->
             <div class=" relative z-1  overflow-hidden sm:rounded-lg rounded-3xl">
                 <!-- Grid para mostrar las tarjetas de estadísticas -->
-                <div class="grid max-w-screen-xl grid-cols-1  gap-8 m-4  text-gray-900 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 dark:text-white">
+                <div
+                    class="grid max-w-screen-xl grid-cols-1  gap-8 m-4  text-gray-900 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 dark:text-white">
                     <!-- Tarjeta de Usuarios -->
                     <div class="flex items-center justify-center p-2  rounded-full  shadow-2xl"
                         style="background: #21529b;">
@@ -17,7 +18,8 @@
                         </div>
                         <div class="flex items-center justify-center  p-3  rounded-r-full"
                             style="width: 30%; height: 100%; background: #2e6cb4;">
-                            <img src="{{ asset('images/DASHBOARD/IconoUsuarios.png') }}" class="text-white" alt="" style="width: 70%">
+                            <img src="{{ asset('images/DASHBOARD/IconoUsuarios.png') }}" class="text-white"
+                                alt="" style="width: 70%">
                         </div>
                     </div>
 
@@ -31,8 +33,8 @@
                         </div>
                         <div class="flex items-center justify-center b p-3  rounded-r-full"
                             style="width: 30%; height: 100%;  background: #754997;">
-                            <img src="{{ asset('images/DASHBOARD/IconoClientes.png') }}" class="text-white" width="70"
-                                alt="">
+                            <img src="{{ asset('images/DASHBOARD/IconoClientes.png') }}" class="text-white"
+                                width="70" alt="">
                         </div>
                     </div>
 
@@ -93,89 +95,107 @@
                                     aria-labelledby="stats-tab">
                                     <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6">
                                         @php
-                                        // Agrupar productos por nombre y proveedor
+                                        // Agrupar productos por nombre y proveedor con una clave única
                                         $groupedProducts = [];
                                         foreach ($productos as $producto) {
-                                            // Crear una clave única que combine el nombre del producto y el proveedor
                                             $key = $producto->product_name . '|' . $producto->supplier_name;
-                                            $groupedProducts[$key] = $producto; // Almacenar solo una instancia del producto
+                                            $groupedProducts[$key] = $producto;
+                                        }
+                                    
+                                        // Agrupar productos solo por nombre para comparar precios entre proveedores
+                                        $pricesByProduct = [];
+                                        foreach ($groupedProducts as $key => $producto) {
+                                            $pricesByProduct[$producto->product_name][] = $producto->valor;
+                                        }
+                                    
+                                        // Obtener los precios mínimos y máximos para cada producto por nombre
+                                        $priceRanges = [];
+                                        foreach ($pricesByProduct as $productName => $prices) {
+                                            sort($prices);
+                                            $priceRanges[$productName] = [
+                                                'min' => $prices[0],
+                                                'max' => end($prices),
+                                            ];
                                         }
                                     @endphp
-                                
+                                    
                                     @foreach ($groupedProducts as $producto)
                                         @php
-                                            // Determinar los precios mínimo y máximo
-                                            // Aquí no necesitas calcular min y max de precios ya que solo muestras un producto por proveedor
-                                            $class = '';
-                                            // Asignar color según el precio del producto
-                                            if ($producto->valor <= 10000) { // Aquí ajusta el valor según tu rango
-                                                $class = "#3AAA35"; // Precio bajo
-                                            } elseif ($producto->valor <= 20000) {
-                                                $class = '#FCEA10'; // Precio medio
+                                            // Obtener los rangos de precio para el producto actual
+                                            $productName = $producto->product_name;
+                                            $lowestPrice = $priceRanges[$productName]['min'];
+                                            $highestPrice = $priceRanges[$productName]['max'];
+                                    
+                                            // Determinar el color según el precio del producto en comparación con otros proveedores
+                                            if ($producto->valor == $lowestPrice) {
+                                                $class = '#3AAA35'; // Verde para el precio más bajo
+                                            } elseif ($producto->valor == $highestPrice) {
+                                                $class = '#E6332A'; // Rojo para el precio más alto
                                             } else {
-                                                $class = '#E6332A'; // Precio alto
+                                                $class = '#FCEA10'; // Amarillo para precios intermedios
                                             }
                                         @endphp
-                                
-                                        <div class="flex items-center justify-between px-2 py-2 bg-white border-2 rounded-full shadow-md dark:bg-gray-700" style="border-color: #B1B7C3">
+                                    
+                                        <div class="flex items-center justify-between px-2 py-2 bg-white border-2 rounded-full shadow-md dark:bg-gray-700"
+                                            style="border-color: #B1B7C3">
                                             <!-- Información del producto -->
                                             <div class="mx-1">
                                                 <p class="text-sm text-gray-500 dark:text-gray-400 text-center font-bold">
                                                     {{ $producto->product_name }}
                                                 </p>
                                             </div>
-                                
+                                    
                                             <!-- Proveedor del producto -->
                                             <div class="text-right">
                                                 <p class="text-sm text-center text-gray-500 dark:text-gray-400">
                                                     <strong class="text-black">{{ $producto->supplier_name }}</strong>
                                                 </p>
                                             </div>
-                                
+                                    
                                             <!-- Precio del producto -->
                                             <div class="mx-4">
                                                 <p class="text-sm text-gray-500 dark:text-gray-400">
                                                     <strong class="text-black">${{ number_format($producto->valor, 0) }}</strong>
                                                 </p>
                                             </div>
-                                
+                                    
                                             <!-- Indicador de estado (punto) -->
                                             <div class="mx-4">
-                                                <button type="button" class="inline-block w-4 h-4 rounded-full" style="background:{{$class}};"></button>
+                                                <button type="button" class="inline-block w-4 h-4 rounded-full" style="background:{{ $class }};"></button>
                                             </div>
                                         </div>
-                                    
                                     @endforeach
+                                    
+
+
+
+                                    </div>
 
                                 </div>
-
                             </div>
+
                         </div>
-
+                        <div class=" grid justify-center mx">
+                            {{ $productos->links('partials.v1.table.pagination-links') }}
+                        </div>
                     </div>
-                    <div class=" grid justify-center mx">
-                        {{ $productos->links('partials.v1.table.pagination-links') }}
-                    </div>
-                </div>
 
 
-                <!-- Tarjeta del gráfico de productos 1 y 2 -->
-                <div class="lg:col-span-5 sm:col-span-12 grid grid-cols-1 gap-8 rounded-3xl ">
-                    <div class="bg-gray-100  rounded-3xl p-2"
-                        style="box-shadow:rgba(0, 0, 0, 0.474) 0px 4px 8px">
-                        <livewire:dashboard.chart-component />
-                    </div>
-                    <div class="bg-gray-100  rounded-3xl p-2"
-                        style="box-shadow:rgba(0, 0, 0, 0.474) 0px 4px 8px">
-                        <livewire:dashboard.chart-inventario-component />
+                    <!-- Tarjeta del gráfico de productos 1 y 2 -->
+                    <div class="lg:col-span-5 sm:col-span-12 grid grid-cols-1 gap-8 rounded-3xl ">
+                        <div class="bg-gray-100  rounded-3xl p-2" style="box-shadow:rgba(0, 0, 0, 0.474) 0px 4px 8px">
+                            <livewire:dashboard.chart-component />
+                        </div>
+                        <div class="bg-gray-100  rounded-3xl p-2" style="box-shadow:rgba(0, 0, 0, 0.474) 0px 4px 8px">
+                            <livewire:dashboard.chart-inventario-component />
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+
         </div>
 
-
-
     </div>
-
-</div>
 </div>

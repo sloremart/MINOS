@@ -43,7 +43,7 @@ class CashClosure extends Component
     public $hasPreviousRecord = 0;
     public $purchaseDetails = []; // Inicializa la propiedad aquí
     public $isDisabled = false;
-    private $paginacion = 4;
+    private $paginacion = 7;
     public $users;
 
 

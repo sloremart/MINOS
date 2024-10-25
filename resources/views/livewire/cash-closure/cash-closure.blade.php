@@ -71,10 +71,8 @@
                                 <select wire:model="payment_method" id="payment_method"
                                     class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     wire:change="updateTotalSales" aria-describedby="paymentMethodHelp">
-                                    <option value="" class="text-gray-500"> Metodo de pago</option>
-                                    <option value="efectivo">Efectivo</option>
-                                    <option value="transferencia">Transferencia</option>
-                                    <option value="all">Todos</option> <!-- Nueva opción "Todos" -->
+                                    <option value="" class="text-gray-500 hidden"> Efectivo & electrónicos</option>
+                                    <option value="all">Efectivo & Tansferencia</option> <!-- Nueva opción "Todos" -->
                                 </select>
                                 @error('payment_method')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -104,7 +102,7 @@
 
                             <!-- Total Ventas Transferencia -->
                             <div class="relative">
-                                <label for="text" class="text-gray-700 text-xs">Total de transferencia</label>
+                                <label for="text" class="text-gray-700 text-xs">Total de pagos electrónicos </label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-duotone fa-solid fa-credit-card"></i>
                                 </span>
@@ -112,7 +110,7 @@
                                 <input wire:model="total_sales_transfer" type="number" step="0.01" id="total_sales_transfer"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     readonly aria-describedby="totalSalesTransferHelp" disabled
-                                    placeholder="Total de transferencia" />
+                                    placeholder="Total de electrónicos " />
 
                                 {{-- <small id="totalSalesTransferHelp" class="text-gray-500">Total de ventas por
                                     transferencia.</small> --}}
@@ -133,7 +131,7 @@
                             </div>
                             <!-- Saldo Final Efectivo -->
                             <div class="relative">
-                                <label for="text" class="text-gray-700 text-xs">Saldo final en efectivo.</label>
+                                <label for="text" class="text-gray-700 text-xs">Saldo final en caja</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
@@ -211,12 +209,12 @@
                         <!-- Inputs de búsqueda -->
                         <div class="overflow-x-auto  relative z-10 max-w-6xl mx-auto ">
                             <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
-                                <input type="text" placeholder="buscar ..."
+                                <input type="text" placeholder="buscar responsable ..."
                                     class="p-2 border border-gray-300 rounded-full" wire:model.live="search">
-                                <input type="date" class="p-2 border border-gray-300 rounded-full"
+                                {{-- <input type="date" class="p-2 border border-gray-300 rounded-full"
                                     wire:model.live="search_1">
                                 <input type="date" class="p-2 border border-gray-300 rounded-full"
-                                    wire:model.live="search_2">
+                                    wire:model.live="search_2"> --}}
                             </div>
                         </div>
 
@@ -266,7 +264,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{ $data->links('partials.v1.table.pagination-links') }}
+                        <div class=" grid  pt-4 justify-center">
+                            {{ $data->links('partials.v1.table.pagination-links') }}
+                        </div>
+                       
                     </div>
 
                 </div>

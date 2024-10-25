@@ -32,7 +32,7 @@
                         'search_1_placeholder' => $search_1_placeholder,
                         'search_2_placeholder' => $search_2_placeholder,
                         'table_headers' => [
-                            'ID' => 'id',
+                          
                             'Nombre' => 'name',
                             'Valor Unitario' => 'unit_price',
                             'Cantidad' => 'total_quantity',

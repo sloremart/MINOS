@@ -159,6 +159,7 @@ Route::middleware([
             \Log::info('Valores de búsqueda recibidos:', [
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
+                'search_2' => $request->input('search_2'),
             ]);
 
             $component = app()->make(\App\Livewire\Reports\ReportInv::class);
@@ -166,6 +167,7 @@ Route::middleware([
             // Capturar los parámetros de la URL
             $component->search = $request->input('search');
             $component->search_1 = $request->input('search_1');
+            $component->search_2 = $request->input('search_2');
 
             // Generar el PDF
             return $component->pdf();
@@ -187,6 +189,7 @@ Route::prefix('reportes/venta')->group(function () {
         Log::info('Valores de búsqueda recibidos:', [
             'search' => $request->input('search'),
             'search_1' => $request->input('search_1'),
+            'search_2' => $request->input('search_2'),
         ]);
 
         $component = app()->make(\App\Livewire\Reports\Reports::class);
@@ -194,6 +197,7 @@ Route::prefix('reportes/venta')->group(function () {
         // Capturar los parámetros de la URL
         $component->search = $request->input('search');
         $component->search_1 = $request->input('search_1');
+        $component->search_2 = $request->input('search_2');
         
         // Generar el PDF
         return $component->pdf();
@@ -210,21 +214,27 @@ Route::prefix('reportes/venta')->group(function () {
     Route::prefix('reportes/ventaCliente')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
-            \Log::info('Valores de búsqueda recibidos:', [
+            Log::info('Valores de búsqueda recibidos  ventas cliente:', [
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
-            ]);
+                'search_2' => $request->input('search_2'),
+            ]); 
 
             $component = app()->make(\App\Livewire\Reports\ReportCustomer::class);
 
             // Capturar los parámetros de la URL
             $component->search = $request->input('search');
             $component->search_1 = $request->input('search_1');
+            $component->search_2 = $request->input('search_2');
+        
 
             // Generar el PDF
             return $component->pdf();
         })->name('reporte_clientes.list');
     });
+
+
+
 
     //------------------------------------------
     //reporte proveedor + pdf
@@ -240,6 +250,7 @@ Route::prefix('reportes/venta')->group(function () {
             \Log::info('Valores de búsqueda recibidos:', [
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
+                'search_2' => $request->input('search_2'),
             ]);
 
             $component = app()->make(\App\Livewire\Reports\ReportPurchaseSuplier::class);
@@ -247,6 +258,7 @@ Route::prefix('reportes/venta')->group(function () {
             // Capturar los parámetros de la URL
             $component->search = $request->input('search');
             $component->search_1 = $request->input('search_1');
+            $component->search_2 = $request->input('search_2');
 
             // Generar el PDF
             return $component->pdf();

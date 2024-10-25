@@ -30,7 +30,7 @@ class Reports extends Component
 
     public $search = ''; // Fecha de inicio
     public $search_1 = ''; // Fecha de fin
-    public $search_2 = ''; 
+    public $search_2; 
     public $search_placeholder = 'Fecha inicio';
     public $search_1_placeholder = 'Fecha fin';
     public $search_2_placeholder = 'Buscar Producto ...';
@@ -86,18 +86,23 @@ class Reports extends Component
         ])->layout('layouts.app');
     }
 
-
+    public function mount()
+    {
+        $this->search_2 = ''; // Inicializa la propiedad
+    }
 
     ////----------------------------EXPORTAR EN PDF----------------------//////////
 
     public function pdf()
     {
-        Log::info('Generando PDF con las fechas:', [
-            'search' => $this->search,
-            'search_1' => $this->search_1,
-            'search_1' => $this->search_2,
-        ]);
-
+// Decodifica el parámetro search_2
+    $this->search_2 = urldecode($this->search_2);
+        // Log para verificar que las fechas y el nombre del producto llegan correctamente
+    Log::info('Valores de búsqueda recibidos:', [
+        'search' => $this->search,
+        'search_1' => $this->search_1,
+        'search_2' => $this->search_2,
+    ]);
         // Copia la misma consulta del método render(), incluyendo los filtros
         $query = SaleDetail::join('products', 'sale_details.product_id', '=', 'products.id')
             ->select(
@@ -107,32 +112,29 @@ class Reports extends Component
                 DB::raw('MAX(sale_details.sub_total) as sub_total'),
                 DB::raw('MAX(sale_details.created_at) as last_created_at')
             )
-            ->groupBy('products.name', 'sale_details.created_at');
-
-        // Aplicar filtros de fecha
-        if (!empty($this->search)) {
-            $query->where('sale_details.created_at', '>=', $this->search);
-            Log::info('Aplicando filtro de fecha desde: ' . $this->search);
-        }
-        if (!empty($this->search_1)) {
-            $query->where('sale_details.created_at', '<=', $this->search_1);
-            Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
-        }
-        if (!empty($this->search_2)) {
-            $query->where('products.name', '<=', $this->search_2);
-            Log::info('Aplicando filtro de fecha hasta: ' . $this->search_2);
-        }
-
-        // Obtener los datos filtrados
+            ->groupBy('products.name','sale_details.created_at');
+    
+       // Aplica los filtros de fechas
+    if (!empty($this->search)) {
+        $query->where('sale_details.created_at', '>=', $this->search);
+    }
+    if (!empty($this->search_1)) {
+        $query->where('sale_details.created_at', '<=', $this->search_1);
+    }
+    if (!empty($this->search_2)) {
+        $query->where('products.name', 'like', $this->search_2);
+    }
+    
+        // Obtén los datos filtrados
         $data = $query->get();
-
-        // Log de la cantidad de datos obtenidos
-        Log::info('Cantidad de registros obtenidos: ' . $data->count());
-
-        // Generar el PDF con los datos filtrados
+    
+        // Debug para verificar los datos filtrados
+        // dd($data);
+    
+        // Genera el PDF con los datos filtrados
         $pdf = Pdf::loadView('livewire.reports.reportPdf', compact('data'));
-
-        // Devuelve el PDF para visualizarlo o descargarlo
+        
+        // Devuelve el PDF para visualizarlo
         return $pdf->stream('reporte.pdf');
     }
 

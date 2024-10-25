@@ -32,7 +32,7 @@
                         'search_1_placeholder' => $search_1_placeholder,
                         'search_2_placeholder' => $search_2_placeholder,
                         'table_headers' => [
-                            'ID' => 'id',
+                           
                             'Nombre' => 'name',
                             'Cantidad' => 'total_quantity',
                             'Fecha' => 'last_created_at',

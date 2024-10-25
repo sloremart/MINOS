@@ -34,7 +34,7 @@
                             'search_1_placeholder' => $search_1_placeholder,
                             'search_2_placeholder' => $search_2_placeholder,
                             'table_headers' => [
-                                'ID' => 'id',
+                                
                                 'Nombre' => 'name',
                                 'Documento' => 'document',
                                 'Email' => 'email',
