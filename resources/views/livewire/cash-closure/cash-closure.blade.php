@@ -203,12 +203,12 @@
                 <div class="relative z-40 bg-white col-span-1 md:col-span-2 p-4 rounded-lg shadow-md ">
 
 
-                    <div class="p-6">
+                    <div class="p-1">
                         <h1 class="text-2xl font-bold mb-4">Cierre de Caja</h1>
 
                         <!-- Inputs de búsqueda -->
                         <div class="overflow-x-auto  relative z-10 max-w-6xl mx-auto ">
-                            <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
+                            <div class="absoloute z-10 flex space-x-4 mb-4 ">
                                 <input type="text" placeholder="buscar responsable ..."
                                     class="p-2 border border-gray-300 rounded-full" wire:model.live="search">
                                 {{-- <input type="date" class="p-2 border border-gray-300 rounded-full"
@@ -219,22 +219,23 @@
                         </div>
 
                         <div
-                            class="w-full text-sm text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto">
+                            class="w-full  text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto" >
+                           
                             <!-- Añadido overflow-x-auto aquí -->
                             <table
-                                class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap">
+                                class="min-w-full  text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap" style="font-size: 11px;">
                                 <!-- Añadido whitespace-nowrap aquí -->
-                                <thead class="text-xs text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400"
-                                    style="background:#652581;">
+                                <thead class=" text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400" 
+                                    style="background:#652581;font-size: 11px;">
                                     <tr>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Cerrado por</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Fecha y Hora</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Saldo Inicial</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Ingresos</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Egresos</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Saldo Final</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Saldo Siguiente</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Acciones</th>
+                                        <th class="py-3 px-4 text-left  font-semibold" >Cerrado por</th>
+                                        <th class="py-3 px-4 text-left  font-semibold" >Fecha y Hora</th>
+                                        <th class="py-3 px-4 text-left  font-semibold" >Saldo Inicial</th>
+                                        <th class="py-3 px-4 text-left  font-semibold" >Ingresos</th>
+                                        <th class="py-3 px-4 text-left  font-semibold" >Egresos</th>
+                                        <th class="py-3 px-4 text-left  font-semibold" >Saldo Final</th>
+                                        <th class="py-3 px-4 text-left  font-semibold" >Saldo Siguiente</th>
+                                        <th class="py-3 px-4 text-left  font-semibold" >Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>

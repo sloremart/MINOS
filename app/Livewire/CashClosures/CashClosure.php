@@ -176,8 +176,8 @@ class CashClosure extends Component
 
 
         // Calcular el saldo final en efectivo
-        $this->final_balance_cash = $this->start_balance + $this->total_sales_cash - $this->total_expenses;
-
+        $this->final_balance_cash =$this->total_sales_transfer + $this->start_balance + $this->total_sales_cash - $this->total_expenses;
+       
         // Actualizar el balance total
         $this->final_balance = $this->start_balance + $this->total_sales - $this->total_expenses;
     }
