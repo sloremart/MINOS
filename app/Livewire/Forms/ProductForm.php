@@ -1,5 +1,5 @@
 <?php
-
+// ------------------->POR MEDIO DE ESTE COMPONENTE  PODEMOS AGREGAR LOS PRODUCTOS , ELIMINARLOS, EDITARLOS, ESTE COMPONENTE PREPARA LOS PRODUCTOS PARA SU COMPRA  Y VENTA <-----------------------/////
 namespace App\Livewire\Forms;
 
 use App\Models\Product;

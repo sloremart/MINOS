@@ -1,5 +1,5 @@
 <?php
-
+// -------------------->COMPONENTE DE  TIPOS DE COMERCIO ,ESTE COMPONENTE ES EL RESPONSABLE DE RENDERIZAR LA VISTA DEL SUBMODUO DE TIPOS DE COMERCIO  LA CUAL EST CONECTADO  CON EL COMPONENTE CommerceTypeForm que porta las funciones de crear , eliminar y editar el registro  que se encuentre en la db de tipos de comercio.<-------------------------//////////
 namespace App\Livewire\CommerceTypes;
 
 use App\Livewire\Forms\CommerceTypeForm;

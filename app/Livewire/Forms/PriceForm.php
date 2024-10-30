@@ -1,5 +1,5 @@
 <?php
-
+// --------->ESTE COMPONENTE  PERMITE TENER LOS REGISTROS DE LOS PRECIOS DE CADA PRODUCTO TIENE FUNCIONES DE CREAR, ELIMINAR Y EDITAR LOS REGISTROS <-----------//
 namespace App\Livewire\Forms;
 
 use App\Models\Price;

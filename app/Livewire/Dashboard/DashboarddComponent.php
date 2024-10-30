@@ -1,8 +1,8 @@
 <?php
-
+// --------------->ESTE COMPONENTE ES EL PRINCIPAL DEL DASHBOARD SE ENCARGA DE RENDERIZAR LA VISTA DEL MISMO, SU PROPOSITO ES ORIENTAR AL USUARIO  DE FORMA INFORMATIVA  INTRUDUCIENDO UN RESUMEN SOBRE LOS MOVIMIENTOS DEL SOFTWARE  DE LA TEMPORADA USADO<-----------------//
 namespace App\Livewire\Dashboard;
 
-use App\Models\Supplier; // Asegúrate de usar el modelo correcto
+use App\Models\Supplier; // Asegúrate de usar el modelo Supplier
 use App\Models\Customer;
 use App\Models\PurchaseDetail;
 use App\Models\Sale;
