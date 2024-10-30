@@ -1,5 +1,5 @@
 <?php
-
+// ESTE COMPONENTE  NOS PERMITE REGISTRAR EL PORCENTAJE DEL IVA SEGUN LA REGION , PUEDE REGISTRAR, ELIMINAR, EDITAR
 namespace App\Livewire\Forms;
 
 use App\Models\VatPercentage;

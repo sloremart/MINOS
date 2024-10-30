@@ -1,5 +1,5 @@
 <?php
-
+// ACA EN ESTE COMPONENTE SE REGISTRARA LAS UNIDADES DE MEDIDAS , TIENE METODOS DE CREAR ,ELIMINAR, EDITAR, 
 namespace App\Livewire\Forms;
 
 use App\Models\Unit;

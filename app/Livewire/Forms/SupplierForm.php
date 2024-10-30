@@ -1,5 +1,5 @@
 <?php
-
+// ESTE COMPONENTE SIRVE PARA CREAR EL REGISTRO DEL PROVEEDOR , TIENE METODOS PARA CREAR, ELIMINAR ,EDITAR
 namespace App\Livewire\Forms;
 
 use App\Models\Supplier;

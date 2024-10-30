@@ -1,4 +1,5 @@
 <?php
+// COMPONENTE QUE SE ENCARGAR DE RENDERIZAR LA VISTA DEL DETALLE DE LA VENTA
 
 namespace App\Livewire\Sales;
 
