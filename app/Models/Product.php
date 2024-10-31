@@ -1,5 +1,5 @@
 <?php
-
+// ESTE MODELO COMPONE LA TABLA DE  PRODUCTOS  EN LA DB
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

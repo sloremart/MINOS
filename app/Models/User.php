@@ -1,5 +1,5 @@
 <?php
-
+// ESTE MODELO COMPONEN LA TABLA DE  USUARIOS  EN LA DB
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;

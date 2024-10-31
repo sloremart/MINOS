@@ -1,5 +1,5 @@
 <?php
-
+// MIGRACION DE LA TABLA CASH CLORUSES EN DE SE ALMACENARA LA INFORMACION REKACIONADA A ESTA TABLA
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

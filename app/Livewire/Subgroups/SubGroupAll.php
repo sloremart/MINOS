@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire\Subgroups;
+// ESTE COMPONENTE SE ENCARGA DE RENDERIZAR TODA LA INFORMACION DE LOS REGISTRO DE CADA SUBGRUPO 
 
 use App\Livewire\Forms\SubgroupForm;
 use App\Models\Group;

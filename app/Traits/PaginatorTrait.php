@@ -1,5 +1,5 @@
 <?php
-
+// TRAITS PAR CONTROLAR EL PAGINADOR DE CADA TABLA  EXISTENTE EN EL SOFTWARE
 namespace App\Traits;
 
 use App\Scope\PaginationScope;

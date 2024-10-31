@@ -1,5 +1,5 @@
 <?php
-
+// ESTE MODELO COMPONEN LA TABLA DE  CIERRE DE CAJA  EN LA DB
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

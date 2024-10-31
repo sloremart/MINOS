@@ -1,4 +1,5 @@
 <?php
+// ESTE MODELO COMPONEN LA TABLA DE  PRODUCTOS POR PROVEEDOR  EN LA DB
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
