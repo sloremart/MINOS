@@ -38,8 +38,8 @@
                             class="mt-1 block w-full border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             aria-describedby="paymentMethodHelp">
                             <option value="">Seleccione</option>
-                            <option value="efectivo">Efectivo</option>
-                            <option value="transferencia">Transferencia</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Transferencia">Transferencia</option>
                         </select>
                     </div>
                     <!-- Input para Teléfono del Proveedor -->
@@ -93,11 +93,11 @@
                                 <td class="border px-4 py-2">${{ number_format($product['price'], 2) }}</td>
                                 <td class="border px-4 py-2">${{ number_format($product['subtotal'], 2) }}</td>
                                 {{-- <td class="border px-4 py-2">
-                                    <button 
-                                        class="bg-red-500 rounded-full px-2 py-2 hover:bg-red-700 text-white font-bold py-1 px-3 rounded" 
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Eliminar" 
+                                    <button
+                                        class="bg-red-500 rounded-full px-2 py-2 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Eliminar"
                                         wire:click="deleteProduct({{ $index }})">
                                 <i class="text-bg-red-500 fas fa-trash"></i>
                                 </button>

@@ -137,10 +137,10 @@ class CashClosure extends Component
     public function updatedPaymentMethod($value)
     {
         // Lógica para manejar la actualización según el método de pago
-        if ($value === 'efectivo') {
+        if ($value === 'Efectivo') {
             // Si seleccionas efectivo, asegúrate de que la transferencia esté en cero
             $this->total_sales_transfer = 0;
-        } elseif ($value === 'transferencia') {
+        } elseif ($value === 'Transferencia') {
             // Si seleccionas transferencia, asegúrate de que el efectivo esté en cero
             $this->total_sales_cash = 0;
         }
@@ -158,9 +158,9 @@ class CashClosure extends Component
 
         // Calcular las ventas según el método de pago seleccionado
         if ($this->payment_method) {
-            if ($this->payment_method === 'efectivo') {
+            if ($this->payment_method === 'Efectivo') {
                 $this->total_sales_cash = $this->calculateSales('efectivo');
-            } elseif ($this->payment_method === 'transferencia') {
+            } elseif ($this->payment_method === 'Transferencia') {
                 $this->total_sales_transfer = $this->calculateSales('transferencia');
             } elseif ($this->payment_method === 'all') {
                 $this->total_sales_cash = $this->calculateSales('efectivo');
@@ -183,13 +183,13 @@ class CashClosure extends Component
     }
 
     protected function calculateExpenses()
-    {
-        // Asumimos que hay una tabla llamada 'purchases' para las compras
-        return DB::table('purchases')
-            ->whereDate('created_at', now()->format('Y-m-d')) // Filtrar por la fecha actual
-            ->whereNull('deleted_at') // Excluir registros con fecha de eliminación
-            ->sum('total_amount'); // Sumar el campo 'total_amount' de los registros no eliminados
-    }
+{
+    // Asumimos que hay una tabla llamada 'purchases' para las compras
+    return DB::table('purchases')
+        ->whereDate('created_at', now()->format('Y-m-d')) // Filtrar por la fecha actual
+        ->whereNull('deleted_at') // Excluir registros con fecha de eliminación
+        ->sum('total_amount'); // Sumar el campo 'total_amount' de los registros no eliminados
+}
 
 
 
@@ -240,146 +240,146 @@ class CashClosure extends Component
 
 
     public function showDetails($closureId)
-    {
-        // Obtener el cierre de caja específico
-        $closure = cash_closure::with('user')->find($closureId);
-        if (!$closure) {
-            session()->flash('error', 'cierre no encontrado');
-            return;
-        }
-
-        $this->selected_id = $closure->id;
-        $this->user_name = $closure->user->name;
-        $this->closing_date_time = $closure->closing_date_time;
-        $this->start_balance = $closure->start_balance;
-        $this->total_sales = $closure->total_sales;
-        $this->total_expenses = $closure->total_expenses;
-        $this->final_balance = $closure->final_balance;
-
-        // Convertir la fecha de cierre a un objeto Carbon
-        $closingDateTime = Carbon::parse($closure->closing_date_time);
-
-        // Obtener solo la parte de la fecha (Y-m-d)
-        $closingDate = $closingDateTime->toDateString(); // Esto solo obtiene la fecha sin hora
-
-        // Obtener los detalles de ventas relacionadas a este cierre basadas en la fecha
-        $salesDetails = SaleDetail::with(['product' => function ($query) {
-            $query->withTrashed(); // Incluir productos eliminados
-        }])
-            ->whereHas('sale', function ($query) use ($closingDate) {
-                // Comparar solo la fecha, no la hora
-                $query->whereDate('created_at', $closingDate);
-            })
-            ->get();
-
-        // Verificar si se encontraron ventas
-        if ($salesDetails->isNotEmpty()) {
-            // Asignar los detalles de ventas a una propiedad pública
-            $this->salesDetails = $salesDetails;
-            $this->showModal = true; // Abrir el modal de detalles
-        } else {
-            session()->flash('error', 'No se encontraron ventas para este cierre.');
-        }
-
-        // Obtener las compras por proveedor para la fecha actual del cierre
-        $purchaseDetails = PurchaseDetail::join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
-            ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
-            ->join('products', 'purchase_details.product_id', '=', 'products.id')
-            ->select(
-                'suppliers.name as supplier_name',        // Nombre del proveedor
-                'products.name as product_name',          // Nombre del producto
-                'purchase_details.quantity as quantity',   // Cantidad del producto
-                'purchase_details.unit_price',             // Valor unitario de la compra
-                'purchase_details.sub_total',              // Subtotal de la compra
-                'purchases.purchase_date'                  // Fecha de la compra
-            )
-            ->whereDate('purchases.purchase_date', $closingDate) // Solo compras de la fecha actual
-            ->get();
-
-        // Verificar si se encontraron compras
-        if ($purchaseDetails->isNotEmpty()) {
-            // Asignar los detalles de compras a una propiedad pública
-            $this->purchaseDetails = $purchaseDetails;
-        } else {
-            session()->flash('error', 'No se encontraron compras para este cierre.');
-        }
+{
+    // Obtener el cierre de caja específico
+    $closure = cash_closure::with('user')->find($closureId);
+    if (!$closure) {
+        session()->flash('error', 'cierre no encontrado');
+        return;
     }
 
+    $this->selected_id = $closure->id;
+    $this->user_name = $closure->user->name;
+    $this->closing_date_time = $closure->closing_date_time;
+    $this->start_balance = $closure->start_balance;
+    $this->total_sales = $closure->total_sales;
+    $this->total_expenses = $closure->total_expenses;
+    $this->final_balance = $closure->final_balance;
 
+    // Convertir la fecha de cierre a un objeto Carbon
+    $closingDateTime = Carbon::parse($closure->closing_date_time);
 
+    // Obtener solo la parte de la fecha (Y-m-d)
+    $closingDate = $closingDateTime->toDateString(); // Esto solo obtiene la fecha sin hora
 
-
-
-    public function generatePdf($closureId)
-    {
-        // Obtener el cierre de caja específico
-        $closure = cash_closure::with('user')->find($closureId);
-        if (!$closure) {
-            session()->flash('error', 'Cierre no encontrado.');
-            return;
-        }
-
-        // Obtener la fecha de cierre
-        $closingDateTime = Carbon::parse($closure->closing_date_time);
-        $closingDate = $closingDateTime->toDateString(); // Solo fecha, sin hora
-
-        // Obtener los detalles de ventas relacionadas a este cierre basadas en la fecha
-        $salesDetails = SaleDetail::with(['product' => function ($query) {
+    // Obtener los detalles de ventas relacionadas a este cierre basadas en la fecha
+    $salesDetails = SaleDetail::with(['product' => function($query) {
             $query->withTrashed(); // Incluir productos eliminados
         }])
-            ->whereHas('sale', function ($query) use ($closingDate) {
-                // Comparar solo la fecha, no la hora
-                $query->whereDate('created_at', $closingDate);
-            })
-            ->get();
+        ->whereHas('sale', function ($query) use ($closingDate) {
+            // Comparar solo la fecha, no la hora
+            $query->whereDate('created_at', $closingDate);
+        })
+        ->get();
 
-        // Verificar si se encontraron ventas
-        if ($salesDetails->isNotEmpty()) {
-            // Asignar los detalles de ventas a una propiedad pública
-            $this->salesDetails = $salesDetails;
-            // $this->showModal = true; 
-        } else {
-            session()->flash('error', 'No se encontraron ventas para este cierre.');
-        }
-
-        // Obtener los detalles de compras
-        $purchaseDetails = PurchaseDetail::join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
-            ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
-            ->join('products', 'purchase_details.product_id', '=', 'products.id')
-            ->select(
-                'suppliers.name as supplier_name',        // Nombre del proveedor
-                'products.name as product_name',          // Nombre del producto
-                'purchase_details.quantity as quantity',  // Cantidad del producto
-                'purchase_details.unit_price',            // Valor unitario de la compra
-                'purchase_details.sub_total',             // Subtotal de la compra
-                'purchases.purchase_date'                 // Fecha de la compra
-            )
-            ->whereDate('purchases.purchase_date', $closingDate) // Solo compras de la fecha actual
-            ->get();
-
-        // Verificar si se encontraron compras
-        if ($purchaseDetails->isNotEmpty()) {
-            $this->purchaseDetails = $purchaseDetails;
-        } else {
-            session()->flash('error', 'No se encontraron compras para este cierre.');
-        }
-
-        // Preparar los datos para la vista del PDF
-        $data = [
-            'closure' => $closure,
-            'salesDetails' => $salesDetails,
-            'purchaseDetails' => $purchaseDetails
-        ];
-
-        // Generar el PDF
-        $pdf = Pdf::loadView('livewire.cash-closure.closure-pdf', $data);
-
-        // Retornar el PDF generado para ser descargado
-        return response()->streamDownload(
-            fn() => print($pdf->output()),
-            'cierre_de_caja_' . $closureId . '.pdf'
-        );
+    // Verificar si se encontraron ventas
+    if ($salesDetails->isNotEmpty()) {
+        // Asignar los detalles de ventas a una propiedad pública
+        $this->salesDetails = $salesDetails;
+        $this->showModal = true; // Abrir el modal de detalles
+    } else {
+        session()->flash('error', 'No se encontraron ventas para este cierre.');
     }
+
+    // Obtener las compras por proveedor para la fecha actual del cierre
+    $purchaseDetails = PurchaseDetail::join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
+        ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+        ->join('products', 'purchase_details.product_id', '=', 'products.id')
+        ->select(
+            'suppliers.name as supplier_name',        // Nombre del proveedor
+            'products.name as product_name',          // Nombre del producto
+            'purchase_details.quantity as quantity',   // Cantidad del producto
+            'purchase_details.unit_price',             // Valor unitario de la compra
+            'purchase_details.sub_total',              // Subtotal de la compra
+            'purchases.purchase_date'                  // Fecha de la compra
+        )
+        ->whereDate('purchases.purchase_date', $closingDate) // Solo compras de la fecha actual
+        ->get();
+
+    // Verificar si se encontraron compras
+    if ($purchaseDetails->isNotEmpty()) {
+        // Asignar los detalles de compras a una propiedad pública
+        $this->purchaseDetails = $purchaseDetails;
+    } else {
+        session()->flash('error', 'No se encontraron compras para este cierre.');
+    }
+}
+
+
+
+
+
+
+public function generatePdf($closureId)
+{
+    // Obtener el cierre de caja específico
+    $closure = cash_closure::with('user')->find($closureId);
+    if (!$closure) {
+        session()->flash('error', 'Cierre no encontrado.');
+        return;
+    }
+
+    // Obtener la fecha de cierre
+    $closingDateTime = Carbon::parse($closure->closing_date_time);
+    $closingDate = $closingDateTime->toDateString(); // Solo fecha, sin hora
+
+     // Obtener los detalles de ventas relacionadas a este cierre basadas en la fecha
+     $salesDetails = SaleDetail::with(['product' => function($query) {
+        $query->withTrashed(); // Incluir productos eliminados
+    }])
+    ->whereHas('sale', function ($query) use ($closingDate) {
+        // Comparar solo la fecha, no la hora
+        $query->whereDate('created_at', $closingDate);
+    })
+    ->get();
+
+// Verificar si se encontraron ventas
+if ($salesDetails->isNotEmpty()) {
+    // Asignar los detalles de ventas a una propiedad pública
+    $this->salesDetails = $salesDetails;
+    // $this->showModal = true;
+} else {
+    session()->flash('error', 'No se encontraron ventas para este cierre.');
+}
+
+    // Obtener los detalles de compras
+    $purchaseDetails = PurchaseDetail::join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
+        ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+        ->join('products', 'purchase_details.product_id', '=', 'products.id')
+        ->select(
+            'suppliers.name as supplier_name',        // Nombre del proveedor
+            'products.name as product_name',          // Nombre del producto
+            'purchase_details.quantity as quantity',  // Cantidad del producto
+            'purchase_details.unit_price',            // Valor unitario de la compra
+            'purchase_details.sub_total',             // Subtotal de la compra
+            'purchases.purchase_date'                 // Fecha de la compra
+        )
+        ->whereDate('purchases.purchase_date', $closingDate) // Solo compras de la fecha actual
+        ->get();
+
+    // Verificar si se encontraron compras
+    if ($purchaseDetails->isNotEmpty()) {
+        $this->purchaseDetails = $purchaseDetails;
+    } else {
+        session()->flash('error', 'No se encontraron compras para este cierre.');
+    }
+
+    // Preparar los datos para la vista del PDF
+    $data = [
+        'closure' => $closure,
+        'salesDetails' => $salesDetails,
+        'purchaseDetails' => $purchaseDetails
+    ];
+
+    // Generar el PDF
+    $pdf = Pdf::loadView('livewire.cash-closure.closure-pdf', $data);
+
+    // Retornar el PDF generado para ser descargado
+    return response()->streamDownload(
+        fn() => print($pdf->output()),
+        'cierre_de_caja_' . $closureId . '.pdf'
+    );
+}
 
 
 
@@ -423,6 +423,7 @@ class CashClosure extends Component
         $this->search_1 = '';
         $this->search_2 = '';
         return redirect('/cierre/listado');
+
     }
     public function Destroy($id)
     {
