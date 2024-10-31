@@ -1,5 +1,5 @@
 <?php
-
+// ESTE MODELO COMPONEN LA TABLA DE  TIPOS DE COMERCIO  EN LA DB
 namespace App\Models;
 
 use App\Traits\ImageableTrait;

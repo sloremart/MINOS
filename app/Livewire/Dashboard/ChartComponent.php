@@ -1,5 +1,5 @@
 <?php
-
+// ---------------------->ESTE COMPONENTE HACE PARTE DE LAS FUNCIONES PARA EL DASHBOARD Y SU TRABAJO ES GRAFICAR LOS PRODUCTOS MAS VENDIDOS  POR MEDIO DE UNA GRAFICA TIPO CANVA Y ESTA LIGADO AL DASHBOARD<-------------------------------------////
 namespace App\Livewire\Dashboard;
 use App\Models\Inventory;
 use App\Models\SaleDetail;

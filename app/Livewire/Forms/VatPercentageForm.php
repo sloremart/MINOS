@@ -1,5 +1,5 @@
 <?php
-
+// ESTE COMPONENTE  NOS PERMITE REGISTRAR EL PORCENTAJE DEL IVA SEGUN LA REGION , PUEDE REGISTRAR, ELIMINAR, EDITAR
 namespace App\Livewire\Forms;
 
 use App\Models\VatPercentage;
@@ -31,7 +31,7 @@ class VatPercentageForm extends Form
         $this->validate();
         VatPercentage::create($this->all());
         session()->flash('message', 'Porcentaje de IVA creado correctamente.');
-        return redirect('/iva/listado');
+        // return redirect('/iva/listado');
     }
 
     public function edit()
@@ -41,7 +41,7 @@ class VatPercentageForm extends Form
         if ($model) {
             $model->update($this->all());
             session()->flash('message', 'Porcentaje de IVA actualizado correctamente.');
-            return redirect('/iva/listado');
+            // return redirect('/iva/listado');
         }
     }
 
@@ -49,10 +49,11 @@ class VatPercentageForm extends Form
     {
         $model = VatPercentage::find($id);
         if ($model) {
-            $model->delete();
+            // $model->delete();
+            $model->forceDelete();
             session()->flash('message', 'Porcentaje de IVA eliminado correctamente.');
         }
-        return redirect('/iva/listado');
+        // return redirect('/iva/listado');
     }
 
     public function resetForm()

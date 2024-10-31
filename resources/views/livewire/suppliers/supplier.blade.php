@@ -4,9 +4,9 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center  pt-5" style="font-size: 34px;">
         {{ __('Listado de proveedores') }}
     </h2>
-    <div class="text-right z-20 relative  mx-auto  sm:pl-10 sm:pr-10 md:pl-10 md:pr-10  lg:pl-20 lg:pr-20  ">
-        <button wire:click="openModal"
-            class="bg-blue-900 hover:bg-blue-400 text-white font-bold mt-10 py-2 px-4 rounded inline-flex items-center shadow-md">
+    <div class="text-right z-20 relative   sm:pl-10 sm:pr-10 md:pl-10 md:pr-10  lg:pl-20 lg:pr-20"  style="margin-left: 145px;
+    margin-right: 26px;">
+        <button wire:click="openModal" class="bg-blue-900 hover:bg-blue-400 text-white font-bold mt-10 py-2 px-4 rounded-full inline-flex items-center shadow-md">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Proveedor
         </button>

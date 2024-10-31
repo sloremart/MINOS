@@ -1,5 +1,5 @@
 <?php
-
+// ESTE MODELO COMPONEN LA TABLA DE  DETALLE DE COMPRA EN LA DB
 namespace App\Models;
 
 use App\Traits\ImageableTrait;

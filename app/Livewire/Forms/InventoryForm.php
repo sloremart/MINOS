@@ -1,5 +1,5 @@
 <?php
-
+// ----------->FUNCIONES PRINCIPALES DEL COMPONENTE DE CREAR EL PRODUCTO EN EL INVENTARIO PERMITE CREAR ,ELIMINAR,EDITAR Y CONSULTAR LOS PRODUCTO EN EL INVENTARIO  REGISTRADOS EN EL SISTEMA<------------------////
 namespace App\Livewire\Forms;
 
 use App\Models\Inventory;
@@ -55,7 +55,8 @@ class InventoryForm extends Form
     {
         $model = Inventory::find($id);
         if ($model) {
-            $model->delete();
+            $model->forceDelete();
+            // $model->delete();
             session()->flash('message', 'Inventario eliminado correctamente.');
         }
         return redirect('/inventarios/listado');

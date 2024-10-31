@@ -1,5 +1,5 @@
 <?php
-
+// COMPONENTE ENCARGADO DE RENDERIZAR Y TRAER LA INFORAMCION A LA VISTA DE GRUPOS
 namespace App\Livewire\Groups;
 
 use Livewire\Component;

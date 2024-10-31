@@ -34,7 +34,7 @@
                     'search_1_placeholder' => $search_1_placeholder,
                     'search_2_placeholder' => $search_2_placeholder,
                     'table_headers' => [
-                    'ID' => 'id',
+                    
                     'Nombre Proveedor' => 'supplier_name',
                     'Producto' => 'product_name',
                     'Cantidad' => 'quantity',

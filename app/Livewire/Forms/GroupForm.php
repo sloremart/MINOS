@@ -1,5 +1,5 @@
 <?php
-
+// ----------->FUNCIONES PRINCIPALES DEL COMPONENTE DE CREAR TIPOS DE GRUPOS PARA CLASIFICAR Y ORGANIZAR LOS PRODUCTOS  PERMITE CREAR ,ELIMINAR,EDITAR Y CONSULTAR LOS TIPOS DE GRUPOS DE INVENTARIO REGISTRADOS EN EL SISTEMA<------------------////
 namespace App\Livewire\Forms;
 
 use App\Models\Group;
@@ -35,7 +35,7 @@ class GroupForm extends Form
         $group->code = $group->id;
         $group->save();
         session()->flash('message', 'Grupo creado correctamente.');
-        return redirect('/grupos/listado');
+        // return redirect('/grupos/listado');
     }
 
     public function edit()
@@ -45,7 +45,7 @@ class GroupForm extends Form
         if ($model) {
             $model->update($this->all());
             session()->flash('message', 'Grupo actualizado correctamente.');
-            return redirect('/grupos/listado');
+            // return redirect('/grupos/listado');
         }
     }
 
@@ -56,7 +56,7 @@ class GroupForm extends Form
             $model->delete();
             session()->flash('message', 'Grupo eliminado correctamente.');
         }
-        return redirect('/grupos/listado');
+        // return redirect('/grupos/listado');
     }
 
     public function resetForm()

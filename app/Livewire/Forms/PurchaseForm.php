@@ -1,5 +1,5 @@
 <?php
-
+// ------------------->EL COMPONENTE DE COMPRAS ME DA FUNCION DE RENDERIZAR UNA VISTA CON EL DETALLE DE LA COMPRA  POR EL PROVEEDOR , Y A SU VEZ EL FORMULARIO DE CREAR LA COMPRA , DONDE SE LISTARA LOS PRODUCTOS DISPONIBLES PARA LA VENTA Y COMPRA  ESTE MODULO TIENE FUNCIONES DE CREAR, ELIMINAR , EDITAR LOS VALORES REIGSTRADOS DE LA COMPRA<----------------///
 namespace App\Livewire\Forms;
 
 use App\Models\Purchase;
@@ -73,6 +73,7 @@ class PurchaseForm extends Form
     {
         $model = Purchase::find($id);
         if ($model) {
+            // $model->forceDelete();
             $model->delete();
             session()->flash('message', 'Compra eliminada correctamente.');
         }

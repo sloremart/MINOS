@@ -1,5 +1,5 @@
 <?php
-
+// ----------->FUNCIONES PRINCIPALES DEL COMPONENTE DE CREAR TIPOS DE COMERCIOS PERMITE CREAR ,ELIMINAR,EDITAR Y CONSULTAR LOS TIPOS DE COMERCIOS REGISTRADOS EN EL SISTEMA<------------------////
 namespace App\Livewire\Forms;
 
 use App\Models\CommerceType;
@@ -45,7 +45,7 @@ class CommerceTypeForm extends Form
     {
         $model = CommerceType::find($id);
         if ($model) {
-            $model->delete();
+            $model->forceDelete();
             session()->flash('message', 'Tipo de comercio eliminado correctamente.');
         }
         return redirect('/tipos-de-comercio/listado');

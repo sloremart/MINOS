@@ -1,5 +1,5 @@
 <?php
-
+// ESTE MODELO COMPONEN LA TABLA DE  VENTA DETALLE EN LA DB
 namespace App\Models;
 
 use App\Traits\ImageableTrait;
@@ -24,6 +24,7 @@ class SaleDetail extends Model
 
         return $this->belongsTo(Product::class,'product_id');
     }
+  
     // Definir la relación con CashClosure
     
 }

@@ -5,8 +5,9 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center pt-4" style="font-size: 34px;">
             {{ __('Listado de productos') }}
         </h2>
-    <div class="text-right z-20 relative max-w-6xl mx-auto">
-        <button wire:click="openModal" class="bg-blue-900 mt-10 text-gray-200 hover:bg-blue-400 font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+    <div class="text-right z-20 relative max-w-6xl mx-auto" style="margin-left: 145px;
+    margin-right: 26px;">
+        <button wire:click="openModal" class="bg-blue-900 mt-10 text-gray-200 hover:bg-blue-400 font-bold py-2 px-4 rounded-full inline-flex items-center shadow-md">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Producto
         </button>
@@ -38,7 +39,7 @@
         "binding"=>"product"
         ],
         "button_color"=>"bg-blue-500",
-        "button_hover"=>"bg-blue-700",
+        "button_hover"=>"bg-blue-700",  
         "icon_color"=>"bg-blue-500",
         "icon"=>"fas fa-chart-line",
         "tooltip_title"=>"Precios",

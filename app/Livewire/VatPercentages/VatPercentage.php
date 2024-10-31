@@ -1,5 +1,5 @@
 <?php
-
+// COMPONENTE ENCARGADO  DE RENDERIZAR LA INFORMACION  DE LOS PORCENTAJES IVA SEGUN LA REGION APLICADA.
 namespace App\Livewire\VatPercentages;
 
 use Livewire\Component;

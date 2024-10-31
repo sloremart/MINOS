@@ -1,5 +1,5 @@
 <?php
-
+// ESTE MODELO COMPONE LA TABLA DE  PRODUCTOS  EN LA DB
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
+    use SoftDeletes;
     use SoftDeletes;
    //use PaginatorTrait;
  // use ImageableTrait;

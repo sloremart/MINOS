@@ -1,5 +1,5 @@
 <?php
-
+// ESTE MODELO COMPONE LA TABLA DE  VENTA  EN LA DB
 namespace App\Models;
 
 use App\Traits\ImageableTrait;
@@ -14,8 +14,8 @@ class Sale extends Model
     use ImageableTrait;
     protected $fillable = ['customer_id','user_id',  'sale_date', 'total_amount', 'details','payment_method'];
 
-    public const PAYMENT_METHOD_CASH = "cash";
-    public const PAYMENT_METHOD_TRANSFER = "transfer";
+    public const PAYMENT_METHOD_CASH = "efectivo";
+    public const PAYMENT_METHOD_TRANSFER = "transferencia";
 
     public function customer()
     {

@@ -5,8 +5,9 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center pt-4" style="font-size: 34px;">
             {{ __('Listado de tipos de comercio') }}
         </h2>
-    <div class="text-right  z-20 relative max-w-6xl mx-auto">
-        <button wire:click="openModal" class="bg-blue-900 text-gray-200 mt-10 hover:bg-blue-400  font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+    <div class="text-right  z-20 relative max-w-6xl mx-auto" style="margin-left: 145px;
+    margin-right: 26px;">
+        <button wire:click="openModal" class="bg-blue-900 text-gray-200 mt-10 hover:bg-blue-400  font-bold py-2 px-4 rounded-full inline-flex items-center shadow-md">
             <i class="fa-solid fa-circle-plus mr-2"></i>
             Crear Tipo de Comercio
         </button>
@@ -53,7 +54,7 @@
                 <!-- Cuerpo del Modal con Fondo -->
                 @include("partials.v1.form.primary_form",[
                     "form_toast"=>false,
-                    "form_grid_col"=>3,
+                    "form_grid_col"=>1,
                     "session_message"=>"message",
                     "form_submit_action"=>"submitForm",
                     "show_form_submit_action"=>false,

@@ -1,5 +1,5 @@
 <?php
-
+// COMPONENTE ENCARGADO DE RENDERIZAR LA INFORMACION  DE LOS PROVEEDORES REGISTRADOS
 namespace App\Livewire\Suppliers;
 
 use App\Livewire\Forms\SupplierForm;

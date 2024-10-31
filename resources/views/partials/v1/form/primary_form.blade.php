@@ -19,6 +19,7 @@
                                   "icon_class"=>$form_input["icon_class"]??null,
                                   "placeholder"=>$form_input["placeholder"],
                                   "col_with"=>$form_input["col_with"],
+                                
                                   "required"=>$form_input["required"],
                                   "input_rows"=>$form_input["input_rows"]??0,
                                   "number_min"=>$form_input["number_min"]??"",

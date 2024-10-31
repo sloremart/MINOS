@@ -5,8 +5,9 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center pt-4" style="font-size: 34px;">
         {{ __('Listado de compras') }}
     </h2>
-    <div class="text-right  z-10 relative max-w-6xl mx-auto">
-        <button wire:click="openModal" class="bg-blue-900 mt-10 text-gray-200 hover:bg-blue-400  font-bold py-2 px-4 rounded inline-flex items-center shadow-md">
+    <div class="text-right  z-10 relative max-w-6xl mx-auto" style="margin-left: 145px;
+    margin-right: 26px;">
+        <button  class="bg-blue-900 mt-10 text-gray-200 hover:bg-blue-400  font-bold py-2 px-4 rounded-full inline-flex items-center shadow-md">
             <a href="{{ route('purchase.create') }}">
                 <i class="fa-solid fa-circle-plus mr-2"></i>
                 Crear Compra
@@ -23,11 +24,10 @@
         "search_1_placeholder"=>$search_1_placeholder,
         "table_headers"=>["ID"=>"id",
         "Proveedor"=>"supplier_id",
-        "Usuario"=>"user_id",
+        
         "Fecha de Compra"=>"purchase_date",
         "Monto Total"=>"total_amount",
         "Metodo de pago"=>"payment_method",
-        "Detalles"=>"details",
         "Fecha de Creación"=>"created_at",
 
 

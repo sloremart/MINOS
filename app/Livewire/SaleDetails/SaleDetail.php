@@ -1,5 +1,5 @@
 <?php
-
+// COMPONENTE QUE SE ENCARGAR DE RENDERIZAR LA VISTA DE LOS DETALLES DE LAS VETAS
 namespace App\Livewire\SaleDetails;
 
 use App\Models\Group;

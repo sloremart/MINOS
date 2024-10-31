@@ -1,5 +1,5 @@
 <?php
-
+// ESTE COMPONENTE SIRVE PARA CREAR EL REGISTRO DEL PROVEEDOR , TIENE METODOS PARA CREAR, ELIMINAR ,EDITAR
 namespace App\Livewire\Forms;
 
 use App\Models\Supplier;
@@ -82,10 +82,11 @@ class SupplierForm extends Form
     {
         $model = Supplier::find($id);
         if ($model) {
+            // $model->forceDelete();
             $model->delete();
             session()->flash('message', 'Proveedor eliminado correctamente.');
         }
-        return redirect('/proveedores/listado');
+        // return redirect('/proveedores/listado');
     }
 
     public function resetForm()

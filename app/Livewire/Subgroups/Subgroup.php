@@ -1,5 +1,5 @@
 <?php
-
+// ESTE COMPONENTE SE ENCARGA DE RENDERIZAR TODA LA INFORMACION DE LOS REGISTRO DE CADA SUBGRUPO 
 namespace App\Livewire\Subgroups;
 
 use App\Models\Group;

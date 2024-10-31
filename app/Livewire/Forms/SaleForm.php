@@ -1,5 +1,5 @@
 <?php
-
+// --------------->EL COMPONENTE  DE LA VENTA ESTA LIGADO CON EL MODULO DE VENTA  DETALLE GRACIAS A ESTE COMPONENTE NOS PERMITE GESTIONAR LA VENTA A LOS CLIENTES Y TAMBUEN CONTRIBUYE CON  REPORTES DE LAS VENTAS DEL DIA A DIA , ESTE COMPONENTE ESTA UNIFICADO CON EL COMPONENTE  PRINCIPAL DE VENTA (SaleDetailFrom) CUYAS FUNCIONE ESTAN COMPARTIDAS CON  ESTE COMPONENTRE<----------------------///
 namespace App\Livewire\Forms;
 
 use App\Models\Sale;
@@ -64,6 +64,7 @@ class SaleForm extends Form
         $model = Sale::find($id);
         if ($model) {
             $model->delete();
+            // $model->forceDelete();
             session()->flash('message', 'Venta eliminada correctamente.');
         }
         return redirect('/ventas/listado');
