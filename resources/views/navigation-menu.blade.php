@@ -1,4 +1,7 @@
 <nav x-data="{ open: false }" class=" py-10">
+
+     <!-- NAVEGACION PRINCIPAL DEL SOFTWARE APLICADO EN TODAS LAS VISTAS -->
+
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 pt-2 sm:px-6 bg-white lg:px-8 bg-gray-0 rounded-full shadow-lg"
         style=" position: relative; z-index: 1; ">

@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!-- ESTA VISTA ES LA ENCARGADA DE RENDERIZAR TODO EL CONTENIDO DEL SOFTWARE -->
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>

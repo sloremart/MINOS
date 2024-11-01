@@ -1,4 +1,5 @@
 <div>
+    <!-- PAGINADOR PARA LAS TABLAS EXISTENTES EN EL SOFTWARE -->
     @if ($paginator->hasPages())
         <ul class="flex items-center justify-center space-x-2 mt-4">
             @if ($paginator->onFirstPage())

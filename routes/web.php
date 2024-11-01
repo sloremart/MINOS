@@ -1,5 +1,5 @@
 <?php
-
+// En este apartado se encuentran detalladas todas las rutas de navegación del software. Desde la interfaz principal, los usuarios pueden acceder de manera intuitiva a todas las funciones y características disponibles. Cada ruta está diseñada para maximizar la eficiencia y minimizar el tiempo de búsqueda de las herramientas necesarias. Con una estructura clara y un diseño amigable, las rutas de navegación permiten a los usuarios moverse con facilidad a través de las distintas secciones del software, garantizando una experiencia fluida y sin contratiempos.
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tablas;
 use App\Livewire\Forms\ProductForm;

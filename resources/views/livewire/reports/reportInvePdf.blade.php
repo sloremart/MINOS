@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+     <!-- VISTA PRINCIPAL DE REPORTES DE INVENTARIOS PDF-->
 
 <head>
     <meta charset="UTF-8">

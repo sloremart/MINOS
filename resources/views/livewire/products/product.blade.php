@@ -1,5 +1,6 @@
 <!-- resources/views/livewire/products/product.blade.php -->
 <div>
+<!-- VISTA PRINCIPAL DE PRODUCTOS-->
 
     
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center pt-4" style="font-size: 34px;">

@@ -1,4 +1,6 @@
 <!-- resources/views/livewire/subgroups/subgroup.blade.php -->
+      <!-- VISTA PRINCIPAL DE SUBGRUPOS INVENTARIOS-->
+
 <div>
 
    

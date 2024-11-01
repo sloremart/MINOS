@@ -1,4 +1,5 @@
 <!-- resources/views/livewire/purchases/create-purchase.blade.php -->
+<!-- VISTA PRINCIPAL DE CREAR  COMPRAS -->
 
 <div class="pb-4 flex justify-center"> <!-- Contenedor principal con márgenes y flex para centrar -->
 

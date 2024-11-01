@@ -1,5 +1,6 @@
 <!-- resources/views/livewire/units/unit.blade.php -->
 <div>
+     <!-- VISTA PRINCIPAL DE UNIDADES DE MEDIDA PARA LOS PRODUCTOS -->
 
     
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center" style="font-size: 34px">

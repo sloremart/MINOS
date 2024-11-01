@@ -1,5 +1,6 @@
 <!-- resources/views/livewire/suppliers/supplier.blade.php -->
 <div>
+     <!-- VISTA PRINCIPAL DE PROVEEDORES -->
 
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center  pt-5" style="font-size: 34px;">
         {{ __('Listado de proveedores') }}

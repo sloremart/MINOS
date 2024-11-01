@@ -1,5 +1,6 @@
 <!-- resources/views/livewire/files/file.blade.php -->
 <div>
+<!-- VISTA PRINCIPAL DE ARCHIVOS -->
 
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center pt-4" style="font-size: 34px;">
             {{ __('Listado de archivos') }}

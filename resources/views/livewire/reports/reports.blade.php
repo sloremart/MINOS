@@ -1,5 +1,6 @@
 <div>
-    <!-- resources/views/livewire/suppliers/supplier.blade.php -->
+<!-- VISTA PRINCIPAL DE REPORTES DE VENTAS -->
+
     <div>
 
        

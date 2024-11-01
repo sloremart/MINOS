@@ -1,4 +1,7 @@
 <div>
+
+<!-- VISTA PRINCIPAL DE REPORTES DE VENTAS POR CLIENTES -->
+
     <div>
         <!-- resources/views/livewire/suppliers/supplier.blade.php -->
         <div>

@@ -1,4 +1,7 @@
 <div>
+
+
+<!-- VISTA PRINCIPAL DE CIERRE DE CAJA  -->
     <div class="pb-4    max-w-screen-7xl ">
         <div class="max-w-screen-7xl justify-center  place-content-center p-4" style="margin: -2% 2% 0% 2%;">
             <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 relative z-40">

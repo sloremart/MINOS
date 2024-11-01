@@ -1,5 +1,6 @@
 <div>
 
+<!-- VISTA PRINCIPAL DE REPORTES DE COMPRAS POR PROVEEDOR -->
 
     <!-- resources/views/livewire/suppliers/supplier.blade.php -->
     <div>

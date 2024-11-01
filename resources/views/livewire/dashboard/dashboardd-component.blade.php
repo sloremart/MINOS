@@ -1,4 +1,6 @@
 <div>
+    <!-- VISTA PRINCIPAL DEL DASHBOARD TRAE TODOS LOS GRAFICOS   -->
+
     <!-- Contenedor principal con espaciado y bordes redondeados -->
     <div class="pb-4 rounded-3xl">
         <!-- Contenedor central con máximo ancho y espaciado -->

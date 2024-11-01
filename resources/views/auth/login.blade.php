@@ -60,9 +60,11 @@
                 </form>
 
                 <div class="text-center mt-6">
-                <x-button href="{{ route('register') }}" class="w-full inline-block flex justify-center bg-blue-350 text-withe-800 py-2 px-4 rounded-lg text-center text-base">
-                        {{ __('REGISTRARSE') }}
-                        </x-button>
+                    <a href="{{ route('register')}}" class="inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 w-full inline-block flex justify-center bg-blue-350 text-withe-800  py-2 px-4 rounded-lg text-center text-base"> 
+                        {{ __('REGISTRARSE') }}</a>
+                <!-- <x-button href="{{ route('register')}}" class="w-full inline-block flex justify-center bg-blue-350 text-withe-800 py-2 px-4 rounded-lg text-center text-base">
+                       
+                        </x-button> -->
                 </div>
             </div>
 
