@@ -1,4 +1,6 @@
 <!-- resources/views/livewire/sales/sale.blade.php -->
+      <!-- VISTA PRINCIPAL DE VENTAS-->
+
 <div>
 
    

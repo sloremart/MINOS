@@ -1,4 +1,5 @@
 <div>
+<!-- RENDERIZAR LA VISTA DE LOS PRODUCTOS CON BAJO STOCK -->
 
 
     <div class="rounded-full">

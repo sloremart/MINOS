@@ -1,5 +1,6 @@
 <!-- resources/views/livewire/sale-details/sale-detail.blade.php -->
 <div>
+     <!-- VISTA PRINCIPAL DEL DETALLE DE LA VENTA-->
 
 
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center" style="font-size: 34px;">

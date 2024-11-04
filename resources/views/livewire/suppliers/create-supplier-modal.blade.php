@@ -1,4 +1,7 @@
 <div>
+
+     <!-- VISTA PRINCIPAL DE CREAR PROVEEDOR -->
+
     <button wire:click="$set('showModal', true)" class="bg-green-500 hover:bg-green-400 focus:bg-green-400 active:bg-green-600 text-white px-4 py-2 rounded">
         {{ __('Crear nuevo') }}
     </button>

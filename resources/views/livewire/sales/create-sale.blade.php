@@ -1,4 +1,5 @@
 <!-- resources/views/livewire/sales/create-sale.blade.php -->
+     <!-- VISTA PRINCIPAL DE CREAR VENTA-->
 
 <div class="pb-4 flex justify-center ">
     <div class="max-w-screen-2xl  p-2 bg-white  relative z-10 shadow-md rounded-xl grid grid-cols-1  md:grid-cols-1  lg:grid-cols-2  sm:grid-cols-2 gap-4 " style="margin: 0% 2% 0% 2%;">

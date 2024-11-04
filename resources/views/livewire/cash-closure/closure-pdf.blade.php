@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- VISTA PRINCIPAL DE CIERRE DE CAJA  EXPORTAR PDF -->
 
 <head>
     <meta charset="UTF-8">

@@ -1,6 +1,6 @@
 <!-- resources/views/livewire/entities/entity.blade.php -->
 <div>
-
+<!-- VISTA PRINCIPAL DE ENTIDADES -->
 
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center pt-4" style="font-size: 34px;">
         {{ __('Listado de entidades') }}

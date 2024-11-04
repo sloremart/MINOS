@@ -1,5 +1,6 @@
 <!-- resources/views/livewire/vat-percentages/vat-percentage.blade.php -->
 <div>
+     <!-- VISTA PRINCIPAL DE PORCENTAJES DE IVA SEGUN  APLICADO POR REGION -->
 
 
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center" style="font-size: 34px">

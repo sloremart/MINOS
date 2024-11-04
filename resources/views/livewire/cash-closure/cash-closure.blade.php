@@ -1,4 +1,7 @@
 <div>
+
+
+<!-- VISTA PRINCIPAL DE CIERRE DE CAJA  -->
     <div class="pb-4    max-w-screen-7xl ">
         <div class="max-w-screen-7xl justify-center  place-content-center p-4" style="margin: -2% 2% 0% 2%;">
             <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 relative z-40">
@@ -30,19 +33,16 @@
 
                                 <input list="userList" wire:model="user_name"
                                     class="mt-1 block w-full pl-10 border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    class="mt-1 block w-full pl-10 border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="userNameHelp" placeholder=" Nombre responsable" />
 
                                 <!-- Lista de opciones -->
                                 <datalist id="userList">
                                     @foreach ($users as $user)
                                     <option value="{{ $user->name }}">{{ $user->name }}</option>
-                                    <option value="{{ $user->name }}">{{ $user->name }}</option>
                                     @endforeach
                                 </datalist>
                                 <!-- Mensajes de error y ayuda -->
                                 @error('user_name')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="userNameHelp" class="text-gray-500">Seleccione su nombre de la lista.</small> --}}
@@ -59,12 +59,8 @@
                                 <input wire:model="start_balance" id="start_balance" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="startBalanceHelp" placeholder="Saldo inicial" oninput="calculateFinalBalance()"
-                                <input wire:model="start_balance" id="start_balance" type="number" step="0.01"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="startBalanceHelp" placeholder="Saldo inicial" oninput="calculateFinalBalance()"
                                     {{-- Si isDisabled es true, el campo estará deshabilitado --}} @if ($isDisabled) disabled @endif />
                                 @error('start_balance')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -77,16 +73,11 @@
                                 </span>
                                 <select wire:model="payment_method" id="payment_method"
                                     class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                <select wire:model="payment_method" id="payment_method"
-                                    class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     wire:change="updateTotalSales" aria-describedby="paymentMethodHelp">
-                                    <option value="" class="text-gray-500 hidden"> Efectivo & electrónicos</option>
-                                    <option value="all">Efectivo & Tansferencia</option> <!-- Nueva opción "Todos" -->
                                     <option value="" class="text-gray-500 hidden"> Efectivo & electrónicos</option>
                                     <option value="all">Efectivo & Tansferencia</option> <!-- Nueva opción "Todos" -->
                                 </select>
                                 @error('payment_method')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                                 {{-- <small id="paymentMethodHelp" class="text-gray-500">Seleccione el método de pago
@@ -102,12 +93,8 @@
 
                                 <input wire:model="total_sales_cash" type="number" step="0.01" id="total_sales_cash"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-
-                                <input wire:model="total_sales_cash" type="number" step="0.01" id="total_sales_cash"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     readonly aria-describedby="totalSalesCashHelp" disabled
                                     placeholder="Total de ventas en
-                                    efectivo." oninput="calculateFinalBalance()" />
                                     efectivo." oninput="calculateFinalBalance()" />
 
                                 {{-- <small id="totalSalesCashHelp" class="text-gray-500">Total de ventas en
@@ -119,18 +106,13 @@
                             <!-- Total Ventas Transferencia -->
                             <div class="relative">
                                 <label for="text" class="text-gray-700 text-xs">Total de pagos electrónicos </label>
-                                <label for="text" class="text-gray-700 text-xs">Total de pagos electrónicos </label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-duotone fa-solid fa-credit-card"></i>
                                 </span>
 
                                 <input wire:model="total_sales_transfer" type="number" step="0.01" id="total_sales_transfer"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-
-                                <input wire:model="total_sales_transfer" type="number" step="0.01" id="total_sales_transfer"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     readonly aria-describedby="totalSalesTransferHelp" disabled
-                                    placeholder="Total de electrónicos " />
                                     placeholder="Total de electrónicos " />
 
                                 {{-- <small id="totalSalesTransferHelp" class="text-gray-500">Total de ventas por
@@ -147,22 +129,15 @@
                                 <input wire:model="total_expenses" type="number" step="0.01" id="total_expenses"
                                     class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="totalExpensesHelp" disabled placeholder="total de egresos." oninput="calculateFinalBalance()" />
-                                <input wire:model="total_expenses" type="number" step="0.01" id="total_expenses"
-                                    class="mt-1 block w-full border-gray-300  pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="totalExpensesHelp" disabled placeholder="total de egresos." oninput="calculateFinalBalance()" />
 
                                 {{-- <small id="totalExpensesHelp" class="text-gray-500">total de egresos.</small> --}}
                             </div>
                             <!-- Saldo Final Efectivo -->
                             <div class="relative">
                                 <label for="text" class="text-gray-700 text-xs">Saldo final en caja</label>
-                                <label for="text" class="text-gray-700 text-xs">Saldo final en caja</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
-                                <input wire:model="final_balance_cash" type="number" step="0.01" id="final_balance_cash"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    aria-describedby="finalBalanceCashHelp" readonly placeholder="Saldo final en efectivo." oninput="calculateFinalBalance()" disabled />
                                 <input wire:model="final_balance_cash" type="number" step="0.01" id="final_balance_cash"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="finalBalanceCashHelp" readonly placeholder="Saldo final en efectivo." oninput="calculateFinalBalance()" disabled />
@@ -170,31 +145,21 @@
 
 
                             <!-- saldo proximo turno -->
-
-                            <!-- saldo proximo turno -->
                             <div class="relative">
-                                <label for="next_start_balance" class="text-gray-700 text-xs">Saldo para el próximo turno</label>
                                 <label for="next_start_balance" class="text-gray-700 text-xs">Saldo para el próximo turno</label>
                                 <span class="absolute py-4 left-0 flex items-center pl-3">
                                     <i class="fa-sharp fa-solid fa-money-bill"></i>
                                 </span>
                                 <input wire:model="next_start_balance" type="number" step="0.01"
                                     class="mt-1 block w-full border-gray-300 rounded-full pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    class="mt-1 block w-full border-gray-300 rounded-full pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp"
-                                    placeholder="Saldo para el próximo turno."
-                                   />
-                                   {{-- @if (!$hasPreviousRecord) disabled @endif --}}
                                     placeholder="Saldo para el próximo turno."
                                    />
                                    {{-- @if (!$hasPreviousRecord) disabled @endif --}}
                                 @error('next_start_balance')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
 
 
                             <div class="relative">
@@ -204,8 +169,6 @@
                                 </span>
                                 {{-- <label class="block text-sm font-medium text-gray-700">Saldo Inicial Próximo
                                     Turno</label> --}}
-                                <input wire:model="total_sales" type="number" step="0.01" id="total_sales"
-                                    class="mt-1 block w-full border-gray-300 rounded-full pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 <input wire:model="total_sales" type="number" step="0.01" id="total_sales"
                                     class="mt-1 block w-full border-gray-300 rounded-full pl-10 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp" disabled placeholder="Total venta" />
@@ -221,8 +184,6 @@
                                     Turno</label> --}}
                                 <input wire:model="final_balance" type="number" step="0.01" id="final_balance"
                                     class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                <input wire:model="final_balance" type="number" step="0.01" id="final_balance"
-                                    class="mt-1 block w-full border-gray-300 pl-10 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     aria-describedby="nextStartBalanceHelp" disabled placeholder="Total balance" />
 
                                 {{-- <small id="nextStartBalanceHelp" class="text-gray-500">Total balance</small> --}}
@@ -233,11 +194,9 @@
                         <div class="flex justify-end mt-6 gap-2">
                             <button wire:click="resetFields"
                                 class="px-4 py-2 bg-gray-600 text-white rounded-full hover:bg-gray-700">
-                                class="px-4 py-2 bg-gray-600 text-white rounded-full hover:bg-gray-700">
                                 Cancelar
                             </button>
                             <button wire:click="store"
-                                class="px-4 py-2 bg-blue-900 text-white rounded-full hover:bg-blue-900">
                                 class="px-4 py-2 bg-blue-900 text-white rounded-full hover:bg-blue-900">
                                 Registrar Cierre de Caja
                             </button>
@@ -256,13 +215,7 @@
                                 <input type="text" placeholder="buscar responsable ..."
                                     class="p-2 border border-gray-300 rounded-full" wire:model.live="search">
                                 {{-- <input type="date" class="p-2 border border-gray-300 rounded-full"
-                            <div class="absoloute z-10 flex space-x-4 mb-4 ml-8">
-                                <input type="text" placeholder="buscar responsable ..."
-                                    class="p-2 border border-gray-300 rounded-full" wire:model.live="search">
-                                {{-- <input type="date" class="p-2 border border-gray-300 rounded-full"
                                     wire:model.live="search_1">
-                                <input type="date" class="p-2 border border-gray-300 rounded-full"
-                                    wire:model.live="search_2"> --}}
                                 <input type="date" class="p-2 border border-gray-300 rounded-full"
                                     wire:model.live="search_2"> --}}
                             </div>
@@ -270,12 +223,12 @@
 
                         <div
                             class="w-full  text-left rtl:text-right bg-gray-100 text-gray-600 dark:text-gray-400 rounded-3xl overflow-hidden shadow-lg overflow-x-auto" >
-
+                           
                             <!-- Añadido overflow-x-auto aquí -->
                             <table
                                 class="min-w-full  text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden whitespace-nowrap" style="font-size: 11px;">
                                 <!-- Añadido whitespace-nowrap aquí -->
-                                <thead class=" text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400"
+                                <thead class=" text-gray-200 h-10 uppercase dark:bg-gray-700 dark:text-gray-400" 
                                     style="background:#652581;font-size: 11px;">
                                     <tr>
                                         <th class="py-3 px-4 text-left  font-semibold" >Cerrado por</th>
@@ -286,14 +239,6 @@
                                         <th class="py-3 px-4 text-left  font-semibold" >Saldo Final</th>
                                         <th class="py-3 px-4 text-left  font-semibold" >Saldo Siguiente</th>
                                         <th class="py-3 px-4 text-left  font-semibold" >Acciones</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Cerrado por</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Fecha y Hora</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Saldo Inicial</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Ingresos</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Egresos</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Saldo Final</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Saldo Siguiente</th>
-                                        <th class="py-3 px-4 text-left text-sm font-semibold">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -306,28 +251,7 @@
                                         <td class="py-2 px-4">${{ number_format($row->total_expenses, 0, ',', '.') }}</td>
                                         <td class="py-2 px-4">${{ number_format($row->final_balance, 0, ',', '.') }}</td>
                                         <td class="py-2 px-4">${{ number_format($row->next_start_balance, 0, ',', '.') }}</td>
-
-                                        <td class="py-2 px-4">
-                                            <button wire:click="generatePdf({{ $row->id }})"
-                                                class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-3 rounded-full"><i
-                                                    class="fa-regular fa-file-pdf"></i></button>
-                                            <button wire:click="Destroy({{ $row->id }})"
-                                                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-full"><i
-                                                    class="text-bg-red-500 fas fa-trash"></i></button>
-                                            <button wire:click="showDetails({{ $row->id }})"
-                                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-full"><i
-                                                    class="text-bg-blue-500 fas fa-sitemap"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-b hover:bg-gray-100">
-                                        <td class="py-2 px-4">{{ $row->user->name }}</td>
-                                        <td class="py-2 px-4">{{ $row->created_at }}</td>
-                                        <td class="py-2 px-4">${{ number_format($row->start_balance, 0, ',', '.') }}</td>
-                                        <td class="py-2 px-4">${{ number_format($row->total_sales, 0, ',', '.') }}</td>
-                                        <td class="py-2 px-4">${{ number_format($row->total_expenses, 0, ',', '.') }}</td>
-                                        <td class="py-2 px-4">${{ number_format($row->final_balance, 0, ',', '.') }}</td>
-                                        <td class="py-2 px-4">${{ number_format($row->next_start_balance, 0, ',', '.') }}</td>
-
+                                        
                                         <td class="py-2 px-4">
                                             <button wire:click="generatePdf({{ $row->id }})"
                                                 class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-3 rounded-full"><i
@@ -347,11 +271,7 @@
                         <div class=" grid  pt-4 justify-center">
                             {{ $data->links('partials.v1.table.pagination-links') }}
                         </div>
-
-                        <div class=" grid  pt-4 justify-center">
-                            {{ $data->links('partials.v1.table.pagination-links') }}
-                        </div>
-
+                       
                     </div>
 
                 </div>
@@ -378,7 +298,6 @@
                     class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 bg-blue-900 bg-opacity-75">
                     <h3 class="text-xl font-semibold text-gray-100 dark:text-white">
                         Detalles de Ventas & Compras
-                        Detalles de Ventas & Compras
                     </h3>
                     <button type="button"
                         class="text-gray-100 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -392,7 +311,6 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-4 md:p-5 space-y-4 bg-white bg-opacity-75" style="max-height: 500px; overflow-y: auto;">
                 <div class="p-4 md:p-5 space-y-4 bg-white bg-opacity-75" style="max-height: 500px; overflow-y: auto;">
                     <div class="bg-white max-w-full shadow-lg rounded-xl">
                         <div
@@ -414,32 +332,23 @@
                                     <tr>
                                         <td class="border border-gray-300 p-2 text-left">Saldo Inicial :</td>
                                         <td class="border border-gray-300 p-2">${{ number_format($start_balance, 0, ',', '.') }}</td>
-                                        <td class="border border-gray-300 p-2">${{ number_format($start_balance, 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="border border-gray-300 p-2 text-left">Saldo Proximo turno :</td>
                                         <td class="border border-gray-300 p-2">${{ number_format($next_start_balance, 0, ',', '.') }}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="border border-gray-300 p-2 text-left">Saldo Proximo turno :</td>
-                                        <td class="border border-gray-300 p-2">${{ number_format($next_start_balance, 0, ',', '.') }}</td>
-                                    </tr>
+                                    </tr>      
 
                                     <tr>
                                         <td class="border border-gray-300 p-2 text-left">Ingresos :</td>
-                                        <td class="border border-gray-300 p-2">${{ number_format($total_sales, 0, ',', '.') }}</td>
                                         <td class="border border-gray-300 p-2">${{ number_format($total_sales, 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="border border-gray-300 p-2 text-left">Egresos Total:</td>
                                         <td class="border border-gray-300 p-2">${{ number_format($total_expenses, 0, ',', '.') }}</td>
-                                        <td class="border border-gray-300 p-2">${{ number_format($total_expenses, 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="border border-gray-300 p-2 text-left rounded-bl-lg">Total Balance :
                                         </td>
-                                        <td class="border border-gray-300 p-2 rounded-br-lg">${{ number_format($final_balance, 0, ',', '.') }}
                                         <td class="border border-gray-300 p-2 rounded-br-lg">${{ number_format($final_balance, 0, ',', '.') }}
                                         </td>
                                     </tr>
@@ -448,9 +357,6 @@
 
                         </div>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Detalles de Ventas
-                    </h3>
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                         Detalles de Ventas
                     </h3>
@@ -471,44 +377,7 @@
                                         <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
                                         </td>
                                         <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
-
-                                        <td class="px-4 py-2 border-b text-center">  ${{ number_format($detail->unit_price, 0, ',', '.') }}</td>
-                                        <td class="px-4 py-2 border-b text-end">${{ number_format($detail->sub_total, 0, ',', '.') }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Detalles de Compras
-                    </h3>
-                    <div class="bg-white max-w-full shadow-lg rounded-lg overflow-hidden" style="min-height: 12vh;">
-                        <div style="max-height: 300px; overflow-y: auto;">
-                            <table class="table-auto w-full border-collapse bg-white  rounded-3xl">
-                                <thead class="bg-purple-900 text-gray-200 uppercase text-sm leading-normal">
-                                    <tr>
-                                        <th class="px-4 py-2 border-b">Proveedor</th>
-                                        <th class="px-4 py-2 border-b">Producto</th>
-                                        <th class="px-4 py-2 border-b">cantidad</th>
-                                        <th class="px-4 py-2 border-b">Precio Unitario</th>
-                                        <th class="px-4 py-2 border-b">Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($purchaseDetails as $detail)
-                                    <tr>
-                                        <td class="px-4 py-2 border-b text-start">{{ $detail->supplier_name }}</td>
-                                        <td class="px-4 py-2 border-b text-start">{{ $detail->product_name }}</td>
-                                        <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
-                                        <td class="px-4 py-2 border-b text-center">  ${{ number_format($detail->unit_price, 0, ',', '.') }}</td>
-                                        <td class="px-4 py-2 border-b text-end">${{ number_format($detail->sub_total, 0, ',', '.') }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-2 border-b text-start">{{ $detail->product->name }}
-                                        </td>
-                                        <td class="px-4 py-2 border-b text-center">{{ $detail->quantity }}</td>
-
+                                      
                                         <td class="px-4 py-2 border-b text-center">  ${{ number_format($detail->unit_price, 0, ',', '.') }}</td>
                                         <td class="px-4 py-2 border-b text-end">${{ number_format($detail->sub_total, 0, ',', '.') }}</td>
                                     </tr>
@@ -558,7 +427,6 @@
                     <button wire:click="closeModal" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cerrar</button>
 
-
                 </div>
             </div>
         </div>
@@ -566,7 +434,6 @@
 
 
     @if ($showModal)
-    <div class="modal-backdrop fade show"></div>
     <div class="modal-backdrop fade show"></div>
     @endif
     <script>
@@ -600,30 +467,7 @@
             // Actualiza el campo de saldo final
             document.getElementById('final_balance_cash').value = finalBalanceCash.toFixed(2);
         }
-
-
-
-        function calculateFinalBalance() {
-            // Obtiene los valores de los campos de entrada
-            const startBalance = parseFloat(document.getElementById('start_balance').value);
-            const totalSalesCash = parseFloat(document.getElementById('total_sales_cash').value) || 0;
-            const totalExpenses = parseFloat(document.getElementById('total_expenses').value) || 0;
-
-            // Verifica si el saldo inicial es un número
-            if (isNaN(startBalance)) {
-                // Si el saldo inicial está vacío, deja el saldo final vacío
-                document.getElementById('final_balance_cash').value = ""; // Deja vacío
-                return; // Salir de la función
-            }
-
-            // Calcula el saldo final en efectivo
-            const finalBalanceCash = startBalance + totalSalesCash - totalExpenses;
-
-            // Actualiza el campo de saldo final
-            document.getElementById('final_balance_cash').value = finalBalanceCash.toFixed(2);
-        }
     </script>
-
 
 
 
