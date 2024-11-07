@@ -46,6 +46,8 @@ Route::middleware([
     Route::prefix("compras")->group(function () {
         Route::get('listado', \App\Livewire\Purchases\Purchase::class)
             ->name("purchase.list");
+        Route::get('crear', \App\Livewire\Purchases\CreatePurchase::class)
+            ->name("purchase.create");
     });
 
 // Rutas para Customer
@@ -73,10 +75,8 @@ Route::middleware([
     });
 
     // Rutas para crear Compra
-    Route::prefix("compras")->group(function () {
-        Route::get('crear', \App\Livewire\Purchases\CreatePurchase::class)
-            ->name("purchase.create");
-    });
+
+
 // Rutas para File
     Route::prefix("archivos")->group(function () {
         Route::get('listado', \App\Livewire\Files\File::class)
@@ -193,12 +193,12 @@ Route::prefix('reportes/venta')->group(function () {
         ]);
 
         $component = app()->make(\App\Livewire\Reports\Reports::class);
-        
+
         // Capturar los parámetros de la URL
         $component->search = $request->input('search');
         $component->search_1 = $request->input('search_1');
         $component->search_2 = $request->input('search_2');
-        
+
         // Generar el PDF
         return $component->pdf();
     })->name('reportpdf.list');
@@ -218,7 +218,7 @@ Route::prefix('reportes/venta')->group(function () {
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
                 'search_2' => $request->input('search_2'),
-            ]); 
+            ]);
 
             $component = app()->make(\App\Livewire\Reports\ReportCustomer::class);
 
@@ -226,7 +226,7 @@ Route::prefix('reportes/venta')->group(function () {
             $component->search = $request->input('search');
             $component->search_1 = $request->input('search_1');
             $component->search_2 = $request->input('search_2');
-        
+
 
             // Generar el PDF
             return $component->pdf();
