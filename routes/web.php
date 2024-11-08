@@ -289,11 +289,11 @@ Route::prefix("unidades")->group(function () {
             ->name("group.list");
     });
 
-// Rutas para Subgroup
-//    Route::prefix("subgrupos")->group(function () {
-//        Route::get('listado-todos', \App\Livewire\Subgroups\SubgroupAll::class)
-//            ->name("subgroup_all.list");
-//    });
+ //Rutas para Subgroup
+    Route::prefix("subgrupos")->group(function () {
+        Route::get('listado-todos', \App\Livewire\Subgroups\SubgroupAll::class)
+            ->name("subgroup_all.list");
+    });
 
 // Rutas para Product
     Route::prefix("productos")->group(function () {
