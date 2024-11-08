@@ -291,7 +291,7 @@ Route::prefix("unidades")->group(function () {
 
  //Rutas para Subgroup
     Route::prefix("subgrupos")->group(function () {
-        Route::get('listado-todos', \App\Livewire\Subgroups\SubgroupAll::class)
+        Route::get('listado-todos', \App\Livewire\Subgroups\SubGroupAll::class)
             ->name("subgroup_all.list");
     });
 
