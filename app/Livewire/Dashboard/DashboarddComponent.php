@@ -25,7 +25,7 @@ class DashboarddComponent extends Component
         $this->proveedorCount = Supplier::count(); // Aquí usamos el modelo correcto
         $this->Client = Customer::count(); // Aquí usamos el modelo correcto
         // Obtener la suma total
-        $totalSales = Sale::sum('total_amount');
+        $totalSales = Sale::whereNull('deleted_at')->sum('total_amount');
 
         // Formatear el número
         $this->totalSalesFormatted = number_format($totalSales);

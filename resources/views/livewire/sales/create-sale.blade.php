@@ -2,12 +2,12 @@
      <!-- VISTA PRINCIPAL DE CREAR VENTA-->
 
 <div class="pb-4 flex justify-center ">
-    <div class="max-w-screen-2xl  p-2 bg-white  relative z-10 shadow-md rounded-xl grid grid-cols-1  md:grid-cols-1  lg:grid-cols-2  sm:grid-cols-2 gap-4 " style="margin: 0% 2% 0% 2%;">
+    <div class="max-w-screen-2xl  p-2 bg-white  relative z-10 shadow-md rounded-xl grid grid-cols-1  md:grid-cols-6  lg:grid-cols-6  sm:grid-cols-2 gap-4 " style="margin: 0% 2% 0% 2%;">
         <!-- Primera columna: Formulario -->
-        <div class="col-span-1">
+        <div class="col-span-2">
             <div class="grid grid-cols-1 gap-4 mb-6">
                 <!-- Fila de Select y detalles del cliente -->
-                <div class="grid grid-cols-3 gap-5 items-end">
+                <div class="grid grid-cols-2 gap-5 items-end">
                     <!-- Select para Cliente -->
                     <div class="col-span-1">
                         <label for="clientsid" class="block text-sm font-medium text-gray-700">Cliente</label>
@@ -230,7 +230,7 @@
         </div>
 
         <!-- Segunda columna: Tabla de productos para agregar -->
-        <div class="col-span-1">
+        <div class="col-span-4">
             <h3 class="text-lg leading-6 font-medium text-gray-900 mt-0">
                 Productos
             </h3>

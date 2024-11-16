@@ -2,6 +2,7 @@
 // ------------------->POR MEDIO DE ESTE COMPONENTE  PODEMOS AGREGAR LOS PRODUCTOS , ELIMINARLOS, EDITARLOS, ESTE COMPONENTE PREPARA LOS PRODUCTOS PARA SU COMPRA  Y VENTA <-----------------------/////
 namespace App\Livewire\Forms;
 
+use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\VatPercentage;
 use App\Models\Unit;
@@ -122,6 +123,14 @@ class ProductForm extends Form
         if ($model) {
             // $model->forceDelete();
             $model->delete();
+            session()->flash('message', 'Producto eliminado correctamente.');
+        }
+     
+
+        $model1 = Inventory::find($id);
+        if ($model1) {
+            $model1->delete();
+            // $model->forceDelete();
             session()->flash('message', 'Producto eliminado correctamente.');
         }
         return redirect('/productos/listado');
