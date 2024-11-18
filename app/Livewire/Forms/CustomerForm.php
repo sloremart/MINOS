@@ -1,29 +1,19 @@
 <?php
-// ----------->FUNCIONES PRINCIPALES DEL COMPONENTE DE CREAR TIPOS DE CLIENTES PERMITE CREAR ,ELIMINAR,EDITAR Y CONSULTAR LOS TIPOS DE CLIENTES REGISTRADOS EN EL SISTEMA<------------------////
+
 namespace App\Livewire\Forms;
 
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class CustomerForm extends Form
 {
     public $id = null;
 
-    #[Validate('required|min:3')]
     public $name = '';
-
-    #[Validate('required|unique:customers,email')]
     public $email = '';
-
-    #[Validate('required|unique:customers,document')]
     public $document = '';
-
-    #[Validate('required|min:5')]
     public $phone = '';
-
-    #[Validate('required|min:5')]
     public $address = '';
     public $user_id;
 
@@ -35,6 +25,7 @@ class CustomerForm extends Form
             $this->user_id = Auth::id(); // Set the current user's ID by default
         }
     }
+
     public function set($id)
     {
         $model = Customer::find($id);
@@ -51,44 +42,30 @@ class CustomerForm extends Form
         }
     }
 
-    public function store()
+    public function rules()
     {
-        $this->validate();
-        $data = $this->all();
-        $data['user_id'] = Auth::id();
-        Customer::create($data);
-        session()->flash('message', 'Cliente creado correctamente.');
-        // return redirect('/clientes/listado');
-    }
-
-    public function edit()
-    {
-        $this->validate();
-        $model = Customer::find($this->id);
-        if ($model) {
-            $model->update($this->all());
-            session()->flash('message', 'Cliente actualizado correctamente.');
-            // return redirect('/clientes/listado');
+        if ($this->id) {
+            // Reglas para actualizar
+            return [
+                'name' => 'required|min:3',
+                'email' => 'required|email|unique:customers,email,' . $this->id, // Excluye el registro actual
+                'document' => 'required|unique:customers,document,' . $this->id, // Excluye el registro actual
+                'phone' => 'required|min:5',
+                'address' => 'required|min:5',
+            ];
         }
+
+        // Reglas para crear
+        return [
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:customers,email', // Valida unicidad
+            'document' => 'required|unique:customers,document', // Valida unicidad
+            'phone' => 'required|min:5',
+            'address' => 'required|min:5',
+        ];
     }
 
-    public function delete($id)
-    {
-        $model = Customer::find($id);
-        if ($model) {
-            // $model->forceDelete();
-            $model->delete();
-            session()->flash('message', 'Cliente eliminado correctamente.');
-        }
-        // return redirect('/clientes/listado');
-    }
-
-    public function resetForm()
-    {
-        $this->reset(['name', 'email', 'document', 'phone', 'address']);
-    }
-
-    protected function messages()
+    public function messages()
     {
         return [
             'name.required' => 'El nombre es obligatorio.',
@@ -103,5 +80,39 @@ class CustomerForm extends Form
             'address.required' => 'La dirección es obligatoria.',
             'address.min' => 'La dirección debe tener al menos 5 caracteres.',
         ];
+    }
+
+    public function store()
+    {
+        $this->validate($this->rules());
+        $data = $this->all();
+        $data['user_id'] = Auth::id(); // Asigna el ID del usuario autenticado
+        Customer::create($data);
+        session()->flash('message', 'Cliente creado correctamente.');
+        $this->resetForm();
+    }
+
+    public function edit()
+    {
+        $this->validate($this->rules());
+        $model = Customer::find($this->id);
+        if ($model) {
+            $model->update($this->all());
+            session()->flash('message', 'Cliente actualizado correctamente.');
+        }
+    }
+
+    public function delete($id)
+    {
+        $model = Customer::find($id);
+        if ($model) {
+            $model->delete();
+            session()->flash('message', 'Cliente eliminado correctamente.');
+        }
+    }
+
+    public function resetForm()
+    {
+        $this->reset(['name', 'email', 'document', 'phone', 'address']);
     }
 }
