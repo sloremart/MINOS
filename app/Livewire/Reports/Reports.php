@@ -53,7 +53,7 @@ class Reports extends Component
                 DB::raw('MAX(sale_details.unit_price) as unit_price'),
                 DB::raw('MAX(sale_details.sub_total) as sub_total'),
                 DB::raw('MAX(sale_details.created_at) as last_created_at') // O MIN(sale_details.created_at)
-            )
+            )->withoutTrashed()
             ->groupBy('products.name', 'sale_details.created_at');
 
         if ($this->search) {

@@ -2,6 +2,7 @@
 // ------------------->POR MEDIO DE ESTE COMPONENTE  PODEMOS AGREGAR LOS PRODUCTOS , ELIMINARLOS, EDITARLOS, ESTE COMPONENTE PREPARA LOS PRODUCTOS PARA SU COMPRA  Y VENTA <-----------------------/////
 namespace App\Livewire\Forms;
 
+use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\VatPercentage;
 use App\Models\Unit;
@@ -57,7 +58,8 @@ class ProductForm extends Form
             $this->applies_iva = $model->applies_iva;
             $this->vat_percentage_id = $model->vat_percentage_id;
             $this->unit_id = $model->unit_id;
-            $this->price = $model->activePrice ? $model->activePrice->price : '';
+            // $this->price = $model->activePrice ? $model->activePrice->price : '';
+            $this->price = $model->activePrice?->price ?? 0;//ahora
             $this->quantity = 0;
             $this->subgroup_id = $model->subgroup_id;
             $this->number = 1;
@@ -122,6 +124,14 @@ class ProductForm extends Form
         if ($model) {
             // $model->forceDelete();
             $model->delete();
+            session()->flash('message', 'Producto eliminado correctamente.');
+        }
+     
+
+        $model1 = Inventory::find($id);
+        if ($model1) {
+            $model1->delete();
+            // $model->forceDelete();
             session()->flash('message', 'Producto eliminado correctamente.');
         }
         return redirect('/productos/listado');
