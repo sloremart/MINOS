@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tablas;
 use App\Livewire\Forms\ProductForm;
 use App\Livewire\Forms\SaleForm;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -156,7 +157,7 @@ Route::middleware([
     Route::prefix('reportes/inventario')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
-            \Log::info('Valores de búsqueda recibidos:', [
+            Log::info('Valores de búsqueda recibidos:', [
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
                 'search_2' => $request->input('search_2'),
@@ -247,7 +248,7 @@ Route::prefix('reportes/venta')->group(function () {
     Route::prefix('reportes/compraPoveedor')->group(function () {
         Route::get('pdf', function (\Illuminate\Http\Request $request) {
             // Log para verificar que las fechas llegan correctamente
-            \Log::info('Valores de búsqueda recibidos:', [
+            Log::info('Valores de búsqueda recibidos:', [
                 'search' => $request->input('search'),
                 'search_1' => $request->input('search_1'),
                 'search_2' => $request->input('search_2'),

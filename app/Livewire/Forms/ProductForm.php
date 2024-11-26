@@ -10,6 +10,8 @@ use App\Models\Subgroup;
 use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class ProductForm extends Form
 {
@@ -58,8 +60,9 @@ class ProductForm extends Form
             $this->applies_iva = $model->applies_iva;
             $this->vat_percentage_id = $model->vat_percentage_id;
             $this->unit_id = $model->unit_id;
-            $this->price = $model->activePrice ? $model->activePrice->price : '';
-            $this->quantity = 0;
+            $this->price = $model->activePrice ? $model->activePrice->price : 0;
+            // $this->price = $model->activePrice?->price  ?? 10;
+            $this->quantity = $model->inventory ? $model->inventory->quantity : 0;
             $this->subgroup_id = $model->subgroup_id;
             $this->number = 1;
             $this->subtotal = $this->number * $this->price;
@@ -91,31 +94,70 @@ class ProductForm extends Form
     {
         $this->validate([
             'name' => 'required|min:3',
-            'code' => 'required|min:3|unique:products,code,' . $this->id, // Ignora el registro actual en la validación de unicidad
+            'code' => [
+                'required',
+                'min:3',
+                Rule::unique('products', 'code')->ignore($this->id),
+            ],
             'description' => 'nullable|min:5',
-            'price' => 'required|numeric|min:0', // Asegúrate de que el precio sea un número válido
-            'quantity' => 'required|integer|min:0', // Asegúrate de que la cantidad sea un entero no negativo
-            'unit_id' => 'required|exists:units,id', // Verifica que el unit_id exista en la tabla de unidades
-            'subgroup_id' => 'required|exists:subgroups,id', // Verifica que el subgroup_id exista en la tabla de subgrupos
+            'price' => 'nullable|numeric|min:0', // Valida el precio como parte de la relación
+            'quantity' => 'nullable|integer|min:0', // Valida la cantidad como parte del inventario
+            'unit_id' => 'required|exists:units,id',
+            'subgroup_id' => 'required|exists:subgroups,id',
         ]);
+    
         $model = Product::find($this->id);
+    
         if ($model) {
-            $model->name = $this->name;
-            $model->description = $this->description;
-            $model->applies_iva = $this->applies_iva;
-            $model->vat_percentage_id = $this->vat_percentage_id;
-            $model->unit_id = $this->unit_id;
-            $model->price = $this->price;
-            $model->quantity = $this->quantity;
-            $model->subgroup_id = $this->subgroup_id;
-            $model->updated_at = Carbon::now();
-            $model->price = $this->price;
-            $model->quantity = $this->quantity;
-            $model->update();
+            // Actualiza los datos del producto
+            $model->update([
+                'name' => $this->name,
+                'description' => $this->description,
+                'applies_iva' => $this->applies_iva,
+                'vat_percentage_id' => $this->vat_percentage_id,
+                'unit_id' => $this->unit_id,
+                'subgroup_id' => $this->subgroup_id,
+            ]);
+    
+            // Actualiza el precio activo (si corresponde)
+            if ($this->price !== null) {
+                $activePrice = $model->activePrice; // Obtiene el precio activo
+                if ($activePrice) {
+                    $activePrice->update(['price' => $this->price]);
+                } else {
+                    $model->prices()->create([
+                        'price' => $this->price,
+                        'active' => true,
+                        'user_id' => Auth::user()->id,
+                        'valid_from_date' => Carbon::now(), // Asignamos la fecha actual
+                    ]);
+                }
+            }
+    
+            // Actualiza la cantidad en inventario (si corresponde)
+            if ($this->quantity !== null) {
+                $inventory = $model->inventory; // Obtiene el inventario
+                if ($inventory) {
+                    $inventory->update(['quantity' => $this->quantity]);
+                } else {
+                    $model->inventory()->create([
+                        'quantity' => $this->quantity,
+                        'user_id' => Auth::user()->id,
+                        'last_updated_date' => Carbon::now(), // Asignamos la fecha actual
+                    ]);
+                }
+            }
+    
+            // Notificar éxito
+            $this->resetForm();
             session()->flash('message', 'Producto actualizado correctamente.');
             return redirect('/productos/listado');
         }
+    
+        // Producto no encontrado
+        session()->flash('error', 'Producto no encontrado.');
     }
+    
 
     public function delete($id)
     {

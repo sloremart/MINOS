@@ -11,12 +11,21 @@ class Product extends Model
 {
     use SoftDeletes;
     use SoftDeletes;
-   //use PaginatorTrait;
- // use ImageableTrait;
+    //use PaginatorTrait;
+    // use ImageableTrait;
     protected $fillable = [
-        'name', 'code', 'description', 'applies_iva',
-        'vat_percentage_id', 'unit_id', 'category_id', 'subgroup_id'
+        'name',
+        'code',
+        'description',
+        'applies_iva',
+        'vat_percentage_id',
+        'unit_id',
+        'category_id',
+        'subgroup_id',
+        'valid_from_date'  // Agregar como un campo virtual.
     ];
+
+    public $valid_from_date;  // Define como una propiedad pública.
     public $price;
     public $quantity;
 
