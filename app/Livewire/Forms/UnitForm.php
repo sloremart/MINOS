@@ -31,7 +31,7 @@ class UnitForm extends Form
         $this->validate();
         Unit::create($this->all());
         session()->flash('message', 'Unidad creada correctamente.');
-        // return redirect('/unidades/listado');
+        return redirect('/unidades/listado');
     }
 
     public function edit()
@@ -41,7 +41,7 @@ class UnitForm extends Form
         if ($model) {
             $model->update($this->all());
             session()->flash('message', 'Unidad actualizada correctamente.');
-            // return redirect('/unidades/listado');
+            return redirect('/unidades/listado');
         }
     }
 
@@ -49,8 +49,8 @@ class UnitForm extends Form
     {
         $model = Unit::find($id);
         if ($model) {
-            $model->forceDelete();
-            // $model->delete();
+            // $model->forceDelete();
+            $model->delete();
             session()->flash('message', 'Unidad eliminada correctamente.');
         }
         // return redirect('/unidades/listado');
