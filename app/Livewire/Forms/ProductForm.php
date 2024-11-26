@@ -60,13 +60,9 @@ class ProductForm extends Form
             $this->applies_iva = $model->applies_iva;
             $this->vat_percentage_id = $model->vat_percentage_id;
             $this->unit_id = $model->unit_id;
-
             $this->price = $model->activePrice ? $model->activePrice->price : 0;
             // $this->price = $model->activePrice?->price  ?? 10;
             $this->quantity = $model->inventory ? $model->inventory->quantity : 0;
-
-          
-
             $this->subgroup_id = $model->subgroup_id;
             $this->number = 1;
             $this->subtotal = $this->number * $this->price;
