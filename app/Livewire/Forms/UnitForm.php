@@ -36,7 +36,7 @@ class UnitForm extends Form
 
     public function edit()
     {
-        $this->validate();
+        // $this->validate();
         $model = Unit::find($this->id);
         if ($model) {
             $model->update($this->all());

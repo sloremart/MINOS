@@ -45,7 +45,7 @@ class SubgroupForm extends Form
 
     public function edit()
     {
-        $this->validate();
+        // $this->validate();
         $model = Subgroup::find($this->id);
         if ($model) {
             $model->update($this->all());

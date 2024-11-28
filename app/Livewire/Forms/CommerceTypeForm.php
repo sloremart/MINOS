@@ -32,7 +32,7 @@ class CommerceTypeForm extends Form
 
     public function edit()
     {
-        $this->validate();
+        // $this->validate();
         $model = CommerceType::find($this->id);
         if ($model) {
             $model->update($this->all());

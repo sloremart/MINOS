@@ -40,7 +40,7 @@ class GroupForm extends Form
 
     public function edit()
     {
-        $this->validate();
+        // $this->validate();
         $model = Group::find($this->id);
         if ($model) {
             $model->update($this->all());
