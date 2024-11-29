@@ -128,6 +128,14 @@ class CreatePurchase extends Component
         $this->selectedProductQuantity = 1; // Restablecer la cantidad por defecto
         $this->selectedProductPrice = 0; // Restablecer el precio por defecto
     }
+    public function removeProduct($index)
+    {
+        if (isset($this->selectedProducts[$index])) {
+            unset($this->selectedProducts[$index]);
+            $this->selectedProducts = array_values($this->selectedProducts); // Reindexar el array
+            $this->calculateAmount(); // Recalcular el total
+        }
+    }
 
     public function confirmAddProductToPurchase()
     {

@@ -136,55 +136,42 @@
                 </h3>
                 <div class="flex overflow-x-auto max-h-40 space-x-4">
                     <table class="bg-white rounded-lg shadow-lg overflow-hidden text-sm flex-grow" style="min-width: 0;">
-                        <thead class=" text-gray-200 uppercase text-xs leading-tight" style="background: #652581;">
+                        <thead class="text-gray-200 uppercase text-xs leading-tight" style="background: #652581;">
                             <tr>
-                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 40%;">
-                                    Nombre
-                                </th>
-                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 15%;">
-                                    Cantidad
-                                </th>
-                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 20%;">
-                                    Precio unitario
-                                </th>
-                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 25%;">
-                                    Subtotal
-                                </th>
-                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 25%;">
-                                    Total
-                                </th>
+                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 40%;">Nombre</th>
+                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 15%;">Cantidad</th>
+                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 20%;">Precio unitario</th>
+                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 25%;">Subtotal</th>
+                                <th class="px-2 py-2 text-left tracking-wider border-b border-gray-300" style="width: 25%;">Total</th>
+                                <th class="px-2 py-2 text-center tracking-wider border-b border-gray-300" style="width: 10%;">Acción</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-700">
                             @if(count($selectedProducts) > 0)
-                            @foreach($selectedProducts as $product)
+                            @foreach($selectedProducts as $index => $product)
                             <tr class="border-b border-gray-200 hover:bg-blue-100">
-                                <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200">
-                                    {{ $product['name'] }}
-                                </td>
-                                <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200">
-                                    {{ $product['number'] }}
-                                </td>
-                                <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200">
-                                    ${{ $product['price'] }}
-                                </td>
-                                <td class="px-2 py-2 whitespace-nowrap">
-                                    ${{ $product['subtotal'] }}
-                                </td>
-                                <td class="px-2 py-2 whitespace-nowrap">
-                                    ${{ $product['total'] }}
+                                <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200">{{ $product['name'] }}</td>
+                                <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200">{{ $product['number'] }}</td>
+                                <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200">${{ $product['price'] }}</td>
+                                <td class="px-2 py-2 whitespace-nowrap">${{ $product['subtotal'] }}</td>
+                                <td class="px-2 py-2 whitespace-nowrap">${{ $product['total'] }}</td>
+                                <td class="px-2 py-2 text-center">
+                                   
+                                    <button  wire:click="removeProduct({{ $index }})"class="bg-red-500 rounded-full px-2 py-2 hover:bg-red-700 text-white font-bold py-1 px-3 rounded" data-toggle="tooltip" data-placement="top" title="Eliminar" >
+                                        <i class="text-bg-red-500 fas fa-trash"></i></button>
                                 </td>
                             </tr>
                             @endforeach
                             @else
-                            <tr class="border-b border-gray-200 ">
-                                <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200 text-center" colspan="5">
+                            <tr class="border-b border-gray-200">
+                                <td class="px-2 py-2 whitespace-nowrap border-r border-gray-200 text-center" colspan="6">
                                     No hay productos seleccionados
                                 </td>
                             </tr>
                             @endif
                         </tbody>
                     </table>
+                    
                 </div>
                 <div class="flex justify-between items-center mt-10 space-x-3">
                     <div class="flex-grow">

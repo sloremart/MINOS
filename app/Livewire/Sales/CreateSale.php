@@ -10,9 +10,11 @@ use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Product;
+use Livewire\WithPagination;
 
 class CreateSale extends Component
 {
+    use WithPagination;
     public $modelForm = [
         'customer_id' => null,
         'sale_date' => null,
@@ -211,6 +213,14 @@ class CreateSale extends Component
         $this->vatPercentage = $product->vatPercentage->percentage;
         $this->isModalOpen = true;
     }
+    public function removeProduct($index)
+{
+    if (isset($this->selectedProducts[$index])) {
+        unset($this->selectedProducts[$index]);
+        $this->selectedProducts = array_values($this->selectedProducts); // Reindexar el array
+        $this->calculateAmount(); // Recalcular el total
+    }
+}
     public function confirmAddProductToSale()
     {
         $this->selectedProducts[] = $this->selectedProduct->toArray();

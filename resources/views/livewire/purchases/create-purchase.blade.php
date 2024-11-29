@@ -83,6 +83,7 @@
                                 <th class="px-4 py-2 text-left">Cantidad</th>
                                 <th class="px-4 py-2 text-left">Precio Unitario</th>
                                 <th class="px-4 py-2 text-left">Subtotal</th>
+                                <th class="px-4 py-2 text-left">Accion</th>
                                 {{-- <th class="px-4 py-2 text-left">Eliminar</th> --}}
                             </tr>
                         </thead>
@@ -93,16 +94,11 @@
                                 <td class="border px-4 py-2">{{ $product['number'] }}</td>
                                 <td class="border px-4 py-2">${{ number_format($product['price'], 2) }}</td>
                                 <td class="border px-4 py-2">${{ number_format($product['subtotal'], 2) }}</td>
-                                {{-- <td class="border px-4 py-2">
-                                    <button 
-                                        class="bg-red-500 rounded-full px-2 py-2 hover:bg-red-700 text-white font-bold py-1 px-3 rounded" 
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Eliminar" 
-                                        wire:click="deleteProduct({{ $index }})">
-                                <i class="text-bg-red-500 fas fa-trash"></i>
-                                </button>
-                                </td> --}}
+                                <td class="px-2 py-2 text-center">
+                                   
+                                    <button  wire:click="removeProduct({{ $index }})"class="bg-red-500 rounded-full px-2 py-2 hover:bg-red-700 text-white font-bold py-1 px-3 rounded" data-toggle="tooltip" data-placement="top" title="Eliminar" >
+                                        <i class="text-bg-red-500 fas fa-trash"></i></button>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
