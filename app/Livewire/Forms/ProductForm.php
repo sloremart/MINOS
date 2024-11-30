@@ -72,9 +72,12 @@ class ProductForm extends Form
 
     public function store()
     {
-        $this->validate();
+        $this->validate(); // Validar los datos del formulario
+    
+        // Crear un nuevo producto asignando el ID del usuario autenticado
         $product = new Product();
         $product->name = $this->name;
+        $product->code = $this->code;
         $product->description = $this->description;
         $product->applies_iva = $this->applies_iva;
         $product->vat_percentage_id = $this->vat_percentage_id;
@@ -82,12 +85,12 @@ class ProductForm extends Form
         $product->price = $this->price;
         $product->quantity = $this->quantity;
         $product->subgroup_id = $this->subgroup_id;
-        $product->price = $this->price;
-        $product->quantity = $this->quantity;
+        $product->user_id = Auth::id(); // Asignar el ID del usuario autenticado
         $product->save();
-
+    
+        // Mensaje de éxito
         session()->flash('message', 'Producto creado correctamente.');
-        return redirect('/productos/listado');
+        return redirect('/productos/listado'); // Redirigir a la lista de productos
     }
 
     public function edit()

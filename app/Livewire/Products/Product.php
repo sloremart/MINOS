@@ -1,5 +1,4 @@
 <?php
-// COMPONENTE ENCARGADO DE RENDERIZAR Y TRAER LA INFORAMCION A LA VISTA DE PRODUCTOS
 
 namespace App\Livewire\Products;
 
@@ -12,10 +11,12 @@ use Livewire\Component;
 use App\Traits\CrudModelsTrait;
 use App\Livewire\Forms\ProductForm;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Component
 {
     use CrudModelsTrait;
+    use WithPagination;
 
     public ProductForm $modelForm;
     public PriceForm $priceForm;
@@ -23,21 +24,28 @@ class Product extends Component
     public $vatPercentages;
     public $units;
     public $subgroups;
-    use WithPagination;
+
     public $search = '';
     public $search_1 = '';
     public $search_field = 'name';
     public $search_1_field = 'code';
     public $search_placeholder = 'Buscar por nombre';
-    public $search_1_placeholder = 'Buscar por codigo';
+    public $search_1_placeholder = 'Buscar por código';
 
     public function updating($field)
     {
-        $this->resetPage();
+        $this->resetPage(); // Reinicia la paginación al actualizar los filtros de búsqueda
     }
+
     public function getData()
     {
-        $query = \App\Models\Product::query();
+        // Obtener el ID del usuario autenticado
+        $userId = Auth::id(); // ID del usuario actualmente autenticado
+
+        // Filtrar productos del usuario autenticado
+        $query = \App\Models\Product::where('user_id', $userId);
+
+        // Agregar condiciones de búsqueda si se especifican
         if ($this->search) {
             $query->where($this->search_field, 'like', '%' . $this->search . '%');
         }
@@ -46,22 +54,21 @@ class Product extends Component
             $query->where($this->search_1_field, 'like', '%' . $this->search_1 . '%');
         }
 
-        $data = $query->paginate(10);
-        return $data;
+        // Obtener los datos paginados
+        return $query->paginate(10);
     }
 
     public function mount()
     {
-        $this->vatPercentages = VatPercentage::all();
-        $this->units = Unit::all();
-        $this->subgroups = Subgroup::all();
+        $this->vatPercentages = VatPercentage::all(); // Porcentajes de IVA disponibles
+        $this->units = Unit::all(); // Unidades disponibles
+        $this->subgroups = Subgroup::all(); // Subgrupos disponibles
     }
-
 
     public function render()
     {
         return view('livewire.products.product', [
-            "data" => $this->getData()
+            "data" => $this->getData(), // Pasar los datos a la vista
         ])->layout('layouts.app');
     }
 }

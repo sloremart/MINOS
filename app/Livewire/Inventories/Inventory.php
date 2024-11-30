@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Traits\CrudModelsTrait;
 use App\Livewire\Forms\InventoryForm;
+use Livewire\WithPagination;
 
 class Inventory extends Component
 {
     use CrudModelsTrait;
+    use WithPagination;
 
     public InventoryForm $modelForm;
     public $products;

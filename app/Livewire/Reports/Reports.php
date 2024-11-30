@@ -46,6 +46,7 @@ class Reports extends Component
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
     {
+        $userid=Auth::id();
         $query = SaleDetail::join('products', 'sale_details.product_id', '=', 'products.id')
             ->select(
                 'products.name',
@@ -53,7 +54,8 @@ class Reports extends Component
                 DB::raw('MAX(sale_details.unit_price) as unit_price'),
                 DB::raw('MAX(sale_details.sub_total) as sub_total'),
                 DB::raw('MAX(sale_details.created_at) as last_created_at') // O MIN(sale_details.created_at)
-            )->withoutTrashed()
+            )->where('products.user_id',$userid)
+            ->withoutTrashed()
             ->groupBy('products.name', 'sale_details.created_at');
 
         if ($this->search) {
@@ -95,6 +97,8 @@ class Reports extends Component
 
     public function pdf()
     {
+        $userid=Auth::id();
+
 // Decodifica el parámetro search_2
     $this->search_2 = urldecode($this->search_2);
         // Log para verificar que las fechas y el nombre del producto llegan correctamente
@@ -111,7 +115,7 @@ class Reports extends Component
                 DB::raw('MAX(sale_details.unit_price) as unit_price'),
                 DB::raw('MAX(sale_details.sub_total) as sub_total'),
                 DB::raw('MAX(sale_details.created_at) as last_created_at')
-            )
+            )->where('products.user_id',$userid)
             ->groupBy('products.name','sale_details.created_at');
     
        // Aplica los filtros de fechas
@@ -143,6 +147,7 @@ class Reports extends Component
     /////-------------------------EXPORTAR EN EXCEL---------------------------//////////
     public function exportExcel()
     {
+        $userid=Auth::id();
         // Definir la ruta para el directorio donde se guardará el archivo
         $directoryPath = public_path('reportes');
 
@@ -301,7 +306,7 @@ class Reports extends Component
                 DB::raw('MAX(sale_details.unit_price) as unit_price'),
                 DB::raw('MAX(sale_details.sub_total) as sub_total'),
                 DB::raw('MAX(sale_details.created_at) as last_created_at')
-            )
+            )->where('products.user_id',$userid)
             ->groupBy('products.name', 'sale_details.created_at', 'sale_details.id');
 
         if ($this->search) {
@@ -392,11 +397,13 @@ class Reports extends Component
 
     public function graficaDetalle(): void
     {
+        $userid=Auth::id();
+
         $query = SaleDetail::join('products', 'sale_details.product_id', '=', 'products.id')
             ->select(
                 'products.name',
                 DB::raw('SUM(sale_details.quantity) as total_quantity')
-            )
+            )->where('products.user_id',$userid)
             ->groupBy('products.name');
 
         // Filtrar por fechas si se proporcionan

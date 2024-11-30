@@ -11,6 +11,7 @@ use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Product;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class CreateSale extends Component
 {
@@ -99,21 +100,21 @@ class CreateSale extends Component
     // {
     //     // Calcula el cambio a devolver
     //     $this->change = $this->cashGiven - $this->total;
-        
+
     // }
     public function calculateChange()
-{
-    // Asegúrate de que los valores sean numéricos, incluso si están vacíos
-    $total = is_numeric($this->total) ? $this->total : 0;
-    $cashGiven = is_numeric($this->cashGiven) ? $this->cashGiven : 0;
+    {
+        // Asegúrate de que los valores sean numéricos, incluso si están vacíos
+        $total = is_numeric($this->total) ? $this->total : 0;
+        $cashGiven = is_numeric($this->cashGiven) ? $this->cashGiven : 0;
 
-    // Calcula el cambio a devolver
-    $this->change = $cashGiven - $total;
-}
+        // Calcula el cambio a devolver
+        $this->change = $cashGiven - $total;
+    }
 
 
-    
-    
+
+
     public function mount()
     {
         $this->customers = Customer::all();
@@ -197,8 +198,6 @@ class CreateSale extends Component
     public function render()
     {
         $paymentMethods = config('payment_methods.methods');
-
-
         return view('livewire.sales.create-sale', [
             'data' => $this->getData(),
             'paymentMethods' => $paymentMethods,
@@ -214,13 +213,13 @@ class CreateSale extends Component
         $this->isModalOpen = true;
     }
     public function removeProduct($index)
-{
-    if (isset($this->selectedProducts[$index])) {
-        unset($this->selectedProducts[$index]);
-        $this->selectedProducts = array_values($this->selectedProducts); // Reindexar el array
-        $this->calculateAmount(); // Recalcular el total
+    {
+        if (isset($this->selectedProducts[$index])) {
+            unset($this->selectedProducts[$index]);
+            $this->selectedProducts = array_values($this->selectedProducts); // Reindexar el array
+            $this->calculateAmount(); // Recalcular el total
+        }
     }
-}
     public function confirmAddProductToSale()
     {
         $this->selectedProducts[] = $this->selectedProduct->toArray();
@@ -242,20 +241,29 @@ class CreateSale extends Component
 
     public function getData()
     {
-        $query = Product::query();
+        // Obtener el ID del usuario autenticado
+        $userId = Auth::id();
+        
+        // Iniciar la consulta con el filtro por usuario
+        $query = Product::where('user_id', $userId);
 
+        // Aplicar filtro de búsqueda por nombre, si se especifica
         if ($this->search) {
             $query->where('name', 'like', '%' . $this->search . '%');
         }
 
+        // Aplicar filtro de búsqueda por código, si se especifica
         if ($this->search_1) {
             $query->where('code', 'like', '%' . $this->search_1 . '%');
         }
 
+        // Retornar los resultados paginados
         return $query->paginate(10);
     }
 
-        public function cancel(){
-            return redirect('/ventas/listado');
-        }
+
+    public function cancel()
+    {
+        return redirect('/ventas/listado');
+    }
 }

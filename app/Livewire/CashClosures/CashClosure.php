@@ -54,41 +54,40 @@ class CashClosure extends Component
         $this->final_balance_cash = $this->start_balance + $this->total_sales_cash - $this->total_expenses;
     }
 
-
-
     public function mount()
-    {
-        $this->users = User::all();
-        // Obtener el último registro de cierre de caja
-        $lastCashClosure = cash_closure::latest('created_at')->first();
-
-        // Verifica si ya hay un cierre de caja anterior
+    {  $this->users = User::all(); // Si necesitas cargar los usuarios, pero esto no es obligatorio para el saldo inicial.
+        // Obtener el usuario logueado
+        $user = Auth::user();
+    
+        // Obtener el último cierre de caja para el usuario logueado
+        $lastCashClosure = cash_closure::where('user_id', $user->id)->latest('created_at')->first();
+    
+        // Verifica si ya hay un cierre de caja anterior para este usuario
         $this->hasPreviousRecord = $this->checkForPreviousRecord();
-
-        // Asigna 0 si no hay registro anterior, o deja el campo vacío
-        $this->next_start_balance = $this->hasPreviousRecord ? null : 0;
-
-        // Si existe un cierre de caja anterior, asignar el saldo inicial al valor de next_start_balance
-        if ($lastCashClosure) {
-            $this->start_balance = $lastCashClosure->next_start_balance;
-            $this->next_start_balance = $this->start_balance; // Copia el saldo inicial al saldo para el próximo turno
+    
+        // Si no hay un cierre previo, el saldo inicial debe ser 0.00
+        if (!$lastCashClosure) {
+            $this->start_balance = 0.00; // No hay saldo previo, entonces el saldo inicial es 0.00
+            $this->next_start_balance = 0.00; // También el siguiente saldo será 0.00
         } else {
-            // Si no hay registros previos, dejar el saldo inicial en 0 o permitir que se ingrese manualmente
-            $this->start_balance = 0; // O puedes dejarlo en null si quieres permitir entrada manual
+            // Si existe un cierre previo, asignar el saldo del siguiente turno como el saldo inicial para el nuevo turno
+            $this->start_balance = $lastCashClosure->next_start_balance; // Usamos el saldo del último cierre
+            $this->next_start_balance = $this->start_balance; // Establecer el saldo inicial para el próximo turno
         }
-
-        // Verificar si el saldo inicial es superior a 10,000
+    
+        // Verifica si el saldo inicial es superior a 10,000
         if ($this->start_balance > 10000) {
-            $this->isDisabled = true; // Deshabilitar el input si el saldo inicial es mayor a 10,000
+            $this->isDisabled = true; // Deshabilita el input si el saldo inicial es mayor a 10,000
         } else {
-            $this->isDisabled = false; // Habilitar el input si es igual o menor a 10,000
+            $this->isDisabled = false; // Habilita el input si es igual o menor a 10,000
         }
-        // Deshabilitar el input si ya hay tres o más registros de cierre de caja
-        $this->isDisabled = cash_closure::count() >= 0 ? true : $this->isDisabled;
+    
+        // Deshabilita el input si ya hay tres o más registros de cierre de caja
+        $this->isDisabled = cash_closure::count() >= 3 ? true : $this->isDisabled;
     }
+    
 
-
-
+    
 
 
     public function checkForPreviousRecord()
@@ -107,16 +106,16 @@ class CashClosure extends Component
 
     public function render()
     {
-        $query = cash_closure::with('user');
+        $query = cash_closure::with('user')->where('user_id', auth()->id());
 
-
-
+        // Filtrado por nombre del usuario
         if ($this->search) {
             $query->whereHas('user', function ($q) {
                 $q->where('name', 'LIKE', "%{$this->search}%");
             });
         }
 
+        // Filtrado por fechas
         if ($this->search_1) {
             $query->where('created_at', '<=', $this->search_1);
         }
@@ -125,13 +124,14 @@ class CashClosure extends Component
             $query->where('created_at', '<=', $this->search_2);
         }
 
-
+        // Paginación y retorno de la vista
         $data = $query->paginate($this->paginacion);
 
         return view('livewire.cash-closure.cash-closure', [
             'data' => $data,
         ])->layout('layouts.app');
     }
+
 
 
     public function updatedPaymentMethod($value)
@@ -182,27 +182,26 @@ class CashClosure extends Component
         $this->final_balance = $this->start_balance + $this->total_sales - $this->total_expenses;
     }
 
-    protected function calculateExpenses()
-    {
-        // Asumimos que hay una tabla llamada 'purchases' para las compras
-        return DB::table('purchases')
-            ->whereDate('created_at', now()->format('Y-m-d')) // Filtrar por la fecha actual
-            ->whereNull('deleted_at') // Excluir registros con fecha de eliminación
-            ->sum('total_amount'); // Sumar el campo 'total_amount' de los registros no eliminados
-    }
-
-
-
-
     protected function calculateSales($method)
     {
         return ModelsSale::where('payment_method', $method)
-            ->whereDate('created_at', now()->format('Y-m-d')) // Filtrar por la fecha actual
+            ->whereDate('created_at', now()->format('Y-m-d'))
+            ->where('user_id', auth()->id()) // Filtrar por usuario logeado
             ->get()
             ->sum(function ($sale) {
-                return $sale->total_amount; // Cambia 'total_amount' por el campo correcto que representa el monto
+                return $sale->total_amount;
             });
     }
+
+    protected function calculateExpenses()
+    {
+        return DB::table('purchases')
+            ->whereDate('created_at', now()->format('Y-m-d'))
+            ->where('user_id', auth()->id()) // Filtrar por usuario logeado
+            ->whereNull('deleted_at')
+            ->sum('total_amount');
+    }
+
 
     public function store()
     {
@@ -228,9 +227,13 @@ class CashClosure extends Component
             'next_start_balance' => $this->next_start_balance,
         ]);
         // Resetear campos después de guardar
+
         $this->resetFields();
+
         return redirect('/cierre/listado');
     }
+
+
 
 
 

@@ -7,6 +7,7 @@ use App\Traits\CrudModelsTrait;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use App\Models\Inventory;
+use Illuminate\Support\Facades\Log;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -24,6 +25,8 @@ use PhpOffice\PhpSpreadsheet\Chart\Title;
 
 
 use Barryvdh\DomPDF\Facade\Pdf; // Usa el facade en lugar de la clase
+use Dompdf\Css\Content\Attr;
+use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -54,12 +57,13 @@ class ReportInv extends Component
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
     {
+        $userid=Auth::id();
         $query = Inventory::join('products', 'inventories.product_id', '=', 'products.id')
             ->select(
                 'products.name',
                 DB::raw('SUM(inventories.quantity) as total_quantity'),
                 DB::raw('MAX(inventories.created_at) as last_created_at')
-            )
+            )->where('products.user_id',$userid)
             ->groupBy('products.name');
 
         if ($this->search_2) {
@@ -92,9 +96,10 @@ class ReportInv extends Component
 
     public function pdf()
     {
+        $userid=Auth::id();
         $this->search_2 = urldecode($this->search_2);
 
-        \Log::info('Generando PDF con las fechas:', [
+        Log::info('Generando PDF con las fechas:', [
             'search' => $this->search,
             'search_1' => $this->search_1,
             'search_2' => $this->search_2,
@@ -106,28 +111,28 @@ class ReportInv extends Component
                 'products.name',
                 DB::raw('SUM(inventories.quantity) as total_quantity'),
                 DB::raw('MAX(inventories.created_at) as last_created_at')
-            )
+            )->where('products.user_id',$userid)
             ->groupBy('products.name');
 
         // Aplicar filtros de fecha
         if (!empty($this->search)) {
             $query->where('inventories.created_at', '>=', $this->search);
-            \Log::info('Aplicando filtro de fecha desde: ' . $this->search);
+            Log::info('Aplicando filtro de fecha desde: ' . $this->search);
         }
         if (!empty($this->search_1)) {
             $query->where('inventories.created_at', '<=', $this->search_1);
-            \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
+            Log::info('Aplicando filtro de fecha hasta: ' . $this->search_1);
         }
         if (!empty($this->search_2)) {
             $query->where('products.name', 'like', $this->search_2);
-            \Log::info('Aplicando filtro de fecha hasta: ' . $this->search_2);
+            Log::info('Aplicando filtro de fecha hasta: ' . $this->search_2);
         }
 
         // Obtener los datos filtrados
         $data = $query->get();
 
         // Log de la cantidad de datos obtenidos
-        \Log::info('Cantidad de registros obtenidos: ' . $data->count());
+        Log::info('Cantidad de registros obtenidos: ' . $data->count());
 
         // Generar el PDF con los datos filtrados
         $pdf = Pdf::loadView('livewire.reports.reportInvePdf', compact('data'));
@@ -138,6 +143,7 @@ class ReportInv extends Component
 
     public function exportExcel()
     {
+        $userid=Auth::id();
         // Definición de la ruta constante para el directorio donde se guardará el archivo
         $directoryPath = public_path('reportes');
 
@@ -248,7 +254,7 @@ class ReportInv extends Component
                 'products.name',
                 DB::raw('SUM(inventories.quantity) as total_quantity'),
                 DB::raw('MAX(inventories.created_at) as last_created_at')
-            )
+            )->where('products.user_id',$userid)
             ->groupBy('products.id', 'products.name');
 
         // Filtros por búsqueda (opcional)
@@ -305,11 +311,12 @@ class ReportInv extends Component
 
     public function graficaDetalle(): void
     {
+        $userid=Auth::id();
         $query = Inventory::join('products', 'inventories.product_id', '=', 'products.id')
             ->select(
                 'products.name',
                 DB::raw('SUM(inventories.quantity) as total_quantity')
-            )
+            )->where('products.user_id',$userid)
             ->groupBy('products.name');
 
         // Filtrar por fechas si se proporcionan
@@ -344,7 +351,7 @@ class ReportInv extends Component
         $quantities = $this->quantities;
 
         // Log para depurar
-        \Log::info('Datos para updateChart', [
+        Log::info('Datos para updateChart', [
             'products' => $products,
             'quantities' => $quantities,
         ]);

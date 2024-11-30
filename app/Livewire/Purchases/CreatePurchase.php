@@ -9,9 +9,12 @@ use App\Models\PurchaseDetail;
 use App\Models\Inventory;
 use Carbon\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class CreatePurchase extends Component
 {
+    use WithPagination;
     public $modelForm = [
         'supplier_id' => null,
         'purchase_date' => null,
@@ -188,16 +191,23 @@ class CreatePurchase extends Component
 
     public function getData()
     {
-        $query = Product::query();
+        // Obtener el ID del usuario autenticado
+        $userId = Auth::id();
 
+        // Iniciar la consulta con el filtro por usuario
+        $query = Product::where('user_id', $userId);
+
+        // Aplicar filtro de búsqueda por nombre, si se especifica
         if ($this->search) {
             $query->where('name', 'like', '%' . $this->search . '%');
         }
 
+        // Aplicar filtro de búsqueda por código, si se especifica
         if ($this->search_1) {
             $query->where('code', 'like', '%' . $this->search_1 . '%');
         }
 
+        // Retornar los resultados paginados
         return $query->paginate(10);
     }
 

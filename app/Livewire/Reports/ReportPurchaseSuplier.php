@@ -11,7 +11,7 @@ use App\Models\PurchaseDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
@@ -49,6 +49,7 @@ class ReportPurchaseSuplier extends Component
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
     {
+        $userid=Auth::id();
         $query = PurchaseDetail::join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
             ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
             ->join('products', 'purchase_details.product_id', '=', 'products.id')
@@ -59,7 +60,7 @@ class ReportPurchaseSuplier extends Component
                 'purchase_details.unit_price',            // Valor unitario de la compra
                 'purchase_details.sub_total',              // Subtotal de la compra
                 'purchases.purchase_date'                 // Fecha de la compra
-            );
+            )->where('purchases.user_id',$userid);
 
         // dd($query);
         if ($this->search_2) {
@@ -94,6 +95,7 @@ class ReportPurchaseSuplier extends Component
 
     public function pdf()
     {
+        $userid=Auth::id();
         $this->search_2 = urldecode($this->search_2);
 
         Log::info('Generando PDF con las fechas:', [
@@ -112,7 +114,7 @@ class ReportPurchaseSuplier extends Component
                 'purchase_details.unit_price',            // Valor unitario de la compra
                 'purchase_details.sub_total',              // Subtotal de la compra
                 'purchases.purchase_date'                 // Fecha de la compra
-            );
+            )->where('purchases.user_id',$userid);
 
 
         // Aplicar filtros de fecha
@@ -147,6 +149,7 @@ class ReportPurchaseSuplier extends Component
 
     public function exportExcel()
     {
+        $userid=Auth::id();
         // Define una ruta constante para el directorio donde se guardará el archivo
         $directoryPath = public_path('reportes');
 
@@ -226,7 +229,7 @@ class ReportPurchaseSuplier extends Component
                 'purchase_details.unit_price',
                 'purchase_details.sub_total',
                 'purchases.purchase_date'
-            );
+            )->where('purchases.user_id',$userid);
 
         // Aplicar filtros de búsqueda
         if ($this->search_2) {
@@ -296,6 +299,7 @@ class ReportPurchaseSuplier extends Component
 
     public function graficaDetalle(): void
     {
+        $userid=Auth::id();
 
         $query = PurchaseDetail::join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
             ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
@@ -307,7 +311,7 @@ class ReportPurchaseSuplier extends Component
                 'purchase_details.unit_price',            // Valor unitario de la compra
                 'purchase_details.sub_total',              // Subtotal de la compra
                 'purchases.purchase_date'                 // Fecha de la compra
-            );
+            )->where('purchases.user_id',$userid);
 
         // Filtrar por fechas si se proporcionan
         if ($this->search_2) {
