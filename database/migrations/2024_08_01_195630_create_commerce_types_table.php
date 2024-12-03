@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateCommerceTypesTable extends Migration
 {
@@ -18,6 +19,12 @@ class CreateCommerceTypesTable extends Migration
             $table->string('name')->unique();
             $table->timestamps();
         });
+        // Insertar el registro genérico
+        DB::table('commerce_types')->insert([
+            'name' => 'Tienda de barrio',
+            'created_at' => now(), // Fecha y hora actuales
+            'updated_at' => now(),
+        ]);
     }
 
     /**
