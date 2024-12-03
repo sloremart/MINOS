@@ -143,8 +143,8 @@
                         <img src="{{ asset('images/icono_central.png')}}" walt="ligo minos" width="100" height="100">
                     </div>
 
-                    <div class="scale-75 grid grid-cols-1 md:grid-cols-2 " style="margin-top: -4.5rem">
-                        <a class="scale-90 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500" style="background-image: url({{asset('images/Welcome_img/Portada1.jpg')}}); background-repeat: no-repeat; background-size: cover; background-position: center; width: 100%; height: auto;">
+                    <div class="scale-90 grid grid-cols-1 md:grid-cols-2 gap-8" style="margin-top: 0rem">
+                        <a class="scale-100 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500" style="background-image: url({{asset('images/Welcome_img/Portada1.jpg')}}); background-repeat: no-repeat; background-size: cover; background-position: center; width: 100%; height: auto;">
 
                             <div class="bg-blue-900 bg-opacity-70 rounded-lg">
                                 <div class="p-6">
@@ -164,7 +164,7 @@
                         </a>
 
 
-                        <a class="scale-90 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500 bg-cover bg-no-repeat bg-center" style="background-image: url({{asset('images/Welcome_img/Portada2.jpg')}});">
+                        <a class="scale-100 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500 bg-cover bg-no-repeat bg-center" style="background-image: url({{asset('images/Welcome_img/Portada2.jpg')}});">
                             <div class="bg-purple-900 bg-opacity-70 rounded-lg w-full">
                                 <div class="p-6">
                                     <div class="h-14 w-14 bg-red-50 flex items-center justify-center rounded-full">
@@ -185,7 +185,7 @@
                         </a>
 
 
-                        <a class="scale-90 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500" style="background-image: url({{asset('images/Welcome_img/Portada1.jpg')}}); background-repeat: no-repeat; background-size: cover; background-position: center; width: 100%; height: auto;">
+                        <a class="scale-100 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500" style="background-image: url({{asset('images/Welcome_img/Portada1.jpg')}}); background-repeat: no-repeat; background-size: cover; background-position: center; width: 100%; height: auto;">
                             <div class="bg-purple-900 bg-opacity-70 rounded-lg w-full">
                                 <div class="p-6">
                                     <div class="h-14 w-14 bg-red-50 flex items-center justify-center rounded-full">
@@ -207,7 +207,7 @@
                             </div>
                         </a>
 
-                        <a class="scale-90  bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500" style="background-image: url({{asset('images/Welcome_img/Portada3.jpg')}}); background-repeat: no-repeat; background-size: cover; background-position: center; width: 100%; height: auto;">
+                        <a class="scale-100  bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500" style="background-image: url({{asset('images/Welcome_img/Portada3.jpg')}}); background-repeat: no-repeat; background-size: cover; background-position: center; width: 100%; height: auto;">
                             <div class="bg-blue-900 bg-opacity-70 rounded-lg w-full">
                                 <div class="p-6">
                                     <div class="h-14 w-14 bg-red-50 flex items-center justify-center rounded-full">

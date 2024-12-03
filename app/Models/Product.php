@@ -21,6 +21,7 @@ class Product extends Model
         'vat_percentage_id',
         'unit_id',
         'category_id',
+        'user_id',
         'subgroup_id',
         'valid_from_date'  // Agregar como un campo virtual.
     ];
@@ -37,6 +38,10 @@ class Product extends Model
     public function unit()
     {
         return $this->belongsTo(Unit::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function category()
