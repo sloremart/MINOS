@@ -244,6 +244,7 @@ class CashClosure extends Component
 
     public function showDetails($closureId)
     {
+        $userId = Auth::id(); // ID del usuario actualmente autenticado
         // Obtener el cierre de caja específico
         $closure = cash_closure::with('user')->find($closureId);
         if (!$closure) {
@@ -273,6 +274,9 @@ class CashClosure extends Component
                 // Comparar solo la fecha, no la hora
                 $query->whereDate('created_at', $closingDate);
             })
+            ->whereHas('product', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
             ->get();
 
         // Verificar si se encontraron ventas
@@ -295,7 +299,7 @@ class CashClosure extends Component
                 'purchase_details.unit_price',             // Valor unitario de la compra
                 'purchase_details.sub_total',              // Subtotal de la compra
                 'purchases.purchase_date'                  // Fecha de la compra
-            )
+            )->where('purchases.user_id',$userId)
             ->whereDate('purchases.purchase_date', $closingDate) // Solo compras de la fecha actual
             ->get();
 
