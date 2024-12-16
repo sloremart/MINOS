@@ -30,11 +30,11 @@
 
 
         ],
-        "table_actions"=>[
-        "edit"=>"edit",
-        "delete"=>"delete",
-        "details"=>"details",
-        ],
+        // "table_actions"=>[
+        // "edit"=>"edit",
+        // "delete"=>"delete",
+        // "details"=>"details",
+        // ],
 
         "table_rows"=>$data
         ])
